@@ -174,7 +174,6 @@ class PostController extends Controller
         return view('admin/post/list',['post'=>$post,'categories'=> $category,'id'=>$post[0]->categories->name,'key'=>$key]);
 	}
 
-
 	public function activate(Request $request)
 	{
         if(isset($request->option))
@@ -222,6 +221,53 @@ class PostController extends Controller
             return redirect()->route('indexPost'); 
         }
     }
+    public function trend(Request $request)
+    {
+        if(isset($request->option))
+        {
+            if($request->checkbox == null)
+            {
+                $request->session()->flash('fail', 'Xin mời bạn hãy chọn bất kì 1 ô nào đó !!! ');
+                return redirect()->route('indexPost');
+            }
+            $id=$request->checkbox;
+            $temp = new ElasticsearchController();
+                if (is_array($id)) 
+                {
+                foreach ($id as $item) 
+                {
+                    $list = Post::findOrfail($item);
+                    if($list->trend) 
+                    {
+                        $list->trend = false;
+                        $list->save();
+                        $temp->activate($item,'0');
+                    } else {
+                        $list->trend = true;
+                        $list->save();
+                        $temp->activate($item,'1');
+                    }
+                }
+            } 
+            else 
+            {
+                $list = Post::findOrfail($id);
+                if($list->publish) 
+                {
+                    $list->trend = false;
+                    $list->save();
+                    $temp->activate($item,'0');
+                } else 
+                {
+                    $list->trend = true;
+                    $list->save();
+                    $temp->activate($item,'1');
+                }
+            }
+            $request->session()->flash('success', 'Thay đổi thành công !!!');
+            return redirect()->route('indexPost'); 
+        }
+    }
     public function method(Request $request)
     {
         if($request->option == 'delete')
@@ -231,6 +277,10 @@ class PostController extends Controller
         elseif($request->option == 'activate')
         {
             return $this->activate($request); 
+        }
+        elseif($request->option == 'trend')
+        {
+            return $this->trend($request); 
         }
         elseif(isset($request->search))
         {

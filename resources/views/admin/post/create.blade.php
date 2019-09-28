@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+  @extends('adminlte::page')
 
 @section('title', 'CreatData')
 
@@ -53,6 +53,10 @@
                     <div class="form-group">
                       <label for="exampleInputEmail1">Publish</label>
                       <input checked type="checkbox" name="publish">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Trend</label>
+                      <input type="checkbox" name="trend">
                     </div>
                 </div>
 		            <div class="col-sm-3">

@@ -81,6 +81,7 @@
                             <option value="all">All--</option>
                             <option value="activate">Activate</option>
                             <option value="delete">Delete</option>
+                            <option value="trend">Trend</option>
                         </select>
                         <input class="btn btn-primary" type="submit" value="OK" style="margin-left: 20px">
                     </div>
@@ -95,6 +96,7 @@
                             <th>Mục Tin</th>
                             <th>Bài Viết</th>
                             <th>Publish</th>
+                            <th>Trend</th>
                             <th>Update</th>
                         </tr>
                     </thead>
@@ -111,6 +113,9 @@
                                 <td><a href="{{ route('editPost') }}?id={{ $temp->id }}" style="color: green">{{ $temp->name }}</a></td>
                                 <td> 
                                     <span style="background-color: {{ $temp->publish ? '#4caf50' : '#c41700' }}; color: white; padding: 5px 5px;">{{ $temp->publish ? 'ON' : 'OFF' }}</span>
+                                </td>
+                                <td> 
+                                    <span style="background-color: {{ $temp->trend ? '#4caf50' : '#c41700' }}; color: white; padding: 5px 5px;">{{ $temp->trend ? 'ON' : 'OFF' }}</span>
                                 </td>
                                 <td>{{ $temp->updated_at }}</td>
                             </tr>

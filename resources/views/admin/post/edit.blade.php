@@ -1,13 +1,13 @@
-@extends('adminlte::page')
+    @extends('adminlte::page')
 
 @section('title', 'CreatData')
 
 @section('content_header')
       <h1>
         Thêm bài viết
-        <small>Create Courses</small>
+        <small>Update Courses</small>
       </h1>
-      {{Breadcrumbs::render('createPost')}}
+      {{Breadcrumbs::render('editPost')}}
 @endsection
 @include('ckfinder::setup')
 @section('content')
@@ -54,6 +54,14 @@
                     <div class="form-group">
                       <label for="exampleInputEmail1">Publish</label>
                       <input checked type="checkbox" name="publish">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Trend</label>
+                      @if($post->trend == 1)
+                      <input checked type="checkbox" name="trend">
+                      @else
+                      <input type="checkbox" name="trend">
+                      @endif
                     </div>
                 </div>
 		            <div class="col-sm-3">

@@ -205,4 +205,27 @@ class ElasticsearchController extends Controller
 		}
 		return;
     }
+    public function trend($id,$trend)
+    {
+    	if($trend != '')
+        {
+    		$this->connect();
+		    $params = [
+		    'index' => 'baotuyensinh',
+		    'type' => 'posts',
+		    'id'    => $id,
+		    'body'  => [
+		        'doc' => [
+					'trend'=>$trend,
+			        ]
+			    ]
+			];
+		$response = self::$client->update($params);
+		}
+		else
+		{
+			echo "Change fail!!!";
+		}
+		return;
+    }
 }
