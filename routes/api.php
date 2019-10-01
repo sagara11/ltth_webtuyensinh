@@ -25,10 +25,6 @@ Route::get('categories','\App\Http\Controllers\API\CategoryController@index');
 Route::get('posts','\App\Http\Controllers\API\PostsController@posts');
 //post
 Route::get('post','\App\Http\Controllers\API\PostsController@post');
-
-
-
-
 //user
 Route::get('users/info','\App\Http\Controllers\API\UserController@index');
 Route::post('users/login','\App\Http\Controllers\API\UserController@login');

@@ -28,11 +28,11 @@ class CategoryController extends BaseController
         if($request->limit != 10)
         {
             $categories = $categories->paginate($request->limit);
-            return $this->sendResponse($categories, 'Post retrieved successfully.','posts');
+            return $this->sendResponse($categories, 'Post retrieved successfully.','categories');
         }
 
         $categories = $categories->paginate(10);
-        return $this->sendResponse($categories, 'Post retrieved successfully.','posts');
+        return $this->sendResponse($categories, 'Post retrieved successfully.','categories');
     }
     /**
      * Show the form for creating a new user

@@ -4,10 +4,11 @@ namespace App\Http\Controllers\API;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use DB;
-use Illuminate\Support\Str;
 use App\Http\Controllers\API\BaseController as BaseController;
 use Validator;
+use Firebase\JWT\JWT;
+use RestApi\Utility\JwtToken;
+use Illuminate\Support\Facades\Hash;
 
  
 class UserController extends BaseController
@@ -21,7 +22,7 @@ class UserController extends BaseController
      public function index()
     { 
         $user = User::select('avatar','name','email')->jsonPaginate(10);
-        return $this->sendResponse($user->toArray(), 'user retrieved successfully.');
+        return $this->sendResponse($user->toArray(), 'user retrieved successfully.','info');
     }
     /**
      * Show the form for creating a new user
@@ -34,67 +35,33 @@ class UserController extends BaseController
      * @param  \App\User  $model
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
-    {
-        $input = $request->all();
-
-        $validator = Validator::make($input, [
-            'name' => 'required',
-            'id' => 'required',
-            'image' => 'required',
-        ]);
-
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());       
-        }
-
-        $user = User::create($input);
-
-        return $this->sendResponse($user->toArray(), 'Product created successfully.');
-    }
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'api_token' => Str::random(60),
-        ]);
-    }
     /**
      * Show the form for editing the specified user
      *
      * @param  \App\User  $user
      * @return \Illuminate\View\View
      */
-    public function show($id)
-    {
-        $user = User::where('id',$id)->select('id','name','image')->get();
-        if (is_null($user)) {
-            return $this->sendError('User not found.');
-        }
-        return $this->sendResponse($user->toArray(), 'User retrieved successfully.');
-    }
      public function update(Request $request, User $user)
     {
-        $input = $request->all();
-
-        $validator = Validator::make($input, [
-            'name' => 'required',
-            'id' => 'required',
-            'image' => 'required',
-        ]);
-
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());       
+        $data = $request->header('token');
+        $user = User::where('api_token',$data)->get();
+        if(!empty($user[0]))
+        {
+            $insert = User::find($user[0]['id']);
+            $insert->name = $request->header('name') ? $request->header('name') : $user[0]['name'] ;
+            $insert->email = $request->header('email') ? $request->header('email') : $user[0]['email'] ;
+            $insert->avatar = $request->header('avatar') ? $request->header('avatar') : $user[0]['avatar'] ;
+            $insert->save();
+            $response = [
+                    'status' => true,
+                    'message' => 'Update success',
+                ];
+                return response()->json($response);
         }
-
-        $user->name = $input['name'];
-        $user->email = $input['email'];
-        $user->avatar = $input['avatar'];
-        $user->save();
-
-        return $this->sendResponse($user->toArray(), 'user updated successfully.');
+        else
+        {
+            return response()->json(['Update Fail !!!'], 500);
+        }
     }
 
     /**
@@ -103,10 +70,42 @@ class UserController extends BaseController
      * @param  \App\User  $user
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(User $user)
+    public function login(Request $request)
     {
-        $user->delete();
-
-        return $this->sendResponse($user->toArray(), 'user deleted successfully.');
+        $email = $request->email ;
+        $password = $request->password ; 
+        $data = User::where('email',$email)->get();
+        //check
+        if(empty($data[0]))
+        {
+            return response()->json(['Login Fail !!!'], 500);
+        }
+        else
+        {
+            if(Hash::check($password,$data[0]['password']))
+            {
+                $time = time();
+                $token = JWT::encode([12, $time] , env('JWT_KEY'));
+                $insert = User::find($data[0]['id']) ;
+                $insert->api_token = $token ;
+                $insert->save();
+                $info = array(
+                    'name'=>$data[0]['name'],
+                    'email'=>$data[0]['email'],
+                    'avatar'=>$data[0]['avatar']
+                );
+                $response = [
+                    'status' => true,
+                    'message' => 'Login success',
+                    'token' => $token,
+                    'info' => $info,
+                ];
+                return response()->json($response);
+            }
+            else
+            {
+                return response()->json(['Login Fail !!!'], 500);
+            }
+        }
     }
 }

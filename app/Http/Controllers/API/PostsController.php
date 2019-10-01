@@ -34,7 +34,6 @@ class PostsController extends BaseController
         $category_id = isset($request->category_id) ? $request->category_id : 'all';
         $select      = isset($request->type) ? $request->type : 'all';
 
-
         if($select != 'all')
         {
             return $this->sort($select);
