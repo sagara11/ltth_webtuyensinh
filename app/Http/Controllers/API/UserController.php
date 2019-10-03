@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 use App\User;
+use App\Comment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\API\BaseController as BaseController;
@@ -9,8 +10,9 @@ use Validator;
 use Firebase\JWT\JWT;
 use RestApi\Utility\JwtToken;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Model;
 
- 
 class UserController extends BaseController
 {
     /**
@@ -19,10 +21,17 @@ class UserController extends BaseController
      * @param  \App\User  $model
      * @return \Illuminate\View\View
      */
-     public function index()
+     public function index(Request $request)
     { 
-        $user = User::select('avatar','name','email')->jsonPaginate(10);
-        return $this->sendResponse($user->toArray(), 'user retrieved successfully.','info');
+        $token = $request->header('token');
+        $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
+        $user = User::where('id',$gettoken[0])->select('name','email','avatar')->get();
+        $response = [
+                    'status' => true,
+                    'message' => 'User Data',
+                    'info' => $user,
+                ];
+        return response()->json($response);
     }
     /**
      * Show the form for creating a new user
@@ -43,15 +52,15 @@ class UserController extends BaseController
      */
      public function update(Request $request, User $user)
     {
-        $data = $request->header('token');
-        $user = User::where('api_token',$data)->get();
-        if(!empty($user[0]))
+        $token = $request->header('token');
+        $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
+        $user = User::find($gettoken[0]);
+        if($token != null)
         {
-            $insert = User::find($user[0]['id']);
-            $insert->name = $request->header('name') ? $request->header('name') : $user[0]['name'] ;
-            $insert->email = $request->header('email') ? $request->header('email') : $user[0]['email'] ;
-            $insert->avatar = $request->header('avatar') ? $request->header('avatar') : $user[0]['avatar'] ;
-            $insert->save();
+            $user->name = $request->header('name') ? $request->header('name') : $user->name ;
+            $user->email = $request->header('email') ? $request->header('email') : $user->email ;
+            $user->avatar = $request->header('avatar') ? $request->header('avatar') : $user->avatar ;
+            $user->save();
             $response = [
                     'status' => true,
                     'message' => 'Update success',
@@ -84,11 +93,9 @@ class UserController extends BaseController
         {
             if(Hash::check($password,$data[0]['password']))
             {
+                $id = $data[0]['id'];
                 $time = time();
-                $token = JWT::encode([12, $time] , env('JWT_KEY'));
-                $insert = User::find($data[0]['id']) ;
-                $insert->api_token = $token ;
-                $insert->save();
+                $token = JWT::encode([$id , $time] , env('JWT_KEY'));
                 $info = array(
                     'name'=>$data[0]['name'],
                     'email'=>$data[0]['email'],
@@ -107,5 +114,22 @@ class UserController extends BaseController
                 return response()->json(['Login Fail !!!'], 500);
             }
         }
+    }
+    public function comments(Request $request)
+    {
+        $token = $request->header('token');
+        $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
+        $comments = Comment::select('id','comment','created_at','post_id')->with(array(
+            'post' => function($comments)
+            {
+                $comments->select('id','name');
+            }))->where('user_id', $gettoken[0]);
+        $limit = isset($request->limit) ? $request->limit : 10 ;
+        $comments = $comments->paginate($limit);
+        $response = [
+                    'status'  => true,
+                    'comment' => $comments,
+                ];
+        return response()->json($response);
     }
 }
