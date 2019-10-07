@@ -15,9 +15,6 @@ use Illuminate\Database\Eloquent\Model;
 use Facebook\Facebook;
 use App\SocialNetwork;
 use Illuminate\Support\Facades\Log;
-use Tymon\JWTAuth\Exceptions\JWTException;
-use Tymon\JWTAuth\Facades\JWTAuth;
-use Socialite;
 class UserController extends BaseController
 {
     /**
@@ -88,23 +85,23 @@ class UserController extends BaseController
     {
         $email = $request->email ;
         $password = $request->password ; 
-        $data = User::where('email',$email)->get();
+        $data = User::where('email',$email)->first();
         //check
-        if(empty($data[0]))
+        if($data == null)
         {
             return response()->json(['Login Fail !!!'], 500);
         }
         else
         {
-            if(Hash::check($password,$data[0]['password']))
+            if(Hash::check($password,$data->password))
             {
-                $id = $data[0]['id'];
+                $id = $data->id;
                 $time = time();
                 $token = JWT::encode([$id , $time] , env('JWT_KEY'));
                 $info = array(
-                    'name'=>$data[0]['name'],
-                    'email'=>$data[0]['email'],
-                    'avatar'=>$data[0]['avatar']
+                    'name'=>$data->name,
+                    'email'=>$data->email,
+                    'avatar'=>$data->avatar
                 );
                 $response = [
                     'status' => true,
@@ -137,7 +134,7 @@ class UserController extends BaseController
             'app_id' => '413891859271505',
             'app_secret' => 'f678f181e0829f8708594e9a742d0886',
             'default_graph_version' => 'v2.10',
-            'default_access_token' => $request->social_token,
+            'default_access_token' => $request->token,
         ]);
         try {
               // Get the \Facebook\GraphNodes\GraphUser object for the current user.
@@ -178,7 +175,7 @@ class UserController extends BaseController
     }
     public function checkGoogle()
     {
-        require_once 'C:/xampp/htdocs/webtuyensinh/vendor/google/graph-sdk/src/Facebook/autoload.php';
+        // require_once 'C:/xampp/htdocs/webtuyensinh/vendor/google/graph-sdk/src/Facebook/autoload.php';
         $Client = new Google_Client();
         $Client->secClientId();
         $Client->setClientSecret();

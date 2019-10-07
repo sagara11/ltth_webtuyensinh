@@ -84,22 +84,26 @@ class PostsController extends BaseController
 
     public function post(Request $request)
     {
-        $type = 'post';
-        $posts = Post::select('id','name','image','description','content','created_at','view','comment','category_id')->with(array(
-            'categories' => function($posts)
-            {
-                $posts->select('id','name');
-            }))->where('publish', 1);
-        $posts->where('type_post', '=', $type);
-
-        $id    = isset($request->id) ? $request->id : '';
-        $limit = isset($request->limit) ? $request->limit : 10 ;
-    
-        if($id != '') {
-            $posts->where('id',$id);
+        if(isset($request->id) && $request->id != null)
+        {
+            $type = 'post';
+            $posts = Post::where('id',$request->id)->select('id','name','image','description','content','created_at','view','comment','category_id')->with(array(
+                'categories' => function($posts)
+                {
+                    $posts->select('id','name');
+                }))->where('publish', 1);
+            $posts->where('type_post', '=', $type);
+            $posts = $posts->paginate(1);
+            return $this->sendResponse($posts, 'Post read successfully.','post');
         }
-        $posts = $posts->paginate($limit);
-        return $this->sendResponse($posts, 'Post read successfully.','post');
+        else
+        {
+             $response = [
+                        'status' => false,
+                        'message' => 'Please fill the id !!!',
+                    ];
+            return response()->json($response);
+        }
     }
     /**
      * Show the form for creating a new user

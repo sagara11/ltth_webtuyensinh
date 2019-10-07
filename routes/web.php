@@ -52,6 +52,17 @@ Route::group(['prefix' => 'admin'], function() {
 		Route::post('category/slug','\App\Http\Controllers\Admin\CategoryController@slug')->name('slugCategory');
 		Route::post('category/update','\App\Http\Controllers\Admin\CategoryController@update')->name('updateCategory');
 		Route::get('post/init','\App\Http\Controllers\Admin\ElasticsearchController@init');
+		// Route::resource('user','\App\Http\Controllers\Admin\UserController');
+		Route::get('user/list','\App\Http\Controllers\Admin\UserController@index')->name('indexUser');
+		Route::get('user/create','\App\Http\Controllers\Admin\UserController@create')->name('createUser');
+		Route::post('user/store','\App\Http\Controllers\Admin\UserController@store')->name('storeUser');
+		Route::get('user/filter','\App\Http\Controllers\Admin\UserController@filter')->name('filterCategory');
+		Route::post('user/activate','\App\Http\Controllers\Admin\UserController@activate')->name('activateUser');
+		Route::get('user/edit','\App\Http\Controllers\Admin\UserController@edit')->name('editUser');
+		Route::post('user/destroy','\App\Http\Controllers\Admin\UserController@destroy')->name('destroyUser');
+		Route::post('user/slug','\App\Http\Controllers\Admin\UserController@slug')->name('slugUser');
+		Route::post('user/update','\App\Http\Controllers\Admin\UserController@update')->name('updateUser');
+		Route::get('post/init','\App\Http\Controllers\Admin\ElasticsearchController@init');
 		});	
 	});
 Route::group(['prefix'=>'menu'], function () {
