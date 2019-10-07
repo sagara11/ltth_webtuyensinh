@@ -28,6 +28,10 @@ Route::get('post','\App\Http\Controllers\API\PostsController@post');
 //user
 Route::get('users/info','\App\Http\Controllers\API\UserController@index');
 Route::post('users/login','\App\Http\Controllers\API\UserController@login');
-Route::get('users/register','\App\Http\Controllers\API\UserController@register');
 Route::post('users/update_profile','\App\Http\Controllers\API\UserController@update');
-Route::delete('user/{id}','\App\Http\Controllers\API\UserController@destroy');
+Route::get('users/comments','\App\Http\Controllers\API\UserController@comments');
+//comment
+Route::get('comments','\App\Http\Controllers\API\CommentController@index');
+Route::post('add_comment','\App\Http\Controllers\API\CommentController@store');
+Route::post('edit_comment','\App\Http\Controllers\API\CommentController@update');
+Route::post('delete_comment','\App\Http\Controllers\API\CommentController@delete');
