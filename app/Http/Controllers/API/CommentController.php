@@ -25,23 +25,28 @@ class CommentController extends BaseController
     { 
         if(isset($request->post_id) && $request->post_id != null)
         {
-            $comments = Comment::select('id','comment','created_at','user_id','parent_id')->with(array(
-            'user' => function($comments)
-            {
-                $comments->select('id','name','avatar');
-            }))->with(array(
-            'child_comments' => function($comments)
-            {
-                $comments->select('id','comment','created_at','user_id')->with(array(
-            'user' => function($comments)
-            {
-                $comments->select('id','name','avatar');
-            }));
-            }))->where('post_id', $request->post_id);
+            $post = $request->post_id;
+            
+            $comments = Comment::select('id','comment','created_at','user_id','parent_id');
+            
+            $comments->where('post_id', $post)->where('parent_id', NULL);
+            
+            $comments->with(array( 'user' => function($q) {
+                    return $q->select('id','name','avatar');
+                }
+            ));
 
-            $limit    = isset($request->limit) ? $request->limit : 10 ;
-           
+            $comments->with(['child_comments' => ( function ($q) use ($post) {
+                    return $q->where('post_id', $post)->select('id','comment','created_at','user_id', 'parent_id')->with(array( 'user' => function($q) {
+                        return $q->select('id','name','avatar');
+                    }
+                ));
+                }
+            )]);
+
+            $limit = isset($request->limit) ? $request->limit : 10 ;
             $comments = $comments->paginate($limit);
+            
             $response = [
                         'status' => true,
                         'comments' => $comments,
@@ -63,17 +68,22 @@ class CommentController extends BaseController
         if(isset($request->post_id) && isset($request->comment) && $request->post_id != '' && $request->comment != '')
         {
             $parent_id = $request->parent_id ? $request->parent_id : null;
+            
             $data = new Comment();
+            
             $data->comment = $request->comment;
             $data->post_id = $request->post_id;
             $data->parent_id = $parent_id;
             $data->created_at = time();
             $data->updated_at = time();
             $data->publish = $request->publish ? $request->publish : 1 ;
+            
             $token = $request->header('token');
             $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
             $data->user_id = $gettoken[0] ;
+            
             $data->save();
+            
             $response = [
                         'status' => true,
                         'message' => 'Add success',
@@ -120,13 +130,27 @@ class CommentController extends BaseController
                     ];
                 return response()->json($response);
             }
-            $data->comment = $request->comment;
-            $data->save();
-            $response = [
-                        'status' => true,
-                        'message' => 'Update success',
+            $token = $request->header('token');
+            $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
+            if($data->user_id == $gettoken[0])
+            {
+                $data->comment = $request->comment;
+                $data->updated_at = time();
+                $data->save();
+                $response = [
+                            'status' => true,
+                            'message' => 'Update success',
+                        ];
+                return response()->json($response);
+            }
+            else
+            {
+                $response = [
+                        'status' => false,
+                        'message' => 'Update fail!!!',
                     ];
-            return response()->json($response);
+                return response()->json($response);
+            }
         }
         else
         {
@@ -157,12 +181,26 @@ class CommentController extends BaseController
                     ];
                 return response()->json($response);
             }
-            $data->delete();
-            $response = [
+            $token = $request->header('token');
+            $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
+
+            if($data->user_id == $gettoken[0])
+            {
+                $data->delete();
+                $response = [
                         'status' => true,
                         'message' => 'Delete success!!!',
                     ];
-            return response()->json($response);
+                return response()->json($response);
+            }
+            else
+            {
+                $response = [
+                            'status' => false,
+                            'message' => 'Delete fail!!!',
+                        ];
+                    return response()->json($response);
+            }
         }
         else
         {

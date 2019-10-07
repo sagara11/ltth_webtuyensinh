@@ -59,9 +59,9 @@ class UserController extends BaseController
         $user = User::find($gettoken[0]);
         if($token != null)
         {
-            $user->name = $request->header('name') ? $request->header('name') : $user->name ;
-            $user->email = $request->header('email') ? $request->header('email') : $user->email ;
-            $user->avatar = $request->header('avatar') ? $request->header('avatar') : $user->avatar ;
+            $user->name = $request->name ? $request->name : $user->name ;
+            $user->email = $request->email ? $request->email : $user->email ;
+            $user->avatar = $request->avatar ? $request->avatar : $user->avatar ;
             $user->save();
             $response = [
                     'status' => true,
