@@ -9,14 +9,20 @@
     "license": "MIT",
     "require": {
         "php": "^7.1.3",
+        "adaojunior/passport-social-grant": "^3.4",
         "ckfinder/ckfinder-laravel-package": "^3.5",
         "davejamesmiller/laravel-breadcrumbs": "5.x",
         "elasticsearch/elasticsearch": "^7.2",
+        "facebook/graph-sdk": "^5.7",
         "fideloper/proxy": "^4.0",
         "firebase/php-jwt": "^5.0",
+        "google/apiclient": "^2.4",
         "jeroennoten/laravel-adminlte": "^1.27",
         "laravel/framework": "5.8.*",
+        "laravel/passport": "^7.5",
+        "laravel/socialite": "^4.2",
         "laravel/tinker": "^1.0",
+        "newerton/google-api-php-client": "^2.2",
         "spatie/laravel-json-api-paginate": "^1.6"
     },
     "require-dev": {

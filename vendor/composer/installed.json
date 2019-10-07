@@ -1,5 +1,61 @@
 [
     {
+        "name": "adaojunior/passport-social-grant",
+        "version": "v3.4",
+        "version_normalized": "3.4.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/adaojunior/passport-social-grant.git",
+            "reference": "46e03e332651710a76421e875f30dcd356b9db2d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/adaojunior/passport-social-grant/zipball/46e03e332651710a76421e875f30dcd356b9db2d",
+            "reference": "46e03e332651710a76421e875f30dcd356b9db2d",
+            "shasum": ""
+        },
+        "require": {
+            "laravel/passport": "^2.0|^3.0|^4.0|^5.0|^6.0|^7.0",
+            "php": ">=5.6.4"
+        },
+        "time": "2018-08-21T22:09:05+00:00",
+        "type": "library",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "Adaojunior\\Passport\\SocialGrantServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Adaojunior\\Passport\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Adão Júnior",
+                "email": "itsjunnior@gmail.com",
+                "homepage": "https://github.com/adaojunior",
+                "role": "Developer"
+            }
+        ],
+        "description": "Social guard for Laravel Passport",
+        "homepage": "https://github.com/adaojunior/passport-social-grant",
+        "keywords": [
+            "guard",
+            "laravel",
+            "oauth",
+            "passport",
+            "social"
+        ]
+    },
+    {
         "name": "aws/aws-sdk-php",
         "version": "3.112.0",
         "version_normalized": "3.112.0.0",
@@ -253,6 +309,71 @@
         "homepage": "https://github.com/davejamesmiller/laravel-breadcrumbs",
         "keywords": [
             "laravel"
+        ]
+    },
+    {
+        "name": "defuse/php-encryption",
+        "version": "v2.2.1",
+        "version_normalized": "2.2.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/defuse/php-encryption.git",
+            "reference": "0f407c43b953d571421e0020ba92082ed5fb7620"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/defuse/php-encryption/zipball/0f407c43b953d571421e0020ba92082ed5fb7620",
+            "reference": "0f407c43b953d571421e0020ba92082ed5fb7620",
+            "shasum": ""
+        },
+        "require": {
+            "ext-openssl": "*",
+            "paragonie/random_compat": ">= 2",
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "nikic/php-parser": "^2.0|^3.0|^4.0",
+            "phpunit/phpunit": "^4|^5"
+        },
+        "time": "2018-07-24T23:27:56+00:00",
+        "bin": [
+            "bin/generate-defuse-key"
+        ],
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Defuse\\Crypto\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Taylor Hornby",
+                "email": "taylor@defuse.ca",
+                "homepage": "https://defuse.ca/"
+            },
+            {
+                "name": "Scott Arciszewski",
+                "email": "info@paragonie.com",
+                "homepage": "https://paragonie.com"
+            }
+        ],
+        "description": "Secure PHP Encryption Library",
+        "keywords": [
+            "aes",
+            "authenticated encryption",
+            "cipher",
+            "crypto",
+            "cryptography",
+            "encrypt",
+            "encryption",
+            "openssl",
+            "security",
+            "symmetric key cryptography"
         ]
     },
     {
@@ -754,6 +875,66 @@
         ]
     },
     {
+        "name": "facebook/graph-sdk",
+        "version": "5.7.0",
+        "version_normalized": "5.7.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/facebook/php-graph-sdk.git",
+            "reference": "2d8250638b33d73e7a87add65f47fabf91f8ad9b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/facebook/php-graph-sdk/zipball/2d8250638b33d73e7a87add65f47fabf91f8ad9b",
+            "reference": "2d8250638b33d73e7a87add65f47fabf91f8ad9b",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^5.4|^7.0"
+        },
+        "require-dev": {
+            "guzzlehttp/guzzle": "~5.0",
+            "mockery/mockery": "~0.8",
+            "phpunit/phpunit": "~4.0"
+        },
+        "suggest": {
+            "guzzlehttp/guzzle": "Allows for implementation of the Guzzle HTTP client",
+            "paragonie/random_compat": "Provides a better CSPRNG option in PHP 5"
+        },
+        "time": "2018-12-11T22:56:31+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "5.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Facebook\\": "src/Facebook/"
+            },
+            "files": [
+                "src/Facebook/polyfills.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Facebook Platform"
+        ],
+        "authors": [
+            {
+                "name": "Facebook",
+                "homepage": "https://github.com/facebook/php-graph-sdk/contributors"
+            }
+        ],
+        "description": "Facebook SDK for PHP",
+        "homepage": "https://github.com/facebook/php-graph-sdk",
+        "keywords": [
+            "facebook",
+            "sdk"
+        ]
+    },
+    {
         "name": "fideloper/proxy",
         "version": "4.2.1",
         "version_normalized": "4.2.1.0",
@@ -970,6 +1151,161 @@
             "data",
             "faker",
             "fixtures"
+        ]
+    },
+    {
+        "name": "google/apiclient",
+        "version": "v2.4.0",
+        "version_normalized": "2.4.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/googleapis/google-api-php-client.git",
+            "reference": "cd3c37998020d91ae4eafca4f26a92da4dabba83"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/googleapis/google-api-php-client/zipball/cd3c37998020d91ae4eafca4f26a92da4dabba83",
+            "reference": "cd3c37998020d91ae4eafca4f26a92da4dabba83",
+            "shasum": ""
+        },
+        "require": {
+            "firebase/php-jwt": "~2.0||~3.0||~4.0||~5.0",
+            "google/apiclient-services": "~0.13",
+            "google/auth": "^1.0",
+            "guzzlehttp/guzzle": "~5.3.1||~6.0",
+            "guzzlehttp/psr7": "^1.2",
+            "monolog/monolog": "^1.17|^2.0",
+            "php": ">=5.4",
+            "phpseclib/phpseclib": "~0.3.10||~2.0"
+        },
+        "require-dev": {
+            "cache/filesystem-adapter": "^0.3.2",
+            "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
+            "phpcompatibility/php-compatibility": "^9.2",
+            "phpunit/phpunit": "~4.8.36",
+            "squizlabs/php_codesniffer": "~2.3",
+            "symfony/css-selector": "~2.1",
+            "symfony/dom-crawler": "~2.1"
+        },
+        "suggest": {
+            "cache/filesystem-adapter": "For caching certs and tokens (using Google_Client::setCache)"
+        },
+        "time": "2019-09-11T17:38:10+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Google_": "src/"
+            },
+            "classmap": [
+                "src/Google/Service/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "description": "Client library for Google APIs",
+        "homepage": "http://developers.google.com/api-client-library/php",
+        "keywords": [
+            "google"
+        ]
+    },
+    {
+        "name": "google/apiclient-services",
+        "version": "v0.116",
+        "version_normalized": "0.116.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/googleapis/google-api-php-client-services.git",
+            "reference": "91c932fa2bdb37f9fc73a5eee3e7b4734a25f51e"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/91c932fa2bdb37f9fc73a5eee3e7b4734a25f51e",
+            "reference": "91c932fa2bdb37f9fc73a5eee3e7b4734a25f51e",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.8"
+        },
+        "time": "2019-09-29T00:23:21+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Google_Service_": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "description": "Client library for Google APIs",
+        "homepage": "http://developers.google.com/api-client-library/php",
+        "keywords": [
+            "google"
+        ]
+    },
+    {
+        "name": "google/auth",
+        "version": "v1.6.0",
+        "version_normalized": "1.6.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/googleapis/google-auth-library-php.git",
+            "reference": "6d5455b4c0f4a58b1f1b4bdf2ba49221123698b3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/6d5455b4c0f4a58b1f1b4bdf2ba49221123698b3",
+            "reference": "6d5455b4c0f4a58b1f1b4bdf2ba49221123698b3",
+            "shasum": ""
+        },
+        "require": {
+            "firebase/php-jwt": "~2.0|~3.0|~4.0|~5.0",
+            "guzzlehttp/guzzle": "~5.3.1|~6.0",
+            "guzzlehttp/psr7": "^1.2",
+            "php": ">=5.4",
+            "psr/cache": "^1.0",
+            "psr/http-message": "^1.0"
+        },
+        "require-dev": {
+            "friendsofphp/php-cs-fixer": "^1.11",
+            "guzzlehttp/promises": "0.1.1|^1.3",
+            "phpseclib/phpseclib": "^2",
+            "phpunit/phpunit": "^4.8.36|^5.7",
+            "sebastian/comparator": ">=1.2.3"
+        },
+        "suggest": {
+            "phpseclib/phpseclib": "May be used in place of OpenSSL for signing strings or for token management. Please require version ^2."
+        },
+        "time": "2019-10-01T18:35:05+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Google\\Auth\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "description": "Google Auth Library for PHP",
+        "homepage": "http://github.com/google/google-auth-library-php",
+        "keywords": [
+            "Authentication",
+            "google",
+            "oauth2"
         ]
     },
     {
@@ -1674,6 +2010,145 @@
         ]
     },
     {
+        "name": "laravel/passport",
+        "version": "v7.5.0",
+        "version_normalized": "7.5.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/laravel/passport.git",
+            "reference": "663e720a6d15e8ec70bf5309f774439a110efc89"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/laravel/passport/zipball/663e720a6d15e8ec70bf5309f774439a110efc89",
+            "reference": "663e720a6d15e8ec70bf5309f774439a110efc89",
+            "shasum": ""
+        },
+        "require": {
+            "ext-json": "*",
+            "firebase/php-jwt": "~3.0|~4.0|~5.0",
+            "guzzlehttp/guzzle": "~6.0",
+            "illuminate/auth": "~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0",
+            "illuminate/console": "~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0",
+            "illuminate/container": "~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0",
+            "illuminate/contracts": "~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0",
+            "illuminate/cookie": "~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0",
+            "illuminate/database": "~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0",
+            "illuminate/encryption": "~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0",
+            "illuminate/http": "~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0",
+            "illuminate/support": "~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0",
+            "league/oauth2-server": "^7.0",
+            "php": ">=7.1",
+            "phpseclib/phpseclib": "^2.0",
+            "symfony/psr-http-message-bridge": "~1.0",
+            "zendframework/zend-diactoros": "~1.0|~2.0"
+        },
+        "require-dev": {
+            "mockery/mockery": "^1.0",
+            "phpunit/phpunit": "^7.4|^8.0"
+        },
+        "time": "2019-09-24T20:59:35+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "7.0-dev"
+            },
+            "laravel": {
+                "providers": [
+                    "Laravel\\Passport\\PassportServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Laravel\\Passport\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Taylor Otwell",
+                "email": "taylor@laravel.com"
+            }
+        ],
+        "description": "Laravel Passport provides OAuth2 server support to Laravel.",
+        "keywords": [
+            "laravel",
+            "oauth",
+            "passport"
+        ]
+    },
+    {
+        "name": "laravel/socialite",
+        "version": "v4.2.0",
+        "version_normalized": "4.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/laravel/socialite.git",
+            "reference": "f509d06e1e7323997b804c5152874f8aad4508e9"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/laravel/socialite/zipball/f509d06e1e7323997b804c5152874f8aad4508e9",
+            "reference": "f509d06e1e7323997b804c5152874f8aad4508e9",
+            "shasum": ""
+        },
+        "require": {
+            "ext-json": "*",
+            "guzzlehttp/guzzle": "~6.0",
+            "illuminate/http": "~5.7.0|~5.8.0|^6.0|^7.0",
+            "illuminate/support": "~5.7.0|~5.8.0|^6.0|^7.0",
+            "league/oauth1-client": "~1.0",
+            "php": "^7.1.3"
+        },
+        "require-dev": {
+            "illuminate/contracts": "~5.7.0|~5.8.0|^6.0|^7.0",
+            "mockery/mockery": "^1.0",
+            "phpunit/phpunit": "^7.0|^8.0"
+        },
+        "time": "2019-09-03T15:27:17+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "4.0-dev"
+            },
+            "laravel": {
+                "providers": [
+                    "Laravel\\Socialite\\SocialiteServiceProvider"
+                ],
+                "aliases": {
+                    "Socialite": "Laravel\\Socialite\\Facades\\Socialite"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Laravel\\Socialite\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Taylor Otwell",
+                "email": "taylor@laravel.com"
+            }
+        ],
+        "description": "Laravel wrapper around OAuth 1 & OAuth 2 libraries.",
+        "homepage": "https://laravel.com",
+        "keywords": [
+            "laravel",
+            "oauth"
+        ]
+    },
+    {
         "name": "laravel/tinker",
         "version": "v1.0.10",
         "version_normalized": "1.0.10.0",
@@ -1736,6 +2211,115 @@
             "Tinker",
             "laravel",
             "psysh"
+        ]
+    },
+    {
+        "name": "lcobucci/jwt",
+        "version": "3.3.1",
+        "version_normalized": "3.3.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/lcobucci/jwt.git",
+            "reference": "a11ec5f4b4d75d1fcd04e133dede4c317aac9e18"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/lcobucci/jwt/zipball/a11ec5f4b4d75d1fcd04e133dede4c317aac9e18",
+            "reference": "a11ec5f4b4d75d1fcd04e133dede4c317aac9e18",
+            "shasum": ""
+        },
+        "require": {
+            "ext-mbstring": "*",
+            "ext-openssl": "*",
+            "php": "^5.6 || ^7.0"
+        },
+        "require-dev": {
+            "mikey179/vfsstream": "~1.5",
+            "phpmd/phpmd": "~2.2",
+            "phpunit/php-invoker": "~1.1",
+            "phpunit/phpunit": "^5.7 || ^7.3",
+            "squizlabs/php_codesniffer": "~2.3"
+        },
+        "time": "2019-05-24T18:30:49+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.1-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Lcobucci\\JWT\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Luís Otávio Cobucci Oblonczyk",
+                "email": "lcobucci@gmail.com",
+                "role": "Developer"
+            }
+        ],
+        "description": "A simple library to work with JSON Web Token and JSON Web Signature",
+        "keywords": [
+            "JWS",
+            "jwt"
+        ]
+    },
+    {
+        "name": "league/event",
+        "version": "2.2.0",
+        "version_normalized": "2.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/thephpleague/event.git",
+            "reference": "d2cc124cf9a3fab2bb4ff963307f60361ce4d119"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/thephpleague/event/zipball/d2cc124cf9a3fab2bb4ff963307f60361ce4d119",
+            "reference": "d2cc124cf9a3fab2bb4ff963307f60361ce4d119",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "henrikbjorn/phpspec-code-coverage": "~1.0.1",
+            "phpspec/phpspec": "^2.2"
+        },
+        "time": "2018-11-26T11:52:41+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.2-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "League\\Event\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Frank de Jonge",
+                "email": "info@frenky.net"
+            }
+        ],
+        "description": "Event package",
+        "keywords": [
+            "emitter",
+            "event",
+            "listener"
         ]
     },
     {
@@ -1921,6 +2505,150 @@
             }
         ],
         "description": "An adapter decorator to enable meta-data caching."
+    },
+    {
+        "name": "league/oauth1-client",
+        "version": "1.7.0",
+        "version_normalized": "1.7.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/thephpleague/oauth1-client.git",
+            "reference": "fca5f160650cb74d23fc11aa570dd61f86dcf647"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/thephpleague/oauth1-client/zipball/fca5f160650cb74d23fc11aa570dd61f86dcf647",
+            "reference": "fca5f160650cb74d23fc11aa570dd61f86dcf647",
+            "shasum": ""
+        },
+        "require": {
+            "guzzlehttp/guzzle": "^6.0",
+            "php": ">=5.5.0"
+        },
+        "require-dev": {
+            "mockery/mockery": "^0.9",
+            "phpunit/phpunit": "^4.0",
+            "squizlabs/php_codesniffer": "^2.0"
+        },
+        "time": "2016-08-17T00:36:58+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "League\\OAuth1\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Ben Corlett",
+                "email": "bencorlett@me.com",
+                "homepage": "http://www.webcomm.com.au",
+                "role": "Developer"
+            }
+        ],
+        "description": "OAuth 1.0 Client Library",
+        "keywords": [
+            "Authentication",
+            "SSO",
+            "authorization",
+            "bitbucket",
+            "identity",
+            "idp",
+            "oauth",
+            "oauth1",
+            "single sign on",
+            "trello",
+            "tumblr",
+            "twitter"
+        ]
+    },
+    {
+        "name": "league/oauth2-server",
+        "version": "7.4.0",
+        "version_normalized": "7.4.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/thephpleague/oauth2-server.git",
+            "reference": "2eb1cf79e59d807d89c256e7ac5e2bf8bdbd4acf"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/thephpleague/oauth2-server/zipball/2eb1cf79e59d807d89c256e7ac5e2bf8bdbd4acf",
+            "reference": "2eb1cf79e59d807d89c256e7ac5e2bf8bdbd4acf",
+            "shasum": ""
+        },
+        "require": {
+            "defuse/php-encryption": "^2.1",
+            "ext-openssl": "*",
+            "lcobucci/jwt": "^3.2.2",
+            "league/event": "^2.1",
+            "php": ">=7.0.0",
+            "psr/http-message": "^1.0.1"
+        },
+        "replace": {
+            "league/oauth2server": "*",
+            "lncd/oauth2": "*"
+        },
+        "require-dev": {
+            "phpstan/phpstan": "^0.9.2",
+            "phpstan/phpstan-phpunit": "^0.9.4",
+            "phpstan/phpstan-strict-rules": "^0.9.0",
+            "phpunit/phpunit": "^6.3 || ^7.0",
+            "roave/security-advisories": "dev-master",
+            "zendframework/zend-diactoros": "^1.3.2"
+        },
+        "time": "2019-05-05T09:22:01+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "League\\OAuth2\\Server\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Alex Bilbie",
+                "email": "hello@alexbilbie.com",
+                "homepage": "http://www.alexbilbie.com",
+                "role": "Developer"
+            },
+            {
+                "name": "Andy Millington",
+                "email": "andrew@noexceptions.io",
+                "homepage": "https://www.noexceptions.io",
+                "role": "Developer"
+            }
+        ],
+        "description": "A lightweight and powerful OAuth 2.0 authorization and resource server library with support for all the core specification grants. This library will allow you to secure your API with OAuth and allow your applications users to approve apps that want to access their data from your API.",
+        "homepage": "https://oauth2.thephpleague.com/",
+        "keywords": [
+            "Authentication",
+            "api",
+            "auth",
+            "authorisation",
+            "authorization",
+            "oauth",
+            "oauth 2",
+            "oauth 2.0",
+            "oauth2",
+            "protect",
+            "resource",
+            "secure",
+            "server"
+        ]
     },
     {
         "name": "mockery/mockery",
@@ -2243,6 +2971,69 @@
             "date",
             "datetime",
             "time"
+        ]
+    },
+    {
+        "name": "newerton/google-api-php-client",
+        "version": "v2.2.4",
+        "version_normalized": "2.2.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/googleapis/google-api-php-client.git",
+            "reference": "d6c7563bdf88d6a0719ea63e21c74dc86032364e"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/googleapis/google-api-php-client/zipball/d6c7563bdf88d6a0719ea63e21c74dc86032364e",
+            "reference": "d6c7563bdf88d6a0719ea63e21c74dc86032364e",
+            "shasum": ""
+        },
+        "require": {
+            "firebase/php-jwt": "~2.0||~3.0||~4.0||~5.0",
+            "google/apiclient-services": "~0.13",
+            "google/auth": "^1.0",
+            "guzzlehttp/guzzle": "~5.3.1||~6.0",
+            "guzzlehttp/psr7": "^1.2",
+            "monolog/monolog": "^1.17",
+            "php": ">=5.4",
+            "phpseclib/phpseclib": "~0.3.10||~2.0"
+        },
+        "require-dev": {
+            "cache/filesystem-adapter": "^0.3.2",
+            "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
+            "phpcompatibility/php-compatibility": "^9.2",
+            "phpunit/phpunit": "~4.8.36",
+            "squizlabs/php_codesniffer": "~2.3",
+            "symfony/css-selector": "~2.1",
+            "symfony/dom-crawler": "~2.1"
+        },
+        "suggest": {
+            "cache/filesystem-adapter": "For caching certs and tokens (using Google_Client::setCache)"
+        },
+        "time": "2019-08-19T18:09:46+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Google_": "src/"
+            },
+            "classmap": [
+                "src/Google/Service/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "description": "Client library for Google APIs",
+        "homepage": "http://developers.google.com/api-client-library/php",
+        "keywords": [
+            "google"
         ]
     },
     {
@@ -2786,6 +3577,100 @@
             "option",
             "php",
             "type"
+        ]
+    },
+    {
+        "name": "phpseclib/phpseclib",
+        "version": "2.0.23",
+        "version_normalized": "2.0.23.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/phpseclib/phpseclib.git",
+            "reference": "c78eb5058d5bb1a183133c36d4ba5b6675dfa099"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/c78eb5058d5bb1a183133c36d4ba5b6675dfa099",
+            "reference": "c78eb5058d5bb1a183133c36d4ba5b6675dfa099",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "require-dev": {
+            "phing/phing": "~2.7",
+            "phpunit/phpunit": "^4.8.35|^5.7|^6.0",
+            "sami/sami": "~2.0",
+            "squizlabs/php_codesniffer": "~2.0"
+        },
+        "suggest": {
+            "ext-gmp": "Install the GMP (GNU Multiple Precision) extension in order to speed up arbitrary precision integer arithmetic operations.",
+            "ext-libsodium": "SSH2/SFTP can make use of some algorithms provided by the libsodium-php extension.",
+            "ext-mcrypt": "Install the Mcrypt extension in order to speed up a few other cryptographic operations.",
+            "ext-openssl": "Install the OpenSSL extension in order to speed up a wide variety of cryptographic operations."
+        },
+        "time": "2019-09-17T03:41:22+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "phpseclib/bootstrap.php"
+            ],
+            "psr-4": {
+                "phpseclib\\": "phpseclib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Jim Wigginton",
+                "email": "terrafrost@php.net",
+                "role": "Lead Developer"
+            },
+            {
+                "name": "Patrick Monnerat",
+                "email": "pm@datasphere.ch",
+                "role": "Developer"
+            },
+            {
+                "name": "Andreas Fischer",
+                "email": "bantu@phpbb.com",
+                "role": "Developer"
+            },
+            {
+                "name": "Hans-Jürgen Petrich",
+                "email": "petrich@tronic-media.com",
+                "role": "Developer"
+            },
+            {
+                "name": "Graham Campbell",
+                "email": "graham@alt-three.com",
+                "role": "Developer"
+            }
+        ],
+        "description": "PHP Secure Communications Library - Pure-PHP implementations of RSA, AES, SSH2, SFTP, X.509 etc.",
+        "homepage": "http://phpseclib.sourceforge.net",
+        "keywords": [
+            "BigInteger",
+            "aes",
+            "asn.1",
+            "asn1",
+            "blowfish",
+            "crypto",
+            "cryptography",
+            "encryption",
+            "rsa",
+            "security",
+            "sftp",
+            "signature",
+            "signing",
+            "ssh",
+            "twofish",
+            "x.509",
+            "x509"
         ]
     },
     {
@@ -3350,6 +4235,60 @@
             "container-interface",
             "container-interop",
             "psr"
+        ]
+    },
+    {
+        "name": "psr/http-factory",
+        "version": "1.0.1",
+        "version_normalized": "1.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/php-fig/http-factory.git",
+            "reference": "12ac7fcd07e5b077433f5f2bee95b3a771bf61be"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/php-fig/http-factory/zipball/12ac7fcd07e5b077433f5f2bee95b3a771bf61be",
+            "reference": "12ac7fcd07e5b077433f5f2bee95b3a771bf61be",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=7.0.0",
+            "psr/http-message": "^1.0"
+        },
+        "time": "2019-04-30T12:38:16+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Psr\\Http\\Message\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "PHP-FIG",
+                "homepage": "http://www.php-fig.org/"
+            }
+        ],
+        "description": "Common interfaces for PSR-7 HTTP message factories",
+        "keywords": [
+            "factory",
+            "http",
+            "message",
+            "psr",
+            "psr-17",
+            "psr-7",
+            "request",
+            "response"
         ]
     },
     {
@@ -5575,6 +6514,73 @@
         "homepage": "https://symfony.com"
     },
     {
+        "name": "symfony/psr-http-message-bridge",
+        "version": "v1.2.0",
+        "version_normalized": "1.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/psr-http-message-bridge.git",
+            "reference": "9ab9d71f97d5c7d35a121a7fb69f74fee95cd0ad"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/psr-http-message-bridge/zipball/9ab9d71f97d5c7d35a121a7fb69f74fee95cd0ad",
+            "reference": "9ab9d71f97d5c7d35a121a7fb69f74fee95cd0ad",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^7.1",
+            "psr/http-message": "^1.0",
+            "symfony/http-foundation": "^3.4 || ^4.0"
+        },
+        "require-dev": {
+            "nyholm/psr7": "^1.1",
+            "symfony/phpunit-bridge": "^3.4.20 || ^4.0",
+            "zendframework/zend-diactoros": "^1.4.1 || ^2.0"
+        },
+        "suggest": {
+            "nyholm/psr7": "For a super lightweight PSR-7/17 implementation"
+        },
+        "time": "2019-03-11T18:22:33+00:00",
+        "type": "symfony-bridge",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.2-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Bridge\\PsrHttpMessage\\": ""
+            },
+            "exclude-from-classmap": [
+                "/Tests/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Symfony Community",
+                "homepage": "http://symfony.com/contributors"
+            },
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            }
+        ],
+        "description": "PSR HTTP message bridge",
+        "homepage": "http://symfony.com",
+        "keywords": [
+            "http",
+            "http-message",
+            "psr-17",
+            "psr-7"
+        ]
+    },
+    {
         "name": "symfony/routing",
         "version": "v4.3.4",
         "version_normalized": "4.3.4.0",
@@ -6127,6 +7133,74 @@
             "assert",
             "check",
             "validate"
+        ]
+    },
+    {
+        "name": "zendframework/zend-diactoros",
+        "version": "2.1.3",
+        "version_normalized": "2.1.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/zendframework/zend-diactoros.git",
+            "reference": "279723778c40164bcf984a2df12ff2c6ec5e61c1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/279723778c40164bcf984a2df12ff2c6ec5e61c1",
+            "reference": "279723778c40164bcf984a2df12ff2c6ec5e61c1",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^7.1",
+            "psr/http-factory": "^1.0",
+            "psr/http-message": "^1.0"
+        },
+        "provide": {
+            "psr/http-factory-implementation": "1.0",
+            "psr/http-message-implementation": "1.0"
+        },
+        "require-dev": {
+            "ext-dom": "*",
+            "ext-libxml": "*",
+            "http-interop/http-factory-tests": "^0.5.0",
+            "php-http/psr7-integration-tests": "dev-master",
+            "phpunit/phpunit": "^7.0.2",
+            "zendframework/zend-coding-standard": "~1.0.0"
+        },
+        "time": "2019-07-10T16:13:25+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.1.x-dev",
+                "dev-develop": "2.2.x-dev",
+                "dev-release-1.8": "1.8.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "src/functions/create_uploaded_file.php",
+                "src/functions/marshal_headers_from_sapi.php",
+                "src/functions/marshal_method_from_sapi.php",
+                "src/functions/marshal_protocol_version_from_sapi.php",
+                "src/functions/marshal_uri_from_sapi.php",
+                "src/functions/normalize_server.php",
+                "src/functions/normalize_uploaded_files.php",
+                "src/functions/parse_cookie_header.php"
+            ],
+            "psr-4": {
+                "Zend\\Diactoros\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "description": "PSR HTTP Message implementations",
+        "keywords": [
+            "http",
+            "psr",
+            "psr-7"
         ]
     }
 ]

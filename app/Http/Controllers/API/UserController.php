@@ -12,7 +12,12 @@ use RestApi\Utility\JwtToken;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
-
+use Facebook\Facebook;
+use App\SocialNetwork;
+use Illuminate\Support\Facades\Log;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Socialite;
 class UserController extends BaseController
 {
     /**
@@ -115,6 +120,70 @@ class UserController extends BaseController
             }
         }
     }
+    public function login_social(Request $request)
+    {
+        $provider = $request->type;
+        if ($provider == 'google') {
+            return $this->checkGoogle();
+        }
+
+        if ($provider == 'facebook') {
+            return $this->checkFacebook($request);
+        }
+    }
+    public function checkFacebook(Request $request)
+    {
+        $fb = new Facebook([
+            'app_id' => '413891859271505',
+            'app_secret' => 'f678f181e0829f8708594e9a742d0886',
+            'default_graph_version' => 'v2.10',
+            'default_access_token' => $request->social_token,
+        ]);
+        try {
+              // Get the \Facebook\GraphNodes\GraphUser object for the current user.
+              // If you provided a 'default_access_token', the '{access-token}' is optional.
+              $response = $fb->get("/me?fields=id,email,first_name");
+            } catch(\Facebook\Exceptions\FacebookResponseException $e) {
+              // When Graph returns an error
+              echo 'Graph returned an error: ' . $e->getMessage();
+              exit();
+            } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+              // When validation fails or other local issues
+              echo 'Facebook SDK returned an error: ' . $e->getMessage();
+              exit();
+            }
+        $me = $response->getGraphUser();
+        $user = User::where('name',$me['first_name'])->select('id','avatar','name','email')->first();
+
+        $time = time();
+        $token = JWT::encode([$user->id, $time] , env('JWT_KEY'));
+    
+        $data = new SocialNetwork();
+        $data->user_id = $user->id;
+        $data->social_id = $me['id'];
+        $data->provider = 'Facebook';
+        $data->save();
+        $info = array(
+                    'name'=>$user->name,
+                    'email'=>$user->email,
+                    'avatar'=>$user->avatar,
+                );
+        $response = [
+                    'status' => true,
+                    'message' => 'Login success',
+                    'token' => $token,
+                    'info' => $info,
+                ];
+                return response()->json($response);
+    }
+    public function checkGoogle()
+    {
+        require_once 'C:/xampp/htdocs/webtuyensinh/vendor/google/graph-sdk/src/Facebook/autoload.php';
+        $Client = new Google_Client();
+        $Client->secClientId();
+        $Client->setClientSecret();
+    }
+
     public function comments(Request $request)
     {
         $token = $request->header('token');
@@ -131,5 +200,16 @@ class UserController extends BaseController
                     'comment' => $comments,
                 ];
         return response()->json($response);
+    }
+    public function responseErrors($returnCode, $message, $statusCode = 200)
+    {
+        return response()->json([
+            'code' => (int) $returnCode,
+            'message' => $message,
+        ], $statusCode);
+    }
+    public function responseSuccess($data, $statusCode = 200)
+    {
+        return response()->json(array_merge(['code' => 200], $data), $statusCode);
     }
 }

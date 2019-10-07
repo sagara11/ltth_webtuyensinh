@@ -25,13 +25,7 @@ class CategoryController extends BaseController
         $limit       = isset($request->limit) ? $request->limit : 10 ;
         $page        = isset($request->page) ? $request->page : 1 ;
 
-        if($request->limit != 10)
-        {
-            $categories = $categories->paginate($request->limit);
-            return $this->sendResponse($categories, 'Post retrieved successfully.','categories');
-        }
-
-        $categories = $categories->paginate(10);
+        $categories = $categories->paginate($limit);
         return $this->sendResponse($categories, 'Post retrieved successfully.','categories');
     }
     /**

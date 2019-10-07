@@ -44,14 +44,9 @@ class PostsController extends BaseController
         if($category_id !='all'){
             $posts->where('category_id',$category_id);
         }
-        if($request->limit != 10)
-        {
-            $posts = $posts->paginate($request->limit);
-            return $this->sendResponse($posts, 'Post retrieved successfully.','posts');
-        }
-
-        $posts = $posts->paginate(10);
-        return $this->sendResponse($posts, 'Post retrieved successfully.','posts');
+        
+        $posts = $posts->paginate($limit);
+        return $this->sendResponse($posts, 'Post read successfully.','posts');
     }
     public function sort($select)
     {
@@ -63,7 +58,7 @@ class PostsController extends BaseController
                 $posts->select('id','name');
             }))->where('publish', 1);
             $posts = $posts->paginate(10);
-            return $this->sendResponse($posts, 'Post retrieved successfully.','posts');
+            return $this->sendResponse($posts, 'Post sorted successfully.','posts');
         }
         elseif($select == 'newest')
         {
@@ -73,7 +68,7 @@ class PostsController extends BaseController
                 $posts->select('id','name');
             }))->where('publish', 1);
             $posts = $posts->paginate(10);
-            return $this->sendResponse($posts, 'Post retrieved successfully.','posts');
+            return $this->sendResponse($posts, 'Post sorted successfully.','posts');
         }
         elseif($select == 'trend')
         {
@@ -83,7 +78,7 @@ class PostsController extends BaseController
                 $posts->select('id','name');
             }))->where('publish', 1);
             $posts = $posts->paginate(10);
-            return $this->sendResponse($posts, 'Post retrieved successfully.','posts');
+            return $this->sendResponse($posts, 'Post sorted successfully.','posts');
         }
     }
 
@@ -103,13 +98,8 @@ class PostsController extends BaseController
         if($id != '') {
             $posts->where('id',$id);
         }
-        if($request->limit != 10)
-        {
-            $posts = $posts->paginate($request->limit);
-            return $this->sendResponse($posts, 'Post retrieved successfully.','posts');
-        }
-        $posts = $posts->paginate(10);
-        return $this->sendResponse($posts, 'Post retrieved successfully.','posts');
+        $posts = $posts->paginate($limit);
+        return $this->sendResponse($posts, 'Post read successfully.','post');
     }
     /**
      * Show the form for creating a new user

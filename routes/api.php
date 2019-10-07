@@ -28,6 +28,7 @@ Route::get('post','\App\Http\Controllers\API\PostsController@post');
 //user
 Route::get('users/info','\App\Http\Controllers\API\UserController@index');
 Route::post('users/login','\App\Http\Controllers\API\UserController@login');
+Route::post('users/login_social','\App\Http\Controllers\API\UserController@login_social');
 Route::post('users/update_profile','\App\Http\Controllers\API\UserController@update');
 Route::get('users/comments','\App\Http\Controllers\API\UserController@comments');
 //comment
