@@ -66,12 +66,12 @@ class UserController extends Controller
             if($request->id != '')
             {
                 $data = User::find($request->id);
-                return view('users/edit',['data'=>$data]);
+                return view('admin/users/edit',['data'=>$data,'id'=>$request->id]);
             }
             else
             {
                 $data = Auth::user();
-                return view('users/edit',['data'=>$data]);
+                return view('admin/users/edit',['data'=>$data,'id'=>Auth::id()]);
             }
         }
     }
@@ -94,18 +94,15 @@ class UserController extends Controller
         {
             $users = User::find($request->getid);
         }
-        if($request->name != '' && $request->address != '' &&  $request->phone != '' )
+        if($request->name != '' && $request->email != '')
         {
             $users->name  = $request->name ? $request->name : $users->name  ;
             $users->email  = $request->email ? $request->email : $users->email;
-            $users->image = $request->image ? $request->image : $users->image;
-            $users->phone =  $request->phone ? $request->phone : $users->phone ;
-            $users->address = $request->address ? $request->address : $users->address ;
-            $users->gender = $request->gender ;
+            $users->avatar = $request->image ? $request->image : $users->avatar;
             $users->updated_at = now();
             $users->save();
             $request->session()->flash('success', 'Thông tin đã được cập nhật !!');
-            return redirect()->route('indexUsers');
+            return redirect()->route('indexUser');
         }
         else
         {
@@ -174,7 +171,7 @@ class UserController extends Controller
                 }
             }
             $request->session()->flash('success', 'Kích hoạt / Vô hiệu hóa thành công !!!');
-            return redirect()->route('indexUsers'); 
+            return redirect()->route('indexUser'); 
         }
     }
     public function delete(Request $request)
@@ -196,26 +193,19 @@ class UserController extends Controller
                 $list->delete();
             }
             $request->session()->flash('success', 'Xóa dữ liệu thành công !!!');
-            return redirect()->route('indexUsers'); 
+            return redirect()->route('indexUser'); 
         }
     }
     
     public function filter(Request $request)
     {
         $key = true ;
-        $requests = array('phone'=>$request->phone,'publish'=>$request->publish);
+        $requests = array('publish'=>$request->publish);
         foreach ($requests as $key => $value) 
         {
             if($value != 'All')
             {
-                if($value == 0)
-                {
-                    $DB[] = array($key,'=',NULL);
-                }
-                elseif($value == 1)
-                {
-                    $DB[] = array($key,'!=',NULL);
-                }    
+                $DB[] = array($key,'=',$value);
             }
         }
         if(isset($DB))
@@ -223,18 +213,18 @@ class UserController extends Controller
             $user = User::where($DB)->paginate(8);
             if($user[0]==null)
             {
-                return view('users/index',['users'=>$user,'key'=>$key]);
+                return view('admin/users/list',['users'=>$user,'key'=>$key,'publish'=>$user[0]['publish']]);
             }
             else
             {
-                return view('users/index',['users'=>$user,'key'=>$key]);
+                return view('admin/users/list',['users'=>$user,'key'=>$key,'publish'=>$user[0]['publish']]);
             }
         }  
         else
         {
-            return redirect()->route('indexUsers');
+            return redirect()->route('indexUser');
         }
         $user = new User();
-        return view('users/index',['users'=>$user->paginate(8),'key'=>$key]);
+        return view('admin/users/list',['users'=>$user->paginate(8),'key'=>$key]);
     }
 }

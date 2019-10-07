@@ -56,13 +56,12 @@ Route::group(['prefix' => 'admin'], function() {
 		Route::get('user/list','\App\Http\Controllers\Admin\UserController@index')->name('indexUser');
 		Route::get('user/create','\App\Http\Controllers\Admin\UserController@create')->name('createUser');
 		Route::post('user/store','\App\Http\Controllers\Admin\UserController@store')->name('storeUser');
-		Route::get('user/filter','\App\Http\Controllers\Admin\UserController@filter')->name('filterCategory');
-		Route::post('user/activate','\App\Http\Controllers\Admin\UserController@activate')->name('activateUser');
+		Route::get('user/filter','\App\Http\Controllers\Admin\UserController@filter')->name('filterUser');
+		Route::post('user/method','\App\Http\Controllers\Admin\UserController@method')->name('methodUser');
 		Route::get('user/edit','\App\Http\Controllers\Admin\UserController@edit')->name('editUser');
 		Route::post('user/destroy','\App\Http\Controllers\Admin\UserController@destroy')->name('destroyUser');
 		Route::post('user/slug','\App\Http\Controllers\Admin\UserController@slug')->name('slugUser');
 		Route::post('user/update','\App\Http\Controllers\Admin\UserController@update')->name('updateUser');
-		Route::get('post/init','\App\Http\Controllers\Admin\ElasticsearchController@init');
 		});	
 	});
 Route::group(['prefix'=>'menu'], function () {

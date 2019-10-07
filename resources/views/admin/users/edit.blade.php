@@ -1,13 +1,13 @@
 @extends('adminlte::page')
 
-@section('title', 'CreateData')
+@section('title', 'UpdateData')
 
 @section('content_header')
     	<h1>
-        Thêm dữ liệu
-        <small>Create Teachers</small>
+        Update dữ liệu
+        <small>Create User</small>
       </h1>
-      {{Breadcrumbs::render('createTeachers')}}
+      
 @endsection
 @section('content')
     <tbody>
@@ -18,7 +18,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-    <form action="{{ route('updateTeachers') }}" method="post" accept-charset="utf-8">
+    <form action="{{ route('updateUser') }}" method="post" accept-charset="utf-8">
     			@csrf
         <div class="box-body">
             <div class="row">
@@ -31,57 +31,24 @@
 	                  <label for="exampleInputEmail1">Email address</label>
 	                  <input class="form-control" id="exampleInputEmail1" type="email" placeholder="Enter email" value="{{$data->email}}" name="email">
 	                </div>
-	                <div class="form-group">
-	                	<label for="exampleInputEmail1">Gender</label>
-	                  	<div>
-	                  		@if(isset($data))
-		                  	  <input type="radio" id="male" name="gender" value="{{$data->gender}}"
-							         checked >
-							  <label for="male">{{$data->gender}}</label>
-						  	@endif
-						  	@if($data->gender != 'Male')
-							  <input type="radio" id="male" name="gender" value="Male">
-							  <label for="male">Male</label>
-						  	@endif
-							@if($data->gender != 'Female')
-							  <input type="radio" id="female" name="gender" value="Female">
-							  <label for="female">Female</label>
-							@endif
-							@if($data->gender != 'Other')
-							  <input type="radio" id="other" name="gender" value="Other">
-							  <label for="other">Other</label>
-						  	@endif
-						</div>
-	            	</div>
-	                <div class="form-group">
-	                  <label for="exampleInputEmail1">Evaluation</label>
-	                  <input class="form-control" id="" type="text" placeholder="Enter email" value="{{$data->evaluate}}" name="evaluation">
-	                </div>
-	                <div class="form-group">
-	                  <label for="exampleInputEmail1">Phone</label>
-	                  <input class="form-control" id="" type="number" placeholder="Enter email" value="{{$data->phone}}" name="phone">
-	                </div>
+                  <div class="checkbox">
+              <label>
+                <input checked="" type="checkbox" name="publish"> Publish
+              </label>
+            </div>
           		</div>
-          		<div class="col-sm-4">
-          			<div class="form-group">
-		            	<label for="exampleInputEmail1">Image</label>
-		            	<input type="hidden" name="image" placeholder="image" id="url">
-		            	<div id="avatar">
-	        			<img src="{{$data->image}}" class="img-fluid" alt="" id="photo">
-		        		</div>
-		              	<button type="button" onclick="openPopup()" class="btn btn-primary">Select Avatar</button>
-            		</div>
-          		</div>
-         	</div>
-         		<div class="form-group">
-	                 <label for="exampleInputEmail1">Description</label>
-	                 <textarea name="description" value="{{$data->description}}" id="editor1">{{$data->description}}</textarea>
-	                </div>
-                <div class="checkbox">
-                  <label>
-                    <input checked="" type="checkbox" name="publish"> Publish
-                  </label>
+              <div class="col-sm-4">
+                <div class="col-sm-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Image</label>
+                  <input type="hidden" name="image" placeholder="image" id="url">
+                  <div id="avatar">
+                <img style="height: 200px;" src="{{$data->avatar}}" alt="" id="photo">
                 </div>
+                    <button style="margin-top: 20px;" type="button" onclick="openPopup()" class="btn btn-primary">Select Avatar</button>
+                </div>
+              </div>
+         	</div>
 	        </div>
 	    	</tbody>
               <!-- /.box-body -->

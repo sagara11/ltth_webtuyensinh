@@ -28,40 +28,15 @@
         </div>
         <div class="dataTables_length">
             <div class="row">
-                <form action="" method="get" accept-charset="utf-8">
-                    <div class="col-sm-1">
-                        <div class="form-group">
-                          <label for="exampleInputEmail1">Có Phone</label>
-                            <select class="form-control" name="phone">
-                                @if(isset($phone))
-                                    @if($phone != 'All')
-                                    <option style="display: none;" value="{{ $phone }}">
-                                        {{$phone == 0 ? 'OFF' : 'ON' }}
-                                    </option>
-                                    @endif
-                                    @if($phone == 'All')
-                                    <option style="display: none;" value="{{ $phone }}">
-                                        --All
-                                    </option>
-                                    @endif
-                                @endif
-                                <option value="All">--All</option>
-                                <option value="0">OFF</option>
-                                <option value="1">ON</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-sm-1">
-                        
-                    </div>
-                     <div class="col-sm-1">
+                <form action=" {{ route('filterUser') }} " method="get" accept-charset="utf-8">
+                    <div class="col-sm-1" style="margin-left: 20px">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Publish</label>
                             <select class="form-control" name="publish">
                                 @if(isset($publish))
                                     @if($publish != 'All')
                                     <option style="display: none;" value="{{ $publish }}">
-                                        {{$publish == 0 ? 'OFF' : 'ON' }}
+                                        {{ $publish == 0 ? 'OFF' : 'ON' }}
                                     </option>
                                     @endif
                                     @if($publish == 'All')
@@ -71,23 +46,18 @@
                                     @endif
                                 @endif
                                 <option value="All">--All</option>
-                                <option value="0">OFF</option>
                                 <option value="1">ON</option>
+                                <option value="0">OFF</option>
                             </select>
                         </div>
                     </div>
-                     <div class="col-sm-1">
-                        <div class="form-group">
-                            
-                        </div>
-                    </div>
                     <div class="col-sm-1">
-                        <input class="btn btn-success" style="padding: 5px 5px" type="submit" value="Search">
+                        <input class="btn btn-success" style="margin-top: 25px" type="submit" value="Search">
                     </div>
                 </form>
             </div>
         </div>
-    <form action="" method ="post">
+    <form action="{{ route('methodUser') }}" method ="post">
         @csrf
             <!-- /.box-header -->
             <div class="box-body ">
@@ -105,9 +75,6 @@
                                 <option value="delete">Delete</option>
                             </select>
                             <input class="btn btn-success" type="submit" value="OK" id="choose">
-                                <a href="{{ route('createUser') }}">
-                                    <img style="height: 30px; width: 30px;" id="icon-img" src="http://localhost/webbanhang/resources/Icons/add.png" alt="">
-                                </a>
                             </div>
                         </div>
                     </div>

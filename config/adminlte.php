@@ -147,8 +147,13 @@ return [
         ],
         ['header' => 'account_settings'],
         [
+            'text' => 'List Of Users',
+            'url'  => 'admin/user/list',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
             'text' => 'profile',
-            'url'  => 'admin/settings',
+            'url'  => 'admin/user/edit',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
