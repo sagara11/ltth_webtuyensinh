@@ -82,6 +82,11 @@ Breadcrumbs::for('editUser', function ($trail) {
     $trail->push('User', route('indexUser'));
     $trail->push('Sửa thông tin User',route('editUser'));
 });
+Breadcrumbs::for('change_passwordUser', function ($trail) {
+    $trail->parent('indexUser');
+    $trail->push('User', route('indexUser'));
+    $trail->push('Đổi mật khẩu',route('change_passwordUser'));
+});
 Breadcrumbs::for('filterUser', function ($trail,$key) {
     $trail->parent('indexUser');
     if($key == true)
