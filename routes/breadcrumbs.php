@@ -69,3 +69,23 @@ Breadcrumbs::for('filterCategory', function ($trail,$key) {
         $trail->push('Tìm mục tin',route('filterCategory'));
     }
 });
+// User
+Breadcrumbs::for('indexUser', function ($trail) {
+     $trail->push('Trang chủ', route('indexUser'));
+});
+Breadcrumbs::for('createUser', function ($trail) {
+    $trail->parent('indexCategory');
+    $trail->push('Tạo mục tin',route('createUser'));
+});
+Breadcrumbs::for('editUser', function ($trail) {
+    $trail->parent('indexUser');
+    $trail->push('User', route('indexUser'));
+    $trail->push('Sửa thông tin User',route('editUser'));
+});
+Breadcrumbs::for('filterUser', function ($trail,$key) {
+    $trail->parent('indexUser');
+    if($key == true)
+    {
+        $trail->push('Tìm User',route('filterUser'));
+    }
+});

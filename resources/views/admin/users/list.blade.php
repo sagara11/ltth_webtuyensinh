@@ -7,7 +7,7 @@
         Danh sách User
         <small>User</small>
       </h1>
-      
+    {{ Breadcrumbs::render('filterUser',$key) }}
 @endsection
 @section('content')
 @if (session('success'))
@@ -34,9 +34,9 @@
                             <label for="exampleInputEmail1">Publish</label>
                             <select class="form-control" name="publish">
                                 @if(isset($publish))
-                                    @if($publish != 'All')
+                                    @if($publish != 'All' || $publish == 0)
                                     <option style="display: none;" value="{{ $publish }}">
-                                        {{ $publish == 0 ? 'OFF' : 'ON' }}
+                                        {{ $publish == 1 ? 'ON' : 'OFF' }}
                                     </option>
                                     @endif
                                     @if($publish == 'All')

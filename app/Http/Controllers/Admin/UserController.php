@@ -26,6 +26,35 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function change_password()
+    {
+        return view('admin/users/change_password');
+    }
+    public function check_password(Request $request)
+    {
+        $key = false ;
+        $data = User::find(Auth::id());
+        if(Hash::check($request->currentPassword,$data->password))
+        {
+            if($request->newPassword == $request->confirmPassword)
+            {
+                $data->password = Hash::make($request->newPassword);
+                $data->save();
+                $request->session()->flash('success', 'Mật khẩu thay đổi thành công !!!');
+                return redirect()->route('indexUser');
+            }
+            else
+            {
+                $request->session()->flash('fail', 'Mật khẩu nhập lại không đúng !!! ');
+                return view('admin/users/change_password');
+            }
+        }
+        else
+        {
+            $request->session()->flash('fail', 'Mật khẩu hiện tại không đúng !!!');
+            return view('admin/users/change_password');
+        }
+    }
     public function create()
     {
         //
@@ -211,7 +240,7 @@ class UserController extends Controller
         if(isset($DB))
         {
             $user = User::where($DB)->paginate(8);
-            if($user[0]==null)
+            if($user[0] == null)
             {
                 return view('admin/users/list',['users'=>$user,'key'=>$key,'publish'=>$user[0]['publish']]);
             }
@@ -225,6 +254,6 @@ class UserController extends Controller
             return redirect()->route('indexUser');
         }
         $user = new User();
-        return view('admin/users/list',['users'=>$user->paginate(8),'key'=>$key]);
+        return view('admin/users/list',['users'=>$user->paginate(8),'key'=>$key,'publish'=>$user[0]['publish']]);
     }
 }

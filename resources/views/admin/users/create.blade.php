@@ -7,7 +7,7 @@
         Thêm dữ liệu
         <small>Create Teachers</small>
       </h1>
-      {{Breadcrumbs::render('createTeachers')}}
+      {{Breadcrumbs::render('createUser')}}
 @endsection
 @section('content')
 @if (session('fail'))

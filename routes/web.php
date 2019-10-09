@@ -62,6 +62,8 @@ Route::group(['prefix' => 'admin'], function() {
 		Route::post('user/destroy','\App\Http\Controllers\Admin\UserController@destroy')->name('destroyUser');
 		Route::post('user/slug','\App\Http\Controllers\Admin\UserController@slug')->name('slugUser');
 		Route::post('user/update','\App\Http\Controllers\Admin\UserController@update')->name('updateUser');
+		Route::get('user/change_password','\App\Http\Controllers\Admin\UserController@change_password')->name('change_passwordUser');
+		Route::post('user/check_password','\App\Http\Controllers\Admin\UserController@check_password')->name('check_passwordUser');
 		});	
 	});
 Route::group(['prefix'=>'menu'], function () {

@@ -7,7 +7,7 @@
         Update dữ liệu
         <small>Create User</small>
       </h1>
-      
+  {{Breadcrumbs::render('editUser')}}
 @endsection
 @section('content')
     <tbody>

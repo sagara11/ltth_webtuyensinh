@@ -158,7 +158,7 @@ return [
         ],
         [
             'text' => 'change_password',
-            'url'  => 'admin/settings',
+            'url'  => 'admin/user/change_password',
             'icon' => 'fas fa-fw fa-lock',
         ],
         ['header' => 'FACTORS'],
