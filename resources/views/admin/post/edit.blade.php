@@ -1,11 +1,11 @@
     @extends('adminlte::page')
 
-@section('title', 'CreatData')
+@section('title', 'UpdateData')
 
 @section('content_header')
       <h1>
-        Thêm bài viết
-        <small>Update Courses</small>
+        Update bài viết
+        <small>Update Post</small>
       </h1>
       {{Breadcrumbs::render('editPost')}}
 @endsection
@@ -16,7 +16,7 @@
 @endif
     	<div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Detail Courses</h3>
+              <h3 class="box-title">Update Post</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->

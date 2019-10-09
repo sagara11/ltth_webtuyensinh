@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
 use Facebook\Facebook;
 use App\SocialNetwork;
 use Illuminate\Support\Facades\Log;
+use Mail;
 class UserController extends BaseController
 {
     /**
@@ -34,6 +35,30 @@ class UserController extends BaseController
                     'info' => $user,
                 ];
         return response()->json($response);
+    }
+    public function change_password(Request $request)
+    {
+        $data = User::where('email',$request->email)->first();
+        if(empty($data))
+        {
+            $response = [
+                    'status' => false,
+                    'message' => 'Không tồn tại email này !!!',
+                ];
+            return response()->json($response);
+        }
+        else
+        {
+            $email = $data->email;
+            Mail::send('admin/mailfb', array('name'=>$data->name,'content'=>'Please click the link below to retrieve your password !!!', 'link'=>'Link: https:/#'), function($message) use($email) {
+                $message->to($email, 'Verified Password!!!')->subject('Please click the link below to retrieve your password !!!');
+            });
+            $response = [
+                    'status' => true,
+                    'message' => 'Send message successfully!',
+                ];
+            return response()->json($response);
+        }
     }
     /**
      * Show the form for creating a new user

@@ -66,6 +66,10 @@ Route::group(['prefix' => 'admin'], function() {
 		Route::post('user/check_password','\App\Http\Controllers\Admin\UserController@check_password')->name('check_passwordUser');
 		});	
 	});
+// Route::resource('crawl','\App\Http\Controllers\Admin\CrawlController');
+Route::get('crawl', 'CrawlController@pages_insert');
+
+
 Route::group(['prefix'=>'menu'], function () {
 	Route::group(['middleware' => 'auth'], function () {
 
