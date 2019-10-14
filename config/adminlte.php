@@ -205,6 +205,17 @@ return [
                 ],
             ],
         ],
+        [
+            'text'    => 'Bình luận',
+            'icon'    => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'Detail',
+                    'url'  => 'admin/comment/list',
+                    'icon_color' => 'red',
+                ],
+            ],
+        ],
     ],
 
     /*

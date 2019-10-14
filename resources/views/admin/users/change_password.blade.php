@@ -30,16 +30,16 @@
             <div class="row">
                 <div class="col-sm-8">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Current Password</label>
-                    <input required="" class="form-control" id="exampleInputEmail1" type="password" placeholder="currentPassword" name="currentPassword">
+                    <label for="exampleInputEmail1">Mật khẩu hiện tại</label>
+                    <input required="" class="form-control" id="exampleInputEmail1" type="password" placeholder="Mật khẩu hiện tại" name="currentPassword">
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">New Password</label>
-                    <input required="" class="form-control" id="exampleInputEmail1" type="password" placeholder="newPassword" name="newPassword">
+                    <label for="exampleInputEmail1">Mật khẩu mới</label>
+                    <input required="" class="form-control" id="exampleInputEmail1" type="password" placeholder="Mật khẩu mới" name="newPassword">
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Confirm Password</label>
-                    <input required="" class="form-control" id="exampleInputEmail1" type="password" placeholder="confirmPassword" name="confirmPassword">
+                    <label for="exampleInputEmail1">Xác thực mật khẩu</label>
+                    <input required="" class="form-control" id="exampleInputEmail1" type="password" placeholder="Xác thực mật khẩu" name="confirmPassword">
                   </div>
                 </div>
               </div>
