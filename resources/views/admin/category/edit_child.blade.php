@@ -7,7 +7,7 @@
         Thêm dữ liệu
         <small>Create Categories</small>
       </h1>
-      {{Breadcrumbs::render('createCategory')}}
+      {{Breadcrumbs::render('editCategory')}}
 @endsection
 @section('content')
 @include('ckfinder::setup')
