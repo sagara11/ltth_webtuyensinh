@@ -1,10 +1,10 @@
 @extends('adminlte::page')
 
-@section('title', 'CreateData')
+@section('title', 'UpdateData')
 
 @section('content_header')
       <h1>
-        Thêm dữ liệu
+        Update dữ liệu
         <small>update Banner</small>
       </h1>
       {{Breadcrumbs::render('editBanner')}}
@@ -21,7 +21,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-        <form action="{{ route('storeBanner') }}" method="post" accept-charset="utf-8">
+        <form action="{{ route('updateBanner') }}" method="post" accept-charset="utf-8">
           @csrf
         <div class="box-body">
             <div class="row">
@@ -54,7 +54,11 @@
                     </div>
             <label for="exampleInputEmail1">Publish</label>
             <div>
-              <input class="form-check-input" type="checkbox" name="publish" id="inlineRadio1" checked>
+              @if($banners->publish == 1)
+                  <input checked="" class="form-check-input" type="checkbox" name="publish"checked>
+              @else
+                <input class="form-check-input" type="checkbox" name="publish" >
+              @endif
             </div>
               </div>
               <div class="col-sm-4">
@@ -73,6 +77,7 @@
               <!-- /.box-body -->
 
               <div class="box-footer">
+                <input type="hidden" name="getid" value="{{$id}}">
                 <button class="btn btn-primary" type="submit">Submit</button>
               </div>
             </form>

@@ -1,11 +1,11 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
 use Illuminate\Support\Str;
+use Session;
 
  
 class CategoryController extends Controller
@@ -20,7 +20,17 @@ class CategoryController extends Controller
     {
         $key=false;
     	$category = category::all();
-        return view('admin/category/list', ['categories' => $categories->paginate(10), 'category'=> $category,'id'=>'All','key'=>$key]);
+            
+        $categories = Category::select('id','name','updated_at','parent_id','publish');
+        
+        $categories->where('parent_id', NULL);
+        
+        $categories->with(array( 'child_category' => function($q) {
+                return $q->select('id','name','updated_at','parent_id','publish');
+            }
+        ));
+        $categories = $categories->paginate(3);
+        return view('admin/category/list', ['categories' => $categories, 'category'=> $category,'publish'=>'All','key'=>$key,'id'=>'All']);
     }
 
     /**
@@ -28,11 +38,15 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create_parent()
     {
-        return view('admin/category/create');
+        return view('admin/category/create_parent');
     }
-
+    public function create_child()
+    {
+        $data = Category::where('parent_id',NULL)->get();
+        return view('admin/category/create_child',['category'=>$data]);
+    }
     /**
      * Store a newly created user in storage
      *
@@ -47,12 +61,16 @@ class CategoryController extends Controller
             $pointer = Category::where('slug',$request->slug)->get();
             if(empty($pointer[0]))
             {
-                $users = new Category();
-                $users->name = $request->name ;
-                $users->slug = $request->slug ;
-                $users->publish = $request->publish ? 1 : 0 ;
-                $users->updated_at = now();
-                $users->save();
+                $categories = new Category();
+                $categories->name = $request->name ;
+                $categories->slug = $request->slug ;
+                $categories->publish = $request->publish ? 1 : 0 ;
+                $categories->updated_at = now();
+                if(isset($request->category_parent))
+                {
+                    $categories->parent_id = $request->category_parent;
+                }
+                $categories->save();
                 $request->session()->flash('success', 'Bài viết được tạo thành công!');
                 return redirect()->route('indexCategory');
             }
@@ -64,9 +82,8 @@ class CategoryController extends Controller
         }
         else
     	{
-            $id=$request->getid;
     		$request->session()->flash('fail', 'Hãy điền đầy đủ thông tin!');
-       		return view('admin/category/create',['id'=>$id]);
+       		return redirect()->route('indexCategory');
     	}
     }
 	    public function slug(Request $request) {
@@ -79,13 +96,19 @@ class CategoryController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\View\View
      */
-    public function edit(Request $request)
+    public function edit_parent(Request $request)
     {
         $id = $request->id ;
         $category = Category::find($id);
-    	return view('admin/category/edit',['id'=>$id,'category'=>$category]);
+    	return view('admin/category/edit_parent',['id'=>$id,'category'=>$category]);
     }
-
+    public function edit_child(Request $request)
+    {
+        $id = $request->id ;
+        $category = Category::find($id);
+        $data = Category::where('parent_id',NULL)->get();
+        return view('admin/category/edit_child',['id'=>$id,'category'=>$category,'categories'=>$data]);
+    }
     /**
      * Update the specified user in storage
      *
@@ -95,33 +118,31 @@ class CategoryController extends Controller
      */
     public function update(Request $request)
     {
-    	if($request->name != '' && $request->publish != '' )
-    	{
-	    	$users = Category::find($request->getid);
-            $pointer = Category::where('slug','!=',$users['slug'])->get();
-            foreach($pointer as $row)
+    	$users = Category::find($request->getid);
+        $pointer = Category::where('slug','!=',$users['slug'])->get();
+        foreach($pointer as $row)
+        {
+            if($row->slug == $request->slug)
             {
-                if($row->slug == $request->slug)
-                {
-                    $id=$request->getid;
-                    $request->session()->flash('fail', 'Danh mục này đã tồn tại !!! ');
-                    return view('admin/category/edit',['id'=>$id,'category'=>$users]);
-                }
+                $id=$request->getid;
+                $request->session()->flash('fail', 'Danh mục này đã tồn tại !!! ');
+                return view('admin/category/edit',['id'=>$id,'category'=>$users]);
             }
-	    	$users->name  = $request->name;  
-            $users->slug = $request->slug ;
-	    	$users->publish =  $request->publish ? 1 : 0; 
-	    	$users->updated_at = now();
-	    	$users->save();
-	    	$request->session()->flash('success', 'Bài viết được update thành công!');
-       		return redirect()->route('indexCategory');
-    	}
-    	else
-    	{
-            $id=$request->getid;
-    		$request->session()->flash('fail', 'Hãy điền đầy đủ thông tin!');
-       		return view('admin/category/edit',['id'=>$id,'category'=>$users]);
-    	}
+        }
+    	$users->name  = $request->name;  
+        $users->slug = $request->slug ;
+        $users->seo_title = $request->seo_title;
+        $users->seo_description = $request->description;
+        $users->seo_keyword = $request->seo_keyword;    
+    	$users->publish =  $request->publish ? 1 : 0; 
+    	$users->updated_at = now();
+        if(isset($request->category_parent))
+        {
+            $users->parent_id = $request->category_parent;
+        }
+    	$users->save();
+    	$request->session()->flash('success', 'Bài viết được update thành công!');
+   		return redirect()->route('indexCategory');
     }
 
     /**
@@ -130,86 +151,45 @@ class CategoryController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\RedirectResponse
      */
+    public function method(Request $request)
+    {
+        if($request->option == 'delete')
+        {
+            return $this->destroy($request);
+        }
+        elseif($request->option == 'activate')
+        {
+            return $this->activate($request); 
+        }
+    }
     public function destroy(Request $request)
     {
-
-    	$id = $request->takeid;
+    	$id = $request->checkbox   ;
     	if(is_array($id))
     	{
     		foreach ($id as $row) 
     	 	{
-	            $users = Category::findOrFail($row);
-	        	$users->delete();
+	            $categories = Category::findOrFail($row);
+	        	$categories->delete();
         	}
     	}
     	else
     	{
-    		 $users = Category::findOrFail($id);
-    		 $users->delete();
+    		 $categories = Category::findOrFail($id);
+    		 $categories->delete();
     	}
         $request->session()->flash('delete', 'Bài viết được xóa thành công!');
     	return redirect()->route('indexCategory');
     }
-
-	public function filter(Request $request)
-	{
-        $key=true;
-		$category = Category::all();
-        $start = '' ;
-        $end = '' ;
-        if(isset($request->date))
+    public function activate(Request $request)
+    {
+        if($request->checkbox == null)
         {
-            $timeValue = explode('-', $request->date);
-            $start = date('Y-m-d', strtotime($timeValue[0]));
-            $end = date('Y-m-d', strtotime($timeValue[1]));
-        }
-        $requests = array('name'=> $request->name,'updated_at' => $start);
-    	foreach ($requests as $key => $value) 
-    	{
-    		if($value != 'All')
-    			{
-		    		if($key == 'updated_at' && $start != $end)
-		    		{
-		    			$DB[] = array($key,'>=',$value);
-		    			$DB[]=array($key,'<=',$end);   
-		    		}
-		    		elseif($key != 'updated_at' && $value != null)
-					{
-					    $DB[] = array($key, '=', $value); 
-					}
-		    	}
-    	}
-        if(isset($DB))
-        {
-            $categories = Category::where($DB)->paginate(8); 
-            if($categories[0]==null)
-            {
-            	$category = Category::all();
-        		return view('admin/category/list', ['category' => $category, 'categories'=> $categories,'id'=>'All','key'=>$key]);
-            }
-            else
-            {
-            	if($request->name=='All')
-            	{
-            		return view('admin/category/list',['category' => $category,'categories'=> $categories,'id'=>'All','key'=>$key]);
-            	}
-            }
-        }  
-    	else
-        {
+            $request->session()->flash('fail', 'Xin mời bạn hãy chọn bất kì 1 ô nào đó !!! ');
             return redirect()->route('indexCategory');
         }
-        return view('admin/category/list',['category' => $category,'categories'=> $categories,'id'=>$categories[0]->name,'key'=>$key]);
-	}
-	public function activate(Request $request)
-	{
-		if($request->checkbox == null)
-		{
-			$request->session()->flash('fail', 'Xin mời bạn hãy chọn bất kì 1 ô nào đó !!! ');
-       		return redirect()->route('indexCategory');
-		}
         $id=$request->checkbox;
-			if (is_array($id)) 
+            if (is_array($id)) 
             {
             foreach ($id as $item) 
             {
@@ -240,6 +220,39 @@ class CategoryController extends Controller
         $request->session()->flash('success', 'Kích hoạt / Vô hiệu hóa thành công !!!');
         return redirect()->route('indexCategory'); 
     }
+	public function filter(Request $request)
+	{
+        $key=true;
+        $category = Category::all();
+        $requests = array('name'=> $request->name ? $request->name : 'All','publish' => $request->publish);
+        foreach ($requests as $key => $value) 
+        {
+            if($value != 'All')
+            {
+                 $DB[] = array($key, '=', $value); 
+            }
+        }
+        if(isset($DB))
+        {
+            $categories = Category::where($DB)->paginate(8);
+            if($categories[0]==null)
+            {
+            	$category = Category::all();
+        		return view('admin/category/list', ['category' => $category, 'categories'=> $categories,'publish'=>
+                    $request->publish,'key'=>$key,'id'=>'All']);
+            }
+            else
+            {
+        		return view('admin/category/list',['category' => $category,'categories'=> $categories,'publish'=>
+                    $request->publish,'key'=>$key,'id'=>'All']);
+            }
+        }  
+    	else
+        {
+            return redirect()->route('indexCategory');
+        }
+        return view('admin/category/list',['category' => $category,'categories'=> $categories,'id'=>$categories[0]->name,'publish'=>$request->publish,'key'=>$key]);
+	}
 }
 
 

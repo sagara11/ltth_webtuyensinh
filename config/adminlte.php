@@ -147,27 +147,27 @@ return [
         ],
         ['header' => 'account_settings'],
         [
-            'text' => 'List Of Users',
+            'text' => 'Danh sách người dùng',
             'url'  => 'admin/user/list',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'profile',
+            'text' => 'Thông tin cá nhân',
             'url'  => 'admin/user/edit',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'change_password',
+            'text' => 'Đổi mật khẩu',
             'url'  => 'admin/user/change_password',
             'icon' => 'fas fa-fw fa-lock',
         ],
-        ['header' => 'FACTORS'],
+        ['header' => 'ĐỀ MỤC'],
         [
             'text'    => 'Banner',
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
                 [
-                    'text' => 'Detail',
+                    'text' => 'Danh sách',
                     'url'  => 'admin/banner/list',
                     'icon_color' => 'red',
                 ],
@@ -183,7 +183,7 @@ return [
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
                 [
-                    'text' => 'Detail',
+                    'text' => 'Danh sách',
                     'url'  => 'admin/post/list',
                     'icon_color' => 'red',
                 ],
@@ -199,9 +199,19 @@ return [
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
                 [
-                    'text' => 'Detail',
+                    'text' => 'Danh sách',
                     'url'  => 'admin/category/list',
                     'icon_color' => 'red',
+                ],
+                [
+                    'text'    => 'Thêm Danh Mục Cha',
+                    'url'     => 'admin/category/create_parent',
+                    'icon_color' => 'aqua',
+                ],
+                [
+                    'text'    => 'Thêm Danh Mục Con',
+                    'url'     => 'admin/category/create_child',
+                    'icon_color' => 'aqua',
                 ],
             ],
         ],
@@ -210,7 +220,7 @@ return [
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
                 [
-                    'text' => 'Detail',
+                    'text' => 'Danh sách',
                     'url'  => 'admin/comment/list',
                     'icon_color' => 'red',
                 ],

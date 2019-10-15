@@ -72,22 +72,22 @@
               </div>
               <div class="row">
                 <div class="col-sm-9">
-                      <div class="form-group">
-                            <label for="exampleInputEmail1">Nội dung bài viết</label>
-                            <textarea name="content" class="form-control" id="editor1" placeholder="Content"></textarea>
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInputEmail1">Seo Title</label>
-                         <textarea name="seo_title" class="form-control" id="exampleInputEmail1" placeholder="Seo_Title"></textarea>
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInputEmail1">Seo Keyword</label>
-                         <textarea name="seo_keyword" class="form-control" id="exampleInputEmail1" placeholder="Seo_Keyword"></textarea>
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInputEmail1">Seo Description</label>
-                         <textarea name="seo_description" class="form-control" id="exampleInputEmail1" placeholder="Seo Description"></textarea>
-                      </div>  
+                  <div class="form-group">
+                        <label for="exampleInputEmail1">Nội dung bài viết</label>
+                        <textarea name="content" class="form-control" id="editor1" placeholder="Content"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Seo Title</label>
+                     <textarea name="seo_title" class="form-control" id="exampleInputEmail1" placeholder="Seo_Title"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Seo Keyword</label>
+                     <textarea name="seo_keyword" class="form-control" id="exampleInputEmail1" placeholder="Seo_Keyword"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Seo Description</label>
+                     <textarea name="seo_description" class="form-control" id="exampleInputEmail1" placeholder="Seo Description"></textarea>
+                  </div>  
                 </div>
               </div>
           </div>

@@ -69,7 +69,7 @@
     <form action="{{ route('methodPost')}}" method ="post">
         @csrf
             <!-- /.box-header -->
-            <div class="box-body ">
+            <div style="padding: 0px 28px;" class="box-body ">
               <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                 <div class="row">
                     <div class="col-lg-9">

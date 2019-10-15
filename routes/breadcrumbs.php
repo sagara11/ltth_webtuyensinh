@@ -2,6 +2,7 @@
 // Post
 Breadcrumbs::for('indexPost', function ($trail) {
      $trail->push('Trang chủ', route('indexPost'));
+     $trail->push('Bài viết', route('indexPost'));
 });
 
 Breadcrumbs::for('createPost', function ($trail) {
@@ -11,7 +12,6 @@ Breadcrumbs::for('createPost', function ($trail) {
 
 Breadcrumbs::for('editPost', function ($trail) {
     $trail->parent('indexPost');
-    $trail->push('Bài viết', route('indexPost'));
     $trail->push('Sửa bài viết',route('editPost'));
 });
 Breadcrumbs::for('filterPost', function ($trail,$key) {
@@ -32,6 +32,7 @@ Breadcrumbs::for('searchPost', function ($trail,$key) {
 //Banner
 Breadcrumbs::for('indexBanner', function ($trail) {
      $trail->push('Trang chủ', route('indexBanner'));
+     $trail->push('Banner', route('indexBanner'));
 });
 Breadcrumbs::for('createBanner', function ($trail) {
     $trail->parent('indexBanner');
@@ -39,7 +40,6 @@ Breadcrumbs::for('createBanner', function ($trail) {
 });
 Breadcrumbs::for('editBanner', function ($trail) {
     $trail->parent('indexBanner');
-    $trail->push('Banner', route('indexBanner'));
     $trail->push('Sửa Banner',route('editBanner'));
 });
 Breadcrumbs::for('filterBanner', function ($trail,$key) {
@@ -52,6 +52,7 @@ Breadcrumbs::for('filterBanner', function ($trail,$key) {
 // Muc tin
 Breadcrumbs::for('indexCategory', function ($trail) {
      $trail->push('Trang chủ', route('indexCategory'));
+     $trail->push('Mục tin', route('indexCategory'));
 });
 Breadcrumbs::for('createCategory', function ($trail) {
     $trail->parent('indexCategory');
@@ -59,7 +60,6 @@ Breadcrumbs::for('createCategory', function ($trail) {
 });
 Breadcrumbs::for('editCategory', function ($trail) {
     $trail->parent('indexCategory');
-    $trail->push('Mục tin', route('indexCategory'));
     $trail->push('Sửa mục tin',route('editCategory'));
 });
 Breadcrumbs::for('filterCategory', function ($trail,$key) {
@@ -71,7 +71,8 @@ Breadcrumbs::for('filterCategory', function ($trail,$key) {
 });
 // User
 Breadcrumbs::for('indexUser', function ($trail) {
-     $trail->push('Trang chủ', route('indexUser'));
+    $trail->push('Trang chủ', route('indexUser'));
+    $trail->push('User', route('indexUser'));
 });
 Breadcrumbs::for('createUser', function ($trail) {
     $trail->parent('indexCategory');
@@ -79,7 +80,6 @@ Breadcrumbs::for('createUser', function ($trail) {
 });
 Breadcrumbs::for('editUser', function ($trail) {
     $trail->parent('indexUser');
-    $trail->push('User', route('indexUser'));
     $trail->push('Sửa thông tin User',route('editUser'));
 });
 Breadcrumbs::for('change_passwordUser', function ($trail) {

@@ -50,6 +50,7 @@ class PostsController extends BaseController
     }
     public function sort($select)
     {
+        $limit = isset($request->limit) ? $request->limit : 10 ;
         if($select == 'hot')
         {
             $posts = Post::orderBy('view','DESC')->select('id','name','image','description','created_at','view','comment','category_id')->with(array(
@@ -57,7 +58,7 @@ class PostsController extends BaseController
             {
                 $posts->select('id','name');
             }))->where('publish', 1);
-            $posts = $posts->paginate(10);
+            $posts = $posts->paginate($limit);
             return $this->sendResponse($posts, 'Post sorted successfully.','posts');
         }
         elseif($select == 'newest')
@@ -67,7 +68,7 @@ class PostsController extends BaseController
             {
                 $posts->select('id','name');
             }))->where('publish', 1);
-            $posts = $posts->paginate(10);
+            $posts = $posts->paginate($limit);
             return $this->sendResponse($posts, 'Post sorted successfully.','posts');
         }
         elseif($select == 'trend')
@@ -77,7 +78,7 @@ class PostsController extends BaseController
             {
                 $posts->select('id','name');
             }))->where('publish', 1);
-            $posts = $posts->paginate(10);
+            $posts = $posts->paginate($limit);
             return $this->sendResponse($posts, 'Post sorted successfully.','posts');
         }
     }
@@ -86,6 +87,7 @@ class PostsController extends BaseController
     {
         if(isset($request->id) && $request->id != null)
         {
+            $limit = isset($request->limit) ? $request->limit : 1 ;
             $type = 'post';
             $posts = Post::where('id',$request->id)->select('id','name','image','description','content','created_at','view','comment','category_id')->with(array(
                 'categories' => function($posts)
@@ -93,7 +95,7 @@ class PostsController extends BaseController
                     $posts->select('id','name');
                 }))->where('publish', 1);
             $posts->where('type_post', '=', $type);
-            $posts = $posts->paginate(1);
+            $posts = $posts->paginate($limit);
             return $this->sendResponse($posts, 'Post read successfully.','post');
         }
         else

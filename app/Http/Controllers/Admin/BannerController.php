@@ -21,7 +21,7 @@ class BannerController extends Controller
     public function index(Banner $banners)
     {
         $key=false;
-        return view('admin.banner.list', ['banners' => $banners->paginate(8), 'id' => 'All','key'=>$key]);
+        return view('admin.banner.list', ['banners' => $banners->paginate(8),'position'=>'All','publish'=>'All','key'=>$key]);
     }
  	public function test(Banner $users)
     {
@@ -90,7 +90,7 @@ class BannerController extends Controller
     public function update(Request $request)
     {
         $users = Banner::find($request->getid);
-    	if($request->name != '' && $request->link != '' && $request->image != '' && $request->position != '' && $request->publish != '')
+    	if($request->name != '' && $request->link != '' && $request->image != '' && $request->position != '')
     	{
 	    	$users->name  = $request->name ;
 	    	$users->link  = $request->link ;
@@ -107,7 +107,7 @@ class BannerController extends Controller
     	{
             $id=$request->getid;
     		$request->session()->flash('fail', 'Hãy điền đầy đủ thông tin!');
-       		return view('banner/edit',['id'=>$id,'user'=>$users]);
+       		return view('admin/banner/edit',['id'=>$id,'user'=>$users]);
     	}
     }
     /**
@@ -116,68 +116,65 @@ class BannerController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Request $request)
-    {
-    	$id = $request->takeid;
-    	if(is_array($id))
-    	{
-    		foreach ($id as $row) 
-    	 	{
-	            $users = Banner::findOrFail($row);
-	        	$users->delete();
-        	}
-    	}
-    	else
-    	{
-    		 $users = Banner::findOrFail($id);
-    		 $users->delete();
-    	}
-        $request->session()->flash('delete', 'Bài viết được xóa thành công!');
-    	return redirect()->route('indexBanner');
-	}
 	public function filter(Request $request)
 	{
-            $key=true;
-			$timeValue = explode('-', $request->date);
-            $start = date('Y-m-d', strtotime($timeValue[0]));
-            $end = date('Y-m-d', strtotime($timeValue[1]));
-            $requests = array('name'=>$request->name,'position'=>$request->position,'updated_at' => $start);
+        $key=true;
+        $requests = array('name'=> $request->name ? $request->name : 'All','position'=>$request->position ? $request->position : 'All','publish' => $request->publish);
     	foreach ($requests as $key => $value) 
     	{
     		if($value != 'All')
-    			{
-		    		if($key == 'updated_at' && $start != $end)
-		    		{
-		    			$DB[] = array($key,'>=',$value);
-		    			$DB[] = array($key,'<=',$end);   
-		    		}
-		    		elseif($key != 'updated_at' && $value != null)
-					{
-					    $DB[] = array($key, '=', $value); 
-					}
-		    	}
+			{
+	    	     $DB[] = array($key, '=', $value); 
+	    	}
 		}
         if(isset($DB))
         {
-            $user = Banner::where($DB)->paginate(8);
-            if($user[0]==null)
+            $banners = Banner::where($DB)->paginate(8);
+            if($banners[0]==null)
             {
-                return view('admin.banner.list',['banners'=>$user,'id'=>'All','search'=>$request->name,'key'=>$key]);
+                return view('admin.banner.list',['banners'=>$banners,'position'=>$request->position,'publish'=>$request->publish,'search'=>$request->name,'key'=>$key]);
             }
             else
             {
-                if($request->position=='All')
-                {
-                    return view('admin.banner.list',['banners'=>$user,'id'=>'All','key'=>$key]);
-                }
+               return view('admin.banner.list',['banners'=>$banners,'position'=>$request->position,'publish'=>$request->publish,'key'=>$key]);
             }
         }  
     	else
         {
             return redirect()->route('indexBanner');
         }
-        return view('admin.banner.list',['banners'=>$user,'id'=>$request['position'],'key'=>$key]);
+        return view('admin.banner.list',['banners'=>$banners,'position'=>'All','publish'=>$request->publish,'key'=>$key]);
 	}
+    public function method(Request $request)
+    {
+        if($request->option == 'delete')
+        {
+            return $this->destroy($request);
+        }
+        elseif($request->option == 'activate')
+        {
+            return $this->activate($request); 
+        }
+    }
+    public function destroy(Request $request)
+    {
+        $id = $request->checkbox;
+        if(is_array($id))
+        {
+            foreach ($id as $row) 
+            {
+                $banners = Banner::findOrFail($row);
+                $banners->delete();
+            }
+        }
+        else
+        {
+             $banners = Banner::findOrFail($id);
+             $banners->delete();
+        }
+        $request->session()->flash('delete', 'Bài viết được xóa thành công!');
+        return redirect()->route('indexBanner');
+    }
 	public function activate(Request $request)
 	{
         if($request->checkbox == null)

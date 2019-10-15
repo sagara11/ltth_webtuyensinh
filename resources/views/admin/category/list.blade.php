@@ -30,7 +30,7 @@
             <div class="row">
                 <div class="col-lg-1">
                     <form style="padding-left: 20px; padding-top: 25px;" action="{{ route('createCategory') }}" method="get" accept-charset="utf-8">
-                        <button style="display: none;" class="btn btn-primary" type="submit"><i class="fa fa-plus"> </i></button>
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-plus"> </i></button>
                     </form>
                 </div> 
                 <div class="col-lg-9">
@@ -54,8 +54,15 @@
                                 </select>
                             </div>
                             <div class="form-group col-md-3">
-                                <label for="inputState">Updated_at</label>
-                                <input value="" id="daterange" type="text" class="form-control" name="date" >
+                                <label for="inputState">Publish</label>
+                                <select class="form-control" name="publish">
+                                    @if($publish!='All')
+                                    <option style="display: none;" value="{{$publish}}">{{$publish ? 'ON' : 'OFF'}}</option>
+                                    @endif
+                                    <option class="dropdown-item" value="All">All</option>
+                                    <option class="dropdown-item" value="1">ON</option>
+                                    <option class="dropdown-item" value="0">OFF</option>
+                                </select>
                             </div>
                             <div class="col-md-1">
                                 <button class="btn btn-primary" type="submit" id="search" value="Search" style="margin-top: 24px; padding: 10px 12px; border: 0px" class=" animation-on-hover" type="submit"><i class="fa fa-search"> </i></button>
@@ -63,24 +70,27 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-lg-2">
-                    <div>
-                        <input class="btn btn-primary" style="margin-top: 24px; width: 100%; color:white; padding: 10px 10px; border: none;"  type="button" id="destroy" value="Xóa Bài">
-                    </div>
-                </div>
             </div>
-    <form action="{{ route('activateCategory')}}" method ="post">
+    <form action="{{ route('methodCategory')}}" method ="post">
         @csrf
             <!-- /.box-header -->
-            <div class="box-body ">
+            <div style="padding: 0px 28px;" class="box-body ">
               <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                 <div class="row">
-                    <div class="col-lg-10">
+                    <div class="col-lg-9">
                         
                     </div>
-                    <div class="col-lg-2">
-                        <div style="width: 100%;">
-                            <input style="padding: 10px 26px; margin-left: 6px;" class="btn btn-primary" type="submit" id="activate" value="Kích hoạt/Vô Hiệu Hóa">
+                    <div style="display: flex;" class="col-lg-3">
+                        <div>
+                            <label>Chọn Tác Vụ</label>
+                            <select name="option" class="form-control">
+                                <option value="all">All--</option>
+                                <option value="activate">Kích hoạt/Vô hiệu hóa</option>
+                                <option value="delete">Xóa</option>
+                            </select>
+                        </div>
+                        <div style="padding-top: 24px;">
+                            <input class="btn btn-primary" type="submit" value="OK">
                         </div>
                     </div>
                 </div>
@@ -97,18 +107,34 @@
                     </thead>
                     <tbody>
                         @foreach ($categories as $row)
-                           <tr  id="detail_{{ $row->id }}">
-                            <td><input type="checkbox" name="checkbox[]" class="check" value="{{ $row->id }}"></td>   
-                            <td>
-                                <a href="{{ route('editCategory') }}?id={{ $row->id }}" style="color: green">
-                                    {{ $row->name }}
-                                </a>
-                            </td>
-                            <td> 
-                                <span style="background-color: {{ $row->publish ? '#4caf50' : '#c41700' }}; color: white; padding: 5px 5px;">{{ $row->publish ? 'ON' : 'OFF' }}</span>
-                            </td>
-                            <td>{{ $row->updated_at }}</td>
-                        </tr>
+                           <tr>
+                                <td><input type="checkbox" name="checkbox[]" class="check" value="{{ $row->id }}"></td>   
+                                <td>
+                                    <a href="{{ route('editCategory') }}?id={{ $row->id }}" style="color: red">
+                                        {{ $row->name }}
+                                    </a>
+                                </td>
+                                <td> 
+                                    <span style="background-color: {{ $row->publish ? '#4caf50' : '#c41700' }}; color: white; padding: 5px 5px;">{{ $row->publish ? 'ON' : 'OFF' }}</span>
+                                </td>
+                                <td>{{ $row->updated_at }}</td>
+                            </tr>
+                            @if(isset($row->child_category))
+                            @foreach ($row->child_category as $colum)
+                                <tr>
+                                    <td><input type="checkbox" name="checkbox[]" class="check" value="{{ $colum->id }}"></td>   
+                                    <td>
+                                        <a href="{{ route('editChildCategory') }}?id={{ $colum->id }}" style="color: green">
+                                             ---- {{$colum->name }}
+                                        </a>
+                                    </td>
+                                    <td> 
+                                        <span style="background-color: {{ $colum->publish ? '#4caf50' : '#c41700' }}; color: white; padding: 5px 5px;">{{ $colum->publish ? 'ON' : 'OFF' }}</span>
+                                    </td>
+                                    <td>{{ $colum->updated_at }}</td>
+                                </tr>
+                            @endforeach
+                            @endif
                         @endforeach
                     </tbody>
                   </table>
@@ -128,42 +154,6 @@
         </div>
     </div>
 </div>
-        <!-- /.box-body -->
-         <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Thêm Danh Mục</h3>
-            </div>
-            <!-- /.box-header -->
-            <!-- form start -->
-            <form role="form" action="{{ route('storeCategory') }}" method="post" accept-charset="utf-8">
-                @csrf
-              <div class="box-body">
-                <div class="row">
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Tên Danh Mục</label>
-                      <input type="text" name="name" value="" class="form-control" id="categories" placeholder="Tên danh mục">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Publish</label>
-                      <input checked type="checkbox" name="publish">
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Slug</label>
-                      <input type="text" name="slug" value="" class="form-control" id="slug" placeholder="Tên danh mục">
-                    </div>
-                </div>
-                </div>
-              </div>
-              <!-- /.box-body -->
-              <div class="box-footer">
-                <input type="submit" name="create" value="Create" class="btn btn-success">
-              </div>
-            </form>
-          </div>
-      </div>
 @endsection
 @section('css')
     <link
@@ -183,48 +173,6 @@
         <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
         <meta name="csrf_token" content="{{ csrf_token() }}" />
         <script>$.ajaxSetup({ headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')} })</script>
-        <script>            
-            $(document).ready(function(){
-                $('.check').click(function(){
-                    var id = new Array();
-                    $('input:checkbox:checked').each(function() 
-                    {
-                        if(this.checked){
-                            id.push($(this).val());
-                        }
-
-                    });
-                    $('#destroy').click(function(){
-                        Swal.fire({
-                          title: 'Are you sure?',
-                          text: "You won't be able to revert this!",
-                          type: 'warning',
-                          showCancelButton: true,
-                          confirmButtonColor: '#3085d6',
-                          cancelButtonColor: '#d33',
-                          confirmButtonText: 'Yes, delete it!'
-                        }).then((result) => {
-                            if (result.value) {
-                                var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-                                $.post("{{ route('destroyCategory') }}", {takeid:id,_token:CSRF_TOKEN}, function (data){ 
-                                    for (var i = 0; i < id.length; i++) {
-                                        $('#detail_'+id[i]).fadeTo('slow',0.7,function()
-                                        {
-                                            $(this).remove();
-                                        });
-                                    }
-                                     Swal.fire(
-                                          'Deleted!',
-                                          'Your file has been deleted.',
-                                          'success'
-                                    )
-                            });
-                        };
-                    });
-                })
-            })
-        });
-        </script>
         <script>
             $('#checkall').change(function(){
                 $(".check").prop("checked",$(this).prop("checked"))
@@ -251,27 +199,5 @@
                     )
                 });
              });
-             $(document).ready(function(){
-          $('#categories').keyup(function(){
-            var temp = $('#categories').val();
-              $.ajax({
-                url: "{{ route('slugCategory') }}",
-                type:"post",
-                beforeSend: function (xhr) {
-                    var token = $('meta[name="csrf_token"]').attr('content');
-                    if (token) {
-                          return xhr.setRequestHeader('X-CSRF-TOKEN', token);
-                    }
-                },
-                data: { str : temp },
-                success:function(data){
-                    $('#slug').val(data)
-                },
-                error:function(){ 
-                    alert('error');
-                }
-            }); 
-          });
-      });
         </script>
 @endsection

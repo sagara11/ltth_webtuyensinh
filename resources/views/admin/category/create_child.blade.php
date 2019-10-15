@@ -1,13 +1,13 @@
-	@extends('adminlte::page')
+@extends('adminlte::page')
 
 @section('title', 'CreateData')
 
 @section('content_header')
       <h1>
         Thêm dữ liệu
-        <small>Create Category</small>
+        <small>Create Categories</small>
       </h1>
-      {{Breadcrumbs::render('editCategory')}}
+      {{Breadcrumbs::render('createCategory')}}
 @endsection
 @section('content')
 @include('ckfinder::setup')
@@ -15,45 +15,61 @@
         <div class="alert alert-danger">{{session('fail')}}</div>
 @endif
     <tbody>
-    <div class="box box-primary">
+      <!-- /.box-body -->
+         <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Update dữ liệu</h3>
+              <h3 class="box-title">Thêm Danh Mục</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-        <form action="{{ route('updateCategory') }}" method="post" accept-charset="utf-8">
-          @csrf
-        <div class="box-body">
-            <div class="row">
-                <div class="col-sm-8">
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Tên danh mục</label>
-                      <input type="textbox" required class="form-control" id="categories" aria-describedby="emailHelp" placeholder="Tên Danh Mục" name="name" value="{{$category->name}}">
+            <form role="form" action="{{ route('storeCategory') }}" method="post" accept-charset="utf-8">
+                @csrf
+              <div class="box-body">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <label style="color: black;" for="exampleInputEmail1">Danh mục cha </label>
+                    <select  style=" color: black ; width: 100%;" class="form-control" name="category_parent">
+                        <option value="All">All</option>
+                        @foreach($category as $row)
+                        {
+                            <option value="{{ $row->id }}">{{ $row->name }}</option>
+                        }
+                        @endforeach
+                    </select>
+                  </div>
+                  <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Tên Danh Mục Con </label>
+                        <input type="text" name="name" value="" class="form-control" id="categories" placeholder="Tên danh mục">
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Slug</label>
-                      <input required type="text" class="form-control" id="slug" value="{{$category->slug}}" name="slug">       
+                        <label for="exampleInputEmail1">Slug</label>
+                        <input type="text" name="slug" value="" class="form-control" id="slug" placeholder="Tên danh mục">
                     </div>
-		            <label for="exampleInputEmail1">Publish</label>
-		            <div>
-		              <input class="form-check-input" type="checkbox" name="publish" id="inlineRadio1" checked>
-		            </div>
-              </div>
-              <div class="col-sm-4">
-          
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-      </tbody>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Seo Title</label>
+                     <textarea name="seo_title" class="form-control" id="exampleInputEmail1" placeholder="Seo_Title"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Seo Keyword</label>
+                     <textarea name="seo_keyword" class="form-control" id="exampleInputEmail1" placeholder="Seo_Keyword"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Seo Description</label>
+                     <textarea name="seo_description" class="form-control" id="exampleInputEmail1" placeholder="Seo Description"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Publish</label>
+                    <input checked type="checkbox" name="publish">
+                  </div>  
+                </div>
               <!-- /.box-body -->
-
               <div class="box-footer">
-                <button class="btn btn-primary" type="submit">Submit</button>
-                <input type="hidden" name="getid" value="{{$id}}">
+                <input type="submit" name="create" value="Create" class="btn btn-success">
               </div>
             </form>
-          </div>
 @endsection
 @section('css')
   <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity=" --><!-- sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->

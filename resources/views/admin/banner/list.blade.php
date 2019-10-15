@@ -33,6 +33,7 @@
                         <button class="btn btn-primary" type="submit"><i class="fa fa-plus"> </i></button>
                     </form>
                 </div> 
+                <!-- /.filter -->
                 <div class="col-lg-9">
                     <form action="{{ route('filterBanner') }}" method="get" accept-charset="utf-8">
                         <div class="row">
@@ -45,7 +46,9 @@
                             <div class="form-group col-md-2">
                                <label for="inputState">Position</label>
                                   <select id="postion" class="form-control" name="position">
-                                    <option selected style="display: none" class="dropdown-item" value="{{ $id }}">{{ $id }}</option>
+                                    @if($position!='All')
+                                    <option style="display: none;" value="{{$position}}">{{$position}}</option>
+                                    @endif
                                     <option class="dropdown-item" value="All">All</option>
                                     <option class="dropdown-item" value="Top">Top</option>
                                     <option class="dropdown-item" value="Banner">Banner</option>
@@ -54,8 +57,15 @@
                                   </select>
                             </div>
                             <div class="form-group col-md-2">
-                                <label for="inputState">Updated_at</label>
-                                <input value="" id="daterange" type="text" class="form-control" name="date" >
+                                <label for="inputState">Publish</label>
+                                <select class="form-control"  name="publish">
+                                    @if($publish!='All')
+                                    <option style="display: none;" value="{{$publish}}">{{$publish ? 'ON' : 'OFF'}}</option>
+                                    @endif
+                                    <option class="dropdown-item" value="All">All</option>
+                                    <option class="dropdown-item" value="1">ON</option>
+                                    <option class="dropdown-item" value="0">OFF</option>
+                                </select>
                             </div>
                             <div class="col-md-1">
                                 <button class="btn btn-primary" type="submit" id="search" value="Search" style="margin-top: 24px; padding: 10px 12px; border: 0px" class=" animation-on-hover" type="submit"><i class="fa fa-search"> </i></button>
@@ -63,24 +73,28 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-lg-2">
-                    <div>
-                        <input class="btn btn-primary" style="margin-top: 24px; width: 100%; color:white; padding: 10px 10px; border: none;"  type="button" id="destroy" value="Xóa Bài">
-                    </div>
-                </div>
             </div>
-    <form action="{{ route('activateBanner')}}" method ="post">
+<!-- /.method -->
+    <form action="{{ route('methodBanner')}}" method ="post">
         @csrf
             <!-- /.box-header -->
-            <div class="box-body ">
+            <div style="padding: 0px 28px;" class="box-body ">
               <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                 <div class="row">
-                    <div class="col-lg-10">
+                    <div class="col-lg-9">
                         
                     </div>
-                    <div class="col-lg-2">
-                        <div style="width: 100%;">
-                            <input style="padding: 10px 26px; margin-left: 6px;" class="btn btn-primary" type="submit" id="activate" value="Kích hoạt/Vô Hiệu Hóa">
+                    <div style="display: flex;" class="col-lg-3">
+                        <div>
+                            <label>Chọn Tác Vụ</label>
+                            <select name="option" class="form-control">
+                                <option value="all">All--</option>
+                                <option value="activate">Kích hoạt/Vô hiệu hóa</option>
+                                <option value="delete">Xóa</option>
+                            </select>
+                        </div>
+                        <div style="padding-top: 24px;">
+                            <input class="btn btn-primary" type="submit" value="OK">
                         </div>
                     </div>
                 </div>
@@ -151,48 +165,6 @@
         <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
         <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
         <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
-        <script>            
-            $(document).ready(function(){
-                $('.check').click(function(){
-                    var id = new Array();
-                    $('input:checkbox:checked').each(function() 
-                    {
-                        if(this.checked){
-                            id.push($(this).val());
-                        }
-
-                    });
-                    $('#destroy').click(function(){
-                        Swal.fire({
-                          title: 'Are you sure?',
-                          text: "You won't be able to revert this!",
-                          type: 'warning',
-                          showCancelButton: true,
-                          confirmButtonColor: '#3085d6',
-                          cancelButtonColor: '#d33',
-                          confirmButtonText: 'Yes, delete it!'
-                        }).then((result) => {
-                            if (result.value) {
-                                var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-                                $.post("{{ route('destroyBanner') }}", {takeid:id,_token:CSRF_TOKEN}, function (data){ 
-                                    for (var i = 0; i < id.length; i++) {
-                                        $('#detail_'+id[i]).fadeTo('slow',0.7,function()
-                                        {
-                                            $(this).remove();
-                                        });
-                                    }
-                                     Swal.fire(
-                                          'Deleted!',
-                                          'Your file has been deleted.',
-                                          'success'
-                                    )
-                            });
-                        };
-                    });
-                })
-            })
-        });
-        </script>
         <script>
             $('#checkall').change(function(){
                 $(".check").prop("checked",$(this).prop("checked"))

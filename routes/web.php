@@ -25,8 +25,9 @@ Route::group(['prefix' => 'admin'], function() {
 		Route::get('banner/list','\App\Http\Controllers\Admin\BannerController@index')->name('indexBanner');
 		Route::get('banner/create','\App\Http\Controllers\Admin\BannerController@create')->name('createBanner');
 		Route::post('banner/store','\App\Http\Controllers\Admin\BannerController@store')->name('storeBanner');
+		Route::post('banner/update','\App\Http\Controllers\Admin\BannerController@update')->name('updateBanner');
 		Route::get('banner/filter','\App\Http\Controllers\Admin\BannerController@filter')->name('filterBanner');
-		Route::post('banner/activate','\App\Http\Controllers\Admin\BannerController@activate')->name('activateBanner');
+		Route::post('banner/method','\App\Http\Controllers\Admin\BannerController@method')->name('methodBanner');
 		Route::get('banner/edit','\App\Http\Controllers\Admin\BannerController@edit')->name('editBanner');
 		Route::post('banner/destroy','\App\Http\Controllers\Admin\BannerController@destroy')->name('destroyBanner');
 		// Route::resource('post','\App\Http\Controllers\Admin\BannerController');
@@ -43,12 +44,14 @@ Route::group(['prefix' => 'admin'], function() {
 		Route::get('post/search','\App\Http\Controllers\Admin\PostController@search')->name('searchPost');
 		// Route::resource('category','\App\Http\Controllers\Admin\CategoryController');
 		Route::get('category/list','\App\Http\Controllers\Admin\CategoryController@index')->name('indexCategory');
-		Route::get('category/create','\App\Http\Controllers\Admin\CategoryController@create')->name('createCategory');
+		Route::get('category/create_parent','\App\Http\Controllers\Admin\CategoryController@create_parent')->name('createCategory');
+		Route::get('category/create_child','\App\Http\Controllers\Admin\CategoryController@create_child');
 		Route::post('category/store','\App\Http\Controllers\Admin\CategoryController@store')->name('storeCategory');
 		Route::get('category/filter','\App\Http\Controllers\Admin\CategoryController@filter')->name('filterCategory');
 		Route::post('category/activate','\App\Http\Controllers\Admin\CategoryController@activate')->name('activateCategory');
-		Route::get('category/edit','\App\Http\Controllers\Admin\CategoryController@edit')->name('editCategory');
-		Route::post('category/destroy','\App\Http\Controllers\Admin\CategoryController@destroy')->name('destroyCategory');
+		Route::get('category/edit_parent','\App\Http\Controllers\Admin\CategoryController@edit_parent')->name('editCategory');
+		Route::get('category/edit_child','\App\Http\Controllers\Admin\CategoryController@edit_child')->name('editChildCategory');
+		Route::post('category/method','\App\Http\Controllers\Admin\CategoryController@method')->name('methodCategory');
 		Route::post('category/slug','\App\Http\Controllers\Admin\CategoryController@slug')->name('slugCategory');
 		Route::post('category/update','\App\Http\Controllers\Admin\CategoryController@update')->name('updateCategory');
 		Route::get('post/init','\App\Http\Controllers\Admin\ElasticsearchController@init');
