@@ -28,13 +28,25 @@ class UserController extends BaseController
     { 
         $token = $request->header('token');
         $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
-        $user = User::where('id',$gettoken[0])->select('name','email','avatar')->get();
-        $response = [
+        if(isset($gettoken))
+        {
+            $user = User::where('id',$gettoken[0])->select('name','email','avatar')->get();
+             $response = [
                     'status' => true,
                     'message' => 'User Data',
                     'info' => $user,
                 ];
         return response()->json($response);
+        }
+        else
+        {
+            $response = [
+                    'status' => false,
+                    'message' => 'Get information fail!',
+                    'info' => $user,
+                ];
+            return response()->json($response);
+        }
     }
     public function change_password(Request $request)
     {
@@ -81,9 +93,9 @@ class UserController extends BaseController
     {
         $token = $request->header('token');
         $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
-        $user = User::find($gettoken[0]);
-        if($token != null)
+        if(isset($gettoken))
         {
+            $user = User::find($gettoken[0]);
             $user->name = $request->name ? $request->name : $user->name ;
             $user->email = $request->email ? $request->email : $user->email ;
             $user->avatar = $request->avatar ? $request->avatar : $user->avatar ;
@@ -210,18 +222,29 @@ class UserController extends BaseController
     {
         $token = $request->header('token');
         $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
-        $comments = Comment::select('id','comment','created_at','post_id')->with(array(
-            'post' => function($comments)
-            {
-                $comments->select('id','name');
-            }))->where('user_id', $gettoken[0]);
-        $limit = isset($request->limit) ? $request->limit : 10 ;
-        $comments = $comments->paginate($limit);
-        $response = [
-                    'status'  => true,
-                    'comment' => $comments,
-                ];
-        return response()->json($response);
+        if(isset($gettoken))
+        {
+            $comments = Comment::select('id','comment','created_at','post_id')->with(array(
+                'post' => function($comments)
+                {
+                    $comments->select('id','name');
+                }))->where('user_id', $gettoken[0]);
+            $limit = isset($request->limit) ? $request->limit : 10 ;
+            $comments = $comments->paginate($limit);
+            $response = [
+                        'status'  => true,
+                        'comment' => $comments,
+                    ];
+            return response()->json($response);
+        }
+        else
+        {
+            $response = [
+                        'status'  => false,
+                        'message' => 'Fail!!',
+                    ];
+            return response()->json($response);
+        }
     }
     public function responseErrors($returnCode, $message, $statusCode = 200)
     {
