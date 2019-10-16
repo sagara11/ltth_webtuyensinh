@@ -45,8 +45,12 @@
                             </div>
                             <div class="form-group col-md-2">
                                <label style="color: black;" for="exampleInputEmail1">Mục Tin </label>
-                                    <select style=" color: black ; width: 100%;"id="publish" class="form-control" name="categories">
-                                        <option selected style="display: none" class="dropdown-item" value="{{ $id }}">{{ $id }}</option>
+                                    <select style=" color: black ; width: 100%;"class="form-control" name="categories">
+                                    @if(isset($danhmuc_id))
+                                        @if($danhmuc_id != "All")
+                                        <option style="display: none;" value="{{$post[0] ? $post[0]->categories->id : $danhmuc_id }}">{{$post[0] ? $post[0]->categories->name : $danhmuc}}</option>
+                                        @endif
+                                    @endif
                                         <option value="All">All</option>
                                         @foreach($categories as $row)
                                         {
@@ -56,8 +60,15 @@
                                     </select>
                             </div>
                             <div class="form-group col-md-2">
-                                <label for="inputState">Updated_at</label>
-                                <input value="" id="daterange" type="text" class="form-control" name="date">
+                                 <label for="inputState">Publish</label>
+                                <select class="form-control"  name="publish">
+                                    @if($publish!='All')
+                                    <option style="display: none;" value="{{$publish}}">{{$publish ? 'ON' : 'OFF'}}</option>
+                                    @endif
+                                    <option class="dropdown-item" value="All">All</option>
+                                    <option class="dropdown-item" value="1">ON</option>
+                                    <option class="dropdown-item" value="0">OFF</option>
+                                </select>
                             </div>
                             <div class="col-md-2">
                                 <button class="btn btn-primary" type="submit" id="search" value="Search" style="margin-top: 24px; padding: 10px 12px; border: 0px" class=" animation-on-hover" type="submit"><i class="fa fa-search"> </i></button>

@@ -19,7 +19,7 @@ class CategoryController extends Controller
     public function index(Category $categories)
     {
         $key=false;
-    	$category = category::all();
+    	$category = category::where('parent_id',NULL)->get();
             
         $categories = Category::select('id','name','updated_at','parent_id','publish');
         
@@ -183,14 +183,15 @@ class CategoryController extends Controller
     }
     public function activate(Request $request)
     {
+        return $this->check();
         if($request->checkbox == null)
         {
             $request->session()->flash('fail', 'Xin mời bạn hãy chọn bất kì 1 ô nào đó !!! ');
             return redirect()->route('indexCategory');
         }
         $id=$request->checkbox;
-            if (is_array($id)) 
-            {
+        if (is_array($id)) 
+        {
             foreach ($id as $item) 
             {
                 $list = Category::findOrfail($item);
@@ -223,7 +224,7 @@ class CategoryController extends Controller
 	public function filter(Request $request)
 	{
         $key=true;
-        $category = Category::all();
+        $category = Category::where('parent_id',NULL)->get();
         $requests = array('name'=> $request->name ? $request->name : 'All','publish' => $request->publish);
         foreach ($requests as $key => $value) 
         {
@@ -234,10 +235,19 @@ class CategoryController extends Controller
         }
         if(isset($DB))
         {
-            $categories = Category::where($DB)->paginate(8);
+            $categories = Category::where($DB);
+
+            $categories->where('parent_id', NULL);
+        
+            $categories->with(array( 'child_category' => function($q) {
+                return $q->select('id','name','updated_at','parent_id','publish');
+            }
+            ));
+
+            $categories = $categories->paginate(8);
+
             if($categories[0]==null)
             {
-            	$category = Category::all();
         		return view('admin/category/list', ['category' => $category, 'categories'=> $categories,'publish'=>
                     $request->publish,'key'=>$key,'id'=>'All']);
             }

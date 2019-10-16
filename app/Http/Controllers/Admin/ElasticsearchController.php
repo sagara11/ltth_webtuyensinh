@@ -73,7 +73,7 @@ class ElasticsearchController extends Controller
      * @param  \App\User  $model
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function create($id,$image,$name,$description,$publish,$updated_at)
+    public function create($id,$image,$name,$description,$publish,$updated_at,$trend)
     {
         $this->connect();
         if($name != '' && $description != '')
@@ -88,6 +88,7 @@ class ElasticsearchController extends Controller
 						'name' => $name,
 						'description' =>$description,
 						'publish'=>$publish,
+						'trend' =>$trend,
 						'updated_at'=>$updated_at
 					]
 				];
@@ -106,7 +107,7 @@ class ElasticsearchController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\View\View
      */
-    public function upload($book,$id,$image,$name,$description,$publish,$updated_at)
+    public function upload($book,$id,$image,$name,$description,$publish,$updated_at,$trend)
     {
     	if($name != '' && $description != '')
         {
@@ -122,6 +123,7 @@ class ElasticsearchController extends Controller
 					'name' => $name,
 					'description' =>$description,
 					'publish'=>$publish,
+					'trend' =>$trend,
 					'updated_at'=>$updated_at
 			        ]
 			    ]

@@ -53,7 +53,11 @@
                     </div>
                     <div class="form-group">
                       <label for="exampleInputEmail1">Publish</label>
+                      @if($post->publish == 1)
                       <input checked type="checkbox" name="publish">
+                      @else
+                      <input type="checkbox" name="publish">
+                      @endif
                     </div>
                     <div class="form-group">
                       <label for="exampleInputEmail1">Trend</label>

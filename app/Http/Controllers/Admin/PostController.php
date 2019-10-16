@@ -18,7 +18,7 @@ class PostController extends Controller
     {
         $key = false;
     	$category = Category::all();
-    	return view('admin/post/list',['post'=> $post->paginate(8) , 'categories'=> $category,'id' => 'All','key'=>$key]);
+    	return view('admin/post/list',['post'=> $post->paginate(8) , 'categories'=> $category,'id' => 'All','key'=>$key,'publish'=>'All','danhmuc'=>"All"]);
     }
     public function create(Post $users)
     {
@@ -45,7 +45,7 @@ class PostController extends Controller
             $user->trend = $request->trend ? 1 : 0;
             $user->save();
             $book = (string)$user->id;
-            $temp->create($book,$request->image,$request->name,$request->description,$request->publish,$user->updated_at);
+            $temp->create($book,$request->image,$request->name,$request->description,$request->publish,$user->updated_at,$request->trend);
 	    	$request->session()->flash('success', 'Bài viết được tạo thành công!');
        		return redirect()->route('indexPost');
         }
@@ -69,26 +69,26 @@ class PostController extends Controller
 	}
     public function update(Request $request)
     {
-    	$users = Post::find($request->getid);
+    	$posts = Post::find($request->getid);
     	$category = category::all();
     	if($request->name != '' && $request->image != '' && $request->description != '' && $request->content != '' && $request->publish != '')
     	{
             $temp = new ElasticsearchController();
-	    	$users->name = $request->name ;
-            $users->category_id = $request->information ;
-	    	$users->slug = $request->slug ;
-	    	$users->image= $request->image ;
-	    	$users->description = $request->description ;
-	    	$users->content = $request->content ;
-	    	$users->seo_keyword = $request->seo_keyword ;
-	    	$users->seo_title = $request->seo_title ;
-	    	$users->seo_description = $request->seo_description ;
-	    	$users->updated_at = now();
-	    	$users->publish = $request->publish ? 1 : 0;
-            $user->trend = $request->trend ? 1 : 0;
+	    	$posts->name = $request->name ;
+            $posts->category_id = $request->information ;
+	    	$posts->slug = $request->slug ;
+	    	$posts->image= $request->image ;
+	    	$posts->description = $request->description ;
+	    	$posts->content = $request->content ;
+	    	$posts->seo_keyword = $request->seo_keyword ;
+	    	$posts->seo_title = $request->seo_title ;
+	    	$posts->seo_description = $request->seo_description ;
+	    	$posts->updated_at = now();
+	    	$posts->publish = $request->publish ? 1 : 0;
+            $posts->trend = $request->trend ? 1 : 0;
             $book = (int)$request->getid;
-            $temp->upload($book,$request->getid,$request->image,$request->name,$request->description,$request->publish,$users->updated_at);
-	    	$users->save();
+            $temp->upload($book,$request->getid,$request->image,$request->name,$request->description,$request->publish,$posts->updated_at,$request->trend);
+	    	$posts->save();
 	    	$request->session()->flash('success', 'Update thành công!');
        		return redirect()->route('indexPost');
         }
@@ -132,46 +132,44 @@ class PostController extends Controller
 	{
             $key = true;
             $category = category::all();
-			$timeValue = explode('-', $request->date);
-            $start = date('Y-m-d', strtotime($timeValue[0]));
-            $end = date('Y-m-d', strtotime($timeValue[1]));
-            $requests = array('category_id' => $request->categories,'updated_at' => $start);   
-    	foreach ($requests as $key => $value) 
-    	{
-    		if($value != 'All')
+			// $timeValue = explode('-', $request->date);
+            // $start = date('Y-m-d', strtotime($timeValue[0]));
+            // $end = date('Y-m-d', strtotime($timeValue[1]));
+            $requests = array('category_id' => $request->categories,'publish' => $request->publish);   
+        	foreach ($requests as $key => $value) 
+        	{
+        		if($value != 'All')
     			{
-		    		if($key == 'updated_at' && $start != $end)
-		    		{
-		    			$DB[] = array($key,'>=',$value);
-		    			$DB[]=array($key,'<=',$end);   
-		    		}
-		    		elseif($key != 'updated_at' && $value != null)
-					{
-					    $DB[] = array($key, '=', $value); 
-					}
+		    		 $DB[] = array($key, '=', $value); 
 		    	}
-    	}
+        	}
         if(isset($DB))
         {
-            $post = Post::where($DB)->paginate(8);
+            $post = Post::where($DB);
+
+            $post->with(array( 'categories' => function($q) {
+                return $q->select('id','name','updated_at','publish');
+                }
+            ));
+
+            $post = $post->paginate(8);
+
+            $data = Category::where('id',$request->categories)->first();
+
             if($post[0]==null)
             {
-		    	$category = category::all();
-		    	return view('admin/post/list',['post'=>$post , 'categories'=> $category,'id' => 'All','key'=>$key]);
+		    	return view('admin/post/list',['post'=>$post , 'categories'=> $category,'danhmuc'=>$data ? $data->name : "All",'key'=>$key,'publish'=>$request->publish,'danhmuc_id'=>$request->categories]);
             }
             else
             {
-            	if($request->category=='All')
-            	{
-            		return view('admin/post/list',['post'=>$post,'categories'=> $category,'id'=>'All','key'=>$key]);
-            	}
+            	return view('admin/post/list',['post'=>$post,'categories'=> $category,'danhmuc'=>$data ? $data->name : "All",'key'=>$key,'publish'=>$request->publish,'danhmuc_id'=>$request->categories]);
             }
         }  
     	else
         {
             return redirect()->route('indexPost');
         }
-        return view('admin/post/list',['post'=>$post,'categories'=> $category,'id'=>$post[0]->categories->name,'key'=>$key]);
+        return view('admin/post/list',['post'=>$post,'categories'=> $category,'danhmuc'=>'All','key'=>$key,'publish'=>$request->publish,'danhmuc_id'=>$request->categories]);
 	}
 
 	public function activate(Request $request)
