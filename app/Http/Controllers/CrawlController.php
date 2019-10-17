@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\PostController;
 
 class CrawlController extends Controller
 {
+    // duoc goi trong route
     function pages_insert($domain){
         for($i=3;$i<4;$i++){
             $domain_name = _NAMESPACE_. '\\'.'CrawlerPages'.'\\'. $domain.'Controller';

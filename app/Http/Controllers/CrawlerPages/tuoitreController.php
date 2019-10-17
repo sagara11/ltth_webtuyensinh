@@ -41,13 +41,12 @@ class tuoitreController extends Controller
         $post = new Dom;
         $post->loadFromUrl($page_url);
 
-        // lay cac phan tu name, description, image, content, slug
+        // lay cac phan tu cua trang
         $name = $post->find('h1.article-title')->innerHTML;
         $slug = trim(trim($page_url, "tuoitre.vn//"),".htm");
         $description = $post->find('h2.sapo')->innerHTML;
         $content = $post->find('#main-detail-body');
 
-        // gan thuoc tinh vao doi tuong object
         return array(
             'name' => $name,
             'description' => $description,
