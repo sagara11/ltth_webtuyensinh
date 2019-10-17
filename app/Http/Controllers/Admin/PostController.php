@@ -268,15 +268,15 @@ class PostController extends Controller
     }
     public function method(Request $request)
     {
-        if($request->option == 'delete')
+        if($request->option == 'delete' && $request->checkbox != null)
         {
             return $this->destroy($request);
         }
-        elseif($request->option == 'activate')
+        elseif($request->option == 'activate' && $request->checkbox != null)
         {
             return $this->activate($request); 
         }
-        elseif($request->option == 'trend')
+        elseif($request->option == 'trend' && $request->checkbox != null)
         {
             return $this->trend($request); 
         }
@@ -284,9 +284,14 @@ class PostController extends Controller
         {
            return $this->search($request); 
         }
-        else
+        elseif(isset($request->categories) || isset($request->publish))
         {
             return $this->filter($request);
+        }
+        else
+        {
+            $request->session()->flash('fail', 'Hãy chọn tác vụ hoặc chọn bất kì 1 ô nào đó !!! ');
+            return redirect()->route('indexPost');
         }
     }
     public function search(Request $request)
@@ -297,9 +302,9 @@ class PostController extends Controller
         }
         $key = true;      
         $category = category::all();
-        $user=$request->search;
+        $detail=$request->search;
         $temp = new ElasticsearchController();
-        $data = $temp->search($user);
-        return view('admin/post/view',['post'=>$data,'categories'=> $category,'id' => 'All','key'=>$key,'search'=>$user]);
+        $data = $temp->search($detail);
+        return view('admin/post/view',['post'=>$data,'categories'=> $category,'id' => 'All','key'=>$key,'search'=>$detail]);
     }
 }

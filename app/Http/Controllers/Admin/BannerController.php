@@ -147,13 +147,18 @@ class BannerController extends Controller
 	}
     public function method(Request $request)
     {
-        if($request->option == 'delete')
+        if($request->option == 'delete' && $request->checkbox != null)
         {
             return $this->destroy($request);
         }
-        elseif($request->option == 'activate')
+        elseif($request->option == 'activate' && $request->checkbox != null)
         {
             return $this->activate($request); 
+        }
+        else
+        {
+            $request->session()->flash('fail', 'Hãy chọn tác vụ hoặc chọn bất kì 1 ô nào đó !!! ');
+            return redirect()->route('indexBanner');
         }
     }
     public function destroy(Request $request)

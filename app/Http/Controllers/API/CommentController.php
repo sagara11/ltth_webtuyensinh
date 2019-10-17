@@ -78,18 +78,27 @@ class CommentController extends BaseController
             $data->updated_at = time();
             $data->publish = $request->publish ? $request->publish : 1 ;
             
-            $token = $request->header('token');
-            $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
-            $data->user_id = $gettoken[0] ;
-            
-            $data->save();
-            
-            $response = [
-                        'status' => true,
-                        'message' => 'Add success',
-                        'id' => $data->id,
-                    ];
-            return response()->json($response);
+            try{
+                $token = $request->header('token');
+                $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
+                $data->user_id = $gettoken[0] ;
+                
+                $data->save();
+                
+                $response = [
+                            'status' => true,
+                            'message' => 'Add success',
+                            'id' => $data->id,
+                        ];
+                return response()->json($response);
+            }catch(\Exception $e)
+            {
+                $response = [
+                            'status' => false,
+                            'message' => 'Add Fail',
+                        ];
+                return response()->json($response);
+            }
         }
         else
         {
@@ -130,26 +139,35 @@ class CommentController extends BaseController
                     ];
                 return response()->json($response);
             }
-            $token = $request->header('token');
-            $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
-            if($data->user_id == $gettoken[0])
-            {
-                $data->comment = $request->comment;
-                $data->updated_at = time();
-                $data->save();
-                $response = [
-                            'status' => true,
-                            'message' => 'Update success',
+            try{
+                $token = $request->header('token');
+                $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
+                if($data->user_id == $gettoken[0])
+                {
+                    $data->comment = $request->comment;
+                    $data->updated_at = time();
+                    $data->save();
+                    $response = [
+                                'status' => true,
+                                'message' => 'Update success',
+                            ];
+                    return response()->json($response);
+                }
+                else
+                {
+                    $response = [
+                            'status' => false,
+                            'message' => 'Update fail!!!',
                         ];
-                return response()->json($response);
-            }
-            else
+                    return response()->json($response);
+                }
+            }catch(\Exception $e)
             {
-                $response = [
-                        'status' => false,
-                        'message' => 'Update fail!!!',
-                    ];
-                return response()->json($response);
+                 $response = [
+                            'status' => false,
+                            'message' => 'Update fail!!!',
+                        ];
+                    return response()->json($response);
             }
         }
         else
@@ -181,25 +199,34 @@ class CommentController extends BaseController
                     ];
                 return response()->json($response);
             }
-            $token = $request->header('token');
-            $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
+            try{
+                $token = $request->header('token');
+                $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
 
-            if($data->user_id == $gettoken[0])
-            {
-                $data->delete();
-                $response = [
-                        'status' => true,
-                        'message' => 'Delete success!!!',
-                    ];
-                return response()->json($response);
-            }
-            else
-            {
-                $response = [
-                            'status' => false,
-                            'message' => 'Delete fail!!!',
+                if($data->user_id == $gettoken[0])
+                {
+                    $data->delete();
+                    $response = [
+                            'status' => true,
+                            'message' => 'Delete success!!!',
                         ];
                     return response()->json($response);
+                }
+                else
+                {
+                    $response = [
+                                'status' => false,
+                                'message' => 'Delete fail!!!',
+                            ];
+                        return response()->json($response);
+                }
+            }catch(\Exception $e)
+            {
+                $response = [
+                                'status' => false,
+                                'message' => 'Delete fail!!!',
+                            ];
+                        return response()->json($response);
             }
         }
         else

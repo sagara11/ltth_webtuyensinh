@@ -11,60 +11,48 @@ use App\Http\Controllers\CrawlController;
 
 class tuoitreController extends Controller
 {
-    public $post_links = array();
-    public $img_links = array();
-
-    function posts($url, $page){    
-        $posts  = new Dom;
+    function posts($page){
+        $url = 'https://tuoitre.vn/giao-duc/';   
 
         // load tung trang trong muc giao duc
+        $posts  = new Dom;
         $posts->loadFromUrl($url.'trang-'.$page.'.htm');
 
-        // gan cac link trong muc tin moi vao mang
+        // gan cac link va anh trong muc tin moi vao mang
+        $datas = [];
+        $count = 0;
         $post = $posts->find('h3.title-news a');
-        foreach($post as $key){
-            array_push($this->post_links,'tuoitre.vn/'.$key->href);
-        }
-
         $src = $posts->find('a.img212x132 img.img212x132');
-        foreach($src as $key){
-            array_push($this->img_links, $key->src);
+
+        foreach($post as $key){
+            $object = array(
+                'urls' => 'tuoitre.vn/'.$key->href,
+                'img' => $src[$count]->src
+            );
+            array_push($datas, $object);
+            $count++;
         }
 
-        // xu ly tung bai viet
-        $i=0;
-        foreach($this->post_links as $key){
-            $this->post($key, $this->img_links[$i]);
-            $i++;
-        }
+        // return mang url tung page va hinh anh
+        return $datas;
     }
 
-    function post($page_url, $img){
+    function post($page_url){
         $post = new Dom;
         $post->loadFromUrl($page_url);
 
         // lay cac phan tu name, description, image, content, slug
         $name = $post->find('h1.article-title')->innerHTML;
-        $slug = $page_url;
+        $slug = trim(trim($page_url, "tuoitre.vn//"),".htm");
         $description = $post->find('h2.sapo')->innerHTML;
-        $image = $img;
-        $content_arr = $post->find('div.content.fck p');
-        $content = '';
-        foreach($content_arr as $key){
-            $content.=$key;
-        }
+        $content = $post->find('#main-detail-body');
 
         // gan thuoc tinh vao doi tuong object
-        $this->object=array(
+        return array(
             'name' => $name,
             'description' => $description,
-            'image' => $image,
             'slug' => $slug,
             'content' => $content
         );
-
-        // insert len DB
-        $crawlcontroller = new CrawlController;
-        $crawlcontroller->db_insert($this->object);
     }
 }

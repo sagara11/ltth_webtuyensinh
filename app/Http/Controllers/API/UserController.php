@@ -26,28 +26,26 @@ class UserController extends BaseController
      */
      public function index(Request $request)
     { 
-        $token = $request->header('token');
-        $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
-        if(isset($gettoken))
-        {
-            $user = User::where('id',$gettoken[0])->select('name','email','avatar')->get();
-             $response = [
-                    'status' => true,
-                    'message' => 'User Data',
-                    'info' => $user,
-                ];
-        return response()->json($response);
+        try{
+                $token = $request->header('token');
+                $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
+                $user = User::where('id',$gettoken[0])->select('name','email','avatar')->get();
+                $response = [
+                        'status' => true,
+                        'message' => 'User Data',
+                        'info' => $user,
+                    ];
+                return response()->json($response);
         }
-        else
-        {
-            $response = [
-                    'status' => false,
-                    'message' => 'Get information fail!',
-                    'info' => $user,
-                ];
-            return response()->json($response);
+        catch(\Exception $e){
+                $response = [
+                        'status' => false,
+                        'message' => 'Get information fail!!!',
+                    ];
+                return response()->json($response);
         }
     }
+
     public function change_password(Request $request)
     {
         $data = User::where('email',$request->email)->first();
@@ -91,24 +89,26 @@ class UserController extends BaseController
      */
      public function update(Request $request, User $user)
     {
-        $token = $request->header('token');
-        $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
-        if(isset($gettoken))
-        {
-            $user = User::find($gettoken[0]);
-            $user->name = $request->name ? $request->name : $user->name ;
-            $user->email = $request->email ? $request->email : $user->email ;
-            $user->avatar = $request->avatar ? $request->avatar : $user->avatar ;
-            $user->save();
-            $response = [
-                    'status' => true,
-                    'message' => 'Update success',
-                ];
+        try{
+                $token = $request->header('token');
+                $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
+                $user = User::find($gettoken[0]);
+                $user->name = $request->name ? $request->name : $user->name ;
+                $user->email = $request->email ? $request->email : $user->email ;
+                $user->avatar = $request->avatar ? $request->avatar : $user->avatar ;
+                $user->save();
+                $response = [
+                        'status' => true,
+                        'message' => 'Update success',
+                    ];
+                    return response()->json($response);
+            }
+            catch(\Exception $e){
+                $response = [
+                        'status' => false,
+                        'message' => 'Update fail!!!',
+                    ];
                 return response()->json($response);
-        }
-        else
-        {
-            return response()->json(['Update Fail !!!'], 500);
         }
     }
 
@@ -220,24 +220,23 @@ class UserController extends BaseController
 
     public function comments(Request $request)
     {
-        $token = $request->header('token');
-        $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
-        if(isset($gettoken))
-        {
+        try{
+            $token = $request->header('token');
+            $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
             $comments = Comment::select('id','comment','created_at','post_id')->with(array(
-                'post' => function($comments)
-                {
-                    $comments->select('id','name');
-                }))->where('user_id', $gettoken[0]);
-            $limit = isset($request->limit) ? $request->limit : 10 ;
-            $comments = $comments->paginate($limit);
-            $response = [
-                        'status'  => true,
-                        'comment' => $comments,
-                    ];
-            return response()->json($response);
+                    'post' => function($comments)
+                    {
+                        $comments->select('id','name');
+                    }))->where('user_id', $gettoken[0]);
+                $limit = isset($request->limit) ? $request->limit : 10 ;
+                $comments = $comments->paginate($limit);
+                $response = [
+                            'status'  => true,
+                            'comment' => $comments,
+                        ];
+                return response()->json($response);
         }
-        else
+        catch(\Exception $e)
         {
             $response = [
                         'status'  => false,

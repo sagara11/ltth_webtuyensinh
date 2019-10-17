@@ -62,7 +62,7 @@
 		            <div class="col-sm-3">
 		                <div class="form-group">
                       <label for="exampleInputEmail1">Image</label>
-		                  <div id="avatar">
+		                  <div style="margin-bottom: 15px;" id="avatar">
   		            			<img src="http://localhost/webbanhang/public/userfiles/images/default_avatar-ea7cf6abde4eec089a4e03cc925d0e893e428b2b6971b12405a9b118c837eaa2.png" class="img-fluid" alt="" id="photo">
   		            			<input required=""  type="hidden" name="image"placeholder="image" id="url">
 		                	</div>

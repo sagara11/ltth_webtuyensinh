@@ -20,10 +20,32 @@ class CategoryController extends BaseController
      */
      public function index(Request $request)
     {
-        $categories = Category::select('id','name','image')->where('publish', 1);
-
+        $categories = Category::select('id','name','image','parent_id');
         $limit       = isset($request->limit) ? $request->limit : 10 ;
         $page        = isset($request->page) ? $request->page : 1 ;
+        $parent_id = $request->header('parent_id') ;
+        if(isset($parent_id) && $parent_id != '' )
+        {
+            $categories = Category::where('parent_id',$parent_id)->select('id','name','image');
+
+            $categories = $categories->paginate($limit);
+
+            return $this->sendResponse($categories, 'Post retrieved successfully.','categories');
+        }
+        else
+        {
+            $response = [
+                        'status' => false,
+                        'message' => 'Please fill the parent_id!!!',
+                    ];
+                return response()->json($response);
+        }
+        $categories->where('parent_id', NULL);
+
+        $categories->with(array('child_category' => function($q) {
+                    return $q->select('id','name','image', 'parent_id');
+                }
+            ));
 
         $categories = $categories->paginate($limit);
         return $this->sendResponse($categories, 'Post retrieved successfully.','categories');

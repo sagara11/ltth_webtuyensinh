@@ -75,7 +75,7 @@ Route::group(['prefix' => 'admin'], function() {
 		});	
 	});
 // Route::resource('crawl','\App\Http\Controllers\Admin\CrawlController');
-Route::get('crawl', 'CrawlController@pages_insert');
+Route::get('/crawl/{domain}', 'CrawlController@pages_insert')->name('crawl');
 
 
 Route::group(['prefix'=>'menu'], function () {
