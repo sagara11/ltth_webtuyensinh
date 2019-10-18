@@ -141,7 +141,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <link rel="stylesheet" href="/css/admin_custom.css">
-    <link rel="stylesheet" type="text/css" href="http://localhost/webbanhang/resources/views/style/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
 @endsection
 
 @section('js')

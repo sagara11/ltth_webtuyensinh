@@ -71,8 +71,8 @@
 		            <div class="col-sm-3">
 		                <div class="form-group">
                       <label for="exampleInputEmail1">Image</label>
-		                  <div style="margin-bottom: 15px;" id="avatar">
-  		            			<img src="{{$post->image}}" class="img-fluid" alt="" id="photo">
+		                  <div style="margin-bottom: 15px;">
+  		            			<img src="{{$post->image}}" class="img-fluid" alt="" id="avatar">
   		            			<input required=""  type="hidden" name="image" placeholder="image" id="url" value="{{$post->image}}">
 		                	</div>
 		                		<button type="button" onclick="openPopup()" class="btn btn-primary" >Image</button>
@@ -110,7 +110,7 @@
 @endsection
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
-    <link rel="stylesheet" type="text/css" href="http://localhost/webbanhang/resources/views/style/edit.css">
+    <link rel="stylesheet" type="text/css" href="/css/edit.css">
 @endsection
 
 @section('js')
@@ -130,10 +130,10 @@
                  onInit: function( finder ) {
                      finder.on( 'files:choose', function( evt ) {
                          var file = evt.data.files.first();
-                         document.getElementById( 'photo' ).src = file.getUrl();
+                         document.getElementById( 'avatar' ).src = file.getUrl();
                      } );
                      finder.on( 'file:choose:resizedImage', function( evt ) {
-                         document.getElementById( 'photo' ).src = evt.data.resizedUrl;
+                         document.getElementById( 'avatar' ).src = evt.data.resizedUrl;
                      } );
                      finder.on( 'files:choose', function( evt ) {
                          var file = evt.data.files.first();

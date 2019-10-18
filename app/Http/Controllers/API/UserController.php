@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\API;
 use App\User;
 use App\Comment;
@@ -29,7 +28,7 @@ class UserController extends BaseController
         try{
                 $token = $request->header('token');
                 $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
-                $user = User::where('id',$gettoken[0])->select('name','email','avatar')->get();
+                $user = User::where('id',$gettoken[0])->select('name','email','avatar')->first();
                 $response = [
                         'status' => true,
                         'message' => 'User Data',
@@ -186,38 +185,38 @@ class UserController extends BaseController
               echo 'Facebook SDK returned an error: ' . $e->getMessage();
               exit();
             }
-        $me = $response->getGraphUser();
-        $user = User::where('name',$me['first_name'])->select('id','avatar','name','email')->first();
-
-        $time = time();
-        $token = JWT::encode([$user->id, $time] , env('JWT_KEY'));
-    
-        $data = new SocialNetwork();
-        $data->user_id = $user->id;
-        $data->social_id = $me['id'];
-        $data->provider = 'Facebook';
-        $data->save();
-        $info = array(
-                    'name'=>$user->name,
-                    'email'=>$user->email,
-                    'avatar'=>$user->avatar,
-                );
-        $response = [
-                    'status' => true,
-                    'message' => 'Login success',
-                    'token' => $token,
-                    'info' => $info,
-                ];
-                return response()->json($response);
+        try{
+                $me = $response->getGraphUser();
+                $user = User::where('email',$me['email'])->select('id','avatar','name','email')->first();
+                $time = time();
+                $token = JWT::encode([$user->id, $time] , env('JWT_KEY'));
+            
+                $data = new SocialNetwork();
+                $data->user_id = $user->id;
+                $data->social_id = $me['id'];
+                $data->provider = 'Facebook';
+                $data->save();
+                $info = array(
+                            'name'=>$user->name,
+                            'email'=>$user->email,
+                            'avatar'=>$user->avatar,
+                        );
+                $response = [
+                            'status' => true,
+                            'message' => 'Login success',
+                            'token' => $token,
+                            'info' => $info,
+                        ];
+                        return response()->json($response);
+        }catch(\Exception $e)
+        {
+            $response = [
+                            'status' => false,
+                            'message' => 'Login Fail!!!',
+                        ];
+                        return response()->json($response);
+        }
     }
-    public function checkGoogle()
-    {
-        // require_once 'C:/xampp/htdocs/webtuyensinh/vendor/google/graph-sdk/src/Facebook/autoload.php';
-        $Client = new Google_Client();
-        $Client->secClientId();
-        $Client->setClientSecret();
-    }
-
     public function comments(Request $request)
     {
         try{
@@ -255,5 +254,38 @@ class UserController extends BaseController
     public function responseSuccess($data, $statusCode = 200)
     {
         return response()->json(array_merge(['code' => 200], $data), $statusCode);
+    }
+    public function register(Request $request)
+    {
+        if($request->email != '' && $request->password != '')
+        {
+            try{
+                $user = new User();
+                $user->email = $request->email;
+                $user->password = Hash::make($request->password);
+                $user->publish = 1 ;
+                $user->save();
+                $response = [
+                        'status'  => true,
+                        'message' => 'Register success!!!',
+                    ];
+                return response()->json($response);
+            }catch(\Exception $e)
+            {
+                $response = [
+                        'status'  => false,
+                        'message' => 'This email has existed!!!',
+                    ];
+            return response()->json($response);
+            }
+        }
+        else
+        {
+            $response = [
+                        'status'  => false,
+                        'message' => 'Please fill the email or password !!!',
+                    ];
+            return response()->json($response);
+        }
     }
 }

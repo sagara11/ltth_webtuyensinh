@@ -94,7 +94,7 @@
                         @foreach ($users as $temp)
                             <tr id="detail">
                             <td><input type="checkbox" name="checkbox[]" class="check" value="{{ $temp->id }}"></td>
-                            <td><img style="height: 80px; width: 100px;" src="{{$temp->avatar}}" alt=""></td>
+                            <td><img style="height: 80px; width: 100px;" src="{{$temp->avatar ? $temp->avatar : '/userfiles/images/default_avatar-ea7cf6abde4eec089a4e03cc925d0e893e428b2b6971b12405a9b118c837eaa2.png'}}" alt=""></td>
                             <td>{{ $temp->name }}</td>
                             <td><a href="{{ route('editUser') }}?id={{ $temp->id }}" style="color: green">{{ $temp->email }}</a></td>
                             <td> 
@@ -125,7 +125,7 @@
 @endsection
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
-    <link rel="stylesheet" type="text/css" href="http://localhost/webbanhang/resources/views/style/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
 @endsection
 
 @section('js')

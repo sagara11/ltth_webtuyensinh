@@ -66,10 +66,10 @@
                 <div class="form-group">
                   <label for="exampleInputEmail1">Image</label>
                   <input type="hidden" name="image" placeholder="image" id="url" value="{{$banners->image}}" id="url">
-                  <div id="avatar">
-                <img src="{{$banners->image}}" style="height: 200px; widt:220px " id = "photo">
+                  <div>
+                <img src="{{$banners->image}}" style="height: 200px; widt:220px " id = "avatar">
                 </div>
-                    <button type="button" onclick="openPopup()" class="btn btn-primary" style="margin-top: 20px">Select Avatar</button>
+                    <button type="button" onclick="openPopup()" class="btn btn-primary" style="margin-top: 20px">Image</button>
                 </div>
               </div>
             </div>
@@ -87,7 +87,7 @@
 @section('css')
   <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity=" --><!-- sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="/css/admin_custom.css">
-    <link rel="stylesheet" type="text/css" href="http://localhost/webbanhang/resources/views/style/edit.css">
+    <link rel="stylesheet" type="text/css" href="/css/edit.css">
 @endsection
 
 @section('js')
@@ -105,10 +105,10 @@
                  onInit: function( finder ) {
                      finder.on( 'files:choose', function( evt ) {
                          var file = evt.data.files.first();
-                         document.getElementById( 'photo' ).src = file.getUrl();
+                         document.getElementById( 'avatar' ).src = file.getUrl();
                      } );
                      finder.on( 'file:choose:resizedImage', function( evt ) {
-                         document.getElementById( 'photo' ).src = evt.data.resizedUrl;
+                         document.getElementById( 'avatar' ).src = evt.data.resizedUrl;
                      } );
                      finder.on( 'files:choose', function( evt ) {
                          var file = evt.data.files.first();
