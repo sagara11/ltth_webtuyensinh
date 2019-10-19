@@ -38,10 +38,14 @@ return [
     'client_secret' => env('GOOGLE_CLIENT_SECRET'),
     'redirect' => env('GOOGLE_REDIRECT_URL'),
     ],
+    
     'facebook' => [
     'client_id' => env('FACEBOOK_KEY'),
     'client_secret' => env('FACEBOOK_SECRET'),
-    'redirect' => env('FACEBOOK_REDIRECT_URI')
+    'redirect' => env('FACEBOOK_REDIRECT_URI'),
+    'app_id' => env('413891859271505'),
+    'app_secret' => env('f678f181e0829f8708594e9a742d0886'),
+    'default_graph_version' => env('v2.10'),
     ],
 
 ];

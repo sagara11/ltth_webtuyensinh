@@ -166,10 +166,7 @@ class UserController extends BaseController
     }
     public function checkFacebook(Request $request)
     {
-        $fb = new Facebook([
-            'app_id' => '413891859271505',
-            'app_secret' => 'f678f181e0829f8708594e9a742d0886',
-            'default_graph_version' => 'v2.10',
+        $fb = new Facebook([    
             'default_access_token' => $request->token,
         ]);
         try {
