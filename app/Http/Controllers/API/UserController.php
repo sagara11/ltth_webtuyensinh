@@ -190,7 +190,7 @@ class UserController extends BaseController
                 $user = User::where('email',$me['email'])->select('id','avatar','name','email')->first();
                 if(empty($user))
                 {
-                    return $this->add_new($me['id'],$me['email'],$me['first_name']);
+                    $user = $this->add_new($me['id'],$me['email'],$me['first_name']);
                 }
                 $time = time();
                 $token = JWT::encode([$user->id, $time] , env('JWT_KEY'));
@@ -230,27 +230,7 @@ class UserController extends BaseController
             $user->password = Hash::make('admin123');
             $user->publish  = 1 ;
             $user->save();
-
-            $time = time();
-            $token = JWT::encode([$user->id, $time] , env('JWT_KEY'));
-
-            $data = new SocialNetwork();
-            $data->user_id = $user->id;
-            $data->social_id = $id;
-            $data->provider = 'Facebook';
-            $data->save();
-                $info = array(
-                            'name'=>$user->name,
-                            'email'=>$user->email,
-                            'avatar'=>$user->avatar,
-                        );
-                $response = [
-                            'status' => true,
-                            'message' => 'Login success',
-                            'token' => $token,
-                            'info' => $info,
-                        ];
-                        return response()->json($response);
+            return $user ;
         }catch(\Exception $e)
         {
             $response = [
