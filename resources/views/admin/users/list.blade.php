@@ -63,10 +63,10 @@
             <div class="box-body ">
               <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-9">
                         
                     </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-3">
                             <div id="chontacvu">
                             <label>Chọn Tác Vụ</label>
                             <select class="form-control" name="option">
