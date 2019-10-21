@@ -88,13 +88,13 @@
                     </div>
                     <div class="col-lg-3">
                         <label>Chọn Tác Vụ</label>
-                        <select name="option" class="form-control">
+                        <select id="select" name="option" class="form-control">
                             <option value="all">All--</option>
                             <option value="activate">Activate</option>
                             <option value="delete">Delete</option>
                             <option value="trend">Trend</option>
                         </select>
-                        <input class="btn btn-primary" type="submit" value="OK" style="margin-left: 20px">
+                        <input onclick="confirm()"  class="btn btn-primary" id="confirm-btn" type="button" value="OK" style="margin-left: 20px" name="confirm1">
                     </div>
                 </div>
         <div class="row">
@@ -197,5 +197,47 @@
                     )
                 });
              });
+        </script>
+        <script type="text/javascript">
+            var checkbox = document.getElementsByClassName('check');
+            var confirm_btn = document.getElementById('confirm-btn');
+                function confirm(){
+                    if(checkbox.checked == false){
+                                    Swal.fire({
+                                      type: 'error',
+                                      title: 'Lỗi...',
+                                      text: 'Bạn chưa chọn ô nào',
+                                    })
+                                }
+                    else{
+                        Swal.fire({
+                          title: 'Are you sure?',
+                          text: "You won't be able to revert this!",
+                          type: 'warning',
+                          showCancelButton: true,
+                          confirmButtonColor: '#3085d6',
+                          cancelButtonColor: '#d33',
+                          confirmButtonText: 'Confirm'
+                        }).then((result) => {
+                          if (result.value) {
+                            Swal.fire(
+                              'Completed!',
+                              'success'
+                            )
+                          }
+                          else if (result.dismiss === Swal.DismissReason.cancel) {
+                                
+                              }
+                            })
+                        $(".swal2-confirm.swal2-styled").on('click', function() {
+                            confirm_btn.type = "submit";
+                            $("#confirm-btn").click();
+                            $(".swal2-container").css("display","none");
+                        })
+                        $(".swal2-confirm.swal2-styled").on('click', function() {
+                            confirm_btn.type = "button";
+                        })
+                        }
+                    } 
         </script>
 @endsection

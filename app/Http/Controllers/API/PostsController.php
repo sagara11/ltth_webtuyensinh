@@ -87,16 +87,41 @@ class PostsController extends BaseController
     {
         if(isset($request->id) && $request->id != null)
         {
-            $limit = isset($request->limit) ? $request->limit : 1 ;
+            // $limit = isset($request->limit) ? $request->limit : 1 ;
             $type = 'post';
-            $posts = Post::where('id',$request->id)->select('id','name','image','description','content','created_at','view','comment','category_id')->with(array(
-                'categories' => function($posts)
+            $post = Post::where('id',$request->id)->select('id','name','image','description','content','created_at','view','comment','category_id')->with(array(
+                'categories' => function($post)
                 {
-                    $posts->select('id','name');
+                    $post->select('id','name');
+
                 }))->where('publish', 1);
-            $posts->where('type_post', '=', $type);
-            $posts = $posts->paginate($limit);
-            return $this->sendResponse($posts, 'Post read successfully.','post');
+
+            $post->where('type_post', '=', $type);
+
+            $post = $post->first();
+
+            $post->view = $post->view + 1 ;
+            $post->save();
+
+            $related = Post::where('category_id',$post->category_id)->select('id','name','image','description','created_at','view','comment','category_id');
+
+            $related->with(array(
+                'categories' => function($related)
+                {
+                    $related->select('id','name');
+
+                }))->where('publish', 1)->get();
+
+            $related->where('type_post', '=', $type)->where('id','!=',$post->id);
+
+            $related = $related->get();
+
+            $response = [
+                        'status'  => true,
+                        'post'    =>$post,
+                        'related' =>$related,
+                    ];
+            return response()->json($response);
         }
         else
         {

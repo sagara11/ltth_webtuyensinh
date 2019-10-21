@@ -188,7 +188,6 @@ class CategoryController extends Controller
     }
     public function activate(Request $request)
     {
-        return $this->check();
         if($request->checkbox == null)
         {
             $request->session()->flash('fail', 'Xin mời bạn hãy chọn bất kì 1 ô nào đó !!! ');

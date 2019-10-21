@@ -168,7 +168,7 @@ class UserController extends BaseController
     {
         $fb = new Facebook([    
             'default_access_token' => $request->token,
-        ]);
+        ]);     
         try {
               // Get the \Facebook\GraphNodes\GraphUser object for the current user.
               // If you provided a 'default_access_token', the '{access-token}' is optional.
