@@ -110,19 +110,8 @@ class UserController extends BaseController
                 $user = User::find($gettoken[0]);
                 $user->name = $request->name ? $request->name : $user->name ;
                 $user->email = $request->email ? $request->email : $user->email ;
-                $user->avatar = $request->avatar ? $request->avatar : $user->avatar ;
-
-                // $this->validate($request, 
-                //     [
-                //         //Kiểm tra đúng file đuôi .jpg,.jpeg,.png.gif và dung lượng không quá 2M
-                //         'avatar' => 'mimes:jpg,jpeg,png,gif|max:2048',
-                //     ],          
-                //     [
-                //         //Tùy chỉnh hiển thị thông báo không thõa điều kiện
-                //         'avatar.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
-                //         'avatar.max' => 'Hình thẻ giới hạn dung lượng không quá 2M',
-                //     ]
-                // );
+                $avatar = $this->Xulyupload($request,$user->name);
+                $user->avatar = $avatar ;
                 $user->save();
                 $response = [
                     'status' => true,
@@ -138,7 +127,34 @@ class UserController extends BaseController
             return response()->json($response);
         }
     }
+    public function Xulyupload(Request $rq,$name)
+    {
+        $rules = [ 'avatar' => 'avatar|max:1024' ]; 
+        $posts = [ 'avatar' => $rq->file('avatar') ];
 
+        $valid = Validator::make($posts, $rules);
+            // Ko có lỗi, kiểm tra nếu file đã dc upload
+            if ($rq->file('avatar')->isValid()) {
+                // Filename cực shock để khỏi bị trùng
+                $fileName = $rq->file('avatar')->storeAs('images','avatar'.$name.'.jpg');
+                // Thư mục upload
+                $uploadPath = public_path('/userfiles/images'); // Thư mục upload
+                
+                // Bắt đầu chuyển file vào thư mục
+                $rq->file('avatar')->move($uploadPath, $fileName);
+                // Thành công, show thành công
+                $photoURL = url('http://localhost/webtuyensinh/public/userfiles/'.$fileName);
+                return $photoURL;
+            }
+            else {
+                // Lỗi file
+                 $response = [
+                    'status' => false,
+                    'message' => ' Update Avatar fail !!!!',
+                ];
+                    return response()->json($response);
+            }
+        }
     /**
      * Remove the specified user from storage
      *
