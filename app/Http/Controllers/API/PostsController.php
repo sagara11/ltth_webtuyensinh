@@ -144,4 +144,34 @@ class PostsController extends BaseController
      * @param  \App\User  $model
      * @return \Illuminate\Http\RedirectResponse
      */
+    public function search(Request $request)
+    {
+        $type = 'post';
+        $posts = Post::select('id','name','image','description','created_at','view','comment','category_id')->with(array(
+            'categories' => function($posts)
+            {
+                $posts->select('id','name');
+            }))->where('publish', 1);
+        $posts->where('type_post', '=', $type);
+
+        $name        = isset($request->name) ? $request->name : '';
+        $limit       = isset($request->limit) ? $request->limit : 10 ;
+        $page        = isset($request->page) ? $request->page : 1 ;
+        $category_id = isset($request->category_id) ? $request->category_id : 'all';
+        $select      = isset($request->type) ? $request->type : 'all';
+
+        if($select != 'all')
+        {
+            return $this->sort($select);
+        }
+        if($name != '') {
+            $posts->where('name',$name);
+        }
+        if($category_id !='all'){
+            $posts->where('category_id',$category_id);
+        }
+        
+        $posts = $posts->paginate($limit);
+        return $this->sendResponse($posts, 'Post read successfully.','posts');
+    }
 }

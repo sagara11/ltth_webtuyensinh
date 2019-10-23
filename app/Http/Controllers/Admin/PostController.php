@@ -29,7 +29,7 @@ class PostController extends Controller
     {
     	if($request->name != '' && $request->image != '' && $request->description != '' && $request->content != '' && $request->publish != '')
     	{
-            $temp = new ElasticsearchController();
+            //$temp = new ElasticsearchController();
 	    	$user = new Post();
 	    	$user->name = $request->name ;
 	    	$user->category_id = $request->information ;
@@ -45,7 +45,7 @@ class PostController extends Controller
             $user->trend = $request->trend ? 1 : 0;
             $user->save();
             $book = (string)$user->id;
-            $temp->create($book,$request->image,$request->name,$request->description,$request->publish,$user->updated_at,$request->trend);
+            //$temp->create($book,$request->image,$request->name,$request->description,$request->publish,$user->updated_at,$request->trend);
 	    	$request->session()->flash('success', 'Bài viết được tạo thành công!');
        		return redirect()->route('indexPost');
         }
@@ -73,7 +73,7 @@ class PostController extends Controller
     	$category = category::all();
     	if($request->name != '' && $request->image != '' && $request->description != '' && $request->content != '' && $request->publish != '')
     	{
-            $temp = new ElasticsearchController();
+            //$temp = new ElasticsearchController();
 	    	$posts->name = $request->name ;
             $posts->category_id = $request->information ;
 	    	$posts->slug = $request->slug ;
@@ -87,7 +87,7 @@ class PostController extends Controller
 	    	$posts->publish = $request->publish ? 1 : 0;
             $posts->trend = $request->trend ? 1 : 0;
             $book = (int)$request->getid;
-            $temp->upload($book,$request->getid,$request->image,$request->name,$request->description,$request->publish,$posts->updated_at,$request->trend);
+            //$temp->upload($book,$request->getid,$request->image,$request->name,$request->description,$request->publish,$posts->updated_at,$request->trend);
 	    	$posts->save();
 	    	$request->session()->flash('success', 'Update thành công!');
        		return redirect()->route('indexPost');
@@ -107,21 +107,21 @@ class PostController extends Controller
                 return redirect()->route('indexPost');
             }	
         	$id = $request->checkbox;
-            $temp = new ElasticsearchController();
+            //$temp = new ElasticsearchController();
         	if(is_array($id))
         	{
         		foreach ($id as $row) 
         	 	{
     	            $users = Post::findOrFail($row);
     	        	$users->delete();
-                    $temp->delete($row);
+                    //$temp->delete($row);
             	}
         	}
         	else
         	{
         		 $users = Post::findOrFail($id);
         		 $users->delete();
-                 $temp->delete($row);
+                 //$temp->delete($row);
         	}
         	$request->session()->flash('delete', 'Xóa bài thành công!');
         	return redirect()->route('indexPost');
@@ -182,7 +182,7 @@ class PostController extends Controller
            		return redirect()->route('indexPost');
     		}
             $id=$request->checkbox;
-            $temp = new ElasticsearchController();
+            //$temp = new ElasticsearchController();
     			if (is_array($id)) 
                 {
                 foreach ($id as $item) 
@@ -192,11 +192,11 @@ class PostController extends Controller
                     {
                         $list->publish = false;
                         $list->save();
-                        $temp->activate($item,'0');
+                        //$temp->activate($item,'0');
                     } else {
                         $list->publish = true;
                         $list->save();
-                        $temp->activate($item,'1');
+                        //$temp->activate($item,'1');
                     }
                 }
             } 
@@ -207,12 +207,12 @@ class PostController extends Controller
                 {
                     $list->publish = false;
                     $list->save();
-                    $temp->activate($item,'0');
+                    //$temp->activate($item,'0');
                 } else 
                 {
                     $list->publish = true;
                     $list->save();
-                    $temp->activate($item,'1');
+                    //$temp->activate($item,'1');
                 }
             }
             $request->session()->flash('success', 'Kích hoạt / Vô hiệu hóa thành công !!!');
@@ -229,7 +229,7 @@ class PostController extends Controller
                 return redirect()->route('indexPost');
             }
             $id=$request->checkbox;
-            $temp = new ElasticsearchController();
+            // $temp = new ElasticsearchController();
                 if (is_array($id)) 
                 {
                 foreach ($id as $item) 
@@ -239,11 +239,11 @@ class PostController extends Controller
                     {
                         $list->trend = false;
                         $list->save();
-                        $temp->activate($item,'0');
+                        // $temp->activate($item,'0');
                     } else {
                         $list->trend = true;
                         $list->save();
-                        $temp->activate($item,'1');
+                        // $temp->activate($item,'1');
                     }
                 }
             } 
@@ -254,12 +254,12 @@ class PostController extends Controller
                 {
                     $list->trend = false;
                     $list->save();
-                    $temp->activate($item,'0');
+                    // $temp->activate($item,'0');
                 } else 
                 {
                     $list->trend = true;
                     $list->save();
-                    $temp->activate($item,'1');
+                    // $temp->activate($item,'1');
                 }
             }
             $request->session()->flash('success', 'Thay đổi thành công !!!');
@@ -294,17 +294,17 @@ class PostController extends Controller
             return redirect()->route('indexPost');
         }
     }
-    public function search(Request $request)
-    {
-        if($request->search == '')
-        {
-            return redirect()->route('indexPost');
-        }
-        $key = true;      
-        $category = category::all();
-        $detail=$request->search;
-        $temp = new ElasticsearchController();
-        $data = $temp->search($detail);
-        return view('admin/post/view',['post'=>$data,'categories'=> $category,'id' => 'All','key'=>$key,'search'=>$detail]);
-    }
+    // public function search(Request $request)
+    // {
+    //     if($request->search == '')
+    //     {
+    //         return redirect()->route('indexPost');
+    //     }
+    //     $key = true;      
+    //     $category = category::all();
+    //     $detail=$request->search;
+    //     $temp = new ElasticsearchController();
+    //     $data = $temp->search($detail);
+    //     return view('admin/post/view',['post'=>$data,'categories'=> $category,'id' => 'All','key'=>$key,'search'=>$detail]);
+    // }
 }

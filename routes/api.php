@@ -23,6 +23,7 @@ Route::get('categories','\App\Http\Controllers\API\CategoryController@index');
 
  //posts
 Route::get('posts','\App\Http\Controllers\API\PostsController@posts');
+Route::get('posts/search','\App\Http\Controllers\API\PostsController@search');
 //post
 Route::get('post','\App\Http\Controllers\API\PostsController@post');
 //user
@@ -38,3 +39,5 @@ Route::get('comments','\App\Http\Controllers\API\CommentController@index');
 Route::post('add_comment','\App\Http\Controllers\API\CommentController@store');
 Route::post('edit_comment','\App\Http\Controllers\API\CommentController@update');
 Route::post('delete_comment','\App\Http\Controllers\API\CommentController@delete');
+//option
+Route::post('options','\App\Http\Controllers\API\OptionController@option');

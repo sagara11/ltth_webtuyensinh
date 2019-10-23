@@ -28,6 +28,14 @@ class UserController extends BaseController
         try{
                 $token = $request->header('token');
                 $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
+                if($gettoken == null)
+                {
+                    $response = [
+                        'status' => false,
+                        'message' => '$token is invalid !!! ',
+                    ];
+                    return response()->json($response);
+                }
                 $user = User::where('id',$gettoken[0])->select('name','email','avatar')->first();
                 $response = [
                         'status' => true,
@@ -88,26 +96,46 @@ class UserController extends BaseController
      */
      public function update(Request $request, User $user)
     {
-        try{
+        try{ 
                 $token = $request->header('token');
                 $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
+                if($gettoken == null)
+                {
+                    $response = [
+                        'status' => false,
+                        'message' => '$token is invalid !!! ',
+                    ];
+                    return response()->json($response);
+                }
                 $user = User::find($gettoken[0]);
                 $user->name = $request->name ? $request->name : $user->name ;
                 $user->email = $request->email ? $request->email : $user->email ;
                 $user->avatar = $request->avatar ? $request->avatar : $user->avatar ;
+
+                // $this->validate($request, 
+                //     [
+                //         //Kiểm tra đúng file đuôi .jpg,.jpeg,.png.gif và dung lượng không quá 2M
+                //         'avatar' => 'mimes:jpg,jpeg,png,gif|max:2048',
+                //     ],          
+                //     [
+                //         //Tùy chỉnh hiển thị thông báo không thõa điều kiện
+                //         'avatar.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
+                //         'avatar.max' => 'Hình thẻ giới hạn dung lượng không quá 2M',
+                //     ]
+                // );
                 $user->save();
                 $response = [
-                        'status' => true,
-                        'message' => 'Update success',
-                    ];
-                    return response()->json($response);
-            }
-            catch(\Exception $e){
-                $response = [
-                        'status' => false,
-                        'message' => 'Update fail!!!',
-                    ];
+                    'status' => true,
+                    'message' => 'Update success',
+                ];
                 return response()->json($response);
+        }
+        catch(\Exception $e) {
+            $response = [
+                'status' => false,
+                'message' => 'Update fail!!!',
+            ];
+            return response()->json($response);
         }
     }
 
@@ -149,7 +177,7 @@ class UserController extends BaseController
             }
             else
             {
-                return response()->json(['Login Fail !!!'], 500);
+                return response()->json(['Wrong password !!!'], 500);
             }
         }
     }
@@ -189,12 +217,13 @@ class UserController extends BaseController
                 $user = User::where('email',$me['email'])->select('id','avatar','name','email')->first();
                 if(empty($user))
                 {
-                    $user = $this->add_new($me['id'],$me['email'],$me['first_name']);
+                    $avatar = 'http://graph.facebook.com/'.$me['id'].'/picture?type=square';
+                    $user = $this->add_new($me['id'],$me['email'],$me['first_name'],$avatar);
                 }
 
                 $time = time();
                 $token = JWT::encode([$user->id, $time] , env('JWT_KEY'));
-            
+
                 $data = new SocialNetwork();
                 $data->user_id = $user->id;
                 $data->social_id = $me['id'];
@@ -221,12 +250,13 @@ class UserController extends BaseController
                         return response()->json($response);
         }
     }
-    public function add_new($id,$email,$name)
+    public function add_new($id,$email,$name,$avatar)
     {
         try{
             $user = new User();
             $user->name  = $name;
             $user->email = $email;
+            $user->avatar = $avatar;
             $user->password = Hash::make('admin123');
             $user->save();
             return $user ;
@@ -244,6 +274,14 @@ class UserController extends BaseController
         try{
             $token = $request->header('token');
             $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
+            if($gettoken == null)
+                {
+                    $response = [
+                        'status' => false,
+                        'message' => '$token is invalid !!! ',
+                    ];
+                    return response()->json($response);
+                }
             $comments = Comment::select('id','comment','created_at','post_id')->with(array(
                     'post' => function($comments)
                     {
