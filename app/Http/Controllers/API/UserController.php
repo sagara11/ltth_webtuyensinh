@@ -191,6 +191,7 @@ class UserController extends BaseController
                 {
                     $user = $this->add_new($me['id'],$me['email'],$me['first_name']);
                 }
+
                 $time = time();
                 $token = JWT::encode([$user->id, $time] , env('JWT_KEY'));
             
@@ -227,14 +228,13 @@ class UserController extends BaseController
             $user->name  = $name;
             $user->email = $email;
             $user->password = Hash::make('admin123');
-            $user->publish  = 1 ;
             $user->save();
             return $user ;
         }catch(\Exception $e)
         {
             $response = [
                             'status' => false,
-                            'message' => 'Login Fail!!!',
+                            'message' => 'Add Fail!!!',
                         ];
                         return response()->json($response);
         }
