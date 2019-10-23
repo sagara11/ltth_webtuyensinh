@@ -87,6 +87,7 @@ class PostsController extends BaseController
     {
         if(isset($request->id) && $request->id != null)
         {
+            // lay bai viet
             // $limit = isset($request->limit) ? $request->limit : 1 ;
             $type = 'post';
             $post = Post::where('id',$request->id)->select('id','name','image','description','content','created_at','view','comment','category_id')->with(array(
@@ -102,7 +103,7 @@ class PostsController extends BaseController
 
             $post->view = $post->view + 1 ;
             $post->save();
-
+            // cac bai viet lien quan
             $related = Post::where('category_id',$post->category_id)->select('id','name','image','description','created_at','view','comment','category_id');
 
             $related->with(array(
