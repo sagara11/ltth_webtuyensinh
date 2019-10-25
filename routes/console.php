@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Inspiring;
+use App\Http\Controllers\CrawlController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,8 @@ use Illuminate\Foundation\Inspiring;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->describe('Display an inspiring quote');
+
+Artisan::command('crawl {frequency}', function($frequency){
+    $tuoitre = new CrawlController;
+    $tuoitre->crawl_routine($frequency);
+})->describe('Crawl du lieu tu web');

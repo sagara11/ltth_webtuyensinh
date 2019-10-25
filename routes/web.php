@@ -16,6 +16,8 @@ Route::get('/', function () {
 });
 Auth::routes();
 
+Route::get('/crawl/{frequency}', 'CrawlController@crawl_routine')->name('crawl');
+
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
 Route::group(['prefix' => 'admin'], function() {

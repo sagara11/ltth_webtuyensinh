@@ -9,9 +9,9 @@ use App\Post;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\CrawlController;
 
-class tuoitreController extends Controller
+class dantriController extends Controller
 {
-    function posts($page){
+    function posts($url, $page){
         // load tung trang trong muc giao duc
         $posts  = new Dom;
         $posts->loadFromUrl($url.'trang-'.$page.'.htm');
@@ -19,19 +19,19 @@ class tuoitreController extends Controller
         // gan cac link va anh trong muc tin moi vao mang
         $datas = [];
         $count = 0;
-        $post = $posts->find('h3.title-news a');
-        $src = $posts->find('a.img212x132 img.img212x132');
+        $post = $posts->find('.eplcheck div.mr1 h2 a');
+        $src = $posts->find('img.img130');
 
         foreach($post as $key){
             $object = array(
-                'urls' => 'tuoitre.vn/'.$key->href,
+                'urls' => 'dantri.com.vn'.$key->href,
                 'img' => $src[$count]->src
             );
             array_push($datas, $object);
             $count++;
         }
 
-        // return mang url tung page va hinh anh
+        // return mang page va hinh anh
         return $datas;
     }
 
@@ -39,12 +39,14 @@ class tuoitreController extends Controller
         $post = new Dom;
         $post->loadFromUrl($page_url);
 
-        // lay cac phan tu cua trang
-        $name = $post->find('h1.article-title')->innerHTML;
-        $slug = trim(trim($page_url, "tuoitre.vn//"),".htm");
-        $description = $post->find('h2.sapo')->innerHTML;
-        $content = $post->find('#main-detail-body');
+        // lay cac phan tu name, description, image, content, slug
+        $name = $post->find('h1.fon31.mgb15')->innerHTML;
+        $slug = trim(trim($page_url, "https://dantri.com.vn/"),".html");
+        $description_span = $post->find('h2.fon33.mt1.sapo')->innerHTML;
+        $description = trim($description_span, "<span>Dân trí<span/>&nbsp;");
+        $content = $post->find('.detail-content');
 
+        //gan thuoc tinh cua trang
         return array(
             'name' => $name,
             'description' => $description,
