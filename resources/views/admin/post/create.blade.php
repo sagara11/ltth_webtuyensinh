@@ -64,7 +64,7 @@
                       <label for="exampleInputEmail1">Image</label>
 		                  <div>
   		            			<img src="/userfiles/images/default_avatar-ea7cf6abde4eec089a4e03cc925d0e893e428b2b6971b12405a9b118c837eaa2.png" class="img-fluid" alt="" id="avatar">
-  		            			<input required=""  type="hidden" name="image" placeholder="image" id="url">
+  		            			<input type="hidden" name="image" placeholder="image" id="url">
 		                	</div>
 		                		<button type="button" onclick="openPopup()" class="btn btn-primary" >Image</button>
             			  </div>

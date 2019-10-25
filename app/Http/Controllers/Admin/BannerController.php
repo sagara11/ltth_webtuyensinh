@@ -44,24 +44,24 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
-    	if($request->name != '' && $request->link != '' && $request->position != '' && $request->publish != '')
+    	if($request->name != '' && $request->link != '' && $request->position != '' && $request->publish != ''&& $request->image != '')
     	{
-	        $users = new Banner();
-	    	$users->name = $request->name ;
-	    	$users->link = $request->link ;
-	    	$users->image= $request->image ;
-	    	$users->description = $request->description ;
-	    	$users->position = $request->position ;
-	    	$users->publish = $request->publish ? 1 : 0 ;
-	    	$users->updated_at = now();
-	    	$users->save();
+	        $banner = new Banner();
+	    	$banner->name = $request->name ;
+	    	$banner->link = $request->link ;
+	    	$banner->image= $request->image ;
+	    	$banner->description = $request->description ;
+	    	$banner->position = $request->position ;
+	    	$banner->publish = $request->publish ? 1 : 0 ;
+	    	$banner->updated_at = now();
+	    	$banner->save();
 	    	$request->session()->flash('success', 'Bài viết được tạo thành công!');
        		return redirect()->route('indexBanner')->with('Bài viết đã được tạo ra thành công!');
        	}
        	else
        	{
        		$request->session()->flash('fail', 'Hãy chọn ảnh bất kì !!! ');
-       		return redirect()->route('createBanner');
+       		return view('admin/banner/create');
        	}
     }
 
@@ -87,17 +87,17 @@ class BannerController extends Controller
      */
     public function update(Request $request)
     {
-        $users = Banner::find($request->getid);
+        $banner = Banner::find($request->getid);
     	if($request->name != '' && $request->link != '' && $request->image != '' && $request->position != '')
     	{
-	    	$users->name  = $request->name ;
-	    	$users->link  = $request->link ;
-	    	$users->image = $request->image ;
-	    	$users->position =  $request->position ;
-	    	$users->description = $request->description ;
-	    	$users->publish =  $request->publish ? 1 : 0 ;
-	    	$users->updated_at = now();
-	    	$users->save();
+	    	$banner->name  = $request->name ;
+	    	$banner->link  = $request->link ;
+	    	$banner->image = $request->image ;
+	    	$banner->position =  $request->position ;
+	    	$banner->description = $request->description ;
+	    	$banner->publish =  $request->publish ? 1 : 0 ;
+	    	$banner->updated_at = now();
+	    	$banner->save();
 	    	$request->session()->flash('success', 'Bài viết được update thành công!');
        		return redirect()->route('indexBanner');
     	}
@@ -105,7 +105,7 @@ class BannerController extends Controller
     	{
             $id=$request->getid;
     		$request->session()->flash('fail', 'Hãy điền đầy đủ thông tin!');
-       		return view('admin/banner/edit',['id'=>$id,'user'=>$users]);
+       		return view('admin/banner/edit',['id'=>$id,'banners'=>$banner]);
     	}
     }
     /**

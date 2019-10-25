@@ -29,7 +29,7 @@
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Tên Danh Mục</label>
-                      <input type="text" name="name" class="form-control" id="categories" placeholder="Tên danh mục" value="{{ $category->name }}">
+                      <input required="" type="text" name="name" class="form-control" id="categories" placeholder="Tên danh mục" value="{{ $category->name }}">
                     </div>
                   </div>
                   <div class="col-sm-6">

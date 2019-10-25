@@ -27,7 +27,7 @@
               		<div class="col-sm-5">
                     <div class="form-group">
                         <label style="color: black;" for="exampleInputEmail1">Tên Bài Viết</label>
-                        <input required style="color: black;" type="textbox" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Tên Bài Viết" name="name" value="{{$post->name}}">
+                        <input required style="color: black;" type="text" class="form-control"placeholder="Tên Bài Viết" name="name" value="{{$post->name}}">
                     </div>
 		              	<div class="form-group">
 		                  <label style="color: black;" for="exampleInputEmail1">Slug</label>

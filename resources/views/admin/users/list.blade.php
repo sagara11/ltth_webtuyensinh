@@ -153,11 +153,17 @@
             }
         })
     </script>
-    <script type="text/javascript">
+     <script type="text/javascript">
             var checkbox = document.getElementsByClassName('check');
             var confirm_btn = document.getElementById('confirm-btn');
+            var values = new Array();
+            
                 function confirm(){
-                    if(checkbox.checked == false){
+                    values = [];
+                    $.each($("input[name='checkbox[]']:checked"), function() {
+                      values.push($(this).val());
+                    });
+                    if(values.length == 0){
                                     Swal.fire({
                                       type: 'error',
                                       title: 'Lỗi...',
@@ -193,6 +199,6 @@
                             confirm_btn.type = "button";
                         })
                         }
-                    } 
+                     } 
         </script>
 @endsection

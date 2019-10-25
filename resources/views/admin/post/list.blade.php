@@ -83,15 +83,15 @@
             <div style="padding: 0px 28px;" class="box-body ">
               <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                 <div class="row">
-                    <div class="col-lg-9">
+                    <div class="col-lg-8">
                         
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         <label>Chọn Tác Vụ</label>
                         <select id="select" name="option" class="form-control">
                             <option value="all">All--</option>
-                            <option value="activate">Activate</option>
-                            <option value="delete">Delete</option>
+                            <option value="activate">Kích hoạt/Vô hiệu hóa</option>
+                            <option value="delete">Xóa</option>
                             <option value="trend">Trend</option>
                         </select>
                         <input onclick="confirm()"  class="btn btn-primary" id="confirm-btn" type="button" value="OK" style="margin-left: 20px" name="confirm1">
@@ -198,11 +198,17 @@
                 });
              });
         </script>
-        <script type="text/javascript">
+         <script type="text/javascript">
             var checkbox = document.getElementsByClassName('check');
             var confirm_btn = document.getElementById('confirm-btn');
+            var values = new Array();
+            
                 function confirm(){
-                    if(checkbox.checked == false){
+                    values = [];
+                    $.each($("input[name='checkbox[]']:checked"), function() {
+                      values.push($(this).val());
+                    });
+                    if(values.length == 0){
                                     Swal.fire({
                                       type: 'error',
                                       title: 'Lỗi...',
@@ -238,6 +244,6 @@
                             confirm_btn.type = "button";
                         })
                         }
-                    } 
+                     } 
         </script>
 @endsection

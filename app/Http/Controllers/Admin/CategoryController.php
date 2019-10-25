@@ -58,8 +58,8 @@ class CategoryController extends Controller
     {
     	if($request->name != '' && $request->publish != '' )
     	{
-            $pointer = Category::where('slug',$request->slug)->get();
-            if(empty($pointer[0]))
+            $pointer = Category::where('slug',$request->slug)->first();
+            if(empty($pointer))
             {
                 $categories = new Category();
                 $categories->name = $request->name ;
@@ -68,7 +68,16 @@ class CategoryController extends Controller
                 $categories->updated_at = now();
                 if(isset($request->category_parent))
                 {
-                    $categories->parent_id = $request->category_parent;
+                    if($request->category_parent != 'All')
+                    {
+                        $categories->parent_id = $request->category_parent;
+                    }
+                    else
+                    {
+                        $data = Category::where('parent_id',NULL)->get();
+                        $request->session()->flash('fail', 'Hãy chọn danh mục cha !!!');
+                        return view('admin/category/create_child',['category'=>$data]);
+                    }
                 }
                 $categories->save();
                 $request->session()->flash('success', 'Bài viết được tạo thành công!');
@@ -77,7 +86,15 @@ class CategoryController extends Controller
             else
             {
                 $request->session()->flash('fail', 'Danh mục này đã tồn tại !!! ');
-                return redirect()->route('indexCategory');
+                if(isset($request->category_parent))
+                {
+                    $data = Category::where('parent_id',NULL)->get();
+                    return view('admin/category/create_child',['category'=>$data]);
+                }
+                else
+                {
+                    return view('admin/category/create_parent');
+                }
             }
         }
         else

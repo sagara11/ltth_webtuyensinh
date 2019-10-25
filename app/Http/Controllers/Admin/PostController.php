@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Database\Seeder;
-use Session;
 use DB;
 use App\Category;
 use Illuminate\Support\Str;
@@ -22,12 +21,12 @@ class PostController extends Controller
     }
     public function create(Post $users)
     {
-    	$category = category::all();
+    	$category = Category::where('parent_id','!=',NULL)->get();
     	return view('admin/post/create', ['categories' => $category]);
     }
     public function store(Request $request)
     {
-    	if($request->name != '' && $request->image != '' && $request->description != '' && $request->content != '' && $request->publish != '')
+    	if($request->name != '' && $request->image != '' && $request->description != '' && $request->content != '')
     	{
             //$temp = new ElasticsearchController();
 	    	$user = new Post();
@@ -51,8 +50,9 @@ class PostController extends Controller
         }
         else
         {
+            $category = Category::where('parent_id','!=',NULL)->get();
         	$request->session()->flash('fail', 'Hãy điền đầy đủ thông tin!');
-       		return redirect()->route('createPost');
+       		return view('admin/post/create', ['categories' => $category]);
         }
     }
     public function slug(Request $request) {
@@ -62,7 +62,7 @@ class PostController extends Controller
     public function edit(Request $request)
     {
 	    	$id = $request->id ;
-	    	$category = category::all();
+	    	$category = Category::where('parent_id','!=',NULL)->get();
         	$post = Post::find($id);
         	// $user = Post::find($id)->categories->name;
 	    	return view('admin/post/edit',['id'=>$id, 'categories'=> $category ,'post'=>$post]);
@@ -70,8 +70,8 @@ class PostController extends Controller
     public function update(Request $request)
     {
     	$posts = Post::find($request->getid);
-    	$category = category::all();
-    	if($request->name != '' && $request->image != '' && $request->description != '' && $request->content != '' && $request->publish != '')
+    	$category = Category::where('parent_id','!=',NULL)->get();
+    	if($request->name != '' && $request->description != '' && $request->content != '')
     	{
             //$temp = new ElasticsearchController();
 	    	$posts->name = $request->name ;
@@ -96,7 +96,7 @@ class PostController extends Controller
         {
         	$id=$request->getid;
         	$request->session()->flash('fail', 'Hãy điền đầy đủ thông tin!');
-       		return view('admin/post/edit',['categories'=> $category,'id'=>$id]);
+       		return view('admin/post/edit',['categories'=> $category,'id'=>$id,'post'=>$posts]);
         }
     }
     public function destroy(Request $request)

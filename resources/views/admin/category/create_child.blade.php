@@ -40,7 +40,7 @@
                   <div class="col-sm-6">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Tên Danh Mục Con </label>
-                        <input type="text" name="name" value="" class="form-control" id="categories" placeholder="Tên danh mục">
+                        <input required="" type="text" name="name" value="" class="form-control" id="categories" placeholder="Tên danh mục">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Slug</label>

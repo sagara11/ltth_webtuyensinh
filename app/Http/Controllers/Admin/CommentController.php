@@ -48,7 +48,6 @@ class CommentController extends Controller
             }
         )]);
         $comments = $comments->orderBy('created_at','DESC')->paginate(10);
-    
         return view('admin/comment/list',['comments'=>$comments,'post'=>$posts,'name'=> $post != 'All' ? $name->name : '--All--','post_id'=>$post,'x'=>1]);
     }
 
@@ -57,57 +56,6 @@ class CommentController extends Controller
      *
      * @return \Illuminate\View\View
      */
-
-	public function filter($date)
-	{
-        $key=true;
-		$category = Comment::all();
-        $start = '' ;
-        $end = '' ;
-        if(isset($date))
-        {
-            $timeValue = explode('-', $date);
-            $start = date('Y-m-d', strtotime($timeValue[0]));
-            $end = date('Y-m-d', strtotime($timeValue[1]));
-        }
-        $requests = array('updated_at' => $start);
-    	foreach ($requests as $key => $value) 
-    	{
-    		if($value != 'All')
-    			{
-		    		if($key == 'updated_at' && $start != $end)
-		    		{
-		    			$DB[] = array($key,'>=',$value);
-		    			$DB[]=array($key,'<=',$end);   
-		    		}
-		    		elseif($key != 'updated_at' && $value != null)
-					{
-					    $DB[] = array($key, '=', $value); 
-					}
-		    	}
-    	}
-        if(isset($DB))
-        {
-            $categories = Category::where($DB)->paginate(8); 
-            if($categories[0]==null)
-            {
-            	$category = Category::all();
-        		return view('admin/category/list', ['category' => $category, 'categories'=> $categories,'id'=>'All','key'=>$key]);
-            }
-            else
-            {
-            	if($request->name=='All')
-            	{
-            		return view('admin/category/list',['category' => $category,'categories'=> $categories,'id'=>'All','key'=>$key]);
-            	}
-            }
-        }  
-    	else
-        {
-            return redirect()->route('indexCategory');
-        }
-        return view('admin/category/list',['category' => $category,'categories'=> $categories,'id'=>$categories[0]->name,'key'=>$key]);
-	}
 	public function activate(Request $request)
 	{
 		if($request->checkbox == null)
@@ -151,7 +99,8 @@ class CommentController extends Controller
             // $this->activate_parent($id[0]);
         }
         $request->session()->flash('success', 'Kích hoạt / Vô hiệu hóa thành công !!!');
-        $url = "https://demo.baotuyensinh.edu.vn/admin/comment/list?post_id=".$request->id."";
+        // $url = "https://demo.baotuyensinh.edu.vn/admin/comment/list?post_id=".$request->id."";
+        $url = "http://127.0.0.1:8000/admin/comment/list?post_id=".$request->id."";
         return Redirect::to($url);
     }
     public function activate_parent($id)

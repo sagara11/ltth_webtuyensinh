@@ -51,7 +51,7 @@
                 @csrf
                     <div class="col-lg-2">
                           <div style="width: 100%;">
-                                <input style="margin-top: 20px" class="btn btn-primary" type="submit" id="activate" value="Kích hoạt/Vô Hiệu Hóa">
+                                <input onclick="confirm()" style="margin-top: 20px" class="btn btn-primary" type="button" id="activate" value="Kích hoạt/Vô Hiệu Hóa">
                           </div>
                     </div>
             </div>
@@ -103,7 +103,6 @@
                     <img
                         class="rounded rounded-circle children-img"
                         src="{{ $row->user->avatar }}"
-                        alt=""
                     />
                   </div>
                   
@@ -227,15 +226,52 @@
         <script type="text/javascript">
             $('#daterange').daterangepicker();
         </script>
-        <script>
-             $(document).ready(function(){
-                $('#destroy').click(function(){
-                    Swal.fire(
-                      'Oop!!!',
-                      'Bạn nên chọn bất kì 1 ô nào đó',
-                      'question'
-                    )
-                });
-             });
+        <script type="text/javascript">
+            var checkbox = document.getElementsByClassName('check');
+            var activate = document.getElementById('activate');
+            var values = new Array();
+            
+                function confirm(){
+                    values = [];
+                    $.each($("input[name='checkbox[]']:checked"), function() {
+                      values.push($(this).val());
+                    });
+                    if(values.length == 0){
+                                    Swal.fire({
+                                      type: 'error',
+                                      title: 'Lỗi...',
+                                      text: 'Bạn chưa chọn ô nào',
+                                    })
+                                }
+                    else{
+                        Swal.fire({
+                          title: 'Are you sure?',
+                          text: "You won't be able to revert this!",
+                          type: 'warning',
+                          showCancelButton: true,
+                          confirmButtonColor: '#3085d6',
+                          cancelButtonColor: '#d33',
+                          confirmButtonText: 'Confirm'
+                        }).then((result) => {
+                          if (result.value) {
+                            Swal.fire(
+                              'Completed!',
+                              'success'
+                            )
+                          }
+                          else if (result.dismiss === Swal.DismissReason.cancel) {
+                                
+                              }
+                            })
+                        $(".swal2-confirm.swal2-styled").on('click', function() {
+                            activate.type = "submit";
+                            $("#activate").click();
+                            $(".swal2-container").css("display","none");
+                        })
+                        $(".swal2-confirm.swal2-styled").on('click', function() {
+                            activate.type = "button";
+                        })
+                        }
+                     } 
         </script>
 @endsection
