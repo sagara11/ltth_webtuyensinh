@@ -40,4 +40,4 @@ Route::post('add_comment','\App\Http\Controllers\API\CommentController@store');
 Route::post('edit_comment','\App\Http\Controllers\API\CommentController@update');
 Route::post('delete_comment','\App\Http\Controllers\API\CommentController@delete');
 //option
-Route::post('options','\App\Http\Controllers\API\OptionController@option');
+Route::get('options','\App\Http\Controllers\API\OptionController@option');

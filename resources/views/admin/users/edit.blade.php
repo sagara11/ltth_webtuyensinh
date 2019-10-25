@@ -32,10 +32,13 @@
 	                  <input class="form-control" id="exampleInputEmail1" type="email" placeholder="Enter email" value="{{$data->email}}" name="email">
 	                </div>
                   <div class="checkbox">
-              <label>
-                <input checked="" type="checkbox" name="publish"> Publish
-              </label>
-            </div>
+                    @if($data->publish == 1)
+                    <label>
+                    <input checked="" type="checkbox" name="publish"> Publish </label>
+                    @endif
+                    <label>
+                    <input type="checkbox" name="publish"> Publish </label>
+                  </div> 
           		</div>
               <div class="col-sm-4">
                 <div class="col-sm-4">

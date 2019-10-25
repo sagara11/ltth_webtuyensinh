@@ -40,8 +40,8 @@ class UserController extends Controller
             {
                 $data->password = Hash::make($request->newPassword);
                 $data->save();
-                $request->session()->flash('success', 'Mật khẩu thay đổi thành công !!!');
-                return redirect()->route('indexUser');
+                Auth::logout();
+                return redirect('/login');
             }
             else
             {
@@ -128,6 +128,7 @@ class UserController extends Controller
             $users->name  = $request->name ? $request->name : $users->name  ;
             $users->email  = $request->email ? $request->email : $users->email;
             $users->avatar = $request->image ? $request->image : $users->avatar;
+            $users->publish = $request->publish ? 1 : 0 ;
             $users->updated_at = now();
             $users->save();
             $request->session()->flash('success', 'Thông tin đã được cập nhật !!');
@@ -149,21 +150,18 @@ class UserController extends Controller
      */
      public function method(Request $request)
      {
-        if(isset($request->checkbox) && isset($request->option))
+        if($request->option == 'delete' && $request->checkbox != null)
         {
-            if($request->option == 'activate')
-            {
-                return $this->activate($request);
-            }
-            elseif($request->option == 'delete')
-            {
-                return $this->delete($request);
-            }
+            return $this->delete($request);
+        }
+        elseif($request->option == 'activate' && $request->checkbox != null)
+        {
+            return $this->activate($request); 
         }
         else
         {
-            $request->session()->flash('fail', 'Xin mời bạn hãy chọn bất kì 1 ô nào đó !!! ');
-            return redirect()->route('indexUsers');
+            $request->session()->flash('fail', 'Hãy chọn tác vụ hoặc chọn bất kì 1 ô nào đó !!! ');
+            return redirect()->route('indexUser');
         }
     }
     public function activate(Request $request)
@@ -242,7 +240,7 @@ class UserController extends Controller
             $user = User::where($DB)->paginate(8);
             if($user[0] == null)
             {
-                return view('admin/users/list',['users'=>$user,'key'=>$key,'publish'=>$user[0]['publish']]);
+                return view('admin/users/list',['users'=>$user,'key'=>$key,'publish'=>$request->publish]);
             }
             else
             {

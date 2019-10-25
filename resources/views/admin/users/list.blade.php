@@ -22,7 +22,7 @@
 @if (session('search'))
         <div class="alert alert-danger">{{session('search')}}</div>
 @endif
-    <div class="box">
+    <div style="padding: 5px 15px;" class="box">
         <div class="box-header">
             <h3 class="box-title">Users</h3>
         </div>
@@ -34,10 +34,16 @@
                             <label for="exampleInputEmail1">Publish</label>
                             <select class="form-control" name="publish">
                                 @if(isset($publish))
-                                    @if($publish != 'All' || $publish == 0)
-                                    <option style="display: none;" value="{{ $publish }}">
-                                        {{ $publish == 1 ? 'ON' : 'OFF' }}
-                                    </option>
+                                    @if($publish != 'All')
+                                     @if($publish == 1)
+                                        <option style="display: none;" value="{{ $publish }}">
+                                            {{ 'ON' }}
+                                        </option>
+                                     @else
+                                        <option style="display: none;" value="{{ $publish }}">
+                                            {{ 'OFF' }}
+                                        </option>
+                                     @endif
                                     @endif
                                     @if($publish == 'All')
                                     <option style="display: none;" value="{{ $publish }}">
@@ -63,18 +69,17 @@
             <div class="box-body ">
               <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                 <div class="row">
-                    <div class="col-sm-9">
+                    <div class="col-sm-8">
                         
                     </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <div id="chontacvu">
                             <label>Chọn Tác Vụ</label>
                             <select class="form-control" name="option">
                                 <option value="all">All--</option>
-                                <option value="activate">Activate</option>
-                                <option value="delete">Delete</option>
+                                <option value="activate">Kích hoạt/Vô hiệu hóa</option>
                             </select>
-                            <input class="btn btn-success" type="submit" value="OK" id="choose">
+                            <input onclick="confirm()" class="btn btn-primary" id="confirm-btn" type="button" value="OK" name="confirm1">
                             </div>
                         </div>
                     </div>
@@ -148,4 +153,46 @@
             }
         })
     </script>
+    <script type="text/javascript">
+            var checkbox = document.getElementsByClassName('check');
+            var confirm_btn = document.getElementById('confirm-btn');
+                function confirm(){
+                    if(checkbox.checked == false){
+                                    Swal.fire({
+                                      type: 'error',
+                                      title: 'Lỗi...',
+                                      text: 'Bạn chưa chọn ô nào',
+                                    })
+                                }
+                    else{
+                        Swal.fire({
+                          title: 'Are you sure?',
+                          text: "You won't be able to revert this!",
+                          type: 'warning',
+                          showCancelButton: true,
+                          confirmButtonColor: '#3085d6',
+                          cancelButtonColor: '#d33',
+                          confirmButtonText: 'Confirm'
+                        }).then((result) => {
+                          if (result.value) {
+                            Swal.fire(
+                              'Completed!',
+                              'success'
+                            )
+                          }
+                          else if (result.dismiss === Swal.DismissReason.cancel) {
+                                
+                              }
+                            })
+                        $(".swal2-confirm.swal2-styled").on('click', function() {
+                            confirm_btn.type = "submit";
+                            $("#confirm-btn").click();
+                            $(".swal2-container").css("display","none");
+                        })
+                        $(".swal2-confirm.swal2-styled").on('click', function() {
+                            confirm_btn.type = "button";
+                        })
+                        }
+                    } 
+        </script>
 @endsection
