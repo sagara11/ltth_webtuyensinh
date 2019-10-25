@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
-use Session;
-
 class BannerController extends Controller
 {
     /**
@@ -46,7 +44,7 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
-    	if($request->name != '' && $request->link != '' && $request->image != '' && $request->position != '' && $request->publish != '')
+    	if($request->name != '' && $request->link != '' && $request->position != '' && $request->publish != '')
     	{
 	        $users = new Banner();
 	    	$users->name = $request->name ;
@@ -62,7 +60,7 @@ class BannerController extends Controller
        	}
        	else
        	{
-       		$request->session()->flash('status', 'Hãy điền đầy đủ thông tin!');
+       		$request->session()->flash('fail', 'Hãy chọn ảnh bất kì !!! ');
        		return redirect()->route('createBanner');
        	}
     }

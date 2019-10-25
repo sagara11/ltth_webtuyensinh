@@ -30,7 +30,7 @@ class CategoryController extends Controller
             }
         ));
         $categories = $categories->paginate(3);
-        return view('admin/category/list', ['categories' => $categories, 'category'=> $category,'publish'=>'All','key'=>$key,'id'=>'All']);
+        return view('admin/category/list', ['categories' => $categories, 'category'=> $category,'publish'=>'All','key'=>$key,'muctin'=>'All']);
     }
 
     /**
@@ -253,12 +253,12 @@ class CategoryController extends Controller
             if($categories[0]==null)
             {
         		return view('admin/category/list', ['category' => $category, 'categories'=> $categories,'publish'=>
-                    $request->publish,'key'=>$key,'id'=>'All']);
+                    $request->publish,'key'=>$key,'muctin'=>$request->name]);
             }
             else
             {
         		return view('admin/category/list',['category' => $category,'categories'=> $categories,'publish'=>
-                    $request->publish,'key'=>$key,'id'=>'All']);
+                    $request->publish,'key'=>$key,'muctin'=>$request->name]);
             }
         }  
     	else

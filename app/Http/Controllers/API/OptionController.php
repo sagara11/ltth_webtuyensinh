@@ -19,10 +19,13 @@ class OptionController extends BaseController
      public function option(Request $request)
     {
         try{
-            $option = Option::select('position','key_option')->get();
+            $option = Option::select('key_option','value')->get();
+
             foreach ($option as $row) {
-                $options[] = array($row->position=>$row->key_option);
+                $options[$row->key_option] = $row->value;
             }
+
+            $options = (object) $options;
             $response = [
                             'status' => true,
                             'data' => $options,

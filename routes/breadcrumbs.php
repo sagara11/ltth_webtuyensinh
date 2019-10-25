@@ -84,7 +84,6 @@ Breadcrumbs::for('editUser', function ($trail) {
 });
 Breadcrumbs::for('change_passwordUser', function ($trail) {
     $trail->parent('indexUser');
-    $trail->push('User', route('indexUser'));
     $trail->push('Đổi mật khẩu',route('change_passwordUser'));
 });
 Breadcrumbs::for('filterUser', function ($trail,$key) {

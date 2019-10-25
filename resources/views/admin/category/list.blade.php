@@ -44,7 +44,9 @@
                             <div class="form-group col-md-4">
                                <label style="color: black;" for="exampleInputEmail1">Mục Tin </label>
                                 <select  style=" color: black ; width: 100%;"id="publish" class="form-control" name="name">
-                                    <option selected style="display: none" class="dropdown-item" value="{{ $id }}">{{ $id }}</option>
+                                    @if($muctin != 'All')
+                                    <option style="display: none;" value="{{$muctin}}">{{$muctin}}</option>
+                                    @endif
                                     <option value="All">All</option>
                                     @foreach($category as $row)
                                     {

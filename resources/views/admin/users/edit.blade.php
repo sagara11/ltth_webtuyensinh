@@ -35,9 +35,10 @@
                     @if($data->publish == 1)
                     <label>
                     <input checked="" type="checkbox" name="publish"> Publish </label>
+                    @else
+                      <label>
+                      <input type="checkbox" name="publish"> Publish </label>
                     @endif
-                    <label>
-                    <input type="checkbox" name="publish"> Publish </label>
                   </div> 
           		</div>
               <div class="col-sm-4">
