@@ -25,7 +25,7 @@ class vnexpressController extends Controller
         foreach($post as $key){
             $object = array(
                 'urls' => $key->href,
-                'img' => $src[$count]->src
+                'img' => $src[$count]->getAttribute('data-original')
             );
             array_push($datas, $object);
             $count++;
