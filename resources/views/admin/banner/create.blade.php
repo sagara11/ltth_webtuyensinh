@@ -10,7 +10,6 @@
       {{Breadcrumbs::render('createBanner')}}
 @endsection
 @section('content')
-@include('ckfinder::setup')
 @if (session('fail'))
         <div class="alert alert-danger">{{session('fail')}}</div>
 @endif
