@@ -41,6 +41,7 @@ class CrawlController extends Controller
                         $data->type_post= 'post';
                         $data->publish = 1;
                         $data->view = 0;
+                        $data->trend = 0;
                         $data->category_id = $object_category_id;
                         $data->source_id = $object_source_id;
                         $this->slug_check($post['slug']);

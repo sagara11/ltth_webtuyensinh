@@ -11,7 +11,7 @@ use App\Http\Controllers\CrawlController;
 
 class tuoitreController extends Controller
 {
-    function posts($page){
+    function posts($url, $page){
         // load tung trang trong muc giao duc
         $posts  = new Dom;
         $posts->loadFromUrl($url.'trang-'.$page.'.htm');
@@ -43,7 +43,7 @@ class tuoitreController extends Controller
         $name = $post->find('h1.article-title')->innerHTML;
         $slug = trim(trim($page_url, "tuoitre.vn//"),".htm");
         $description = $post->find('h2.sapo')->innerHTML;
-        $content = $post->find('#main-detail-body');
+        $content = htmlentities($post->find('#main-detail-body'));
 
         return array(
             'name' => $name,

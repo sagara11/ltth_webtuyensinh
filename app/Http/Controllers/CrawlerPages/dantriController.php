@@ -44,7 +44,7 @@ class dantriController extends Controller
         $slug = trim(trim($page_url, "https://dantri.com.vn/"),".html");
         $description_span = $post->find('h2.fon33.mt1.sapo')->innerHTML;
         $description = trim($description_span, "<span>Dân trí<span/>&nbsp;");
-        $content = $post->find('.detail-content');
+        $content = htmlentities($post->find('.detail-content'));
 
         //gan thuoc tinh cua trang
         return array(

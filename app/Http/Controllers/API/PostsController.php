@@ -36,7 +36,7 @@ class PostsController extends BaseController
 
         if($select != 'all')
         {
-            return $this->sort($select);
+            return $this->sort($select,$limit);
         }
         if($name != '') {
             $posts->where('name',$name);
@@ -48,9 +48,9 @@ class PostsController extends BaseController
         $posts = $posts->paginate($limit);
         return $this->sendResponse($posts, 'Post read successfully.','posts');
     }
-    public function sort($select)
+    public function sort($select,$limit)
     {
-        $limit = isset($request->limit) ? $request->limit : 10 ;
+        // $limit = isset($request->limit) ? $request->limit : 10 ;
         if($select == 'hot')
         {
             $posts = Post::orderBy('view','DESC')->select('id','name','image','description','created_at','view','comment','category_id')->with(array(
