@@ -136,14 +136,15 @@ class UserController extends BaseController
             // Ko có lỗi, kiểm tra nếu file đã dc upload
             if ($rq->file('avatar')->isValid()) {
                 // Filename cực shock để khỏi bị trùng
-                $fileName = $rq->file('avatar')->storeAs('images','avatar'.$name.'.jpg');
+                $fileName = $rq->file('avatar')->storeAs('images/avatar','avatar'.$name.'.jpg');
                 // Thư mục upload
-                $uploadPath = public_path('/userfiles/images'); // Thư mục upload
+                $uploadPath = public_path('/userfiles/images/avatar'); // Thư mục upload
                 
                 // Bắt đầu chuyển file vào thư mục
                 $rq->file('avatar')->move($uploadPath, $fileName);
                 // Thành công, show thành công
-                $photoURL = url('http://localhost/webtuyensinh/public/userfiles/'.$fileName);
+                $photoURL = url('/userfiles/'.$fileName);
+            
                 return $photoURL;
             }
             else {

@@ -37,7 +37,8 @@ class CrawlController extends Controller
                         $data->description = $post['description'];
                         $data->image = $value['img'];
                         $data->slug = $post['slug'];
-                        $data->content = htmlentities($post['content']);
+                        $data->content = ($post['content']);
+                        $data->type_post= 'post';
                         $data->publish = 1;
                         $data->view = 0;
                         $data->category_id = $object_category_id;
