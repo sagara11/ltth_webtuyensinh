@@ -17,7 +17,7 @@ class PostController extends Controller
     {
         $key = false;
     	$category = Category::all();
-    	return view('admin/post/list',['post'=> $post->paginate(8) , 'categories'=> $category,'id' => 'All','key'=>$key,'publish'=>'All','danhmuc'=>"All"]);
+    	return view('admin/post/list',['post'=> $post->paginate(8) , 'categories'=> $category,'id' => 'All','key'=>$key,'publish'=>'All','danhmuc'=>"All",'search'=>'']);
     }
     public function create(Post $users)
     {
@@ -130,19 +130,22 @@ class PostController extends Controller
 
 	public function filter(Request $request)
 	{
-            $key = true;
-            $category = category::all();
-			// $timeValue = explode('-', $request->date);
-            // $start = date('Y-m-d', strtotime($timeValue[0]));
-            // $end = date('Y-m-d', strtotime($timeValue[1]));
-            $requests = array('category_id' => $request->categories,'publish' => $request->publish);   
-        	foreach ($requests as $key => $value) 
-        	{
-        		if($value != 'All')
-    			{
-		    		 $DB[] = array($key, '=', $value); 
-		    	}
-        	}
+        $key = true;
+        $category = Category::all();
+		
+        $requests = array('category_id' => $request->categories,'publish' => $request->publish,'name'=>$request->search ? $request->search : '');
+
+    	foreach ($requests as $key => $value) 
+    	{
+    		if($value != 'All' && $value != '' && $key != 'name')
+			{
+	    		 $DB[] = array($key, '=', $value); 
+	    	}
+            if($key == 'name')
+            {
+                $DB[] = array($key,'like','%' .$value. '%');
+            }
+    	}
         if(isset($DB))
         {
             $post = Post::where($DB);
@@ -151,25 +154,25 @@ class PostController extends Controller
                 return $q->select('id','name','updated_at','publish');
                 }
             ));
-
+        
             $post = $post->paginate(8);
-
+            
             $data = Category::where('id',$request->categories)->first();
 
             if($post[0]==null)
             {
-		    	return view('admin/post/list',['post'=>$post , 'categories'=> $category,'danhmuc'=>$data ? $data->name : "All",'key'=>$key,'publish'=>$request->publish,'danhmuc_id'=>$request->categories]);
+		    	return view('admin/post/list',['post'=>$post , 'categories'=> $category,'danhmuc'=>$data ? $data->name : "All",'key'=>$key,'publish'=>$request->publish,'danhmuc_id'=>$request->categories ,'search'=>$request->search]);
             }
             else
             {
-            	return view('admin/post/list',['post'=>$post,'categories'=> $category,'danhmuc'=>$data ? $data->name : "All",'key'=>$key,'publish'=>$request->publish,'danhmuc_id'=>$request->categories]);
+            	return view('admin/post/list',['post'=>$post,'categories'=> $category,'danhmuc'=>$data ? $data->name : "All",'key'=>$key,'publish'=>$request->publish,'danhmuc_id'=>$request->categories,'search'=>$request->search]);
             }
         }  
     	else
         {
             return redirect()->route('indexPost');
         }
-        return view('admin/post/list',['post'=>$post,'categories'=> $category,'danhmuc'=>'All','key'=>$key,'publish'=>$request->publish,'danhmuc_id'=>$request->categories]);
+        return view('admin/post/list',['post'=>$post,'categories'=> $category,'danhmuc'=>'All','key'=>$key,'publish'=>$request->publish,'danhmuc_id'=>$request->categories,'search'=>$request->search]);
 	}
 
 	public function activate(Request $request)
@@ -279,14 +282,6 @@ class PostController extends Controller
         elseif($request->option == 'trend' && $request->checkbox != null)
         {
             return $this->trend($request); 
-        }
-        elseif(isset($request->search))
-        {
-           return $this->search($request); 
-        }
-        elseif(isset($request->categories) || isset($request->publish))
-        {
-            return $this->filter($request);
         }
         else
         {

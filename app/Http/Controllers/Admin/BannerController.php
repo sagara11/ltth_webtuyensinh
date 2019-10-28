@@ -120,14 +120,19 @@ class BannerController extends Controller
         $requests = array('name'=> $request->name ? $request->name : 'All','position'=>$request->position ? $request->position : 'All','publish' => $request->publish);
     	foreach ($requests as $key => $value) 
     	{
-    		if($value != 'All')
+    		if($value != 'All' && $key != 'name')
 			{
 	    	     $DB[] = array($key, '=', $value); 
 	    	}
+            if($key == 'name')
+            {
+                 $DB[] = array($key,'like','%'.$value.'%');
+            }
 		}
         if(isset($DB))
         {
             $banners = Banner::where($DB)->paginate(8);
+
             if($banners[0]==null)
             {
                 return view('admin.banner.list',['banners'=>$banners,'position'=>$request->position,'publish'=>$request->publish,'search'=>$request->name,'key'=>$key]);

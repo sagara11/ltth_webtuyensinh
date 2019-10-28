@@ -34,13 +34,12 @@
                     </form>
                 </div> 
                 <div class="col-lg-11">
-                    <form action="{{ route('methodPost') }}" method="post" accept-charset="utf-8">
-                        @csrf
+                    <form action="{{ route('filterPost') }}" method="get" accept-charset="utf-8">
                         <div class="row">
                             <div class="col-lg-6">
                               <div class="form-group">
                                     <label for="exampleInputEmail1">Tìm Kiếm</label>
-                                    <input value="{{ isset($search) ? $search : '' }}"  name="search" type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="">
+                                    <input name="search" type="text" class="form-control" id="name" value="{{$search != '' ? $search : ''}}">
                               </div>
                             </div>
                             <div class="form-group col-md-2">

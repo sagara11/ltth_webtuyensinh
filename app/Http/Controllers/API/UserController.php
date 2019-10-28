@@ -273,6 +273,7 @@ class UserController extends BaseController
             $user->email = $email;
             $user->avatar = $avatar;
             $user->password = Hash::make('admin123');
+            $user->publish = 1 ;
             $user->save();
             return $user ;
         }catch(\Exception $e)
