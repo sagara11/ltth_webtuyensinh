@@ -94,6 +94,7 @@ class UserController extends BaseController
      * @param  \App\User  $user
      * @return \Illuminate\View\View
      */
+    
      public function update(Request $request, User $user)
     {
         try{ 
@@ -108,10 +109,38 @@ class UserController extends BaseController
                     return response()->json($response);
                 }
                 $user = User::find($gettoken[0]);
+                // xu li phan thay doi mat khau
+                if((isset($request->password) &&  $request->password != null) || (isset($request->new_password) && $request->new_password != null))
+                {
+                    if(Hash::check($request->password,$user->password))
+                    {
+                        $user->password = Hash::make($request->new_password);
+                    } 
+                    else
+                    {
+                        $response = [
+                        'status' => false,
+                        'message' => 'Your password does not match any other password !!!',
+                        ];
+                        return response()->json($response);
+                    }
+                }   
+                else
+                {
+                    $response = [
+                    'status' => false,
+                    'message' => 'please fill the password or new password !!!',
+                    ];
+                    return response()->json($response);
+                }
+                // xu li phan anh
+                if($request->file('avatar') != null)
+                {
+                    $avatar = $this->Xulyupload($request,$user->name);
+                    $user->avatar = $avatar ;
+                }
                 $user->name = $request->name ? $request->name : $user->name ;
                 $user->email = $request->email ? $request->email : $user->email ;
-                $avatar = $this->Xulyupload($request,$user->name);
-                $user->avatar = $avatar ;
                 $user->save();
                 $response = [
                     'status' => true,
