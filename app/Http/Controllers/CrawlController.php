@@ -20,6 +20,20 @@ class CrawlController extends Controller
         foreach($object as $key){
             // lay web_name va link cua tung web
             $object_name = $key['web_name'];
+            switch($object_name){
+                case "Tuổi trẻ": 
+                    $object_name = "tuoitre";
+                    break;
+                case "Dân trí": 
+                    $object_name = "dantri";
+                    break;
+                case "Vnexpress": 
+                    $object_name = "vnexpress";
+                    break;
+                case "Giáo dục thời đại": 
+                    $object_name = "giaoducthoidai";
+                    break;
+            }
             $object_link = $key['links'];
             $object_category_id = $key['bts_categories'];
             $object_source_id = $key['id'];
