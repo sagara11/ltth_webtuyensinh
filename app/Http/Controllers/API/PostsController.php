@@ -21,13 +21,22 @@ class PostsController extends BaseController
      public function posts(Request $request)
     {
         $type = 'post';
-        $posts = Post::select('id','name','image','description','created_at','view','comment','category_id')->with(array(
-            'categories' => function($posts)
+        $posts = Post::select('id','name','image','description','created_at','view','comment','category_id','source_id');
+        $posts->with(array(
+            'source' => function($q)
             {
-                $posts->select('id','name');
+                return $q->select('id','web_name');
+            }));
+
+        $posts->with(array(
+            'categories' => function($q)
+            {
+                return $q->select('id','name');
             }))->where('publish', 1);
+
         $posts->where('type_post', '=', $type);
 
+        
         $name        = isset($request->name) ? $request->name : '';
         $limit       = isset($request->limit) ? $request->limit : 10 ;
         $page        = isset($request->page) ? $request->page : 1 ;
@@ -46,6 +55,7 @@ class PostsController extends BaseController
         }
         
         $posts = $posts->paginate($limit);
+
         return $this->sendResponse($posts, 'Post read successfully.','posts');
     }
     public function sort($select,$limit)
@@ -88,41 +98,66 @@ class PostsController extends BaseController
         if(isset($request->id) && $request->id != null)
         {
             // lay bai viet
-            // $limit = isset($request->limit) ? $request->limit : 1 ;
-            $type = 'post';
-            $post = Post::where('id',$request->id)->select('id','name','image','description','content','created_at','view','comment','category_id')->with(array(
-                'categories' => function($post)
-                {
-                    $post->select('id','name');
+            try{
+                $type = 'post';
+                $post = Post::where('id',$request->id)->select('id','name','image','description','content','created_at','view','comment','category_id','source_id');
 
-                }))->where('publish', 1);
+                $post->with(array(
+                    'source' => function($post)
+                    {
+                        $post->select('id','web_name');
 
-            $post->where('type_post', '=', $type);
+                    }));
 
-            $post = $post->first();
+                $post->with(array(
+                    'categories' => function($post)
+                    {
+                        $post->select('id','name');
 
-            $post->view = $post->view + 1 ;
-            $post->save();
-            // cac bai viet lien quan
-            $related = Post::where('category_id',$post->category_id)->select('id','name','image','description','created_at','view','comment','category_id');
+                    }))->where('publish', 1);
 
-            $related->with(array(
-                'categories' => function($related)
-                {
-                    $related->select('id','name');
+                $post->where('type_post', '=', $type);
 
-                }))->where('publish', 1)->get();
+                $post = $post->first();
 
-            $related->where('type_post', '=', $type)->where('id','!=',$post->id);
+                $post->view = $post->view + 1 ;
+                $post->save();
+                // cac bai viet lien quan
+                $related = Post::where('category_id',$post->category_id)->select('id','name','image','description','created_at','view','comment','category_id','source_id');
 
-            $related = $related->get();
+                $related->with(array(
+                    'source' => function($related)
+                    {
+                        $related->select('id','web_name');
 
-            $response = [
-                        'status'  => true,
-                        'post'    =>$post,
-                        'related' =>$related,
-                    ];
-            return response()->json($response);
+                    }));
+
+                $related->with(array(
+                    'categories' => function($related)
+                    {
+                        $related->select('id','name');
+
+                    }))->where('publish', 1)->get();
+
+                $related->where('type_post', '=', $type)->where('id','!=',$post->id);
+
+                $related = $related->get();
+
+                $response = [
+                            'status'  => true,
+                            'post'    =>$post,
+                            'related' =>$related,
+                        ];
+                return response()->json($response);
+            }catch(\Exception $e)
+            {
+                $response = [
+                            'status'  => false,
+                            'message'    =>"Post does not exists !!!",
+                        ];
+                        return response()->json($response);
+            }
+            
         }
         else
         {
@@ -147,11 +182,18 @@ class PostsController extends BaseController
     public function search(Request $request)
     {
         $type = 'post';
-        $posts = Post::select('id','name','image','description','created_at','view','comment','category_id')->with(array(
+        $posts = Post::select('id','name','image','description','created_at','view','comment','category_id');
+        $posts->with(array(
+            'source' => function($posts)
+            {
+                $posts->select('id','web_name');
+            }));
+        $posts->with(array(
             'categories' => function($posts)
             {
                 $posts->select('id','name');
             }))->where('publish', 1);
+
         $posts->where('type_post', '=', $type);
 
         $name        = isset($request->name) ? $request->name : '';

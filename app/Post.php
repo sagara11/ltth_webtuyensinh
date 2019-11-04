@@ -12,4 +12,8 @@ class Post extends Model
     {
     	return $this->belongsTo('App\Category','category_id','id');
     }
+    public function source()
+    {
+    	return $this->belongsTo('App\Crawl','source_id','id');
+    }
 }

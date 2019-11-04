@@ -43,7 +43,7 @@ class tuoitreController extends Controller
         $name = $post->find('h1.article-title')->innerHTML;
         $slug = trim(trim($page_url, "tuoitre.vn//"),".htm");
         $description = $post->find('h2.sapo')->innerHTML;
-        $content = htmlentities($post->find('#main-detail-body'));
+        $content = $post->find('#main-detail-body');
 
         return array(
             'name' => $name,

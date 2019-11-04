@@ -50,7 +50,7 @@ class giaoducthoidaiController extends Controller
             $name = strip_tags($post->find('h1.cms-title')->innerHTML);
             $slug = trim(trim($page_url, "https://giaoducthoidai.vn/giao-duc"),".html");
             $description = $post->find('div.summary.cms-desc')->innerHTML;
-            $content = htmlentities($post->find('.cms-body'));
+            $content = $post->find('.cms-body');
         }
 
         //gan thuoc tinh cua trang
