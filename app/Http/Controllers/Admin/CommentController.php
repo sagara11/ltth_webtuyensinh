@@ -100,7 +100,7 @@ class CommentController extends Controller
         }
         $request->session()->flash('success', 'Kích hoạt / Vô hiệu hóa thành công !!!');
         // $url = "https://demo.baotuyensinh.edu.vn/admin/comment/list?post_id=".$request->id."";
-        $url = "http://127.0.0.1:8000/admin/comment/list?post_id=".$request->id."";
+        $url = "https://demo.baotuyensinh.edu.vn/admin/comment/list?post_id=".$request->id."";
         return Redirect::to($url);
     }
     public function activate_parent($id)
