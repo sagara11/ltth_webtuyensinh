@@ -182,7 +182,7 @@ class PostsController extends BaseController
     public function search(Request $request)
     {
         $type = 'post';
-        $posts = Post::select('id','name','image','description','created_at','view','comment','category_id');
+        $posts = Post::select('id','name','image','description','created_at','view','comment','category_id','source_id');
         $posts->with(array(
             'source' => function($posts)
             {
@@ -207,7 +207,7 @@ class PostsController extends BaseController
             return $this->sort($select);
         }
         if($name != '') {
-            $posts->where('name',$name);
+            $posts->where('name','like','%' .$name. '%');
         }
         if($category_id !='all'){
             $posts->where('category_id',$category_id);

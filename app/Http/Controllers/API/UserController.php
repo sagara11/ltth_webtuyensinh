@@ -110,7 +110,7 @@ class UserController extends BaseController
                 }
                 $user = User::find($gettoken[0]);
                 // xu li phan thay doi mat khau
-                if((isset($request->password) &&  $request->password != null) || (isset($request->new_password) && $request->new_password != null))
+                if((isset($request->password) &&  $request->password != null) && (isset($request->new_password) && $request->new_password != null))
                 {
                     if(Hash::check($request->password,$user->password))
                     {
