@@ -48,13 +48,13 @@ class PostsController extends BaseController
             return $this->sort($select,$limit);
         }
         if($name != '') {
-            $posts->where('name',$name);
+            $posts->where('name','like','%' .$name. '%');
         }
         if($category_id !='all'){
             $posts->where('category_id',$category_id);
         }
         
-        $posts = $posts->paginate($limit);
+        $posts = $posts->orderBy('created_at','desc')->paginate($limit);
 
         return $this->sendResponse($posts, 'Post read successfully.','posts');
     }
@@ -213,7 +213,7 @@ class PostsController extends BaseController
             $posts->where('category_id',$category_id);
         }
         
-        $posts = $posts->paginate($limit);
+        $posts = $posts->orderBy('created_at','desc')->paginate($limit);
         return $this->sendResponse($posts, 'Post read successfully.','posts');
     }
 }

@@ -39,7 +39,7 @@ class CategoryController extends BaseController
                 }
             ));
 
-        $categories = $categories->paginate($limit);
+        $categories = $categories->orderBy('created_at','desc')->paginate($limit);
         return $this->sendResponse($categories, 'Post retrieved successfully.','categories');
     }
     /**

@@ -110,28 +110,31 @@ class UserController extends BaseController
                 }
                 $user = User::find($gettoken[0]);
                 // xu li phan thay doi mat khau
-                if((isset($request->password) &&  $request->password != null) && (isset($request->new_password) && $request->new_password != null))
+                if(isset($request->password) || isset($request->new_password))
                 {
-                    if(Hash::check($request->password,$user->password))
+                    if($request->password != null && $request->new_password != null)
                     {
-                        $user->password = Hash::make($request->new_password);
-                    } 
+                        if(Hash::check($request->password,$user->password))
+                        {
+                            $user->password = Hash::make($request->new_password);
+                        } 
+                        else
+                        {
+                            $response = [
+                            'status' => false,
+                            'message' => 'Your password does not match any other password !!!',
+                            ];
+                            return response()->json($response);
+                        }
+                    }   
                     else
                     {
                         $response = [
                         'status' => false,
-                        'message' => 'Your password does not match any other password !!!',
+                        'message' => 'please fill the password or new password !!!',
                         ];
                         return response()->json($response);
                     }
-                }   
-                else
-                {
-                    $response = [
-                    'status' => false,
-                    'message' => 'please fill the password or new password !!!',
-                    ];
-                    return response()->json($response);
                 }
                 // xu li phan anh
                 if($request->file('avatar') != null)

@@ -45,7 +45,7 @@ class CommentController extends BaseController
             )]);
 
             $limit = isset($request->limit) ? $request->limit : 10 ;
-            $comments = $comments->paginate($limit);
+            $comments = $comments->orderBy('created_at','desc')->paginate($limit);
             
             $response = [
                         'status' => true,
