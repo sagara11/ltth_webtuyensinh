@@ -38,7 +38,8 @@ class CategoryController extends BaseController
                     return $q->select('id','name','image', 'parent_id');
                 }
             ));
-
+        $categories->where('publish', 1);
+        
         $categories = $categories->orderBy('created_at','desc')->paginate($limit);
         return $this->sendResponse($categories, 'Post retrieved successfully.','categories');
     }

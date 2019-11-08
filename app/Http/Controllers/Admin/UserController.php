@@ -18,7 +18,7 @@ class UserController extends Controller
     public function index(User $users)
     {
         $key = false ;
-        return view('admin/users/list', ['users' => $users->paginate(8),'key'=>$key]);
+        return view('admin/users/list', ['users' => $users->paginate(8),'key'=>$key,'publish'=>'All']);
     }
 
     /**
@@ -158,11 +158,26 @@ class UserController extends Controller
         {
             return $this->activate($request); 
         }
+        elseif($request->publish != 'All')
+        {
+            return $this->filter($request);
+        }
+        elseif(isset($request->search))
+        {
+            return $this->search($request);
+        }
         else
         {
             $request->session()->flash('fail', 'Hãy chọn tác vụ hoặc chọn bất kì 1 ô nào đó !!! ');
             return redirect()->route('indexUser');
         }
+    }
+    public function search(Request $request)
+    {
+        $key = true;
+        $data = $request->search;
+        $user = User::where('name', 'like','%' .$data. '%')->orWhere('email', 'like','%' .$data. '%')->orWhere('phone', 'like','%' .$data. '%');
+        return view('admin/users/list',['users'=>$user->paginate(5),'key'=>$key,'publish'=>'All','search'=>$request->search]);
     }
     public function activate(Request $request)
     {
@@ -244,7 +259,7 @@ class UserController extends Controller
             }
             else
             {
-                return view('admin/users/list',['users'=>$user,'key'=>$key,'publish'=>$user[0]['publish']]);
+                return view('admin/users/list',['users'=>$user,'key'=>$key,'publish'=>$request->publish]);
             }
         }  
         else
@@ -252,6 +267,6 @@ class UserController extends Controller
             return redirect()->route('indexUser');
         }
         $user = new User();
-        return view('admin/users/list',['users'=>$user->paginate(8),'key'=>$key,'publish'=>$user[0]['publish']]);
+        return view('admin/users/list',['users'=>$user->paginate(8),'key'=>$key,'publish'=>$request->publish]);
     }
 }

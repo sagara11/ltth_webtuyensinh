@@ -39,5 +39,6 @@ Route::get('comments','\App\Http\Controllers\API\CommentController@index');
 Route::post('add_comment','\App\Http\Controllers\API\CommentController@store');
 Route::post('edit_comment','\App\Http\Controllers\API\CommentController@update');
 Route::post('delete_comment','\App\Http\Controllers\API\CommentController@delete');
+Route::post('report_comment','\App\Http\Controllers\API\CommentController@report');
 //option
 Route::get('options','\App\Http\Controllers\API\OptionController@option');

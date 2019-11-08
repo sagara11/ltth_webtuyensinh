@@ -36,7 +36,7 @@ class UserController extends BaseController
                     ];
                     return response()->json($response);
                 }
-                $user = User::where('id',$gettoken[0])->select('name','email','avatar')->first();
+                $user = User::where('id',$gettoken[0])->select('id','name','email','avatar')->first();
                 $response = [
                         'status' => true,
                         'message' => 'User Data',
@@ -97,7 +97,7 @@ class UserController extends BaseController
     
      public function update(Request $request, User $user)
     {
-        try{ 
+        // try{ 
                 $token = $request->header('token');
                 $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
                 if($gettoken == null)
@@ -108,6 +108,7 @@ class UserController extends BaseController
                     ];
                     return response()->json($response);
                 }
+                $id = $gettoken[0];
                 $user = User::find($gettoken[0]);
                 // xu li phan thay doi mat khau
                 if(isset($request->password) || isset($request->new_password))
@@ -145,19 +146,21 @@ class UserController extends BaseController
                 $user->name = $request->name ? $request->name : $user->name ;
                 $user->email = $request->email ? $request->email : $user->email ;
                 $user->save();
+                $data = User::where('id',$id)->select('id','name','email','avatar')->first();
                 $response = [
                     'status' => true,
                     'message' => 'Update success',
+                    'info' => $data 
                 ];
                 return response()->json($response);
-        }
-        catch(\Exception $e) {
-            $response = [
-                'status' => false,
-                'message' => 'Update fail!!!',
-            ];
-            return response()->json($response);
-        }
+        // }
+        // catch(\Exception $e) {
+        //     $response = [
+        //         'status' => false,
+        //         'message' => 'Update fail!!!',
+        //     ];
+        //     return response()->json($response);
+        // }
     }
     public function Xulyupload(Request $rq,$name)
     {
@@ -172,7 +175,7 @@ class UserController extends BaseController
                 // Thư mục upload
                 $uploadPath = public_path('userfiles\images\avatar'); // Thư mục upload
                 // Bắt đầu chuyển file vào thư mục
-                $rq->file('avatar')->move($uploadPath, $fileName);
+                $rq->file('avatar')->move($uploadPath,$fileName);
                 // Thành công, show thành công
                 $photoURL = url($fileName);
                 return $photoURL;
@@ -210,6 +213,7 @@ class UserController extends BaseController
                 $time = time();
                 $token = JWT::encode([$id , $time] , env('JWT_KEY'));
                 $info = array(
+                    'id'=>$data->id,
                     'name'=>$data->name,
                     'email'=>$data->email,
                     'avatar'=>$data->avatar
@@ -239,6 +243,11 @@ class UserController extends BaseController
             return $this->checkFacebook($request);
         }
     }
+    public function check_id($id)
+    {
+        $data = SocialNetwork::where('social_id',$id)->first();
+        return $data;
+    }
     public function checkFacebook(Request $request)
     {
         $fb = new Facebook([
@@ -261,31 +270,50 @@ class UserController extends BaseController
             }
         try{
                 $me = $response->getGraphUser();
-                $user = User::where('email',$me['email'])->select('id','avatar','name','email')->first();
-                if(empty($user))
+                $check = $this->check_id($me['id']);
+                $user = '';
+                // check id
+                if(empty($check))
                 {
-                    $avatar = 'http://graph.facebook.com/'.$me['id'].'/picture?type=square';
-                    $user = $this->add_new($me['id'],$me['email'],$me['first_name'],$avatar);
+                    //check email
+                    $check_email = User::where('email',$me['email'])->first();
+                    if(!empty($check_email))
+                    {
+                        // them tai khoan
+                        $avatar = 'http://graph.facebook.com/'.$me['id'].'/picture?type=square';
+                        $id = ($this->add_new($check_email,$me['id'],$me['first_name'],$avatar));
+                        $user = User::where('id',$id)->select('id','name','email','avatar')->first();
+                    }
+                    else
+                    {
+                        $response = [
+                            'status' => false,
+                            'message' => 'Khong co email !!!',
+                        ];
+                        return response()->json($response);
+                    }
                 }
-
+                else
+                {
+                    $user = User::where('id',$check->user_id)->select('id','name','email','avatar',)->first();
+                }
+                // luu vao social network
+                if(empty($check)){
+                    $data = new SocialNetwork();
+                    $data->user_id = $user->id;
+                    $data->social_id = $me['id'];
+                    $data->provider = 'Facebook';
+                    $data->save();
+                }
+                // cap token
                 $time = time();
                 $token = JWT::encode([$user->id, $time] , env('JWT_KEY'));
 
-                $data = new SocialNetwork();
-                $data->user_id = $user->id;
-                $data->social_id = $me['id'];
-                $data->provider = 'Facebook';
-                $data->save();
-                $info = array(
-                            'name'=>$user->name,
-                            'email'=>$user->email,
-                            'avatar'=>$user->avatar,
-                        );
                 $response = [
                             'status' => true,
                             'message' => 'Login success',
                             'token' => $token,
-                            'info' => $info,
+                            'info' => $user,
                         ];
                         return response()->json($response);
         }catch(\Exception $e)
@@ -297,17 +325,15 @@ class UserController extends BaseController
                         return response()->json($response);
         }
     }
-    public function add_new($id,$email,$name,$avatar)
+    public function add_new($user,$id,$name,$avatar)
     {
         try{
-            $user = new User();
             $user->name  = $name;
-            $user->email = $email;
             $user->avatar = $avatar;
             $user->password = Hash::make('admin123');
             $user->publish = 1 ;
             $user->save();
-            return $user ;
+            return $user->id ;
         }catch(\Exception $e)
         {
             $response = [

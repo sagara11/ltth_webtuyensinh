@@ -28,33 +28,26 @@
         </div>
         <div class="dataTables_length">
             <div class="row">
-                <form action=" {{ route('filterUser') }} " method="get" accept-charset="utf-8">
+                <form action=" {{ route('methodUser') }} " method="post" accept-charset="utf-8">
+                    @csrf
                     <div class="col-sm-1" style="margin-left: 20px">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Publish</label>
                             <select class="form-control" name="publish">
-                                @if(isset($publish))
-                                    @if($publish != 'All')
-                                     @if($publish == 1)
-                                        <option style="display: none;" value="{{ $publish }}">
-                                            {{ 'ON' }}
-                                        </option>
-                                     @else
-                                        <option style="display: none;" value="{{ $publish }}">
-                                            {{ 'OFF' }}
-                                        </option>
-                                     @endif
-                                    @endif
-                                    @if($publish == 'All')
-                                    <option style="display: none;" value="{{ $publish }}">
-                                        --All
-                                    </option>
-                                    @endif
+                                @if($publish != 'All')
+                                 <option style="display: none;" value="{{$publish}}">{{ $publish == 1 ? 'ON' : 'OFF' }}</option>}
                                 @endif
-                                <option value="All">--All</option>
+                                <option value="All">--All--</option>
                                 <option value="1">ON</option>
                                 <option value="0">OFF</option>
                             </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <input type="text" name="search"
+                            placeholder="Ten,SoDT,Email,..."
+                            class="form-control"style="margin-top: 25px" value="{{isset($search) ? $search : ''}}">
                         </div>
                     </div>
                     <div class="col-sm-1">
@@ -78,6 +71,7 @@
                             <select class="form-control" name="option">
                                 <option value="all">All--</option>
                                 <option value="activate">Kích hoạt/Vô hiệu hóa</option>
+                                <option value="delete">Xóa</option>
                             </select>
                             <input onclick="confirm()" class="btn btn-primary" id="confirm-btn" type="button" value="OK" name="confirm1">
                             </div>
@@ -92,6 +86,7 @@
                             <td>Image</td>
                             <td>Name</td>
                             <td>Email</td>
+                            <td>Phone</td>
                             <td>Publish</td>
                         </tr>
                     </thead>
@@ -102,6 +97,7 @@
                             <td><img style="height: 80px; width: 100px;" src="{{$temp->avatar ? $temp->avatar : '/userfiles/images/default_avatar-ea7cf6abde4eec089a4e03cc925d0e893e428b2b6971b12405a9b118c837eaa2.png'}}" alt=""></td>
                             <td>{{ $temp->name }}</td>
                             <td><a href="{{ route('editUser') }}?id={{ $temp->id }}" style="color: green">{{ $temp->email }}</a></td>
+                            <td>{{$temp->phone}}</td>
                             <td> 
                                 <span style="background-color: {{ $temp->publish ? '#4caf50' : '#c41700' }}; color: white; padding: 5px 5px;">{{ $temp->publish ? 'ON' : 'OFF' }}</span>
                             </td>

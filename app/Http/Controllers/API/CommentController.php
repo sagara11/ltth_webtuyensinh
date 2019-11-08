@@ -238,4 +238,26 @@ class CommentController extends BaseController
             return response()->json($response);
         }
     }
+    public function report(Request $request)
+    {
+        if($request->comment_id != null && $request->report != null)
+        {
+            $comment = Comment::find($request->comment_id);
+            $comment->report = $request->report ;
+            $comment->save();
+            $response = [
+                        'status' => true,
+                        'message' => 'Thanks you for reporting !!!!',
+                    ];
+            return response()->json($response);
+        }
+        else
+        {
+            $response = [
+                        'status' => false,
+                        'message' => 'Please fill the comment_id or report',
+                    ];
+            return response()->json($response);
+        }
+    }
 }
