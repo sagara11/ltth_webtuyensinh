@@ -128,6 +128,7 @@ class UserController extends Controller
             $users->name  = $request->name ? $request->name : $users->name  ;
             $users->email  = $request->email ? $request->email : $users->email;
             $users->avatar = $request->image ? $request->image : $users->avatar;
+            $users->phone  = $request->phone;
             $users->publish = $request->publish ? 1 : 0 ;
             $users->updated_at = now();
             $users->save();

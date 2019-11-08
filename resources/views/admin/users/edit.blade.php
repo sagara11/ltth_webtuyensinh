@@ -31,6 +31,10 @@
 	                  <label for="exampleInputEmail1">Email address</label>
 	                  <input class="form-control" id="exampleInputEmail1" type="email" placeholder="Enter email" value="{{$data->email}}" name="email">
 	                </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Phone</label>
+                    <input required="" class="form-control" id="exampleInputEmail1" type="text" placeholder="Phone" value="{{$data->phone}}" name="phone">
+                  </div>
                   <div class="checkbox">
                     @if($data->publish == 1)
                     <label>
