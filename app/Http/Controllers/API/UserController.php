@@ -97,7 +97,7 @@ class UserController extends BaseController
     
      public function update(Request $request, User $user)
     {
-        // try{ 
+        try{ 
                 $token = $request->header('token');
                 $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
                 if($gettoken == null)
@@ -153,14 +153,14 @@ class UserController extends BaseController
                     'info' => $data 
                 ];
                 return response()->json($response);
-        // }
-        // catch(\Exception $e) {
-        //     $response = [
-        //         'status' => false,
-        //         'message' => 'Update fail!!!',
-        //     ];
-        //     return response()->json($response);
-        // }
+        }
+        catch(\Exception $e) {
+            $response = [
+                'status' => false,
+                'message' => 'Update fail!!!',
+            ];
+            return response()->json($response);
+        }
     }
     public function Xulyupload(Request $rq,$name)
     {
