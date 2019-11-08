@@ -64,6 +64,9 @@ class CategoryController extends Controller
                 $categories = new Category();
                 $categories->name = $request->name ;
                 $categories->slug = $request->slug ;
+                $categories->seo_title = $request->seo_title;
+                $categories->seo_description = $request->seo_description;
+                $categories->seo_keyword = $request->seo_keyword;
                 $categories->publish = $request->publish ? 1 : 0 ;
                 $categories->updated_at = now();
                 if(isset($request->category_parent))
@@ -149,7 +152,7 @@ class CategoryController extends Controller
     	$users->name  = $request->name;  
         $users->slug = $request->slug ;
         $users->seo_title = $request->seo_title;
-        $users->seo_description = $request->description;
+        $users->seo_description = $request->seo_description;
         $users->seo_keyword = $request->seo_keyword;    
     	$users->publish =  $request->publish ? 1 : 0; 
     	$users->updated_at = now();

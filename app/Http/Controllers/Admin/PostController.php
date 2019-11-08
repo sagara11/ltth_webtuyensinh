@@ -35,6 +35,7 @@ class PostController extends Controller
 	    	$user->slug = $request->slug ;
 	    	$user->image= $request->image ;
 	    	$user->description = $request->description ;
+            $user->source_id = 12 ;
 	    	$user->content = $request->content ;
 	    	$user->seo_keyword = $request->seo_keyword ;
 	    	$user->seo_title = $request->seo_title ;
@@ -79,6 +80,7 @@ class PostController extends Controller
 	    	$posts->slug = $request->slug ;
 	    	$posts->image= $request->image ;
 	    	$posts->description = $request->description ;
+            $posts->source_id = 12 ;
 	    	$posts->content = $request->content ;
 	    	$posts->seo_keyword = $request->seo_keyword ;
 	    	$posts->seo_title = $request->seo_title ;

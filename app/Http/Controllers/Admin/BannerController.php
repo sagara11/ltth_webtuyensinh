@@ -158,11 +158,26 @@ class BannerController extends Controller
         {
             return $this->activate($request); 
         }
+        elseif($request->publish != 'All' || $request->position != 'All')
+        {
+            return $this->filter($request);
+        }
+        elseif($request->name != null)
+        {
+            return $this->search($request);
+        }
         else
         {
             $request->session()->flash('fail', 'Hãy chọn tác vụ hoặc chọn bất kì 1 ô nào đó !!! ');
             return redirect()->route('indexBanner');
         }
+    }
+    public function search(Request $request)
+    {
+        $key = true;
+        $data = $request->name;
+        $banners = Banner::where('name', 'like','%' .$data. '%')->orWhere('position', 'like','%' .$data. '%');
+        return view('admin.banner.list', ['banners' => $banners->paginate(8),'position'=>'All','publish'=>'All','key'=>$key,'search'=>$data]);
     }
     public function destroy(Request $request)
     {

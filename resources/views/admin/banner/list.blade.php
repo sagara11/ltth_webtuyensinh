@@ -35,7 +35,8 @@
                 </div> 
                 <!-- /.filter -->
                 <div class="col-lg-9">
-                    <form action="{{ route('filterBanner') }}" method="get" accept-charset="utf-8">
+                    <form action="{{ route('methodBanner') }}" method="post" accept-charset="utf-8">
+                        @csrf
                         <div class="row">
                             <div class="col-lg-6">
                               <div class="form-group">
