@@ -298,7 +298,7 @@ class UserController extends BaseController
                     else
                     {
                         $response = [
-                            'status' => false,
+                            'status' => -1,
                             'message' => 'Khong co email !!!',
                         ];
                         return response()->json($response);
