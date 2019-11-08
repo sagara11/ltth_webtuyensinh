@@ -295,7 +295,7 @@ class UserController extends BaseController
                 }
                 else
                 {
-                    $user = User::where('id',$check->user_id)->select('id','name','email','avatar',)->first();
+                    $user = User::where('id',$check->user_id)->select('id','name','email','avatar')->first();
                 }
                 // luu vao social network
                 if(empty($check)){
