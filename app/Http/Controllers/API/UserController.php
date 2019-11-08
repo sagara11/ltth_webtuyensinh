@@ -275,14 +275,25 @@ class UserController extends BaseController
                 // check id
                 if(empty($check))
                 {
-                    //check email
-                    $check_email = User::where('email',$me['email'])->first();
-                    if(!empty($check_email))
+                    if(isset($me['email']))
                     {
-                        // them tai khoan
-                        $avatar = 'http://graph.facebook.com/'.$me['id'].'/picture?type=square';
-                        $id = ($this->add_new($check_email,$me['id'],$me['first_name'],$avatar));
-                        $user = User::where('id',$id)->select('id','name','email','avatar')->first();
+                        //check email
+                        $check_email = User::where('email',$me['email'])->first();
+                        if(!empty($check_email))
+                        {
+                            // them tai khoan
+                            $avatar = 'http://graph.facebook.com/'.$me['id'].'/picture?type=square';
+                            $id = ($this->add_new($check_email,$me['id'],$me['first_name'],$avatar));
+                            $user = User::where('id',$id)->select('id','name','email','avatar')->first();
+                        }
+                        else
+                        {
+                            $response = [
+                                'status' => false,
+                                'message' => 'Khong tim thay email trong db !!!',
+                            ];
+                            return response()->json($response);
+                        }
                     }
                     else
                     {
