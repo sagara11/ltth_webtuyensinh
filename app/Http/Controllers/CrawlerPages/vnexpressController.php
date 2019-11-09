@@ -49,7 +49,7 @@ class vnexpressController extends Controller
         }
         catch(\Exception $e){
             $name = $post->find('h1.title_news_detail')->innerHTML;
-            $slug = trim(trim($page_url, "https://vnexpress.net/giao-duc/"),".html");
+            $slug = str_replace("https://vnexpress.net/giao-duc/","",$page_url);
             $description = $post->find('h2.description')->innerHTML;
             $content = $post->find('.content_detail')->innerHTML;                                                                                                                                                                                       
             exit();
