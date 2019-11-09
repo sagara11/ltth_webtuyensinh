@@ -42,13 +42,13 @@ class giaoducthoidaiController extends Controller
         // lay cac phan tu name, description, image, content, slug
         try{
             $name = strip_tags($post->find('h1.cms-title')->innerHTML);
-            $slug = trim(trim($page_url, "https://giaoducthoidai.vn/giao-duc"),".html");
+            $slug = trim(str_replace("ps://giaoducthoidai.vn/giao-duc","",$page_url),'.html');
             $description = $post->find('div.summary.cms-desc div')->innerHTML;
             $content = htmlentities($post->find('.cms-body'));
         }
         catch(\Exception $e){
             $name = strip_tags($post->find('h1.cms-title')->innerHTML);
-            $slug = trim(trim($page_url, "https://giaoducthoidai.vn/giao-duc"),".html");
+            $slug = trim(str_replace("ps://giaoducthoidai.vn/giao-duc","",$page_url),'.html');
             $description = $post->find('div.summary.cms-desc')->innerHTML;
             $content = $post->find('.cms-body');
         }

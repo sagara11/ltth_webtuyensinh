@@ -54,9 +54,6 @@ class vnexpressController extends Controller
             $content = $post->find('.content_detail')->innerHTML;                                                                                                                                                                                       
             exit();
         }
-        catch(\Exception $e){
-   
-        }
 
         //gan thuoc tinh cua trang
         return array(
