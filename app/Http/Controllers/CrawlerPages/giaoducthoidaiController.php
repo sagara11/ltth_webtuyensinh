@@ -39,7 +39,7 @@ class giaoducthoidaiController extends Controller
         $post = new Dom;
         $post->loadFromUrl($page_url);
 
-        // lay cac phan tu name, description, image, content, slug
+        // lay cac phan tu cua page
         try{
             $name = strip_tags($post->find('h1.cms-title')->innerHTML);
             $slug = trim(str_replace("ps://giaoducthoidai.vn/giao-duc","",$page_url),'.html');

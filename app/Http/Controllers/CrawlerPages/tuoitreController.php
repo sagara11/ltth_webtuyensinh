@@ -39,7 +39,7 @@ class tuoitreController extends Controller
         $post = new Dom;
         $post->loadFromUrl($page_url);
 
-        // lay cac phan tu cua trang
+        // lay cac phan tu cua page
         $name = $post->find('h1.article-title')->innerHTML;
         $slug = trim(str_replace("tuoitre.vn//","",$page_url),'.htm');
         $description = $post->find('h2.sapo')->innerHTML;

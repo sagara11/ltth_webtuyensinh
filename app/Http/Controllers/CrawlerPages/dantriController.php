@@ -39,7 +39,7 @@ class dantriController extends Controller
         $post = new Dom;
         $post->loadFromUrl($page_url);
 
-        // lay cac phan tu name, description, image, content, slug
+        // lay cac phan tu cua page
         $name = $post->find('h1.fon31.mgb15')->innerHTML;
         $slug = trim(str_replace("dantri.com.vn/giao-duc-khuyen-hoc/","",$page_url),'.htm');
         $description_span = $post->find('h2.fon33.mt1.sapo')->innerHTML;
