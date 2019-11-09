@@ -173,7 +173,7 @@ class UserController extends BaseController
                 // Filename cực shock để khỏi bị trùng
                 $fileName = $rq->file('avatar')->storeAs('userfiles/images/avatar','avatar'.$name.'.jpg');
                 // Thư mục upload
-                $uploadPath = public_path('userfiles\images\avatar'); // Thư mục upload
+                $uploadPath = public_path('userfiles/images/avatar'); // Thư mục upload
                 // Bắt đầu chuyển file vào thư mục
                 $rq->file('avatar')->move($uploadPath,$fileName);
                 // Thành công, show thành công
@@ -272,6 +272,7 @@ class UserController extends BaseController
                 $me = $response->getGraphUser();
                 $check = $this->check_id($me['id']);
                 $user = '';
+                $user_new = '';
                 // check id
                 if(empty($check))
                 {
@@ -279,22 +280,18 @@ class UserController extends BaseController
                     {
                         //check email
                         $check_email = User::where('email',$me['email'])->first();
-                        if(!empty($check_email))
+                        if(empty($check_email))
                         {
-                            // them tai khoan
+                            // them tai khoan khi chua co email
                             $avatar = 'http://graph.facebook.com/'.$me['id'].'/picture?type=square';
-                            $id = ($this->add_new($check_email,$me['id'],$me['first_name'],$avatar));
-                            $user = User::where('id',$id)->select('id','name','email','avatar')->first();
+                            $user_new_id = $this->add_new($me['first_name'],$me['email'],$avatar);
+                            $user_new = User::where('id',$user_new_id)->select('id','name','email','avatar')->first();  
                         }
-                        else
-                        {
-                            $response = [
-                                'status' => false,
-                                'message' => 'Khong tim thay email trong db !!!',
-                            ];
-                            return response()->json($response);
-                        }
-                    }
+                        // them tai khoan khi da co email
+                        $avatar = 'http://graph.facebook.com/'.$me['id'].'/picture?type=square';
+                        $id = ($this->update_new($check_email,$me['first_name'],$avatar));
+                        $user = User::where('id',$id)->select('id','name','email','avatar')->first();  
+                    }     
                     else
                     {
                         $response = [
@@ -311,20 +308,20 @@ class UserController extends BaseController
                 // luu vao social network
                 if(empty($check)){
                     $data = new SocialNetwork();
-                    $data->user_id = $user->id;
+                    $data->user_id = isset($user->id) ? $user->id : $user_new_id;
                     $data->social_id = $me['id'];
                     $data->provider = 'Facebook';
                     $data->save();
                 }
                 // cap token
                 $time = time();
-                $token = JWT::encode([$user->id, $time] , env('JWT_KEY'));
-
+                $token = JWT::encode([isset($user->id) ? $user->id : $user_new_id, $time] , env('JWT_KEY'));
+                $data = $user_new != '' ? $user_new : $user;
                 $response = [
                             'status' => true,
                             'message' => 'Login success',
                             'token' => $token,
-                            'info' => $user,
+                            'info' => $data,
                         ];
                         return response()->json($response);
         }catch(\Exception $e)
@@ -336,11 +333,31 @@ class UserController extends BaseController
                         return response()->json($response);
         }
     }
-    public function add_new($user,$id,$name,$avatar)
+    public function update_new($user,$name,$avatar)
     {
         try{
             $user->name  = $name;
             $user->avatar = $avatar;
+            $user->password = Hash::make('admin123');
+            $user->publish = 1 ;
+            $user->save();
+            return $user->id ;
+        }catch(\Exception $e)
+        {
+            $response = [
+                            'status' => false,
+                            'message' => 'Add Fail!!!',
+                        ];
+                        return response()->json($response);
+        }
+    }
+    public function add_new($name,$email,$avatar)
+    {
+        try{
+            $user = new User();
+            $user->name  = $name;
+            $user->avatar = $avatar;
+            $user->email = $email;
             $user->password = Hash::make('admin123');
             $user->publish = 1 ;
             $user->save();
