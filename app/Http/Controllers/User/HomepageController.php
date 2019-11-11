@@ -10,8 +10,14 @@ class HomepageController extends Controller
 {
     function home(){
         $news = Post::paginate(20);
-        $tuoitre1 = Post::where('category_id', 37)->first();
-        $tuoitre = Post::where('category_id', 37)->paginate(3);
-        return view('user.page.home', compact('news','tuoitre1','tuoitre'));
+        $trend_first = Post::where('trend', 1)->first();
+        $trend = Post::where('trend', 1)->where('id', "!=", $trend_first->id)->paginate(3);
+        $sidetrend = Post::where('trend', 1)->where('id', "!=", $trend_first->id)->paginate(6);
+        $tuyensinh_first = Post::where('category_id', 37)->first();
+        $tuyensinh = Post::where('category_id', 37)->where('id', "!=", $tuyensinh_first->id)->paginate(4);
+        $giaoduc_first = Post::where('category_id', 34)->first();
+        $giaoduc = Post::where('category_id', 34)->where('id', "!=", $giaoduc_first->id)->paginate(4);
+        return view('user.page.home', compact('news','trend_first','trend','sidetrend','tuyensinh','tuyensinh_first','giaoduc','giaoduc_first'));
     }
 }
+ 

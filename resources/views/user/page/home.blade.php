@@ -9,10 +9,9 @@ Home
             <!-- Bai viet chinh -->
             <section id="baiviet-chinh">
                 <a href="">
-                    <img height="350px" width="100%" src="{{ $tuoitre1->image }}"
-                        alt="" />
+                    <img height="350px" width="100%" src="{{ $trend_first->image }}" alt="" />
                     <h5>
-                        {{ $tuoitre1->name }}
+                        {{ $trend_first->name }}
                     </h5>
                 </a>
                 <p>
@@ -23,7 +22,7 @@ Home
 
             <!-- Bai viet tieu bieu -->
             <section class="d-flex" id="baiviet-tieubieu">
-                @foreach ($tuoitre as $item)
+                @foreach ($trend as $item)
                 <div class="baiviet-box p-2">
                     <a href="">
                         <img class="img-fluid" src="{{ $item->image }}" alt="" />
@@ -83,53 +82,20 @@ Home
                 <i class="fas fa-facebook"></i>
                 <h4 class="d-inline">XU HƯỚNG</h4>
                 <a href="" class="xuhuong-main">
-                    <img class="img-fluid" src="http://localhost\baotuyensinhView\media\blank-img.jpg" alt="" />
+                    <img class="img-fluid" src="{{ $trend_first->image }}" alt="" />
                     <p>
-                        Hội thảo Sáng chế công nghệ sàn ô cờ ở ACH tiết kiệm chi phí xây
-                        dựng tại Hồ Chí Minh
+                        {{ $trend_first->name }}
                     </p>
                 </a>
                 <div>
+                    @foreach ($sidetrend as $item)
                     <a href="" class="d-flex xuhuong-contents p-2">
-                        <img width="25%" height="70px" src="http://localhost\baotuyensinhView\media\blank-img.jpg"
-                            alt="" />
+                        <img width="25%" height="70px" src="{{ $item->image }}" alt="" />
                         <p class="xuhuong-contents-des">
-                            "Tuyển dụng 50 nhân viên thì có tới 49 sinh viên trường nghề
-                            trúng tuyển"
+                            "{{ $item->name }}"
                         </p>
                     </a>
-                    <a href="" class="d-flex xuhuong-contents p-2">
-                        <img width="25%" height="70px" src="http://localhost\baotuyensinhView\media\blank-img.jpg"
-                            alt="" />
-                        <p class="xuhuong-contents-des">
-                            "Tuyển dụng 50 nhân viên thì có tới 49 sinh viên trường nghề
-                            trúng tuyển"
-                        </p>
-                    </a>
-                    <a href="" class="d-flex xuhuong-contents p-2">
-                        <img width="25%" height="70px" src="http://localhost\baotuyensinhView\media\blank-img.jpg"
-                            alt="" />
-                        <p class="xuhuong-contents-des">
-                            "Tuyển dụng 50 nhân viên thì có tới 49 sinh viên trường nghề
-                            trúng tuyển"
-                        </p>
-                    </a>
-                    <a href="" class="d-flex xuhuong-contents p-2">
-                        <img width="25%" height="70px" src="http://localhost\baotuyensinhView\media\blank-img.jpg"
-                            alt="" />
-                        <p class="xuhuong-contents-des">
-                            "Tuyển dụng 50 nhân viên thì có tới 49 sinh viên trường nghề
-                            trúng tuyển"
-                        </p>
-                    </a>
-                    <a href="" class="d-flex xuhuong-contents p-2">
-                        <img width="25%" height="70px" src="http://localhost\baotuyensinhView\media\blank-img.jpg"
-                            alt="" />
-                        <p class="xuhuong-contents-des">
-                            "Tuyển dụng 50 nhân viên thì có tới 49 sinh viên trường nghề
-                            trúng tuyển"
-                        </p>
-                    </a>
+                    @endforeach
                 </div>
             </section>
 
@@ -169,74 +135,37 @@ Home
             <section id="tuyensinh">
                 <h3>TUYỂN SINH</h3>
                 <a href="" class="d-flex tuyensinh-main">
-                    <img width="35%" height="100px" src="http://localhost\baotuyensinhView\media\blank-img.jpg"
-                        alt="" />
+                    <img width="35%" height="100px" src="{{ $tuyensinh_first->image }}" alt="" />
                     <p class="tuyensinh-des">
-                        "Tuyển dụng 50 nhân viên thì có tới 49 sinh viên trường nghề
-                        trúng tuyển"
+                        "{{ $tuyensinh_first->name }}"
                     </p>
                 </a>
+                @foreach ($tuyensinh as $item)
                 <a href="" class="tuyensinh-contents">
                     <p>
-                        "Tuyển dụng 50 nhân viên thì có tới 49 sinh viên trường nghề
-                        trúng tuyển"
+                        "{{ $item->name }}"
                     </p>
                 </a>
-                <a href="" class="tuyensinh-contents">
-                    <p>
-                        "Tuyển dụng 50 nhân viên thì có tới 49 sinh viên trường nghề
-                        trúng tuyển"
-                    </p>
-                </a>
-                <a href="" class="tuyensinh-contents">
-                    <p>
-                        "Tuyển dụng 50 nhân viên thì có tới 49 sinh viên trường nghề
-                        trúng tuyển"
-                    </p>
-                </a>
-                <a href="" class="tuyensinh-contents">
-                    <p>
-                        "Tuyển dụng 50 nhân viên thì có tới 49 sinh viên trường nghề
-                        trúng tuyển"
-                    </p>
-                </a>
+                @endforeach
             </section>
 
             <!-- Giao duc -->
             <section id="giaoduc">
                 <h4>GIÁO DỤC</h4>
                 <a href="" class="d-flex tuyensinh-main">
-                    <img width="35%" height="100px" src="http://localhost\baotuyensinhView\media\blank-img.jpg"
+                    <img width="35%" height="100px" src="{{ $giaoduc_first->image }}"
                         alt="" />
                     <div class="tuyensinh-des">
-                        "Tuyển dụng 50 nhân viên thì có tới 49 sinh viên trường nghề
-                        trúng tuyển"
+                        "{{ $giaoduc_first->name }}"
                     </div>
                 </a>
+                @foreach ($giaoduc as $item)
                 <a href="" class="tuyensinh-contents">
                     <p>
-                        "Tuyển dụng 50 nhân viên thì có tới 49 sinh viên trường nghề
-                        trúng tuyển"
+                        "{{ $item->name }}"
                     </p>
                 </a>
-                <a href="" class="tuyensinh-contents">
-                    <p>
-                        "Tuyển dụng 50 nhân viên thì có tới 49 sinh viên trường nghề
-                        trúng tuyển"
-                    </p>
-                </a>
-                <a href="" class="tuyensinh-contents">
-                    <p>
-                        "Tuyển dụng 50 nhân viên thì có tới 49 sinh viên trường nghề
-                        trúng tuyển"
-                    </p>
-                </a>
-                <a href="" class="tuyensinh-contents">
-                    <p>
-                        "Tuyển dụng 50 nhân viên thì có tới 49 sinh viên trường nghề
-                        trúng tuyển"
-                    </p>
-                </a>
+                @endforeach
             </section>
 
             <!-- Big advertisement -->

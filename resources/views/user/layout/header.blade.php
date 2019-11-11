@@ -55,7 +55,7 @@
             </ul>
         </div>
         <div class="col-lg-1">
-            <i class="fa fa-search"></i>
+            <i class="fas fa-search"></i>
         </div>
     </div>
 </nav>
