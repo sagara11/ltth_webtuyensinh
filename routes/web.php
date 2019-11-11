@@ -106,3 +106,5 @@ Route::group(['prefix'=>'elastic'], function () {
 	Route::get('init','ElasticsearchController@init')->name('initController');
 	});
 });
+
+Route::get("/homepage",'User\HomepageController@home');

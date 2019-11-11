@@ -148,7 +148,7 @@
     </div>
 </div>
         <!-- /.box-body -->
-      </div>
+    </div>
 @endsection
 @section('css')
     <link
