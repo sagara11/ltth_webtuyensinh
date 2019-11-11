@@ -141,7 +141,7 @@ class UserController extends BaseController
                 // xu li phan anh
                 if($request->file('avatar') != null)
                 {
-                    $avatar = $this->Xulyupload($request,$user->name);
+                    $avatar = $this->Xulyupload($request,$user->id);
                     $user->avatar = $avatar ;
                 }
                 $user->name = $request->name ? $request->name : $user->name ;
@@ -163,7 +163,7 @@ class UserController extends BaseController
             return response()->json($response);
         }
     }
-    public function Xulyupload(Request $rq,$name)
+    public function Xulyupload(Request $rq,$id)
     {
         $rules = [ 'avatar' => 'avatar|max:1024' ]; 
         $posts = [ 'avatar' => $rq->file('avatar') ];
@@ -172,7 +172,7 @@ class UserController extends BaseController
             // Ko có lỗi, kiểm tra nếu file đã dc upload
             if ($rq->file('avatar')->isValid()) {
                 // Filename cực shock để khỏi bị trùng
-                $fileName = $rq->file('avatar')->storeAs('userfiles/images/avatar','avatar'.$name.'.jpg');
+                $fileName = $rq->file('avatar')->storeAs('userfiles/images/avatar','avatar'.$id.'.jpg');
                 // Thư mục upload
                 $uploadPath = public_path('userfiles/images/avatar'); // Thư mục upload
                 // Bắt đầu chuyển file vào thư mục
