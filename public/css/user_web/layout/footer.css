@@ -1,0 +1,15 @@
+footer {
+  padding: 40px 0px;
+  background-color: #f6f6f6; }
+  footer .footer-contain .info-contain {
+    list-style-type: none; }
+    footer .footer-contain .info-contain li {
+      padding: 5px 0px; }
+      footer .footer-contain .info-contain li h6 {
+        font-weight: bold;
+        font-size: 16px;
+        color: #333333; }
+      footer .footer-contain .info-contain li a {
+        color: #333333; }
+
+/*# sourceMappingURL=footer.css.map */

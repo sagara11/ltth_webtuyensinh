@@ -1,0 +1,250 @@
+@import url("http://127.0.0.1:8000/css/user_web/layout/header.css");
+@import url("http://127.0.0.1:8000/css/user_web/layout/footer.css");
+
+main {
+  #baiviet-chinh {
+    a {
+      h5 {
+        color: rgb(51, 51, 51);
+        margin-top: 20px;
+      }
+    }
+  }
+
+  #baiviet-tieubieu {
+    .baiviet-box {
+      padding: 0px 10px;
+      width: 33.33%;
+      a {
+        height: 100%;
+        img {
+          width: 100%;
+          height: 65%;
+        }
+        h5 {
+          color: rgb(51, 51, 51);
+          font-size: 16px;
+          padding: 5px 0px;
+          white-space: nowrap;
+          overflow: hidden;
+          height: fit-content;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
+
+  #baiviet-tintuc {
+    .baiviet-box {
+      margin: 10px 0px;
+      display: flex;
+      .tintuc-img {
+        padding: 0px 15px 15px 0px;
+        width: 30%;
+        img {
+          border-radius: 5px;
+          width: 100%;
+        }
+      }
+      .tintuc-detail {
+        width: 70%;
+        a {
+          h5 {
+            color: rgb(51, 51, 51);
+          }
+        }
+      }
+    }
+  }
+
+  #quangcao {
+    div {
+      margin-bottom: 20px;
+    }
+  }
+
+  #xuhuong {
+    margin: 10px 0px;
+    .side-header {
+      background-color: rgba(246, 92, 44, 0.15);
+      margin: 2px 0px;
+      padding: 10px 10px;
+      i {
+        color: rgb(246, 92, 44);
+      }
+      h4 {
+        color: rgb(246, 92, 44);
+        display: inline;
+      }
+    }
+    .side-content {
+      padding: 10px 10px;
+      background-color: rgba(246, 92, 44, 0.15);
+      .xuhuong-main {
+        img {
+          border-radius: 5px;
+        }
+        p {
+          color: rgb(51, 51, 51);
+          margin: 0px 0px;
+        }
+      }
+      div {
+        .xuhuong-contents {
+          padding: 5px 7px;
+          margin: 10px 0px;
+          display: flex;
+          img {
+            margin-right: 5px;
+            border-radius: 5px;
+          }
+          p {
+            color: rgb(51, 51, 51);
+            margin: 0px 0px;
+          }
+        }
+      }
+    }
+  }
+
+  #videos {
+    margin: 10px 0px;
+    border: 1px rgb(238, 238, 238) solid;
+    .side-header {
+      border-bottom: 1px rgb(238, 238, 238);
+      margin: 2px 0px;
+      padding: 10px 10px;
+      i {
+        color: rgb(246, 92, 44);
+      }
+      h4 {
+        color: rgb(246, 92, 44);
+        display: inline;
+      }
+    }
+    .side-content {
+      .video {
+        padding: 10px 10px;
+        display: flex;
+        flex-direction: column;
+        video {
+          width: 100%;
+        }
+        p {
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  #tuyensinh {
+    margin: 10px 0px;
+    .side-header {
+      color: rgb(47, 161, 179);
+      padding: 10px 0px;
+    }
+    .side-content {
+      padding: 10px 10px;
+      background-color: rgb(247, 247, 247);
+      border: 1px solid rgb(213, 213, 213);
+      border-top: 2px solid rgb(47, 161, 179);
+      .tuyensinh-main {
+        padding: 8px 0px;
+        display: flex;
+        img {
+          width: 35%;
+          border-radius: 5px;
+        }
+        p {
+          color: rgb(51, 51, 51);
+        }
+      }
+      .tuyensinh-contents {
+        padding: 10px 0px;
+        border-bottom: 1px rgb(51, 51, 51) dotted;
+        border-top: 1px rgb(51, 51, 51) dotted;
+        a {
+          p {
+            color: rgb(51, 51, 51);
+            margin: 0px 0px;
+          }
+        }
+      }
+    }
+  }
+
+  #giaoduc {
+    margin: 10px 0px;
+    .side-header {
+      padding: 10px 0px;
+      i,
+      h4 {
+        color: rgb(246, 92, 44);
+      }
+    }
+    .side-content {
+      padding: 10px 10px;
+      background-color: rgb(247, 247, 247);
+      border: 1px solid rgb(213, 213, 213);
+      border-top: 2px solid rgb(246, 92, 44);
+      .tuyensinh-main {
+        padding: 10px 5px;
+        display: flex;
+        img {
+          border-radius: 5px;
+          width: 35%;
+        }
+        .tuyensinh-des {
+          padding: 5px 5px;
+          color: rgb(51, 51, 51);
+        }
+      }
+      .tuyensinh-contents {
+        padding: 15px 8px;
+        border-bottom: 1px rgb(51, 51, 51) dotted;
+        border-top: 1px rgb(51, 51, 51) dotted;
+        a {
+          p {
+            text-align: left;
+            margin: 0px 0px;
+            color: rgb(51, 51, 51);
+          }
+        }
+      }
+    }
+  }
+
+  #facebook-embed{
+    margin: 10px 0px;
+    i{
+      font-size: 35px;
+      color: rgb(59, 89, 151);
+      margin-bottom: 10px;
+      margin-right: 10px;
+    }
+    span{
+      font-weight: bold;
+      color: rgb(59, 89, 151);
+      font-size: 28px;
+    }
+  }
+}
+
+#doitac-container{
+  border: 1px solid rgb(213, 213, 213);
+  .doitac{
+    display: flex;
+    .doitac-header{
+      display: flex;
+      width: 15%;
+      align-items: center;
+      p{
+        margin: auto 0px;
+      }
+    }
+    .doitac-contents{
+      width: 85%;
+      display: flex;
+    }
+  }
+}

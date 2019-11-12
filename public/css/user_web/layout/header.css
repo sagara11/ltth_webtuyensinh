@@ -1,0 +1,38 @@
+header {
+  padding: 10px 0px;
+  background-color: #f65c2c;
+  color: white; }
+  header .header-news p {
+    margin: 0px 0px; }
+  header .header-account .dropdown-toggle {
+    display: flex; }
+    header .header-account .dropdown-toggle img {
+      margin-right: 10px; }
+    header .header-account .dropdown-toggle p {
+      margin: 0px 0px; }
+
+nav {
+  padding: 5px 0px; }
+  nav .nav {
+    align-items: center; }
+    nav .nav .home {
+      height: fit-content;
+      width: fit-content;
+      padding: 8px 8px;
+      display: flex;
+      align-items: center;
+      background-color: #f65c2c; }
+      nav .nav .home i {
+        color: white; }
+    nav .nav .menu ul {
+      margin: 0px 0px;
+      align-items: center;
+      list-style-type: none; }
+      nav .nav .menu ul li {
+        text-align: center;
+        padding: 0px 0px; }
+        nav .nav .menu ul li a {
+          color: #333333;
+          font-size: 13px; }
+
+/*# sourceMappingURL=header.css.map */

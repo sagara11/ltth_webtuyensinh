@@ -1,0 +1,54 @@
+header{
+    padding: 10px 0px;
+    background-color: rgb(246, 92, 44);
+    color: white;
+    .header-news{
+        p{
+            margin: 0px 0px;
+        }
+    }
+    .header-account{
+        .dropdown-toggle{
+            display: flex;
+            img{
+                margin-right: 10px;
+            }
+            p{
+                margin: 0px 0px;
+            }
+        }
+    }
+}
+
+nav{
+    padding: 5px 0px;
+    .nav{
+        align-items: center;
+        .home{
+            height: fit-content;
+            width: fit-content;
+            padding: 8px 8px;
+            display: flex;
+            align-items: center;
+            background-color: rgb(246, 92, 44);
+            i{
+                color: white;
+            }
+        }
+        .menu{
+            ul{
+                margin: 0px 0px;
+                align-items: center;
+                list-style-type: none;
+                li{
+                    text-align: center;
+                    padding: 0px 0px;
+                    a{
+                        color: rgb(51, 51, 51);
+                        font-size: 13px;
+                    }
+                }
+            }
+        }
+    }
+}
