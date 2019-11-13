@@ -5,7 +5,7 @@ footer {
     .info-contain {
       list-style-type: none;
       li {
-          padding: 5px 0px;
+        padding: 5px 0px;
         h6 {
           font-weight: bold;
           font-size: 16px;
@@ -14,6 +14,39 @@ footer {
         a {
           color: rgb(51, 51, 51);
         }
+      }
+      .li-section {
+        &::before {
+          display: inline-block;
+          content: "";
+          border-radius: 3.5px;
+          height: 7px;
+          width: 7px;
+          margin-right: 0.5rem;
+          background-color: rgb(15, 144, 164);
+        }
+      }
+    }
+    .social {
+      h6 {
+        margin-bottom: 20px;
+      }
+      i {
+        margin-right: 5px;
+        margin-bottom: 30px;
+        font-size: 25px;
+      }
+      .fa-facebook {
+        color: rgb(80, 114, 169);
+      }
+      .fa-twitter-square {
+        color: rgb(28, 183, 235);
+      }
+      .fa-google-plus {
+        color: rgb(227, 65, 31);
+      }
+      .fa-youtube-square {
+        color: rgb(202, 55, 55);
       }
     }
   }

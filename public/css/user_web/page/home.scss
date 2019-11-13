@@ -1,23 +1,35 @@
-@import url("http://127.0.0.1:8000/css/user_web/layout/header.css");
-@import url("http://127.0.0.1:8000/css/user_web/layout/footer.css");
-
 main {
   #baiviet-chinh {
     a {
+      img {
+        border-radius: 5px;
+      }
       h5 {
         color: rgb(51, 51, 51);
         margin-top: 20px;
       }
     }
+    p {
+      .webtuyensinh-section {
+        font-weight: bold;
+        color: rgb(167, 167, 167);
+      }
+      .webtuyensinh-link {
+        color: rgb(31, 151, 170);
+        font-weight: bold;
+      }
+    }
   }
 
   #baiviet-tieubieu {
+    display: flex;
     .baiviet-box {
       padding: 0px 10px;
       width: 33.33%;
       a {
         height: 100%;
         img {
+          border-radius: 5px;
           width: 100%;
           height: 65%;
         }
@@ -29,6 +41,16 @@ main {
           overflow: hidden;
           height: fit-content;
           text-overflow: ellipsis;
+        }
+      }
+      p {
+        .webtuyensinh-section {
+          font-weight: bold;
+          color: rgb(167, 167, 167);
+        }
+        .webtuyensinh-link {
+          color: rgb(31, 151, 170);
+          font-weight: bold;
         }
       }
     }
@@ -53,6 +75,16 @@ main {
             color: rgb(51, 51, 51);
           }
         }
+        p {
+          .webtuyensinh-section {
+            font-weight: bold;
+            color: rgb(167, 167, 167);
+          }
+          .webtuyensinh-link {
+            color: rgb(31, 151, 170);
+            font-weight: bold;
+          }
+        }
       }
     }
   }
@@ -67,12 +99,15 @@ main {
     margin: 10px 0px;
     .side-header {
       background-color: rgba(246, 92, 44, 0.15);
-      margin: 2px 0px;
+      margin: 1px 0px;
       padding: 10px 10px;
       i {
         color: rgb(246, 92, 44);
+        margin-right: 10px;
       }
       h4 {
+        font-weight: bold;
+        font-size: 20px;
         color: rgb(246, 92, 44);
         display: inline;
       }
@@ -82,11 +117,12 @@ main {
       background-color: rgba(246, 92, 44, 0.15);
       .xuhuong-main {
         img {
+          width: 100%;
           border-radius: 5px;
         }
         p {
           color: rgb(51, 51, 51);
-          margin: 0px 0px;
+          margin: 5px 0px;
         }
       }
       div {
@@ -109,20 +145,50 @@ main {
 
   #videos {
     margin: 10px 0px;
-    border: 1px rgb(238, 238, 238) solid;
+    border: 2px solid rgb(246, 92, 44);
+    position: relative;
+
+    &::before,
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      background: #fff;
+    }
+    &::before {
+      top: -0.3em;
+      bottom: -0.3em;
+      left: 1em;
+      right: 1em;
+    }
+
+    &::after {
+      left: -0.3em;
+      right: -0.3em;
+      top: 1em;
+      bottom: 1em;
+    }
     .side-header {
-      border-bottom: 1px rgb(238, 238, 238);
-      margin: 2px 0px;
+      border: 1px solid rgb(238, 238, 238);
+      position: relative;
+      z-index: 1;
+      margin-bottom: 2px;
       padding: 10px 10px;
       i {
+        margin-right: 10px;
         color: rgb(246, 92, 44);
       }
       h4 {
+        font-weight: bold;
+        font-size: 20px;
         color: rgb(246, 92, 44);
         display: inline;
       }
     }
     .side-content {
+      border: 1px solid rgb(238, 238, 238);
+      position: relative;
+      z-index: 1;
       .video {
         padding: 10px 10px;
         display: flex;
@@ -140,8 +206,17 @@ main {
   #tuyensinh {
     margin: 10px 0px;
     .side-header {
-      color: rgb(47, 161, 179);
       padding: 10px 0px;
+      i {
+        margin-right: 10px;
+        color: rgb(47, 161, 179);
+      }
+      h4 {
+        color: rgb(47, 161, 179);
+        font-weight: bold;
+        font-size: 20px;
+        display: inline;
+      }
     }
     .side-content {
       padding: 10px 10px;
@@ -161,8 +236,7 @@ main {
       }
       .tuyensinh-contents {
         padding: 10px 0px;
-        border-bottom: 1px rgb(51, 51, 51) dotted;
-        border-top: 1px rgb(51, 51, 51) dotted;
+        border-top: 1px dotted rgb(213, 213, 213);
         a {
           p {
             color: rgb(51, 51, 51);
@@ -177,8 +251,14 @@ main {
     margin: 10px 0px;
     .side-header {
       padding: 10px 0px;
-      i,
+      i {
+        margin-right: 10px;
+        color: rgb(246, 92, 44);
+      }
       h4 {
+        font-weight: bold;
+        font-size: 20px;
+        display: inline;
         color: rgb(246, 92, 44);
       }
     }
@@ -201,8 +281,7 @@ main {
       }
       .tuyensinh-contents {
         padding: 15px 8px;
-        border-bottom: 1px rgb(51, 51, 51) dotted;
-        border-top: 1px rgb(51, 51, 51) dotted;
+        border-top: 1px dotted rgb(213, 213, 213);
         a {
           p {
             text-align: left;
@@ -214,15 +293,15 @@ main {
     }
   }
 
-  #facebook-embed{
+  #facebook-embed {
     margin: 10px 0px;
-    i{
+    i {
       font-size: 35px;
       color: rgb(59, 89, 151);
       margin-bottom: 10px;
       margin-right: 10px;
     }
-    span{
+    span {
       font-weight: bold;
       color: rgb(59, 89, 151);
       font-size: 28px;
@@ -230,21 +309,32 @@ main {
   }
 }
 
-#doitac-container{
+#doitac-container {
   border: 1px solid rgb(213, 213, 213);
-  .doitac{
+  .doitac {
     display: flex;
-    .doitac-header{
+    .doitac-header {
       display: flex;
       width: 15%;
       align-items: center;
-      p{
+      p {
         margin: auto 0px;
       }
     }
-    .doitac-contents{
+    .doitac-contents {
       width: 85%;
       display: flex;
+    }
+  }
+}
+
+@media only screen and(max-width:600px) {
+  main {
+    #baiviet-tieubieu {
+      display: block;
+      .baiviet-box{
+        width: 100%;
+      }
     }
   }
 }

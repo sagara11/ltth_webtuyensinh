@@ -11,5 +11,27 @@ footer {
         color: #333333; }
       footer .footer-contain .info-contain li a {
         color: #333333; }
+    footer .footer-contain .info-contain .li-section::before {
+      display: inline-block;
+      content: "";
+      border-radius: 3.5px;
+      height: 7px;
+      width: 7px;
+      margin-right: 0.5rem;
+      background-color: #0f90a4; }
+  footer .footer-contain .social h6 {
+    margin-bottom: 20px; }
+  footer .footer-contain .social i {
+    margin-right: 5px;
+    margin-bottom: 30px;
+    font-size: 25px; }
+  footer .footer-contain .social .fa-facebook {
+    color: #5072a9; }
+  footer .footer-contain .social .fa-twitter-square {
+    color: #1cb7eb; }
+  footer .footer-contain .social .fa-google-plus {
+    color: #e3411f; }
+  footer .footer-contain .social .fa-youtube-square {
+    color: #ca3737; }
 
 /*# sourceMappingURL=footer.css.map */

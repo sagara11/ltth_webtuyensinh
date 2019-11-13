@@ -1,24 +1,39 @@
-@import url("http://127.0.0.1:8000/css/user_web/layout/header.css");
-@import url("http://127.0.0.1:8000/css/user_web/layout/footer.css");
+main #baiviet-chinh a img {
+  border-radius: 5px; }
 main #baiviet-chinh a h5 {
   color: #333333;
   margin-top: 20px; }
-main #baiviet-tieubieu .baiviet-box {
-  padding: 0px 10px;
-  width: 33.33%; }
-  main #baiviet-tieubieu .baiviet-box a {
-    height: 100%; }
-    main #baiviet-tieubieu .baiviet-box a img {
-      width: 100%;
-      height: 65%; }
-    main #baiviet-tieubieu .baiviet-box a h5 {
-      color: #333333;
-      font-size: 16px;
-      padding: 5px 0px;
-      white-space: nowrap;
-      overflow: hidden;
-      height: fit-content;
-      text-overflow: ellipsis; }
+main #baiviet-chinh p .webtuyensinh-section {
+  font-weight: bold;
+  color: #a7a7a7; }
+main #baiviet-chinh p .webtuyensinh-link {
+  color: #1f97aa;
+  font-weight: bold; }
+main #baiviet-tieubieu {
+  display: flex; }
+  main #baiviet-tieubieu .baiviet-box {
+    padding: 0px 10px;
+    width: 33.33%; }
+    main #baiviet-tieubieu .baiviet-box a {
+      height: 100%; }
+      main #baiviet-tieubieu .baiviet-box a img {
+        border-radius: 5px;
+        width: 100%;
+        height: 65%; }
+      main #baiviet-tieubieu .baiviet-box a h5 {
+        color: #333333;
+        font-size: 16px;
+        padding: 5px 0px;
+        white-space: nowrap;
+        overflow: hidden;
+        height: fit-content;
+        text-overflow: ellipsis; }
+    main #baiviet-tieubieu .baiviet-box p .webtuyensinh-section {
+      font-weight: bold;
+      color: #a7a7a7; }
+    main #baiviet-tieubieu .baiviet-box p .webtuyensinh-link {
+      color: #1f97aa;
+      font-weight: bold; }
 main #baiviet-tintuc .baiviet-box {
   margin: 10px 0px;
   display: flex; }
@@ -32,27 +47,37 @@ main #baiviet-tintuc .baiviet-box {
     width: 70%; }
     main #baiviet-tintuc .baiviet-box .tintuc-detail a h5 {
       color: #333333; }
+    main #baiviet-tintuc .baiviet-box .tintuc-detail p .webtuyensinh-section {
+      font-weight: bold;
+      color: #a7a7a7; }
+    main #baiviet-tintuc .baiviet-box .tintuc-detail p .webtuyensinh-link {
+      color: #1f97aa;
+      font-weight: bold; }
 main #quangcao div {
   margin-bottom: 20px; }
 main #xuhuong {
   margin: 10px 0px; }
   main #xuhuong .side-header {
     background-color: rgba(246, 92, 44, 0.15);
-    margin: 2px 0px;
+    margin: 1px 0px;
     padding: 10px 10px; }
     main #xuhuong .side-header i {
-      color: #f65c2c; }
+      color: #f65c2c;
+      margin-right: 10px; }
     main #xuhuong .side-header h4 {
+      font-weight: bold;
+      font-size: 20px;
       color: #f65c2c;
       display: inline; }
   main #xuhuong .side-content {
     padding: 10px 10px;
     background-color: rgba(246, 92, 44, 0.15); }
     main #xuhuong .side-content .xuhuong-main img {
+      width: 100%;
       border-radius: 5px; }
     main #xuhuong .side-content .xuhuong-main p {
       color: #333333;
-      margin: 0px 0px; }
+      margin: 5px 0px; }
     main #xuhuong .side-content div .xuhuong-contents {
       padding: 5px 7px;
       margin: 10px 0px;
@@ -65,29 +90,61 @@ main #xuhuong {
         margin: 0px 0px; }
 main #videos {
   margin: 10px 0px;
-  border: 1px #eeeeee solid; }
+  border: 2px solid #f65c2c;
+  position: relative; }
+  main #videos::before, main #videos::after {
+    content: "";
+    display: block;
+    position: absolute;
+    background: #fff; }
+  main #videos::before {
+    top: -0.3em;
+    bottom: -0.3em;
+    left: 1em;
+    right: 1em; }
+  main #videos::after {
+    left: -0.3em;
+    right: -0.3em;
+    top: 1em;
+    bottom: 1em; }
   main #videos .side-header {
-    border-bottom: 1px #eeeeee;
-    margin: 2px 0px;
+    border: 1px solid #eeeeee;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 2px;
     padding: 10px 10px; }
     main #videos .side-header i {
+      margin-right: 10px;
       color: #f65c2c; }
     main #videos .side-header h4 {
+      font-weight: bold;
+      font-size: 20px;
       color: #f65c2c;
       display: inline; }
-  main #videos .side-content .video {
-    padding: 10px 10px;
-    display: flex;
-    flex-direction: column; }
-    main #videos .side-content .video video {
-      width: 100%; }
-    main #videos .side-content .video p {
-      text-align: center; }
+  main #videos .side-content {
+    border: 1px solid #eeeeee;
+    position: relative;
+    z-index: 1; }
+    main #videos .side-content .video {
+      padding: 10px 10px;
+      display: flex;
+      flex-direction: column; }
+      main #videos .side-content .video video {
+        width: 100%; }
+      main #videos .side-content .video p {
+        text-align: center; }
 main #tuyensinh {
   margin: 10px 0px; }
   main #tuyensinh .side-header {
-    color: #2fa1b3;
     padding: 10px 0px; }
+    main #tuyensinh .side-header i {
+      margin-right: 10px;
+      color: #2fa1b3; }
+    main #tuyensinh .side-header h4 {
+      color: #2fa1b3;
+      font-weight: bold;
+      font-size: 20px;
+      display: inline; }
   main #tuyensinh .side-content {
     padding: 10px 10px;
     background-color: #f7f7f7;
@@ -103,8 +160,7 @@ main #tuyensinh {
         color: #333333; }
     main #tuyensinh .side-content .tuyensinh-contents {
       padding: 10px 0px;
-      border-bottom: 1px #333333 dotted;
-      border-top: 1px #333333 dotted; }
+      border-top: 1px dotted #d5d5d5; }
       main #tuyensinh .side-content .tuyensinh-contents a p {
         color: #333333;
         margin: 0px 0px; }
@@ -112,8 +168,13 @@ main #giaoduc {
   margin: 10px 0px; }
   main #giaoduc .side-header {
     padding: 10px 0px; }
-    main #giaoduc .side-header i,
+    main #giaoduc .side-header i {
+      margin-right: 10px;
+      color: #f65c2c; }
     main #giaoduc .side-header h4 {
+      font-weight: bold;
+      font-size: 20px;
+      display: inline;
       color: #f65c2c; }
   main #giaoduc .side-content {
     padding: 10px 10px;
@@ -131,8 +192,7 @@ main #giaoduc {
         color: #333333; }
     main #giaoduc .side-content .tuyensinh-contents {
       padding: 15px 8px;
-      border-bottom: 1px #333333 dotted;
-      border-top: 1px #333333 dotted; }
+      border-top: 1px dotted #d5d5d5; }
       main #giaoduc .side-content .tuyensinh-contents a p {
         text-align: left;
         margin: 0px 0px;
@@ -162,5 +222,11 @@ main #facebook-embed {
     #doitac-container .doitac .doitac-contents {
       width: 85%;
       display: flex; }
+
+@media only screen and (max-width: 600px) {
+  main #baiviet-tieubieu {
+    display: block; }
+    main #baiviet-tieubieu .baiviet-box {
+      width: 100%; } }
 
 /*# sourceMappingURL=home.css.map */

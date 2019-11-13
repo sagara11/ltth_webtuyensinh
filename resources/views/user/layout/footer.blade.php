@@ -25,13 +25,13 @@
                 <li>
                     <a href="">HỢP TÁC TRUYỀN THÔNG</a>
                 </li>
-                <li>
+                <li class="li-section">
                     <a href="">xxxxxxxx(máy lẻ 62.370)</a>
                 </li>
-                <li>
+                <li class="li-section">
                     <a href="">contact@bts.vn</a>
                 </li>
-                <li>
+                <li class="li-section">
                     <a href="">xxxxxxxx(máy lẻ 62.370)</a>
                 </li>
             </ul>
@@ -39,26 +39,26 @@
                 <li>
                     <h6>Quy định, chính sách</h6>
                 </li>
-                <li>
+                <li class="li-section">
                     <a href="">Thảo luận sử dụng</a>
                 </li>
-                <li>
+                <li class="li-section">
                     <a href="">Quy chế hoạt động</a>
                 </li>
-                <li>
+                <li class="li-section">
                     <a href="">Quy định bảo mật thông tin</a>
                 </li>
 
-                <li>
+                <li class="li-section">
                     <a href="">Cơ chế giải quyết tranh cãi</a>
                 </li>
             </ul>
-            <div class="col-lg-3 info-contain">
+            <div class="col-lg-3 info-contain social">
                 <h6><b>Liên kết</b></h6>
                 <i class="fab fa-facebook"></i>
                 <i class="fab fa-twitter-square"></i>
                 <i class="fab fa-google-plus"></i>
-                <i class="fab fa-youtube"></i>
+                <i class="fab fa-youtube-square"></i>
                 <i class="fab fa-facebook"></i>
                 <img src="" alt="" />
                 <div class="appstore-ggplay">

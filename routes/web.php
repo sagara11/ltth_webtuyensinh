@@ -10,10 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
 Auth::routes();
 
 Route::get('/crawl/{frequency}', 'CrawlController@crawl_routine')->name('crawl');
@@ -107,4 +103,4 @@ Route::group(['prefix'=>'elastic'], function () {
 	});
 });
 
-Route::get("/homepage",'User\HomepageController@home');
+Route::get("/",'User\HomepageController@home');

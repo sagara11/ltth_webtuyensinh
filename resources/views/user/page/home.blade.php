@@ -1,5 +1,7 @@
 @extends('user.layout.master')
 @section('css')
+<link rel="stylesheet" href="{{ asset('css/user_web/layout/header.css') }}">
+<link rel="stylesheet" href="{{ asset('css/user_web/layout/footer.css') }}">
 <link rel="stylesheet" href="{{ asset('css/user_web/page/home.css') }}">
 @endsection
 @section('title')
@@ -18,13 +20,13 @@ Home
                     </h5>
                 </a>
                 <p>
-                    <small>Tuyển sinh | 1 giờ | 3 bình luận | </small>
-                    <small><a href="">webtuyensinh</a></small>
+                    <small class="webtuyensinh-section">Tuyển sinh | 1 giờ | 3 bình luận | </small>
+                    <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
                 </p>
             </section>
 
             <!-- Bai viet tieu bieu -->
-            <section class="d-flex" id="baiviet-tieubieu">
+            <section id="baiviet-tieubieu">
                 @foreach ($trend as $item)
                 <div class="baiviet-box">
                     <a href="">
@@ -34,8 +36,8 @@ Home
                         </h5>
                     </a>
                     <p>
-                        <small>3 bình luận | </small>
-                        <small><a href="">webtuyensinh</a></small>
+                        <small class="webtuyensinh-section">3 bình luận | </small>
+                        <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
                     </p>
                 </div>
                 @endforeach
@@ -55,8 +57,8 @@ Home
                             </h5>
                         </a>
                         <p>
-                            <small>3 bình luận | </small>
-                            <small><a href="">webtuyensinh</a></small>
+                            <small class="webtuyensinh-section">Tuyển sinh | 1 giờ | 3 bình luận | </small>
+                            <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
                         </p>
                     </div>
                 </div>
@@ -145,7 +147,8 @@ Home
             <!-- Tuyen sinh -->
             <section id="tuyensinh">
                 <div class="side-header">
-                    <h3>TUYỂN SINH</h3>
+                    <i class="fas fa-briefcase"></i>
+                    <h4>TUYỂN SINH</h4>
                 </div>
                 <div class="side-content">
                     <a href="" class="tuyensinh-main">
@@ -251,4 +254,7 @@ Home
         </div>
     </div>
 </article>
+@endsection
+@section('js')
+<script type="text/javascript" src="{{ asset('js/user/home.js') }}"></script>
 @endsection
