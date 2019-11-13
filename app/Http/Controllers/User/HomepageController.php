@@ -10,7 +10,7 @@ class HomepageController extends Controller
 {
     function home(){
         $news = Post::paginate(20);
-        $trend_first = $news->where('trend', 1)->first();
+        $trend_first = Post::where('trend', 1)->first();
         $trend = Post::where('trend', 1)->where('id', "!=", $trend_first->id)->paginate(3);
         $sidetrend = Post::where('trend', 1)->where('id', "!=", $trend_first->id)->paginate(6);
         $tuyensinh_first = Post::where('category_id', 37)->first();
