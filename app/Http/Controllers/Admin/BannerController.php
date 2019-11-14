@@ -16,8 +16,9 @@ class BannerController extends Controller
      * @param  \App\User  $model
      * @return \Illuminate\View\View
      */
-    public function index(Banner $banners)
+    public function index()
     {
+        $banners = Banner::orderBy('created_at','desc');
         $key=false;
         return view('admin.banner.list', ['banners' => $banners->paginate(8),'position'=>'All','publish'=>'All','key'=>$key]);
     }
@@ -158,9 +159,15 @@ class BannerController extends Controller
         {
             return $this->activate($request); 
         }
-        elseif($request->publish != 'All' || $request->position != 'All')
+        elseif($request->publish != null || $request->position != null)
         {
+            if($request->publish != 'All' || $request->position != 'All')
             return $this->filter($request);
+            else
+            {
+                $request->session()->flash('fail', 'Hãy chọn trạng thái cho publish hoặc position!!! ');
+                return redirect()->route('indexBanner');
+            }
         }
         elseif($request->name != null)
         {

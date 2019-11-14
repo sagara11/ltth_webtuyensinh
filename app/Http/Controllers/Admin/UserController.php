@@ -159,7 +159,7 @@ class UserController extends Controller
         {
             return $this->activate($request); 
         }
-        elseif($request->publish != 'All')
+        elseif($request->publish != 'All' && $request->publish != null)
         {
             return $this->filter($request);
         }
