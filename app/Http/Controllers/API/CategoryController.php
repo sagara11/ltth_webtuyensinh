@@ -20,7 +20,7 @@ class CategoryController extends BaseController
      */
      public function index(Request $request)
     {
-        $categories = Category::select('id','name','image','parent_id');
+        $categories = Category::select('id','name','image','icon','parent_id');
         $limit       = isset($request->limit) ? $request->limit : 10 ;
         $page        = isset($request->page) ? $request->page : 1 ;
         $parent_id = $request->parent_id ;
@@ -35,7 +35,7 @@ class CategoryController extends BaseController
         $categories->where('parent_id', NULL);
 
         $categories->with(array('child_category' => function($q) {
-                    return $q->select('id','name','image', 'parent_id');
+                    return $q->select('id','name','image','icon','parent_id');
                 }
             ));
         $categories->where('publish', 1);
