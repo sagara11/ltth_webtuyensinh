@@ -1,39 +1,105 @@
 <!-- Page header -->
-<header class="mr-5 ml-5">
-    <div class="row p-1">
-        <div class="col-lg-9">
-            <p>
-                <i class="fa fa-edit"></i>
-                <b>SỰ KIỆN: </b>"Tuyển sụng 50 nhân viên thì có tới 49 sinh viên
-                trường nghề trúng tuyển" | "Tuyển dụng....."
-            </p>
-        </div>
-        <div class="dropdown d-flex col-lg-3">
-            <div class="d-flex dropdown-toggle" data-toggle="dropdown">
-                <img height="50px" width="50px" src="http://localhost\baotuyensinhView\media\tải xuống (1).png"
-                    alt="" />
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="header-news col-lg-9">
                 <p>
-                    Nguyễn Văn Nam
+                    <i class="fa fa-edit"></i>
+                    <b>SỰ KIỆN: </b>"Tuyển sụng 50 nhân viên thì có tới 49 sinh viên
+                    trường nghề trúng tuyển" | "Tuyển dụng....."
                 </p>
             </div>
-            <div class="dropdown-menu">
-                menu
+            <div class="header-account dropdown col-lg-3">
+                <div class="dropdown-toggle" data-toggle="dropdown">
+                    <img class=" rounded rounded-circle" height="25px" width="25px"
+                        src="http://localhost\baotuyensinhView\media\tải xuống (1).png" alt="" />
+                    <p>
+                        Nguyễn Văn Nam
+                    </p>
+                </div>
+                <div class="dropdown-menu">
+                    <ul>
+                        <li data-toggle="modal" data-target="#signin">
+                            Đăng nhập
+                        </li>
+                        <li data-toggle="modal" data-target="#signup">
+                            Đăng ký
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 </header>
 
+<!-- Dang nhap, dang ky -->
+<article class="modal fade" id="signin">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p>ĐĂNG NHẬP</p>
+            </div>
+            <div class="modal-box">
+                <form class="form-group" action="">
+                    <input required class="form-control" type="text" placeholder="Tên tài khoản">
+                    <input required class="form-control" type="password" placeholder="Mật khẩu">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn-danger">
+                    Đóng
+                </button>
+
+                <button type="submit" class="btn btn-success">
+                    Đăng nhập
+                </button>
+            </div>
+        </div>
+    </div>
+</article>
+
+<article class="modal fade" id="signup">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p>ĐĂNG KÝ</p>
+            </div>
+            <div class="modal-box">
+                <form class="form-group" action="">
+                    <input required class="form-control" type="email" placeholder="Email">
+                    <input required class="form-control" type="text" placeholder="Tên tài khoản">
+                    <input required class="form-control" type="password" placeholder="Mật khẩu">
+                    <input required class="form-control" type="password" placeholder="Xác nhận Mật khẩu">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn-danger">
+                    Đóng
+                </button>
+
+                <button type="submit" class="btn btn-success">
+                    Đăng ký
+                </button>
+            </div>
+        </div>
+    </div>
+</article>
+
 <!-- Navigation -->
-<nav class="container bg-light">
-    <div class="row">
-        <a href="" class="col-lg-2 nav-logo">
-            <img class="img-fluid" src="http://localhost\baotuyensinhView\media\1 Trang chủ.png" alt="" />
-        </a>
-        <a href="" class="col-lg-1">
-            <i class="fa fa-home"></i>
-        </a>
-        <div class="col-lg-8">
-            <ul class="row list-unstyled">
+<nav class="container">
+    <div class="nav row">
+        <div class="col-lg-2 nav-logo">
+            <a href="">
+                <img class="img-fluid" src="http://localhost\baotuyensinhView\media\1 Trang chủ.png" alt="" />
+            </a>
+        </div>
+        <div class="home col-lg-1">
+            <a class="col-lg-1" href="">
+                <i class="fa fa-home"></i>
+            </a>
+        </div>
+        <div class="menu col-lg-8">
+            <ul class="row">
                 <li class="col-lg-2">
                     <a href=""><b>GIÁO DỤC</b></a>
                 </li>
@@ -54,8 +120,58 @@
                 </li>
             </ul>
         </div>
-        <div class="col-lg-1">
+        <div data-target="#searchbar" data-toggle="collapse" id="search" class="col-lg-1">
             <i class="fas fa-search"></i>
         </div>
     </div>
+    <div class="collapse" id="searchbar">
+        <input class="form-control" type="text" placeholder="Nhập tìm kiếm...">
+    </div>
 </nav>
+
+{{-- Mobile responsive --}}
+<div class="mb-header">
+    <div class="logo">
+        <a href="">
+            <img class="img-fluid" src="http://localhost\baotuyensinhView\media\1 Trang chủ.png" alt="" />
+        </a>
+    </div>
+</div>
+<div class="mb-nav sticky-top">
+    <div class="mb-menu">
+        <a onclick="openNav()">
+            <i class="fas fa-bars"></i>
+        </a>
+    </div>
+    <div class="mb-search">
+        <input type="text" placeholder="Nhập bình luận" class="form-control">
+    </div>
+    <div class="mb-account">
+        <a href="">
+            <i class="far fa-user-circle"></i>
+        </a>
+    </div>
+</div>
+<div id="Sidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <ul class="list-unstyled">
+        <li>
+            <a href=""><b>GIÁO DỤC</b></a>
+        </li>
+        <li>
+            <a href=""><b>TUYỂN SINH</b></a>
+        </li>
+        <li>
+            <a href=""><b>HƯỚNG NGHIỆP</b></a>
+        </li>
+        <li>
+            <a href=""><b>DU HỌC</b></a>
+        </li>
+        <li>
+            <a href=""><b>KHÓA HỌC</b></a>
+        </li>
+        <li>
+            <a href=""><b>TEEN ONLINE</b></a>
+        </li>
+    </ul>
+</div>
