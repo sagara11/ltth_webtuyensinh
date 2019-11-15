@@ -23,7 +23,7 @@ main {
 
   #baiviet-tieubieu {
     display: flex;
-    .baiviet-box {
+    .tieubieu-box {
       padding: 0px 10px;
       width: 33.33%;
       a {
@@ -90,15 +90,18 @@ main {
   }
 
   #quangcao {
-    div {
+    .quangcao-box {
       margin-bottom: 20px;
+      img{
+        width: 100%;
+      }
     }
   }
 
   #xuhuong {
     margin: 10px 0px;
     .side-header {
-      background-color: rgba(246, 92, 44, 0.15);
+      background-color: rgba(246, 92, 44, 0.1);
       margin: 1px 0px;
       padding: 10px 10px;
       i {
@@ -114,7 +117,7 @@ main {
     }
     .side-content {
       padding: 10px 10px;
-      background-color: rgba(246, 92, 44, 0.15);
+      background-color: rgba(246, 92, 44, 0.1);
       .xuhuong-main {
         img {
           width: 100%;
@@ -309,30 +312,11 @@ main {
   }
 }
 
-#doitac-container {
-  border: 1px solid rgb(213, 213, 213);
-  .doitac {
-    display: flex;
-    .doitac-header {
-      display: flex;
-      width: 15%;
-      align-items: center;
-      p {
-        margin: auto 0px;
-      }
-    }
-    .doitac-contents {
-      width: 85%;
-      display: flex;
-    }
-  }
-}
-
 @media only screen and(max-width:600px) {
   main {
     #baiviet-tieubieu {
       display: block;
-      .baiviet-box{
+      .tieubieu-box{
         width: 100%;
       }
     }

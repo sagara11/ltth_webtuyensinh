@@ -1,3 +1,37 @@
+<article id="doitac-container">
+    <div class="doitac container">
+        <div class="doitac-header">
+            <p>Liên kết đối tác:</p>
+        </div>
+        <div class="doitac-contents">
+            <div class="doitac-img">
+                <img class="img-fluid" src="http://localhost\baotuyensinhView\media\Young-Greens-Logo-Icon-02.png"
+                    alt="" />
+            </div>
+            <div class="doitac-img">
+                <img class="img-fluid" src="http://localhost\baotuyensinhView\media\Young-Greens-Logo-Icon-02.png"
+                    alt="" />
+            </div>
+            <div class="doitac-img">
+                <img class="img-fluid" src="http://localhost\baotuyensinhView\media\Young-Greens-Logo-Icon-02.png"
+                    alt="" />
+            </div>
+            <div class="doitac-img">
+                <img class="img-fluid" src="http://localhost\baotuyensinhView\media\Young-Greens-Logo-Icon-02.png"
+                    alt="" />
+            </div>
+
+            <div class="doitac-img">
+                <img class="img-fluid" src="http://localhost\baotuyensinhView\media\Young-Greens-Logo-Icon-02.png"
+                    alt="" />
+            </div>
+            <div class="doitac-img">
+                <img class="img-fluid" src="http://localhost\baotuyensinhView\media\Young-Greens-Logo-Icon-02.png"
+                    alt="" />
+            </div>
+        </div>
+    </div>
+</article>
 <footer>
     <div class="footer-contain container">
         <div class="row">

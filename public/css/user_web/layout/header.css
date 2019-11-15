@@ -95,6 +95,8 @@ article .modal-box {
       padding: 10px 0px; }
 
   .mb-nav {
+    margin-bottom: 10px;
+    box-shadow: 0px 1px 2px gainsboro;
     background-color: white;
     display: flex;
     padding: 10px 13px;
@@ -150,13 +152,13 @@ article .modal-box {
         padding: 10px 0px; }
         .sidenav ul li a {
           color: #333333; }
-
-  .sidenav .closebtn {
-    color: #f65c2c;
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px; } }
+    .sidenav .closebtn {
+      text-decoration: none;
+      color: red;
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px; } }
 
 /*# sourceMappingURL=header.css.map */

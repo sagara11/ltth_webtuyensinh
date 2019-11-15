@@ -1,0 +1,22 @@
+.baiviet-box {
+  border-bottom: 1px solid #eeeeee;
+  margin: 10px 0px;
+  display: flex; }
+  .baiviet-box .tintuc-img {
+    padding: 0px 15px 15px 0px;
+    width: 30%; }
+    .baiviet-box .tintuc-img img {
+      border-radius: 5px;
+      width: 100%; }
+  .baiviet-box .tintuc-detail {
+    width: 70%; }
+    .baiviet-box .tintuc-detail a h5 {
+      color: #333333; }
+    .baiviet-box .tintuc-detail p .webtuyensinh-section {
+      font-weight: bold;
+      color: #a7a7a7; }
+    .baiviet-box .tintuc-detail p .webtuyensinh-link {
+      color: #1f97aa;
+      font-weight: bold; }
+
+/*# sourceMappingURL=baiviet_box.css.map */

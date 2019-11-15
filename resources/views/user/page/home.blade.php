@@ -2,6 +2,7 @@
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/user_web/layout/header.css') }}">
 <link rel="stylesheet" href="{{ asset('css/user_web/layout/footer.css') }}">
+<link rel="stylesheet" href="{{ asset('css/user_web/layout/baiviet_box.css') }}">
 <link rel="stylesheet" href="{{ asset('css/user_web/page/home.css') }}">
 @endsection
 @section('title')
@@ -28,7 +29,7 @@ Home
             <!-- Bai viet tieu bieu -->
             <section id="baiviet-tieubieu">
                 @foreach ($trend as $item)
-                <div class="baiviet-box">
+                <div class="tieubieu-box">
                     <a href="">
                         <img class="img-fluid" src="{{ $item->image }}" alt="" />
                         <h5>
@@ -69,14 +70,14 @@ Home
         <div class="col-lg-4">
             <!-- Banner quang cao -->
             <section id="quangcao">
-                <div>
+                <div class="quangcao-box">
                     <a href="">
-                        <img class="img-fluid" src="http://localhost\baotuyensinhView\media\blank-img.jpg" alt="" />
+                        <img src="{{ asset('media/Untitled-1.png') }}" alt="" />
                     </a>
                 </div>
-                <div>
+                <div class="quangcao-box">
                     <a href="">
-                        <img class="img-fluid" src="http://localhost\baotuyensinhView\media\blank-img.jpg" alt="" />
+                        <img src="{{ asset('media/Untitled-2.png') }}" alt="" />
                     </a>
                 </div>
             </section>
@@ -197,8 +198,7 @@ Home
             <!-- Big advertisement -->
             <section id="big-ad">
                 <a href="">
-                    <img height="500px;" class="img-fluid" src="http://localhost\baotuyensinhView\media\blank-img.jpg"
-                        alt="" />
+                    <img class="img-fluid" src="{{ asset('media/Untitled-3.jpg') }}" alt="" />
                 </a>
             </section>
 
@@ -219,41 +219,6 @@ Home
         </div>
     </div>
 </main>
-
-<article id="doitac-container">
-    <div class="doitac container">
-        <div class="doitac-header">
-            <p>Liên kết đối tác:</p>
-        </div>
-        <div class="doitac-contents">
-            <div class="doitac-img">
-                <img class="img-fluid" src="http://localhost\baotuyensinhView\media\Young-Greens-Logo-Icon-02.png"
-                    alt="" />
-            </div>
-            <div class="doitac-img">
-                <img class="img-fluid" src="http://localhost\baotuyensinhView\media\Young-Greens-Logo-Icon-02.png"
-                    alt="" />
-            </div>
-            <div class="doitac-img">
-                <img class="img-fluid" src="http://localhost\baotuyensinhView\media\Young-Greens-Logo-Icon-02.png"
-                    alt="" />
-            </div>
-            <div class="doitac-img">
-                <img class="img-fluid" src="http://localhost\baotuyensinhView\media\Young-Greens-Logo-Icon-02.png"
-                    alt="" />
-            </div>
-
-            <div class="doitac-img">
-                <img class="img-fluid" src="http://localhost\baotuyensinhView\media\Young-Greens-Logo-Icon-02.png"
-                    alt="" />
-            </div>
-            <div class="doitac-img">
-                <img class="img-fluid" src="http://localhost\baotuyensinhView\media\Young-Greens-Logo-Icon-02.png"
-                    alt="" />
-            </div>
-        </div>
-    </div>
-</article>
 @endsection
 @section('js')
 <script type="text/javascript" src="{{ asset('js/user/home.js') }}"></script>

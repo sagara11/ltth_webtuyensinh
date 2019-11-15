@@ -34,4 +34,22 @@ footer {
   footer .footer-contain .social .fa-youtube-square {
     color: #ca3737; }
 
+#doitac-container {
+  border: 1px solid #d5d5d5; }
+  #doitac-container .doitac {
+    display: flex; }
+    #doitac-container .doitac .doitac-header {
+      display: flex;
+      width: 15%;
+      align-items: center; }
+      #doitac-container .doitac .doitac-header p {
+        margin: auto 0px; }
+    #doitac-container .doitac .doitac-contents {
+      width: 85%;
+      display: flex; }
+
+@media only screen and (max-width: 600px) {
+  .footer-contain div {
+    justify-content: center; } }
+
 /*# sourceMappingURL=footer.css.map */

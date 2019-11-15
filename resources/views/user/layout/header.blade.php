@@ -40,9 +40,11 @@
                 <p>ĐĂNG NHẬP</p>
             </div>
             <div class="modal-box">
-                <form class="form-group" action="">
-                    <input required class="form-control" type="text" placeholder="Tên tài khoản">
-                    <input required class="form-control" type="password" placeholder="Mật khẩu">
+                <form method="post" action="{{ route('signin') }}" class="form-group" >
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input name="email" required class="form-control" type="email" placeholder="Tên tài khoản">
+                    <input name="password" required class="form-control" type="password" placeholder="Mật khẩu">
+                    <button type="submit">dang nhap</button>
                 </form>
             </div>
             <div class="modal-footer">
@@ -133,7 +135,7 @@
 <div class="mb-header">
     <div class="logo">
         <a href="">
-            <img class="img-fluid" src="http://localhost\baotuyensinhView\media\1 Trang chủ.png" alt="" />
+            <img class="img-fluid" src="{{ asset('media/1 Trang chủ.png') }}" alt="" />
         </a>
     </div>
 </div>
@@ -147,13 +149,27 @@
         <input type="text" placeholder="Nhập bình luận" class="form-control">
     </div>
     <div class="mb-account">
-        <a href="">
+        <a data-toggle="modal" data-target="#mb-account-modal" href="">
             <i class="far fa-user-circle"></i>
         </a>
     </div>
 </div>
+
+{{-- Mobile modal --}}
+<div class="modal fade" id="mb-account-modal">
+    <div class="modal-dialog-centered modal-dialog">
+        <div class="modal-content p-3">
+            <h4>ĐĂNG NHẬP</h4>
+            <form class="form-group" action="">
+                <input class="form-control" type="text" placeholder="Tên đăng nhâp">
+                <input type="password" placeholder="Mật khẩu" class="form-control">
+            </form>
+        </div>
+    </div>
+</div>
+
 <div id="Sidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="" class="closebtn" onclick="closeNav()">&times;</a>
     <ul class="list-unstyled">
         <li>
             <a href=""><b>GIÁO DỤC</b></a>

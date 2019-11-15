@@ -137,6 +137,8 @@ article {
     }
   }
   .mb-nav {
+    margin-bottom: 10px;
+    box-shadow: 0px 1px 2px rgb(220, 220, 220);
     background-color: white;
     display: flex;
     padding: 10px 13px;
@@ -203,13 +205,14 @@ article {
         }
       }
     }
-  }
-  .sidenav .closebtn {
-    color: rgb(246, 92, 44);
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
+    .closebtn {
+      text-decoration: none;
+      color: red;
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+    }
   }
 }

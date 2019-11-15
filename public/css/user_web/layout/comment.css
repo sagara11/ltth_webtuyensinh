@@ -1,0 +1,48 @@
+.user-comment .comment-box {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px 0px; }
+  .user-comment .comment-box .comment-box-img {
+    padding: 0px 5px; }
+    .user-comment .comment-box .comment-box-img img {
+      height: 35px;
+      width: 35px; }
+  .user-comment .comment-box .comment-box-content .user-name {
+    font-size: 17px;
+    font-weight: bold; }
+  .user-comment .comment-box .comment-box-content .comment-time {
+    color: gray; }
+  .user-comment .comment-box .comment-box-content p {
+    margin: 0px 0px; }
+  .user-comment .comment-box .comment-box-content .comment-reply span {
+    color: gray;
+    font-size: 14px; }
+  .user-comment .comment-box .children {
+    padding-left: 45px; }
+.user-comment .father {
+  padding-top: 10px;
+  margin-bottom: 10px;
+  border-top: 1px solid #eeeeee; }
+  .user-comment .father:first-child {
+    border-top: none; }
+
+.your-comment {
+  position: relative;
+  padding: 15px 15px;
+  background-color: #eeeeee; }
+  .your-comment form {
+    margin-bottom: 10px; }
+  .your-comment img {
+    height: 35px;
+    width: 35px;
+    margin-right: 10px; }
+  .your-comment button {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    color: white;
+    border: none;
+    padding: 5px 20px;
+    background-color: #f65c2c; }
+
+/*# sourceMappingURL=comment.css.map */
