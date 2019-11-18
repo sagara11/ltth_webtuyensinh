@@ -32,14 +32,14 @@ Chi tiết tin
             <section id="baiviet-description">
                 <div>
                     <p>
-                        {{ $new->description }}
+                        {!! $new->description !!}
                     </p>
                 </div>
             </section>
 
             {{-- Image --}}
             <section id="baiviet-img">
-                <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="">
+                <img class="img-fluid" src="{{ $new->image }}" alt="">
             </section>
 
             {{-- Content --}}
@@ -129,14 +129,15 @@ Chi tiết tin
                     <h3>TIN LIÊN QUAN</h3>
                 </div>
                 <div class="tin-content">
+                    @foreach ($tinlienquan as $item)
                     <div class="baiviet-box">
                         <div class="tintuc-img">
-                            <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="" />
+                            <img class="img-fluid" src="{{ $item->image }}" alt="" />
                         </div>
                         <div class="tintuc-detail">
-                            <a href="">
+                            <a href="{{ route('chitiettin', $item->id) }}">
                                 <h5>
-                                    Tuyển dụng 50 nhân viên thì có tới 49 sinh viên
+                                    {{ $item->name }}
                                 </h5>
                             </a>
                             <p>
@@ -145,54 +146,7 @@ Chi tiết tin
                             </p>
                         </div>
                     </div>
-                    <div class="baiviet-box">
-                        <div class="tintuc-img">
-                            <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="" />
-                        </div>
-                        <div class="tintuc-detail">
-                            <a href="">
-                                <h5>
-                                    Tuyển dụng 50 nhân viên thì có tới 49 sinh viên
-                                </h5>
-                            </a>
-                            <p>
-                                <small class="webtuyensinh-section">Tuyển sinh | 1 giờ | 3 bình luận | </small>
-                                <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="baiviet-box">
-                        <div class="tintuc-img">
-                            <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="" />
-                        </div>
-                        <div class="tintuc-detail">
-                            <a href="">
-                                <h5>
-                                    Tuyển dụng 50 nhân viên thì có tới 49 sinh viên
-                                </h5>
-                            </a>
-                            <p>
-                                <small class="webtuyensinh-section">Tuyển sinh | 1 giờ | 3 bình luận | </small>
-                                <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="baiviet-box">
-                        <div class="tintuc-img">
-                            <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="" />
-                        </div>
-                        <div class="tintuc-detail">
-                            <a href="">
-                                <h5>
-                                    Tuyển dụng 50 nhân viên thì có tới 49 sinh viên
-                                </h5>
-                            </a>
-                            <p>
-                                <small class="webtuyensinh-section">Tuyển sinh | 1 giờ | 3 bình luận | </small>
-                                <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
-                            </p>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </section>
 
@@ -202,14 +156,15 @@ Chi tiết tin
                     <h3>TIN MỚI</h3>
                 </div>
                 <div class="tin-content">
+                    @foreach ($tinmoi as $item)
                     <div class="baiviet-box">
                         <div class="tintuc-img">
-                            <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="" />
+                            <img class="img-fluid" src="{{ $item->image }}" alt="" />
                         </div>
                         <div class="tintuc-detail">
-                            <a href="">
+                            <a href="{{ route('chitiettin', $item->id) }}">
                                 <h5>
-                                    Tuyển dụng 50 nhân viên thì có tới 49 sinh viên
+                                    {{ $item->name }}
                                 </h5>
                             </a>
                             <p>
@@ -218,54 +173,7 @@ Chi tiết tin
                             </p>
                         </div>
                     </div>
-                    <div class="baiviet-box">
-                        <div class="tintuc-img">
-                            <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="" />
-                        </div>
-                        <div class="tintuc-detail">
-                            <a href="">
-                                <h5>
-                                    Tuyển dụng 50 nhân viên thì có tới 49 sinh viên
-                                </h5>
-                            </a>
-                            <p>
-                                <small class="webtuyensinh-section">Tuyển sinh | 1 giờ | 3 bình luận | </small>
-                                <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="baiviet-box">
-                        <div class="tintuc-img">
-                            <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="" />
-                        </div>
-                        <div class="tintuc-detail">
-                            <a href="">
-                                <h5>
-                                    Tuyển dụng 50 nhân viên thì có tới 49 sinh viên
-                                </h5>
-                            </a>
-                            <p>
-                                <small class="webtuyensinh-section">Tuyển sinh | 1 giờ | 3 bình luận | </small>
-                                <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="baiviet-box">
-                        <div class="tintuc-img">
-                            <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="" />
-                        </div>
-                        <div class="tintuc-detail">
-                            <a href="">
-                                <h5>
-                                    Tuyển dụng 50 nhân viên thì có tới 49 sinh viên
-                                </h5>
-                            </a>
-                            <p>
-                                <small class="webtuyensinh-section">Tuyển sinh | 1 giờ | 3 bình luận | </small>
-                                <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
-                            </p>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </section>
 
@@ -275,14 +183,15 @@ Chi tiết tin
                     <h3>TIN NÓNG</h3>
                 </div>
                 <div class="tin-content">
+                    @foreach ($tinmoi as $item)
                     <div class="baiviet-box">
                         <div class="tintuc-img">
-                            <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="" />
+                            <img class="img-fluid" src="{{ $item->image }}" alt="" />
                         </div>
                         <div class="tintuc-detail">
-                            <a href="">
+                            <a href="{{ route('chitiettin', $item->id) }}">
                                 <h5>
-                                    Tuyển dụng 50 nhân viên thì có tới 49 sinh viên
+                                    {{ $item->name }}
                                 </h5>
                             </a>
                             <p>
@@ -291,54 +200,7 @@ Chi tiết tin
                             </p>
                         </div>
                     </div>
-                    <div class="baiviet-box">
-                        <div class="tintuc-img">
-                            <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="" />
-                        </div>
-                        <div class="tintuc-detail">
-                            <a href="">
-                                <h5>
-                                    Tuyển dụng 50 nhân viên thì có tới 49 sinh viên
-                                </h5>
-                            </a>
-                            <p>
-                                <small class="webtuyensinh-section">Tuyển sinh | 1 giờ | 3 bình luận | </small>
-                                <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="baiviet-box">
-                        <div class="tintuc-img">
-                            <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="" />
-                        </div>
-                        <div class="tintuc-detail">
-                            <a href="">
-                                <h5>
-                                    Tuyển dụng 50 nhân viên thì có tới 49 sinh viên
-                                </h5>
-                            </a>
-                            <p>
-                                <small class="webtuyensinh-section">Tuyển sinh | 1 giờ | 3 bình luận | </small>
-                                <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="baiviet-box">
-                        <div class="tintuc-img">
-                            <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="" />
-                        </div>
-                        <div class="tintuc-detail">
-                            <a href="">
-                                <h5>
-                                    Tuyển dụng 50 nhân viên thì có tới 49 sinh viên
-                                </h5>
-                            </a>
-                            <p>
-                                <small class="webtuyensinh-section">Tuyển sinh | 1 giờ | 3 bình luận | </small>
-                                <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
-                            </p>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </section>
         </div>
@@ -364,7 +226,7 @@ Chi tiết tin
                     <h4>XU HƯỚNG</h4>
                 </div>
                 <div class="side-content">
-                    <a href="" class="xuhuong-main">
+                    <a href="{{ route('chitiettin', $new->id) }}" class="xuhuong-main">
                         <img class="img-fluid" src="{{ $new->image }}" alt="" />
                         <p>
                             {{ $new->name }}
@@ -372,7 +234,7 @@ Chi tiết tin
                     </a>
                     <div>
                         @foreach ($xuhuong as $item)
-                        <a href="" class="xuhuong-contents">
+                        <a href="{{ route('chitiettin', $item->id) }}" class="xuhuong-contents">
                             <img width="25%" height="70px" src="{{ $item->image }}" alt="" />
                             <p class="xuhuong-contents-des">
                                 "{{  $item->name }}"
@@ -427,7 +289,7 @@ Chi tiết tin
                     <h4>TUYỂN SINH</h4>
                 </div>
                 <div class="side-content">
-                    <a href="" class="tuyensinh-main">
+                    <a href="{{ route('chitiettin', $tuyensinh_first->id) }}" class="tuyensinh-main">
                         <img src="{{  $tuyensinh_first->image }}" alt="" />
                         <p class="tuyensinh-des">
                             "{{  $tuyensinh_first->name }}"
@@ -435,7 +297,7 @@ Chi tiết tin
                     </a>
                     @foreach ($tuyensinh as $item)
                     <div class="tuyensinh-contents">
-                        <a href="">
+                        <a href="{{ route('chitiettin', $item->id) }}">
                             <p>
                                 "{{  $item->name }}"
                             </p>
@@ -452,7 +314,7 @@ Chi tiết tin
                     <h4 class="d-inline">GIÁO DỤC</h4>
                 </div>
                 <div class="side-content">
-                    <a href="" class="tuyensinh-main">
+                    <a href="{{ route('chitiettin', $giaoduc_first->id) }}" class="tuyensinh-main">
                         <img src="{{ $giaoduc_first->image }}" alt="" />
                         <div class="tuyensinh-des">
                             "{{  $giaoduc_first->name }}"
@@ -460,7 +322,7 @@ Chi tiết tin
                     </a>
                     @foreach ($giaoduc as $item)
                     <div class="tuyensinh-contents">
-                        <a href="" class="">
+                        <a href="{{ route('chitiettin', $item->id) }}" class="">
                             <p>
                                 "{{  $item->name }}"
                             </p>

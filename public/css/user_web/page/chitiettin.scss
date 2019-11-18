@@ -1,13 +1,14 @@
 #danhmuc {
   h4 {
-    font-size: 23px;
+    font-size: 18px;
   }
 }
 
 #baiviet-name {
   h5 {
+    text-transform: uppercase;
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 500;
   }
   .webtuyensinh-section {
     font-weight: bold;
@@ -30,6 +31,10 @@
 
 #baiviet-img {
   margin: 10px 0px;
+  img{
+    width: 100%;
+    height: 450px;
+  }
 }
 
 #baiviet-content {

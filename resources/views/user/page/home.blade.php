@@ -15,7 +15,7 @@ Home
             <!-- Bai viet chinh -->
             <section id="baiviet-chinh">
                 <a href="{{ route('chitiettin', $trend_first->id) }}">
-                    <img height="400px" width="100%" src="{{ $trend_first->image }}" alt="" />
+                    <img height="500px" width="100%" src="{{ $trend_first->image }}" alt="" />
                     <h5>
                         {{ $trend_first->name }}
                     </h5>
@@ -65,6 +65,7 @@ Home
                 </div>
                 @endforeach
             </section>
+            {{ $news->links() }}
         </div>
 
         <div class="col-lg-4">
@@ -97,7 +98,7 @@ Home
                     </a>
                     <div>
                         @foreach ($sidetrend as $item)
-                        <a href="" class="xuhuong-contents">
+                        <a href="{{ route('chitiettin', $item->id) }}" class="xuhuong-contents">
                             <img width="25%" height="70px" src="{{ $item->image }}" alt="" />
                             <p class="xuhuong-contents-des">
                                 "{{ $item->name }}"
@@ -160,7 +161,7 @@ Home
                     </a>
                     @foreach ($tuyensinh as $item)
                     <div class="tuyensinh-contents">
-                        <a href="">
+                        <a href="{{ route('chitiettin', $item->id) }}">
                             <p>
                                 "{{ $item->name }}"
                             </p>
@@ -185,7 +186,7 @@ Home
                     </a>
                     @foreach ($giaoduc as $item)
                     <div class="tuyensinh-contents">
-                        <a href="" class="">
+                        <a href="{{ route('chitiettin', $item->id) }}" class="">
                             <p>
                                 "{{ $item->name }}"
                             </p>

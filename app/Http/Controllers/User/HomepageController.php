@@ -26,7 +26,7 @@ class HomepageController extends Controller
         $news = Post::where('category_id', $type)->paginate(20);
         $trend_first = Post::where('trend', 1)->where('category_id', $type)->first();
         $trend = Post::where('trend', 1)->where('id', "!=", $trend_first->id)->where('category_id', $type)->paginate(3);
-        $sidetrend = Post::where('trend', 1)->where('id', "!=", $trend_first->id)->where('category_id', $type)->paginate(6);
+        $sidetrend = Post::where('trend', 1)->where('id', "!=", $trend_first->id)->paginate(6);
         $tuyensinh_first = Post::where('category_id', 37)->first();
         $tuyensinh = Post::where('category_id', 37)->where('id', "!=", $tuyensinh_first->id)->paginate(4);
         $giaoduc_first = Post::where('category_id', 34)->first();
@@ -41,7 +41,9 @@ class HomepageController extends Controller
         $tuyensinh = Post::where('category_id', 37)->where('id', "!=", $tuyensinh_first->id)->paginate(4);
         $giaoduc_first = Post::where('category_id',34)->first();
         $giaoduc = Post::where('category_id', 34)->where('id', "!=", $giaoduc_first->id)->paginate(4);
-        return view('user.page.chitiettin', compact('new','xuhuong','tuyensinh_first', 'tuyensinh', 'giaoduc_first', 'giaoduc'));
+        $tinlienquan = Post::where('category_id', $new->category_id)->paginate(4);
+        $tinmoi = Post::orderBy('created_at','desc')->paginate(4);
+        return view('user.page.chitiettin', compact('new','xuhuong','tuyensinh_first', 'tuyensinh', 'giaoduc_first', 'giaoduc', 'tinlienquan', 'tinmoi'));
     }
 
     function video(){

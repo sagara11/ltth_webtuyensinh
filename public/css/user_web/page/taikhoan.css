@@ -60,5 +60,35 @@
           border-radius: 3px;
           margin-right: 10px;
           border: none; }
+    #account .account-content .tab-content #doimatkhau .account-section-header {
+      padding: 8px 0px; }
+      #account .account-content .tab-content #doimatkhau .account-section-header h3 {
+        color: #f65c2c;
+        font-size: 20px; }
+    #account .account-content .tab-content #doimatkhau .account-section-content {
+      padding: 10px 5px; }
+      #account .account-content .tab-content #doimatkhau .account-section-content div {
+        color: #a0a0a0;
+        padding: 10px 5px; }
+        #account .account-content .tab-content #doimatkhau .account-section-content div button {
+          padding: 5px 10px;
+          background-color: #f65c2c;
+          color: white;
+          border-radius: 3px;
+          margin-right: 10px;
+          border: none; }
+    #account .account-content .tab-content #quanlybinhluan .account-section-header {
+      color: #f65c2c;
+      font-size: 20px; }
+    #account .account-content .tab-content #quanlybinhluan .account-section-content .comment-box .news-name {
+      font-weight: bold; }
+    #account .account-content .tab-content #quanlybinhluan .account-section-content .comment-box .webtuyeninh-link .webtuyensinh-section {
+      color: #a0a0a0; }
+    #account .account-content .tab-content #quanlybinhluan .account-section-content .comment-box .webtuyeninh-link .webtuyensinh-link {
+      color: #2fa1b3; }
+    #account .account-content .tab-content #quanlybinhluan .account-section-content .comment-box .your-comment {
+      padding: 10px 10px;
+      margin-bottom: 3px;
+      background-color: #eeeeee; }
 
 /*# sourceMappingURL=taikhoan.css.map */

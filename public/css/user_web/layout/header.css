@@ -28,7 +28,10 @@ nav {
   nav .nav {
     align-items: center; }
     nav .nav .nav-logo {
-      padding: 10px 15px; }
+      padding: 0px 15px; }
+      nav .nav .nav-logo img {
+        width: 80%;
+        height: 80px; }
     nav .nav .home a {
       height: fit-content;
       width: fit-content;
@@ -55,6 +58,7 @@ nav {
         nav .nav .menu ul li:hover {
           background-color: #f6f6f6; }
         nav .nav .menu ul li a {
+          text-transform: uppercase;
           text-decoration: none;
           color: #333333;
           font-size: 14px; }

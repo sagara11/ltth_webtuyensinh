@@ -5,28 +5,28 @@
         </div>
         <div class="doitac-contents">
             <div class="doitac-img">
-                <img class="img-fluid" src="http://localhost\baotuyensinhView\media\Young-Greens-Logo-Icon-02.png"
+                <img class="img-fluid" src="{{ asset('media\Young-Greens-Logo-Icon-02.png') }}"
                     alt="" />
             </div>
             <div class="doitac-img">
-                <img class="img-fluid" src="http://localhost\baotuyensinhView\media\Young-Greens-Logo-Icon-02.png"
+                <img class="img-fluid" src="{{ asset('media\Young-Greens-Logo-Icon-02.png') }}"
                     alt="" />
             </div>
             <div class="doitac-img">
-                <img class="img-fluid" src="http://localhost\baotuyensinhView\media\Young-Greens-Logo-Icon-02.png"
+                <img class="img-fluid" src="{{ asset('media\Young-Greens-Logo-Icon-02.png') }}"
                     alt="" />
             </div>
             <div class="doitac-img">
-                <img class="img-fluid" src="http://localhost\baotuyensinhView\media\Young-Greens-Logo-Icon-02.png"
+                <img class="img-fluid" src="{{ asset('media\Young-Greens-Logo-Icon-02.png') }}"
                     alt="" />
             </div>
 
             <div class="doitac-img">
-                <img class="img-fluid" src="http://localhost\baotuyensinhView\media\Young-Greens-Logo-Icon-02.png"
+                <img class="img-fluid" src="{{ asset('media\Young-Greens-Logo-Icon-02.png') }}"
                     alt="" />
             </div>
             <div class="doitac-img">
-                <img class="img-fluid" src="http://localhost\baotuyensinhView\media\Young-Greens-Logo-Icon-02.png"
+                <img class="img-fluid" src="{{ asset('media\Young-Greens-Logo-Icon-02.png') }}"
                     alt="" />
             </div>
         </div>

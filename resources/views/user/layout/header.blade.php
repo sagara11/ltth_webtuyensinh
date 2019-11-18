@@ -92,7 +92,7 @@
     <div class="nav row">
         <div class="col-lg-2 nav-logo">
             <a href="">
-                <img class="img-fluid" src="http://localhost\baotuyensinhView\media\1 Trang chủ.png" alt="" />
+                <img class="img-fluid" src="{{ asset('media/logo.png') }}" alt="" />
             </a>
         </div>
         <div class="home col-lg-1">

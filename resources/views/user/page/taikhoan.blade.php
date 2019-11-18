@@ -41,7 +41,7 @@ Tài khoản
         <div class="account-content col-lg-8">
             <div class="tab-content">
                 {{-- Tai khoan cua toi --}}
-                <section id="taikhoancuatoi" class="container tab-pane active"><br>
+                <section id="taikhoancuatoi" class="container tab-pane"><br>
                     <div class="account-section-header">
                         <h3>TÀI KHOẢN CỦA TÔI</h3>
                     </div>
@@ -198,11 +198,11 @@ Tài khoản
                 </section>
 
                 {{-- Doi mat khau --}}
-                <section id="doimatkhau" class="container tab-pane fade"><br>
+                <section id="doimatkhau" class="container tab-pane"><br>
                     <div class="account-section-header">
                         <h3>ĐỔI MẬT KHẨU</h3>
                     </div>
-                    <div class="row">
+                    <div class="row account-section-content">
                         <div class="col-lg-3">
                             Mật khẩu cũ
                         </div>
@@ -234,10 +234,35 @@ Tài khoản
                 </section>
 
                 {{-- Quan ly binh luan --}}
-                <section id="quanlybinhluan" class="container tab-pane fade"><br>
-                    <h3>Menu 2</h3>
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-                        totam rem aperiam.</p>
+                <section id="quanlybinhluan" class="container tab-pane active"><br>
+                    <div class="account-section-header">
+                        <h3>QUẢN LÝ MẬT KHẨU</h3>
+                    </div>
+                    <div class="account-section-content">
+                        <div class="comment-box">
+                            <p class="news-name">
+                                ""Tuyển dụng 50 hân viên thì ....
+                            </p>
+                            <div class="webtuyensinh-link">
+                                <p>
+                                    <small class="webtuyensinh-section">Tuyển sinh | 1 giờ | 3 bình luận | </small>
+                                    <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
+                                </p>
+                            </div>
+                            <div class="row your-comment">
+                                <div class="your-image">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="comment-content">
+                                    <span>Nguyễn Văn Nam</span>
+                                    <span>- 16:50  06/11/2019</span>
+                                    <p>
+                                        Trong 3 năm gần nhất, ngành dân tộc hoc tuyển được một học viên.....
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </section>
 
                 {{-- Thoat --}}

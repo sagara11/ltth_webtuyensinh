@@ -83,6 +83,56 @@
           }
         }
       }
+      #doimatkhau {
+        .account-section-header {
+          padding: 8px 0px;
+          h3 {
+            color: rgb(246, 92, 44);
+            font-size: 20px;
+          }
+        }
+        .account-section-content {
+          padding: 10px 5px;
+          div {
+            color: rgb(160, 160, 160);
+            padding: 10px 5px;
+            button {
+              padding: 5px 10px;
+              background-color: rgb(246, 92, 44);
+              color: white;
+              border-radius: 3px;
+              margin-right: 10px;
+              border: none;
+            }
+          }
+        }
+      }
+      #quanlybinhluan {
+        .account-section-header {
+          color: rgb(246, 92, 44);
+          font-size: 20px;
+        }
+        .account-section-content {
+          .comment-box {
+            .news-name {
+              font-weight: bold;
+            }
+            .webtuyeninh-link {
+              .webtuyensinh-section {
+                color: rgb(160, 160, 160);
+              }
+              .webtuyensinh-link {
+                color: rgb(47, 161, 179);
+              }
+            }
+            .your-comment{
+              padding: 10px 10px;
+              margin-bottom: 3px;
+              background-color: rgb(238,238,238);
+            }
+          }
+        }
+      }
     }
   }
 }
