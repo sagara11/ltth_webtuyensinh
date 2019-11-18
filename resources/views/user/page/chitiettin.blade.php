@@ -19,7 +19,7 @@ Chi tiết tin
 
             {{-- Ten bai viet --}}
             <section id="baiviet-name">
-                <h5>"Tuyển dụng 50 nhân viên thì có tới 49 nhân viên trường nghề trúng tuyển"</h5>
+                <h5>"{{ $new->name }}"</h5>
                 <div class="webtuyensinh-link">
                     <p>
                         <small class="webtuyensinh-section">Tuyển sinh | 1 giờ | 3 bình luận | </small>
@@ -32,7 +32,7 @@ Chi tiết tin
             <section id="baiviet-description">
                 <div>
                     <p>
-                        {{ $tuyensinh_first->description }}
+                        {{ $new->description }}
                     </p>
                 </div>
             </section>
@@ -44,7 +44,7 @@ Chi tiết tin
 
             {{-- Content --}}
             <section id="baiviet-content">
-                {!! $trend_first->content !!}
+                {!! $new->content !!}
             </section>
 
             {{-- Comment --}}
@@ -365,17 +365,17 @@ Chi tiết tin
                 </div>
                 <div class="side-content">
                     <a href="" class="xuhuong-main">
-                        <img class="img-fluid" src="{{ $trend_first->image }}" alt="" />
+                        <img class="img-fluid" src="{{ $new->image }}" alt="" />
                         <p>
-                            {{ $trend_first->name }}
+                            {{ $new->name }}
                         </p>
                     </a>
                     <div>
-                        @foreach ($sidetrend as $item)
+                        @foreach ($xuhuong as $item)
                         <a href="" class="xuhuong-contents">
                             <img width="25%" height="70px" src="{{ $item->image }}" alt="" />
                             <p class="xuhuong-contents-des">
-                                "{{ $item->name }}"
+                                "{{  $item->name }}"
                             </p>
                         </a>
                         @endforeach
@@ -428,16 +428,16 @@ Chi tiết tin
                 </div>
                 <div class="side-content">
                     <a href="" class="tuyensinh-main">
-                        <img src="{{ $tuyensinh_first->image }}" alt="" />
+                        <img src="{{  $tuyensinh_first->image }}" alt="" />
                         <p class="tuyensinh-des">
-                            "{{ $tuyensinh_first->name }}"
+                            "{{  $tuyensinh_first->name }}"
                         </p>
                     </a>
                     @foreach ($tuyensinh as $item)
                     <div class="tuyensinh-contents">
                         <a href="">
                             <p>
-                                "{{ $item->name }}"
+                                "{{  $item->name }}"
                             </p>
                         </a>
                     </div>
@@ -455,14 +455,14 @@ Chi tiết tin
                     <a href="" class="tuyensinh-main">
                         <img src="{{ $giaoduc_first->image }}" alt="" />
                         <div class="tuyensinh-des">
-                            "{{ $giaoduc_first->name }}"
+                            "{{  $giaoduc_first->name }}"
                         </div>
                     </a>
                     @foreach ($giaoduc as $item)
                     <div class="tuyensinh-contents">
                         <a href="" class="">
                             <p>
-                                "{{ $item->name }}"
+                                "{{  $item->name }}"
                             </p>
                         </a>
                     </div>

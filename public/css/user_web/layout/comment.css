@@ -37,6 +37,7 @@
     width: 35px;
     margin-right: 10px; }
   .your-comment button {
+    border-radius: 4px;
     position: absolute;
     bottom: 10px;
     right: 20px;

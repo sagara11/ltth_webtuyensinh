@@ -3,22 +3,22 @@
 <link rel="stylesheet" href="{{ asset('css/user_web/layout/header.css') }}">
 <link rel="stylesheet" href="{{ asset('css/user_web/layout/footer.css') }}">
 <link rel="stylesheet" href="{{ asset('css/user_web/layout/comment.css') }}">
-<link rel="stylesheet" href="{{ asset('css/user_web/page/chitiettin.css') }}">
+<link rel="stylesheet" href="{{ asset('css/user_web/page/video.css') }}">
 @endsection
 @section('title')
 Video
 @endsection
 @section('content')
 <main class="container">
+    <section id="danhmuc">
+        <h4>VIDEO</h4>
+    </section>
     <section id="top-video">
         <div class="row">
-            <div class="col-lg-6 video">
-                video
-                <video src="">
-                    <source src="">
-                </video>
+            <div class="video">
+                <img class="img-fluid" src="{{ asset("media/tải xuống.png") }}" alt="">
             </div>
-            <div class="col-lg-6 v-detail">
+            <div class="v-detail">
                 <div class="video-detail">
                     <h4>
                         "Tuyển dụng 50 nhân viên thì có tới..."
@@ -104,10 +104,284 @@ Video
             </div>
         </div>
     </section>
-    
+
     {{-- Danh muc video --}}
     <section id="video-list">
         <div class="row">
+            <div class="col-lg-3 video-box">
+                <div>
+                    <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="">
+                    <p class="video-box-des">
+                        Tuyển dụng 50 nhân viên thì có tới....
+                    </p>
+                    <p class="video-info">
+                        <span>01:06 | Tuyển sinh</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 video-box">
+                <div>
+                    <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="">
+                    <p class="video-box-des">
+                        Tuyển dụng 50 nhân viên thì có tới....
+                    </p>
+                    <p class="video-info">
+                        <span>01:06 | Tuyển sinh</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 video-box">
+                <div>
+                    <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="">
+                    <p class="video-box-des">
+                        Tuyển dụng 50 nhân viên thì có tới....
+                    </p>
+                    <p class="video-info">
+                        <span>01:06 | Tuyển sinh</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 video-box">
+                <div>
+                    <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="">
+                    <p class="video-box-des">
+                        Tuyển dụng 50 nhân viên thì có tới....
+                    </p>
+                    <p class="video-info">
+                        <span>01:06 | Tuyển sinh</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 video-box">
+                <div>
+                    <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="">
+                    <p class="video-box-des">
+                        Tuyển dụng 50 nhân viên thì có tới....
+                    </p>
+                    <p class="video-info">
+                        <span>01:06 | Tuyển sinh</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 video-box">
+                <div>
+                    <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="">
+                    <p class="video-box-des">
+                        Tuyển dụng 50 nhân viên thì có tới....
+                    </p>
+                    <p class="video-info">
+                        <span>01:06 | Tuyển sinh</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 video-box">
+                <div>
+                    <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="">
+                    <p class="video-box-des">
+                        Tuyển dụng 50 nhân viên thì có tới....
+                    </p>
+                    <p class="video-info">
+                        <span>01:06 | Tuyển sinh</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 video-box">
+                <div>
+                    <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="">
+                    <p class="video-box-des">
+                        Tuyển dụng 50 nhân viên thì có tới....
+                    </p>
+                    <p class="video-info">
+                        <span>01:06 | Tuyển sinh</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="xemthem-btn">
+            <button>XEM THÊM</button>
+        </div>
+    </section>
+
+    {{-- Video giao duc --}}
+    <section class="video-section">
+        <div>
+            <h4>VIDEO GIÁO DỤC</h4>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 video-box">
+                <div>
+                    <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="">
+                    <p class="video-box-des">
+                        Tuyển dụng 50 nhân viên thì có tới....
+                    </p>
+                    <p class="video-info">
+                        <span>01:06 | Tuyển sinh</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 video-box">
+                <div>
+                    <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="">
+                    <p class="video-box-des">
+                        Tuyển dụng 50 nhân viên thì có tới....
+                    </p>
+                    <p class="video-info">
+                        <span>01:06 | Tuyển sinh</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 video-box">
+                <div>
+                    <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="">
+                    <p class="video-box-des">
+                        Tuyển dụng 50 nhân viên thì có tới....
+                    </p>
+                    <p class="video-info">
+                        <span>01:06 | Tuyển sinh</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 video-box">
+                <div>
+                    <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="">
+                    <p class="video-box-des">
+                        Tuyển dụng 50 nhân viên thì có tới....
+                    </p>
+                    <p class="video-info">
+                        <span>01:06 | Tuyển sinh</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 video-box">
+                <div>
+                    <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="">
+                    <p class="video-box-des">
+                        Tuyển dụng 50 nhân viên thì có tới....
+                    </p>
+                    <p class="video-info">
+                        <span>01:06 | Tuyển sinh</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 video-box">
+                <div>
+                    <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="">
+                    <p class="video-box-des">
+                        Tuyển dụng 50 nhân viên thì có tới....
+                    </p>
+                    <p class="video-info">
+                        <span>01:06 | Tuyển sinh</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 video-box">
+                <div>
+                    <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="">
+                    <p class="video-box-des">
+                        Tuyển dụng 50 nhân viên thì có tới....
+                    </p>
+                    <p class="video-info">
+                        <span>01:06 | Tuyển sinh</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 video-box">
+                <div>
+                    <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="">
+                    <p class="video-box-des">
+                        Tuyển dụng 50 nhân viên thì có tới....
+                    </p>
+                    <p class="video-info">
+                        <span>01:06 | Tuyển sinh</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- Video tuyen sinh --}}
+    <section class="video-section">
+        <div>
+            <h4>VIDEO TUYỂN SINH</h4>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 video-box">
+                <div>
+                    <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="">
+                    <p class="video-box-des">
+                        Tuyển dụng 50 nhân viên thì có tới....
+                    </p>
+                    <p class="video-info">
+                        <span>01:06 | Tuyển sinh</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 video-box">
+                <div>
+                    <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="">
+                    <p class="video-box-des">
+                        Tuyển dụng 50 nhân viên thì có tới....
+                    </p>
+                    <p class="video-info">
+                        <span>01:06 | Tuyển sinh</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 video-box">
+                <div>
+                    <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="">
+                    <p class="video-box-des">
+                        Tuyển dụng 50 nhân viên thì có tới....
+                    </p>
+                    <p class="video-info">
+                        <span>01:06 | Tuyển sinh</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 video-box">
+                <div>
+                    <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="">
+                    <p class="video-box-des">
+                        Tuyển dụng 50 nhân viên thì có tới....
+                    </p>
+                    <p class="video-info">
+                        <span>01:06 | Tuyển sinh</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 video-box">
+                <div>
+                    <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="">
+                    <p class="video-box-des">
+                        Tuyển dụng 50 nhân viên thì có tới....
+                    </p>
+                    <p class="video-info">
+                        <span>01:06 | Tuyển sinh</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 video-box">
+                <div>
+                    <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="">
+                    <p class="video-box-des">
+                        Tuyển dụng 50 nhân viên thì có tới....
+                    </p>
+                    <p class="video-info">
+                        <span>01:06 | Tuyển sinh</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 video-box">
+                <div>
+                    <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="">
+                    <p class="video-box-des">
+                        Tuyển dụng 50 nhân viên thì có tới....
+                    </p>
+                    <p class="video-info">
+                        <span>01:06 | Tuyển sinh</span>
+                    </p>
+                </div>
+            </div>
             <div class="col-lg-3 video-box">
                 <div>
                     <img class="img-fluid" src="{{ asset('media/blank-img.jpg') }}" alt="">

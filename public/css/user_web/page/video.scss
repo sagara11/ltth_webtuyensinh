@@ -1,0 +1,62 @@
+.video-box {
+  div {
+    img {
+      width: 100%;
+      height: 150px;
+    }
+    .video-box-des {
+      margin: 0px 0px;
+    }
+    .video-info {
+      color: rgb(167, 167, 167);
+    }
+  }
+}
+
+#danhmuc{
+    margin: 10px 0px;
+}
+
+#top-video {
+  padding: 20px 0px;
+  .video {
+    width: 60%;
+    padding: 10px 10px;
+    img {
+      width: 100%;
+    }
+  }
+  .v-detail {
+    width: 40%;
+    .video-detail {
+      .webtuyensinh-section {
+        color: rgb(167, 167, 167);
+      }
+      .webtuyensinh-link {
+        font-weight: bold;
+        color: rgb(47, 161, 179);
+      }
+    }
+  }
+}
+
+#video-list {
+  .xemthem-btn {
+    display: flex;
+    justify-content: center;
+    button {
+      padding: 7px 13px;
+      background-color: rgb(246, 92, 44);
+      color: white;
+      border: none;
+      border-radius: 4px;
+    }
+  }
+}
+
+.video-section {
+  padding: 20px 0px;
+  h4 {
+    color: rgb(246, 92, 44);
+  }
+}

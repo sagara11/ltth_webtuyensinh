@@ -40,7 +40,7 @@
                 <p>ĐĂNG NHẬP</p>
             </div>
             <div class="modal-box">
-                <form method="post" action="{{ route('signin') }}" class="form-group" >
+                <form method="post" action="{{ route('signin') }}" class="form-group">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input name="email" required class="form-control" type="email" placeholder="Tên tài khoản">
                     <input name="password" required class="form-control" type="password" placeholder="Mật khẩu">
@@ -96,30 +96,17 @@
             </a>
         </div>
         <div class="home col-lg-1">
-            <a class="col-lg-1" href="">
+            <a class="col-lg-1" href="{{ route('home') }}">
                 <i class="fa fa-home"></i>
             </a>
         </div>
         <div class="menu col-lg-8">
             <ul class="row">
+                @foreach ($nav_section as $item)
                 <li class="col-lg-2">
-                    <a href=""><b>GIÁO DỤC</b></a>
+                    <a href="{{ route('danhmuc', $item->id) }}"><b>{{ $item->name }}</b></a>
                 </li>
-                <li class="col-lg-2">
-                    <a href=""><b>TUYỂN SINH</b></a>
-                </li>
-                <li class="col-lg-2">
-                    <a href=""><b>HƯỚNG NGHIỆP</b></a>
-                </li>
-                <li class="col-lg-2">
-                    <a href=""><b>DU HỌC</b></a>
-                </li>
-                <li class="col-lg-2">
-                    <a href=""><b>KHÓA HỌC</b></a>
-                </li>
-                <li class="col-lg-2">
-                    <a href=""><b>TEEN ONLINE</b></a>
-                </li>
+                @endforeach
             </ul>
         </div>
         <div data-target="#searchbar" data-toggle="collapse" id="search" class="col-lg-1">

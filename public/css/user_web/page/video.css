@@ -1,3 +1,42 @@
+.video-box div img {
+  width: 100%;
+  height: 150px; }
+.video-box div .video-box-des {
+  margin: 0px 0px; }
+.video-box div .video-info {
+  color: #a7a7a7; }
 
+#danhmuc {
+  margin: 10px 0px; }
+
+#top-video {
+  padding: 20px 0px; }
+  #top-video .video {
+    width: 60%;
+    padding: 10px 10px; }
+    #top-video .video img {
+      width: 100%; }
+  #top-video .v-detail {
+    width: 40%; }
+    #top-video .v-detail .video-detail .webtuyensinh-section {
+      color: #a7a7a7; }
+    #top-video .v-detail .video-detail .webtuyensinh-link {
+      font-weight: bold;
+      color: #2fa1b3; }
+
+#video-list .xemthem-btn {
+  display: flex;
+  justify-content: center; }
+  #video-list .xemthem-btn button {
+    padding: 7px 13px;
+    background-color: #f65c2c;
+    color: white;
+    border: none;
+    border-radius: 4px; }
+
+.video-section {
+  padding: 20px 0px; }
+  .video-section h4 {
+    color: #f65c2c; }
 
 /*# sourceMappingURL=video.css.map */

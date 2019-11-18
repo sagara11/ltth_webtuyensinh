@@ -1,0 +1,64 @@
+#account {
+  padding: 10px 20px; }
+  #account .account-nav {
+    padding: 0px 0px;
+    border: 1px solid #eeeeee; }
+    #account .account-nav .user-info {
+      padding: 10px 0px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; }
+      #account .account-nav .user-info img {
+        width: 30%;
+        margin: 10px 0px; }
+      #account .account-nav .user-info p {
+        margin: 0px 0px;
+        text-align: center;
+        font-weight: bold; }
+      #account .account-nav .user-info small {
+        font-size: 13px;
+        color: gray; }
+    #account .account-nav ul {
+      flex-direction: column; }
+      #account .account-nav ul li {
+        padding: 0px 10px;
+        border-top: 1px solid #eeeeee; }
+        #account .account-nav ul li .nav-link {
+          border-radius: 0px;
+          padding: 10px 5px;
+          color: #f65c2c; }
+        #account .account-nav ul li .active {
+          border: none; }
+  #account .account-content .tab-content {
+    padding: 0px 10px;
+    border: 1px solid #eeeeee; }
+    #account .account-content .tab-content #taikhoancuatoi .account-section-header {
+      padding: 8px 0px; }
+      #account .account-content .tab-content #taikhoancuatoi .account-section-header h3 {
+        color: #f65c2c;
+        font-size: 20px; }
+    #account .account-content .tab-content #taikhoancuatoi .account-section-content .col-lg-3 {
+      padding: 10px 0px;
+      color: gray; }
+    #account .account-content .tab-content #taikhoancuatoi .account-section-content .col-lg-9 {
+      border-bottom: 1px solid #eeeeee;
+      padding: 10px 0px; }
+      #account .account-content .tab-content #taikhoancuatoi .account-section-content .col-lg-9 a {
+        color: gray; }
+      #account .account-content .tab-content #taikhoancuatoi .account-section-content .col-lg-9 .account-edit {
+        padding-left: 50px;
+        flex-wrap: nowrap;
+        background-color: #eeeeee;
+        padding: 10px 10px; }
+        #account .account-content .tab-content #taikhoancuatoi .account-section-content .col-lg-9 .account-edit input {
+          margin-bottom: 7px; }
+        #account .account-content .tab-content #taikhoancuatoi .account-section-content .col-lg-9 .account-edit button {
+          padding: 5px 10px;
+          background-color: #f65c2c;
+          color: white;
+          border-radius: 3px;
+          margin-right: 10px;
+          border: none; }
+
+/*# sourceMappingURL=taikhoan.css.map */

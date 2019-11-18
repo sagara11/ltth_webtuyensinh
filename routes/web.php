@@ -103,10 +103,13 @@ Route::group(['prefix'=>'elastic'], function () {
 	});
 });
 
-Route::get("/",'User\HomepageController@home');
+Route::get("/",'User\HomepageController@home')->name('home');
+Route::get('/danhmuc/{type}','User\HomepageController@danhmuc')->name('danhmuc');
 
-Route::get("/chitiettin",'User\HomepageController@chitiettin');
+Route::get("/chitiettin/{id}",'User\HomepageController@chitiettin')->name('chitiettin');
 
 Route::get('/video', 'User\HomepageController@video');
+
+Route::get('/taikhoan', 'User\HomepageController@taikhoan');
 
 Route::post("/signin","User\HomepageController@signin")->name('signin');

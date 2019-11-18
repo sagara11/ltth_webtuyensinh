@@ -14,7 +14,7 @@ Home
         <div class="col-lg-8">
             <!-- Bai viet chinh -->
             <section id="baiviet-chinh">
-                <a href="">
+                <a href="{{ route('chitiettin', $trend_first->id) }}">
                     <img height="400px" width="100%" src="{{ $trend_first->image }}" alt="" />
                     <h5>
                         {{ $trend_first->name }}
@@ -30,7 +30,7 @@ Home
             <section id="baiviet-tieubieu">
                 @foreach ($trend as $item)
                 <div class="tieubieu-box">
-                    <a href="">
+                    <a href="{{ route('chitiettin', $item->id) }}">
                         <img class="img-fluid" src="{{ $item->image }}" alt="" />
                         <h5>
                             {{ $item->name }}
@@ -52,7 +52,7 @@ Home
                         <img class="img-fluid" src="{{ $item->image }}" alt="" />
                     </div>
                     <div class="tintuc-detail">
-                        <a href="">
+                        <a href="{{ route('chitiettin', $item->id) }}">
                             <h5>
                                 {{ $item->name }}
                             </h5>
@@ -89,7 +89,7 @@ Home
                     <h4>XU HƯỚNG</h4>
                 </div>
                 <div class="side-content">
-                    <a href="" class="xuhuong-main">
+                    <a href="{{ route('chitiettin', $trend_first->id) }}" class="xuhuong-main">
                         <img class="img-fluid" src="{{ $trend_first->image }}" alt="" />
                         <p>
                             {{ $trend_first->name }}
@@ -152,7 +152,7 @@ Home
                     <h4>TUYỂN SINH</h4>
                 </div>
                 <div class="side-content">
-                    <a href="" class="tuyensinh-main">
+                    <a href="{{ route('chitiettin', $tuyensinh_first->id) }}" class="tuyensinh-main">
                         <img src="{{ $tuyensinh_first->image }}" alt="" />
                         <p class="tuyensinh-des">
                             "{{ $tuyensinh_first->name }}"
@@ -177,7 +177,7 @@ Home
                     <h4 class="d-inline">GIÁO DỤC</h4>
                 </div>
                 <div class="side-content">
-                    <a href="" class="tuyensinh-main">
+                    <a href="{{ route('chitiettin', $giaoduc_first->id) }}" class="tuyensinh-main">
                         <img src="{{ $giaoduc_first->image }}" alt="" />
                         <div class="tuyensinh-des">
                             "{{ $giaoduc_first->name }}"
