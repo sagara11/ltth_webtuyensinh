@@ -8,6 +8,7 @@ header {
     }
   }
   .header-account {
+    padding-left: 55px;
     .dropdown-toggle {
       display: flex;
       align-items: center;
@@ -41,38 +42,46 @@ header {
 nav {
   padding: 10px 0px;
   .nav {
+    margin-top: 10px;
+    margin-bottom: 10px;
     align-items: center;
     .nav-logo {
       padding: 0px 15px;
-      img{
+      img {
         width: 80%;
         height: 80px;
       }
     }
-    .home {
-      a {
-        height: fit-content;
-        width: fit-content;
-        display: flex;
-        align-items: center;
-        text-decoration: none;
-        i {
-          padding: 10px 10px;
-          background-color: rgb(246, 92, 44);
-          color: white;
-          transition: 0.3s;
-          &:hover {
-            transform: scale(1.2, 1.2);
-          }
-        }
-      }
-    }
     .menu {
       ul {
+        padding: 0px 0px;
         margin: 0px 0px;
         align-items: center;
         list-style-type: none;
+        .home {
+          width: 10%;
+          a {
+            height: fit-content;
+            width: fit-content;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            i {
+              padding: 10px 10px;
+              background-color: rgb(246, 92, 44);
+              color: white;
+              transition: 0.3s;
+              &:hover {
+                transform: scale(1.2, 1.2);
+              }
+            }
+          }
+          &:hover {
+            background-color: white;
+          }
+        }
         li {
+          width: 15%;
           align-items: center;
           height: 60px;
           display: flex;
@@ -92,11 +101,28 @@ nav {
     }
     #search {
       display: flex;
+      flex-direction: column;
       justify-content: center;
+      align-items: center;
       i {
         text-align: right;
         font-size: 20px;
         color: rgb(127, 127, 127);
+      }
+      #searchbar {
+        background-color: white;
+        padding: 10px 12px;
+        border: 1px solid rgb(220, 220, 220);
+        top: 25px;
+        width: 200px;
+        z-index: 9999;
+        position: absolute;
+        display: none;
+        .closebtn {
+          color: rgb(246, 92, 44);
+          font-size: 25px;
+          text-decoration: none;
+        }
       }
     }
   }
@@ -104,6 +130,9 @@ nav {
 
 article {
   .modal-header {
+    background-color: rgb(246, 92, 44);
+    color: white;
+    padding: 10px 15px;
     p {
       width: 100%;
       font-size: 35px;
@@ -111,12 +140,39 @@ article {
       text-align: center;
     }
   }
-  .modal-box {
+  .modal-body {
     padding: 10px 10px;
     form {
       input {
         margin: 10px 0px;
       }
+    }
+  }
+  .modal-footer {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    .social-btn {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
+
+#signin {
+  .modal-body {
+    input {
+      margin: 10px 0px;
+    }
+    .submit-btn {
+      background-color: rgb(246, 92, 44);
+      color: white;
+      border: none;
+      border-radius: 3px;
+      padding: 5px 12px;
+    }
+    .checkbox-btn {
+      display: block;
     }
   }
 }
@@ -125,7 +181,7 @@ article {
 .mb-nav {
   display: none;
 }
-.sidenav{
+.sidenav {
   display: none;
 }
 
@@ -133,13 +189,6 @@ article {
   header,
   nav {
     display: none;
-  }
-  .mb-header {
-    display: flex;
-    justify-content: center;
-    .logo {
-      padding: 10px 0px;
-    }
   }
   .mb-nav {
     margin-bottom: 10px;
@@ -149,12 +198,65 @@ article {
     padding: 10px 13px;
     justify-content: center;
     align-items: center;
+    .logo {
+      width: 30%;
+    }
     .mb-menu,
     .mb-account {
       width: 15%;
     }
-    .mb-search {
-      width: 70%;
+    .space {
+      width: 20%;
+    }
+    .mb-search{
+      background-color: white;
+      width: 15%;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .mb-search > div {
+      display: inline-block;
+      position: relative;
+    }
+
+    .mb-search > div:after {
+      content: "";
+      background: black;
+      width: 2px;
+      height: 10px;
+      position: absolute;
+      top: 17px;
+      right: -3px;
+      transform: rotate(130deg);
+      box-shadow: 1px 0 #0091c2;
+    }
+
+    .mb-search > div > input {
+      color: black;
+      font-size: 16px;
+      background-color: white;
+      width: 12px;
+      height: 12px;
+      padding: 10px;
+      border: solid 2px black;
+      outline: none;
+      border-radius: 35px;
+      box-shadow: 0 1px #0091c2;
+      transition: width 0.5s;
+    }
+
+    .mb-search > div > input::placeholder {
+      color: black;
+      opacity: 1;
+    }
+
+    .mb-search > div > input::-ms-placeholder {
+      color: #efefef;
+    }
+
+    .mb-search > div > input:focus,
+    .mb-search > div > input:valid {
+      width: 200px;
     }
     .mb-menu {
       a {
@@ -201,11 +303,12 @@ article {
     overflow-x: hidden;
     padding-top: 60px;
     transition: 0.3s;
-    ul{
+    ul {
       padding: 0px 15px;
-      li{
+      li {
         padding: 10px 0px;
-        a{
+        a {
+          text-transform: uppercase;
           color: rgb(51, 51, 51);
         }
       }

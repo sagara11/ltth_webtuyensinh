@@ -1,0 +1,16 @@
+.pagination li {
+  border: 1px solid #f65c2c; }
+  .pagination li a {
+    margin: 0px 0px;
+    color: black; }
+.pagination .active {
+  color: white; }
+  .pagination .active .page-link {
+    border: 1px solid #f65c2c;
+    background-color: #f65c2c; }
+
+@media only screen and (max-width: 600px) {
+  .pagination {
+    display: none; } }
+
+/*# sourceMappingURL=paginate.css.map */

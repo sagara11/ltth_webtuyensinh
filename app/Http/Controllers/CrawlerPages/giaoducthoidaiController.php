@@ -25,7 +25,7 @@ class giaoducthoidaiController extends Controller
         foreach($post as $key){
             $object = array(
                 'urls' => 'https://giaoducthoidai.vn'.$key->href,
-                'img' => $src[$count]->src
+                'img' => str_replace("168x110","",$src[$count]->src)
             );
             array_push($datas, $object);
             $count++;
@@ -44,7 +44,7 @@ class giaoducthoidaiController extends Controller
             $name = strip_tags($post->find('h1.cms-title')->innerHTML);
             $slug = trim(str_replace("ps://giaoducthoidai.vn/giao-duc","",$page_url),'.html');
             $description = $post->find('div.summary.cms-desc div')->innerHTML;
-            $content = htmlentities($post->find('.cms-body'));
+            $content = $post->find('.cms-body');
         }
         catch(\Exception $e){
             $name = strip_tags($post->find('h1.cms-title')->innerHTML);
@@ -52,13 +52,15 @@ class giaoducthoidaiController extends Controller
             $description = $post->find('div.summary.cms-desc')->innerHTML;
             $content = $post->find('.cms-body');
         }
+        $post_link = $page_url;
 
         //gan thuoc tinh cua trang
         return array(
             'name' => $name,
             'description' => $description,
             'slug' => $slug,
-            'content' => $content
+            'content' => $content,
+            'post_link' => $post_link
         );
     }
 }

@@ -1,6 +1,7 @@
 main {
   #baiviet-chinh {
     a {
+      text-decoration: none;
       img {
         border-radius: 5px;
       }
@@ -27,6 +28,7 @@ main {
       padding: 0px 10px;
       width: 33.33%;
       a {
+        text-decoration: none;
         height: 100%;
         img {
           border-radius: 5px;
@@ -71,6 +73,7 @@ main {
       .tintuc-detail {
         width: 70%;
         a {
+          text-decoration: none;
           h5 {
             color: rgb(51, 51, 51);
           }
@@ -92,7 +95,7 @@ main {
   #quangcao {
     .quangcao-box {
       margin-bottom: 20px;
-      img{
+      img {
         width: 100%;
       }
     }
@@ -119,6 +122,7 @@ main {
       padding: 10px 10px;
       background-color: rgba(246, 92, 44, 0.1);
       .xuhuong-main {
+        text-decoration: none;
         img {
           width: 100%;
           border-radius: 5px;
@@ -130,6 +134,7 @@ main {
       }
       div {
         .xuhuong-contents {
+          text-decoration: none;
           padding: 5px 7px;
           margin: 10px 0px;
           display: flex;
@@ -227,6 +232,7 @@ main {
       border: 1px solid rgb(213, 213, 213);
       border-top: 2px solid rgb(47, 161, 179);
       .tuyensinh-main {
+        text-decoration: none;
         padding: 8px 0px;
         display: flex;
         img {
@@ -241,6 +247,7 @@ main {
         padding: 10px 0px;
         border-top: 1px dotted rgb(213, 213, 213);
         a {
+          text-decoration: none;
           p {
             color: rgb(51, 51, 51);
             margin: 0px 0px;
@@ -270,7 +277,8 @@ main {
       background-color: rgb(247, 247, 247);
       border: 1px solid rgb(213, 213, 213);
       border-top: 2px solid rgb(246, 92, 44);
-      .tuyensinh-main {
+      .giaoduc-main {
+        text-decoration: none;
         padding: 10px 5px;
         display: flex;
         img {
@@ -282,10 +290,11 @@ main {
           color: rgb(51, 51, 51);
         }
       }
-      .tuyensinh-contents {
+      .giaoduc-contents {
         padding: 15px 8px;
         border-top: 1px dotted rgb(213, 213, 213);
         a {
+          text-decoration: none;
           p {
             text-align: left;
             margin: 0px 0px;
@@ -293,6 +302,12 @@ main {
           }
         }
       }
+    }
+  }
+
+  #big-ad {
+    img {
+      width: 100%;
     }
   }
 
@@ -316,7 +331,7 @@ main {
   main {
     #baiviet-tieubieu {
       display: block;
-      .tieubieu-box{
+      .tieubieu-box {
         width: 100%;
       }
     }

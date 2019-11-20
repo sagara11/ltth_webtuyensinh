@@ -10,7 +10,10 @@ footer {
         font-size: 16px;
         color: #333333; }
       footer .footer-contain .info-contain li a {
+        text-decoration: none;
         color: #333333; }
+        footer .footer-contain .info-contain li a:hover {
+          color: #e3411f; }
     footer .footer-contain .info-contain .li-section::before {
       display: inline-block;
       content: "";
@@ -35,6 +38,7 @@ footer {
     color: #ca3737; }
 
 #doitac-container {
+  padding: 10px 0px;
   border: 1px solid #d5d5d5; }
   #doitac-container .doitac {
     display: flex; }
@@ -47,6 +51,10 @@ footer {
     #doitac-container .doitac .doitac-contents {
       width: 85%;
       display: flex; }
+      #doitac-container .doitac .doitac-contents .doitac-img {
+        display: flex;
+        align-items: center;
+        justify-content: center; }
 
 @media only screen and (max-width: 600px) {
   .footer-contain div {

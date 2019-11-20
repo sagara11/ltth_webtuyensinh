@@ -4,52 +4,62 @@ header {
   color: white; }
   header .header-news p {
     margin: 0px 0px; }
-  header .header-account .dropdown-toggle {
-    display: flex;
-    align-items: center; }
-    header .header-account .dropdown-toggle img {
-      margin-right: 10px; }
-    header .header-account .dropdown-toggle p {
-      margin: 0px 0px; }
-    header .header-account .dropdown-toggle::after {
-      margin-left: 20px; }
-  header .header-account .dropdown-menu ul {
-    padding: 0px 10px;
-    margin: 0px 0px;
-    list-style: none; }
-    header .header-account .dropdown-menu ul li {
-      cursor: pointer;
-      padding: 10px 0px; }
-      header .header-account .dropdown-menu ul li:hover {
-        background-color: #f6f6f6; }
+  header .header-account {
+    padding-left: 55px; }
+    header .header-account .dropdown-toggle {
+      display: flex;
+      align-items: center; }
+      header .header-account .dropdown-toggle img {
+        margin-right: 10px; }
+      header .header-account .dropdown-toggle p {
+        margin: 0px 0px; }
+      header .header-account .dropdown-toggle::after {
+        margin-left: 20px; }
+    header .header-account .dropdown-menu ul {
+      padding: 0px 10px;
+      margin: 0px 0px;
+      list-style: none; }
+      header .header-account .dropdown-menu ul li {
+        cursor: pointer;
+        padding: 10px 0px; }
+        header .header-account .dropdown-menu ul li:hover {
+          background-color: #f6f6f6; }
 
 nav {
   padding: 10px 0px; }
   nav .nav {
+    margin-top: 10px;
+    margin-bottom: 10px;
     align-items: center; }
     nav .nav .nav-logo {
       padding: 0px 15px; }
       nav .nav .nav-logo img {
         width: 80%;
         height: 80px; }
-    nav .nav .home a {
-      height: fit-content;
-      width: fit-content;
-      display: flex;
-      align-items: center;
-      text-decoration: none; }
-      nav .nav .home a i {
-        padding: 10px 10px;
-        background-color: #f65c2c;
-        color: white;
-        transition: 0.3s; }
-        nav .nav .home a i:hover {
-          transform: scale(1.2, 1.2); }
     nav .nav .menu ul {
+      padding: 0px 0px;
       margin: 0px 0px;
       align-items: center;
       list-style-type: none; }
+      nav .nav .menu ul .home {
+        width: 10%; }
+        nav .nav .menu ul .home a {
+          height: fit-content;
+          width: fit-content;
+          display: flex;
+          align-items: center;
+          text-decoration: none; }
+          nav .nav .menu ul .home a i {
+            padding: 10px 10px;
+            background-color: #f65c2c;
+            color: white;
+            transition: 0.3s; }
+            nav .nav .menu ul .home a i:hover {
+              transform: scale(1.2, 1.2); }
+        nav .nav .menu ul .home:hover {
+          background-color: white; }
       nav .nav .menu ul li {
+        width: 15%;
         align-items: center;
         height: 60px;
         display: flex;
@@ -64,21 +74,58 @@ nav {
           font-size: 14px; }
     nav .nav #search {
       display: flex;
-      justify-content: center; }
+      flex-direction: column;
+      justify-content: center;
+      align-items: center; }
       nav .nav #search i {
         text-align: right;
         font-size: 20px;
         color: #7f7f7f; }
+      nav .nav #search #searchbar {
+        background-color: white;
+        padding: 10px 12px;
+        border: 1px solid gainsboro;
+        top: 25px;
+        width: 200px;
+        z-index: 9999;
+        position: absolute;
+        display: none; }
+        nav .nav #search #searchbar .closebtn {
+          color: #f65c2c;
+          font-size: 25px;
+          text-decoration: none; }
 
-article .modal-header p {
-  width: 100%;
-  font-size: 35px;
-  font-weight: bold;
-  text-align: center; }
-article .modal-box {
+article .modal-header {
+  background-color: #f65c2c;
+  color: white;
+  padding: 10px 15px; }
+  article .modal-header p {
+    width: 100%;
+    font-size: 35px;
+    font-weight: bold;
+    text-align: center; }
+article .modal-body {
   padding: 10px 10px; }
-  article .modal-box form input {
+  article .modal-body form input {
     margin: 10px 0px; }
+article .modal-footer {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column; }
+  article .modal-footer .social-btn {
+    display: flex;
+    justify-content: center; }
+
+#signin .modal-body input {
+  margin: 10px 0px; }
+#signin .modal-body .submit-btn {
+  background-color: #f65c2c;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 12px; }
+#signin .modal-body .checkbox-btn {
+  display: block; }
 
 .mb-header,
 .mb-nav {
@@ -92,12 +139,6 @@ article .modal-box {
   nav {
     display: none; }
 
-  .mb-header {
-    display: flex;
-    justify-content: center; }
-    .mb-header .logo {
-      padding: 10px 0px; }
-
   .mb-nav {
     margin-bottom: 10px;
     box-shadow: 0px 1px 2px gainsboro;
@@ -106,11 +147,51 @@ article .modal-box {
     padding: 10px 13px;
     justify-content: center;
     align-items: center; }
+    .mb-nav .logo {
+      width: 30%; }
     .mb-nav .mb-menu,
     .mb-nav .mb-account {
       width: 15%; }
+    .mb-nav .space {
+      width: 20%; }
     .mb-nav .mb-search {
-      width: 70%; }
+      background-color: white;
+      width: 15%;
+      display: flex;
+      justify-content: flex-end; }
+    .mb-nav .mb-search > div {
+      display: inline-block;
+      position: relative; }
+    .mb-nav .mb-search > div:after {
+      content: "";
+      background: black;
+      width: 2px;
+      height: 10px;
+      position: absolute;
+      top: 17px;
+      right: -3px;
+      transform: rotate(130deg);
+      box-shadow: 1px 0 #0091c2; }
+    .mb-nav .mb-search > div > input {
+      color: black;
+      font-size: 16px;
+      background-color: white;
+      width: 12px;
+      height: 12px;
+      padding: 10px;
+      border: solid 2px black;
+      outline: none;
+      border-radius: 35px;
+      box-shadow: 0 1px #0091c2;
+      transition: width 0.5s; }
+    .mb-nav .mb-search > div > input::placeholder {
+      color: black;
+      opacity: 1; }
+    .mb-nav .mb-search > div > input::-ms-placeholder {
+      color: #efefef; }
+    .mb-nav .mb-search > div > input:focus,
+    .mb-nav .mb-search > div > input:valid {
+      width: 200px; }
     .mb-nav .mb-menu a {
       height: fit-content;
       width: fit-content;
@@ -155,6 +236,7 @@ article .modal-box {
       .sidenav ul li {
         padding: 10px 0px; }
         .sidenav ul li a {
+          text-transform: uppercase;
           color: #333333; }
     .sidenav .closebtn {
       text-decoration: none;

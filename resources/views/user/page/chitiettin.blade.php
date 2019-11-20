@@ -5,6 +5,8 @@
 <link rel="stylesheet" href="{{ asset('css/user_web/layout/baiviet_box.css') }}">
 <link rel="stylesheet" href="{{ asset('css/user_web/layout/comment.css') }}">
 <link rel="stylesheet" href="{{ asset('css/user_web/page/chitiettin.css') }}">
+<link rel="stylesheet" href="{{ asset('slick-1.8.1/slick/slick.css') }}">
+<link rel="stylesheet" href="{{ asset('slick-1.8.1/slick/slick-theme.css') }}" />
 @endsection
 @section('title')
 Chi tiết tin
@@ -38,9 +40,9 @@ Chi tiết tin
             </section>
 
             {{-- Image --}}
-            <section id="baiviet-img">
+            {{-- <section id="baiviet-img">
                 <img class="img-fluid" src="{{ $new->image }}" alt="">
-            </section>
+            </section> --}}
 
             {{-- Content --}}
             <section id="baiviet-content">
@@ -183,7 +185,7 @@ Chi tiết tin
                     <h3>TIN NÓNG</h3>
                 </div>
                 <div class="tin-content">
-                    @foreach ($tinmoi as $item)
+                    @foreach ($tinnong as $item)
                     <div class="baiviet-box">
                         <div class="tintuc-img">
                             <img class="img-fluid" src="{{ $item->image }}" alt="" />
@@ -359,4 +361,5 @@ Chi tiết tin
 @endsection
 @section('js')
 <script type="text/javascript" src="{{ asset('js/user/home.js') }}"></script>
+<script type="text/javascript" src="{{ asset('slick-1.8.1/slick/slick.js') }}"></script>
 @endsection

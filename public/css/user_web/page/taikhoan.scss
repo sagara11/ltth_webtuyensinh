@@ -114,6 +114,8 @@
         }
         .account-section-content {
           .comment-box {
+            padding: 10px 10px;
+            border-bottom: 1px solid rgb(238, 238, 238);
             .news-name {
               font-weight: bold;
             }
@@ -125,11 +127,38 @@
                 color: rgb(47, 161, 179);
               }
             }
-            .your-comment{
+            .your-comment {
               padding: 10px 10px;
               margin-bottom: 3px;
-              background-color: rgb(238,238,238);
+              background-color: rgb(238, 238, 238);
             }
+          }
+        }
+      }
+      #thoat {
+        color: white;
+        .modal-header {
+          background-color: rgb(246, 92, 44);
+        }
+        .modal-body {
+          font-weight: bold;
+          color: black;
+          text-align: center;
+        }
+        .modal-footer {
+          button {
+            padding: 5px 12px;
+            border-radius: 3px;
+          }
+          #logout-btn {
+            border: none;
+            background-color: rgb(246, 92, 44);
+            color: white;
+          }
+          #cancel-btn{
+            color:  rgb(200, 200, 200);
+            background-color: white;
+            border: 1px solid rgb(238, 238, 238);
           }
         }
       }

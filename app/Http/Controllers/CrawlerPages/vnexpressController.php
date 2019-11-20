@@ -25,7 +25,7 @@ class vnexpressController extends Controller
         foreach($post as $key){
             $object = array(
                 'urls' => $key->href,
-                'img' => $src[$count]->getAttribute('data-original')
+                'img' => str_replace("_180x108","",$src[$count]->getAttribute('data-original'))
             );
             array_push($datas, $object);
             $count++;
@@ -45,7 +45,7 @@ class vnexpressController extends Controller
             $slug_arr= str_replace("https://vnexpress.net/giao-duc/","",$page_url);
             $slug = explode('.html?', $slug_arr);
             $description = $post->find('p.description')->innerHTML;
-            $content = htmlentities($post->find('.content_detail')->innerHTML);
+            $content = $post->find('.content_detail')->innerHTML;
         }
         catch(\Exception $e){
             $name = $post->find('h1.title_news_detail')->innerHTML;
@@ -56,12 +56,15 @@ class vnexpressController extends Controller
             exit();
         }
 
+        $post_link = $page_url;
+
         //gan thuoc tinh cua trang
         return array(
             'name' => $name,
             'description' => $description,
             'slug' => $slug[0],
-            'content' => $content
+            'content' => $content,
+            'post_link' => $post_link
         );
     }
 }

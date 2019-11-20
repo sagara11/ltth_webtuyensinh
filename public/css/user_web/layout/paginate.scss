@@ -1,0 +1,22 @@
+.pagination{
+    li{
+        border: 1px solid rgb(246, 92, 44);
+        a{
+            margin: 0px 0px;
+            color: black;
+        }
+    }
+    .active{
+        color: white;
+        .page-link{
+            border: 1px solid rgb(246, 92, 44);
+            background-color: rgb(246, 92, 44);
+        }
+    }
+}
+
+@media only screen and(max-width:600px){
+    .pagination{
+        display: none;
+    }
+}

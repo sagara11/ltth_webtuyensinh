@@ -34,14 +34,14 @@ Tài khoản
                     <a class="nav-link" data-toggle="tab" href="#quanlybinhluan">Quản lý bình luận</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#thoat">Thoát</a>
+                    <a class="nav-link" data-toggle="modal" data-target="#thoat" href="">Thoát</a>
                 </li>
             </ul>
         </div>
         <div class="account-content col-lg-8">
             <div class="tab-content">
                 {{-- Tai khoan cua toi --}}
-                <section id="taikhoancuatoi" class="container tab-pane"><br>
+                <section id="taikhoancuatoi" class="container tab-pane active"><br>
                     <div class="account-section-header">
                         <h3>TÀI KHOẢN CỦA TÔI</h3>
                     </div>
@@ -198,7 +198,7 @@ Tài khoản
                 </section>
 
                 {{-- Doi mat khau --}}
-                <section id="doimatkhau" class="container tab-pane"><br>
+                <section id="doimatkhau" class="container tab-pane fade"><br>
                     <div class="account-section-header">
                         <h3>ĐỔI MẬT KHẨU</h3>
                     </div>
@@ -234,14 +234,14 @@ Tài khoản
                 </section>
 
                 {{-- Quan ly binh luan --}}
-                <section id="quanlybinhluan" class="container tab-pane active"><br>
+                <section id="quanlybinhluan" class="container tab-pane fade"><br>
                     <div class="account-section-header">
-                        <h3>QUẢN LÝ MẬT KHẨU</h3>
+                        <h3>QUẢN LÝ BÌNH LUẬN</h3>
                     </div>
                     <div class="account-section-content">
                         <div class="comment-box">
                             <p class="news-name">
-                                ""Tuyển dụng 50 hân viên thì ....
+                                Tuyển dụng 50 nhân viên thì ....
                             </p>
                             <div class="webtuyensinh-link">
                                 <p>
@@ -255,10 +255,69 @@ Tài khoản
                                 </div>
                                 <div class="comment-content">
                                     <span>Nguyễn Văn Nam</span>
-                                    <span>- 16:50  06/11/2019</span>
+                                    <span>- 16:50 06/11/2019</span>
                                     <p>
                                         Trong 3 năm gần nhất, ngành dân tộc hoc tuyển được một học viên.....
                                     </p>
+                                    <div class="comment-edit">
+                                        <span>
+                                            <a href="">Sửa</a>
+                                        </span>
+                                        <span>
+                                            <a href="">Xóa</a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row your-comment">
+                                <div class="your-image">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="comment-content">
+                                    <span>Nguyễn Văn Nam</span>
+                                    <span>- 16:50 06/11/2019</span>
+                                    <p>
+                                        Trong 3 năm gần nhất, ngành dân tộc hoc tuyển được một học viên.....
+                                    </p>
+                                    <div class="comment-edit">
+                                        <span>
+                                            <a href="">Sửa</a>
+                                        </span>
+                                        <span>
+                                            <a href="">Xóa</a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="comment-box">
+                            <p class="news-name">
+                                Tuyển dụng 50 nhân viên thì ....
+                            </p>
+                            <div class="webtuyensinh-link">
+                                <p>
+                                    <small class="webtuyensinh-section">Tuyển sinh | 1 giờ | 3 bình luận | </small>
+                                    <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
+                                </p>
+                            </div>
+                            <div class="row your-comment">
+                                <div class="your-image">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="comment-content">
+                                    <span>Nguyễn Văn Nam</span>
+                                    <span>- 16:50 06/11/2019</span>
+                                    <p>
+                                        Trong 3 năm gần nhất, ngành dân tộc hoc tuyển được một học viên.....
+                                    </p>
+                                    <div class="comment-edit">
+                                        <span>
+                                            <a href="">Sửa</a>
+                                        </span>
+                                        <span>
+                                            <a href="">Xóa</a>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -266,8 +325,28 @@ Tài khoản
                 </section>
 
                 {{-- Thoat --}}
-                <section id="thoat" class="container tab-pane"><br>
-                    Thoát
+                <section class="modal fade" id="thoat">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Thoát</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                Xác nhận bạn thoát khỏi tài khoản Webtuyensinh
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button id="logout-btn" type="button" >THOÁT</button>
+                                <button id="cancel-btn" type="button" data-dismiss="modal">QUAY LẠI</button>
+                            </div>
+                        </div>
+                    </div>
                 </section>
             </div>
         </div>

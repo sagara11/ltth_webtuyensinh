@@ -3,7 +3,10 @@
 <link rel="stylesheet" href="{{ asset('css/user_web/layout/header.css') }}">
 <link rel="stylesheet" href="{{ asset('css/user_web/layout/footer.css') }}">
 <link rel="stylesheet" href="{{ asset('css/user_web/layout/baiviet_box.css') }}">
+<link rel="stylesheet" href="{{ asset('css/user_web/layout/paginate.css') }}">
 <link rel="stylesheet" href="{{ asset('css/user_web/page/home.css') }}">
+<link rel="stylesheet" href="{{ asset('slick-1.8.1/slick/slick.css') }}">
+<link rel="stylesheet" href="{{ asset('slick-1.8.1/slick/slick-theme.css') }}" />
 @endsection
 @section('title')
 Home
@@ -21,7 +24,11 @@ Home
                     </h5>
                 </a>
                 <p>
-                    <small class="webtuyensinh-section">Tuyển sinh | 1 giờ | 3 bình luận | </small>
+                    <small class="webtuyensinh-section">
+                        <span>{{ $trend_first->categories()->name }} |</span>
+                        <span>{{ $trend_first_time }} giờ trước |</span>
+                        <span>{{ $trend_first->comment }} bình luận |</span>
+                    </small>
                     <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
                 </p>
             </section>
@@ -37,7 +44,11 @@ Home
                         </h5>
                     </a>
                     <p>
-                        <small class="webtuyensinh-section">3 bình luận | </small>
+                        <small class="webtuyensinh-section">
+                            <span>{{ $item->categories()->name }} |</span>
+                            <span>{{ $item->time() }} giờ trước |</span>
+                            <span>{{ $item->comment }} bình luận |</span>
+                        </small>
                         <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
                     </p>
                 </div>
@@ -58,7 +69,11 @@ Home
                             </h5>
                         </a>
                         <p>
-                            <small class="webtuyensinh-section">Tuyển sinh | 1 giờ | 3 bình luận | </small>
+                            <small class="webtuyensinh-section">
+                                <span>{{ $item->categories()->name }} |</span>
+                                <span>{{ $item->time() }} giờ trước |</span>
+                                <span>{{ $item->comment }} bình luận |</span>
+                            </small>
                             <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
                         </p>
                     </div>
@@ -71,16 +86,13 @@ Home
         <div class="col-lg-4">
             <!-- Banner quang cao -->
             <section id="quangcao">
+                @foreach ($banner as $item)
                 <div class="quangcao-box">
                     <a href="">
-                        <img src="{{ asset('media/Untitled-1.png') }}" alt="" />
+                        <img src="{{ $item->image }}" alt="" />
                     </a>
                 </div>
-                <div class="quangcao-box">
-                    <a href="">
-                        <img src="{{ asset('media/Untitled-2.png') }}" alt="" />
-                    </a>
-                </div>
+                @endforeach
             </section>
 
             <!-- Xu huong -->
@@ -178,14 +190,14 @@ Home
                     <h4 class="d-inline">GIÁO DỤC</h4>
                 </div>
                 <div class="side-content">
-                    <a href="{{ route('chitiettin', $giaoduc_first->id) }}" class="tuyensinh-main">
+                    <a href="{{ route('chitiettin', $giaoduc_first->id) }}" class="giaoduc-main">
                         <img src="{{ $giaoduc_first->image }}" alt="" />
                         <div class="tuyensinh-des">
                             "{{ $giaoduc_first->name }}"
                         </div>
                     </a>
                     @foreach ($giaoduc as $item)
-                    <div class="tuyensinh-contents">
+                    <div class="giaoduc-contents">
                         <a href="{{ route('chitiettin', $item->id) }}" class="">
                             <p>
                                 "{{ $item->name }}"
@@ -199,7 +211,7 @@ Home
             <!-- Big advertisement -->
             <section id="big-ad">
                 <a href="">
-                    <img class="img-fluid" src="{{ asset('media/Untitled-3.jpg') }}" alt="" />
+                    <img src="{{ $footer_banner->image }}" alt="" />
                 </a>
             </section>
 
@@ -223,4 +235,5 @@ Home
 @endsection
 @section('js')
 <script type="text/javascript" src="{{ asset('js/user/home.js') }}"></script>
+<script type="text/javascript" src="{{ asset('slick-1.8.1/slick/slick.js') }}"></script>
 @endsection

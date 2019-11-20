@@ -25,7 +25,7 @@ class tuoitreController extends Controller
         foreach($post as $key){
             $object = array(
                 'urls' => 'tuoitre.vn/'.$key->href,
-                'img' => $src[$count]->src
+                'img' => str_replace("zoom/212_132/","",$src[$count]->src)
             );
             array_push($datas, $object);
             $count++;
@@ -44,12 +44,14 @@ class tuoitreController extends Controller
         $slug = trim(str_replace("tuoitre.vn//","",$page_url),'.htm');
         $description = $post->find('h2.sapo')->innerHTML;
         $content = $post->find('#main-detail-body');
+        $post_link = $page_url;
 
         return array(
             'name' => $name,
             'description' => $description,
             'slug' => $slug,
-            'content' => $content
+            'content' => $content,
+            'post_link' => $post_link
         );
     }
 }

@@ -58,6 +58,7 @@ class CrawlController extends Controller
                         $data->trend = 0;
                         $data->category_id = $object_category_id;
                         $data->source_id = $object_source_id;
+                        $data->post_link = $post['post_link'];
                         $this->slug_check($post['slug']);
                         if($this->slug_check($post['slug'])==1){
                             echo "+ Already exist".PHP_EOL;

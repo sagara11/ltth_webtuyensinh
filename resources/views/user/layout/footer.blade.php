@@ -4,29 +4,29 @@
             <p>Liên kết đối tác:</p>
         </div>
         <div class="doitac-contents">
-            <div class="doitac-img">
-                <img class="img-fluid" src="{{ asset('media\Young-Greens-Logo-Icon-02.png') }}"
+            <div class="doitac-img col-lg-2">
+                <img class="img-fluid" src="{{ asset('media\logo eposi.jpg') }}"
                     alt="" />
             </div>
-            <div class="doitac-img">
-                <img class="img-fluid" src="{{ asset('media\Young-Greens-Logo-Icon-02.png') }}"
+            <div class="doitac-img col-lg-2">
+                <img class="img-fluid" src="{{ asset('media\tai-xuo-n_636859354346582162_HasThumb.jpg') }}"
                     alt="" />
             </div>
-            <div class="doitac-img">
-                <img class="img-fluid" src="{{ asset('media\Young-Greens-Logo-Icon-02.png') }}"
+            <div class="doitac-img col-lg-2">
+                <img class="img-fluid" src="{{ asset('media\sblaw.png') }}"
                     alt="" />
             </div>
-            <div class="doitac-img">
-                <img class="img-fluid" src="{{ asset('media\Young-Greens-Logo-Icon-02.png') }}"
+            <div class="doitac-img col-lg-2">
+                <img class="img-fluid" src="{{ asset('media\hud logo.png') }}"
                     alt="" />
             </div>
 
-            <div class="doitac-img">
-                <img class="img-fluid" src="{{ asset('media\Young-Greens-Logo-Icon-02.png') }}"
+            <div class="doitac-img col-lg-2">
+                <img class="img-fluid" src="{{ asset('media\28471172_1881865558770747_2414351670779431115_n.png') }}"
                     alt="" />
             </div>
-            <div class="doitac-img">
-                <img class="img-fluid" src="{{ asset('media\Young-Greens-Logo-Icon-02.png') }}"
+            <div class="doitac-img col-lg-2">
+                <img class="img-fluid" src="{{ asset('media\tải xuống (2).png') }}"
                     alt="" />
             </div>
         </div>

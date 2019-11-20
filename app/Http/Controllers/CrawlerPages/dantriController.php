@@ -25,7 +25,7 @@ class dantriController extends Controller
         foreach($post as $key){
             $object = array(
                 'urls' => 'dantri.com.vn'.$key->href,
-                'img' => $src[$count]->src
+                'img' => str_replace("zoom/130_100//","",$src[$count]->src)
             );
             array_push($datas, $object);
             $count++;
@@ -45,13 +45,15 @@ class dantriController extends Controller
         $description_span = $post->find('h2.fon33.mt1.sapo')->innerHTML;
         $description = trim($description_span, "<span>Dân trí<span/>&nbsp;");
         $content = $post->find('.detail-content');
+        $post_link = $page_url;
 
         //gan thuoc tinh cua trang
         return array(
             'name' => $name,
             'description' => $description,
             'slug' => $slug,
-            'content' => $content
+            'content' => $content,
+            'post_link' => $post_link
         );
     }
 }
