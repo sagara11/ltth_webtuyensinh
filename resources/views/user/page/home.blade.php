@@ -26,7 +26,7 @@ Home
                 <p>
                     <small class="webtuyensinh-section">
                         <span>{{ $trend_first->categories()->name }} |</span>
-                        <span>{{ $trend_first_time }} giờ trước |</span>
+                        <span>{{ $trend_first->time() }} giờ trước |</span>
                         <span>{{ $trend_first->comment }} bình luận |</span>
                     </small>
                     <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>

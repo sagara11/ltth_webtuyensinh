@@ -52,6 +52,8 @@ class HomepageController extends Controller
         $giaoduc_first = Post::where('category_id', 34)->first();
         $giaoduc = Post::orderBy('created_at','desc')->where('category_id', 34)->where('id', "!=", $giaoduc_first->id)->paginate(4);
 
+        $now = Carbon::now();
+
         $webtuyensinh_first = Category::where('id',$trend_first->category_id)->first();
         return view('user.page.home', compact('header','banner','footer_banner','news','trend_first','trend','sidetrend','tuyensinh','tuyensinh_first','giaoduc','giaoduc_first','webtuyensinh_first'));
     }
