@@ -17,17 +17,25 @@ Home
         <div class="col-lg-8">
             <!-- Bai viet chinh -->
             <section id="baiviet-chinh">
-                <a href="{{ route('chitiettin', $trend_first->id) }}">
-                    <img height="500px" width="100%" src="{{ $trend_first->image }}" alt="" />
-                    <h5>
-                        {{ $trend_first->name }}
-                    </h5>
-                </a>
+                <form id="baiviet-form" method="post" action="{{ route('chitiettin', $trend_first->slug) }}">
+                    @csrf
+                    <a onclick="document.getElementById('baiviet-form').submit()">
+                        <img class="img-fluid" height="450px" src="{{ $trend_first->image }}" alt="">
+                        <h5>
+                            {{ $trend_first->name }}
+                        </h5>
+                    </a>
+                    <input type="hidden" name="id" value="{{ $trend_first->id }}">
+                </form>
                 <p>
                     <small class="webtuyensinh-section">
-                        <span>{{ $trend_first->categories()->name }} |</span>
+                        <span>{{ $trend_first->categories->name }} |</span>
                         <span>{{ $trend_first->time() }} giờ trước |</span>
+                        @if ($trend_first->comment != NULL )
                         <span>{{ $trend_first->comment }} bình luận |</span>
+                        @else
+                        <span>0 bình luận |</span>
+                        @endif
                     </small>
                     <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
                 </p>
@@ -37,17 +45,25 @@ Home
             <section id="baiviet-tieubieu">
                 @foreach ($trend as $item)
                 <div class="tieubieu-box">
-                    <a href="{{ route('chitiettin', $item->id) }}">
-                        <img class="img-fluid" src="{{ $item->image }}" alt="" />
-                        <h5>
-                            {{ $item->name }}
-                        </h5>
-                    </a>
+                    <form id="baiviet-form" method="post" action="{{ route('chitiettin', $item->slug) }}">
+                        @csrf
+                        <a onclick="document.getElementById('baiviet-form').submit()">
+                            <img class="img-fluid" src="{{ $item->image }}" alt="">
+                            <h5>
+                                {{ $item->name }}
+                            </h5>
+                        </a>
+                        <input type="hidden" name="id" value="{{ $item->id }}">
+                    </form>
                     <p>
                         <small class="webtuyensinh-section">
-                            <span>{{ $item->categories()->name }} |</span>
+                            <span>{{ $item->categories->name }} |</span>
                             <span>{{ $item->time() }} giờ trước |</span>
+                            @if ($item->comment != NULL )
                             <span>{{ $item->comment }} bình luận |</span>
+                            @else
+                            <span>0 bình luận |</span>
+                            @endif
                         </small>
                         <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
                     </p>
@@ -63,16 +79,24 @@ Home
                         <img class="img-fluid" src="{{ $item->image }}" alt="" />
                     </div>
                     <div class="tintuc-detail">
-                        <a href="{{ route('chitiettin', $item->id) }}">
-                            <h5>
-                                {{ $item->name }}
-                            </h5>
-                        </a>
+                        <form id="baiviet-form" method="post" action="{{ route('chitiettin', $item->slug) }}">
+                            @csrf
+                            <a onclick="document.getElementById('baiviet-form').submit()">
+                                <h5>
+                                    {{ $item->name }}
+                                </h5>
+                            </a>
+                            <input type="hidden" name="id" value="{{ $item->id }}">
+                        </form>
                         <p>
                             <small class="webtuyensinh-section">
-                                <span>{{ $item->categories()->name }} |</span>
+                                <span>{{ $item->categories->name }} |</span>
                                 <span>{{ $item->time() }} giờ trước |</span>
+                                @if ($item->comment != NULL )
                                 <span>{{ $item->comment }} bình luận |</span>
+                                @else
+                                <span>0 bình luận |</span>
+                                @endif
                             </small>
                             <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
                         </p>

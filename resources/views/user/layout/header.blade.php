@@ -171,7 +171,7 @@
 </div>
 
 <div id="Sidenav" class="sidenav">
-    <a href="" class="closebtn" onclick="closeNav()">&times;</a>
+    <a class="closebtn" onclick="closeNav()">&times;</a>
     <ul class="list-unstyled">
         @foreach ($nav_section as $item)
         <li class="col-lg-2">

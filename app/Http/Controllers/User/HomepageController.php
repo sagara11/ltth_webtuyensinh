@@ -58,7 +58,8 @@ class HomepageController extends Controller
         return view('user.page.home', compact('header','banner','footer_banner','news','trend_first','trend','sidetrend','tuyensinh','tuyensinh_first','giaoduc','giaoduc_first','webtuyensinh_first'));
     }
 
-    function chitiettin($id){
+    function chitiettin(Request $request, $slug){
+        $id = $request->id;
         $header = Post::orderBy('view','desc')->paginate(3);
 
         $new = Post::orderBy('created_at','desc')->where('id', $id)->first();

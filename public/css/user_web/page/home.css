@@ -1,6 +1,7 @@
 main #baiviet-chinh a {
   text-decoration: none; }
   main #baiviet-chinh a img {
+    width: 100%;
     border-radius: 5px; }
   main #baiviet-chinh a h5 {
     color: #333333;

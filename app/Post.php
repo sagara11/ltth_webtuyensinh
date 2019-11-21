@@ -11,7 +11,7 @@ class Post extends Model
 
     public function categories()
     {
-    	return Category::where('id', $this->category_id)->first();
+    	return $this->belongsTo('App\Category','category_id','id');
     }
     public function source()
     {
