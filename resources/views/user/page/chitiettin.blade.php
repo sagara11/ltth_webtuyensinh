@@ -297,7 +297,7 @@ Chi tiết tin
                     <h4>TUYỂN SINH</h4>
                 </div>
                 <div class="side-content">
-                    <a href="{{ route('chitiettin', $tuyensinh_first->id) }}" class="tuyensinh-main">
+                    <a href="{{ route('chitiettin', $tuyensinh_first->slug) }}" class="tuyensinh-main">
                         <img src="{{  $tuyensinh_first->image }}" alt="" />
                         <p class="tuyensinh-des">
                             "{{  $tuyensinh_first->name }}"
@@ -322,7 +322,7 @@ Chi tiết tin
                     <h4 class="d-inline">GIÁO DỤC</h4>
                 </div>
                 <div class="side-content">
-                    <a href="{{ route('chitiettin', $giaoduc_first->id) }}" class="tuyensinh-main">
+                    <a href="{{ route('chitiettin', $giaoduc_first->slug) }}" class="tuyensinh-main">
                         <img src="{{ $giaoduc_first->image }}" alt="" />
                         <div class="tuyensinh-des">
                             "{{  $giaoduc_first->name }}"
