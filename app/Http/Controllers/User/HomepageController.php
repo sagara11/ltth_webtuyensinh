@@ -16,7 +16,7 @@ class HomepageController extends Controller
     function home(){
         $header = Post::orderBy('view','desc')->paginate(3);
 
-        $banner = Banner::orderBy('created_at','desc')->where('position','banner')->paginate(2);
+        $banner = Banner::orderBy('created_at','desc')->where('position','top')->paginate(2);
         $footer_banner = Banner::orderBy('created_at','desc')->where('position','sidebar')->first();
 
         $trend_first = Post::latest()->where('trend', 1)->first();
@@ -42,7 +42,7 @@ class HomepageController extends Controller
 
         $header = Post::orderBy('view','desc')->paginate(3);
 
-        $banner = Banner::orderBy('created_at','desc')->paginate(2);
+        $banner = Banner::where('position','top')->paginate(2);
         $footer_banner = Banner::where('position','sidebar')->first();
 
         $trend_first = Post::latest()->where('trend', 1)->where('category_id', $header_id->id)->first();
