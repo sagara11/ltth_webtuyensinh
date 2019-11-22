@@ -254,7 +254,7 @@ Chi tiết tin
             </section>
 
             <!-- Video -->
-            <section id="videos">
+            {{-- <section id="videos">
                 <div class="side-header">
                     <i class="far fa-play-circle"></i>
                     <h4>VIDEO</h4>
@@ -288,7 +288,7 @@ Chi tiết tin
                         </p>
                     </div>
                 </div>
-            </section>
+            </section> --}}
 
             <!-- Tuyen sinh -->
             <section id="tuyensinh">

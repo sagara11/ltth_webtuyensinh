@@ -37,16 +37,17 @@ class HomepageController extends Controller
         return view('user.page.home', compact('header','trend_first_time','banner','footer_banner','news','trend_first','trend','sidetrend','tuyensinh','tuyensinh_first','giaoduc','giaoduc_first','webtuyensinh_first'));
     }
 
-    function danhmuc(Request $request ,$slug){
-        $type = $request->type;
+    function danhmuc($slug){
+        $header_id = Category::where('slug', $slug)->first();
+
         $header = Post::orderBy('view','desc')->paginate(3);
 
         $banner = Banner::orderBy('created_at','desc')->paginate(2);
-        $footer_banner = Banner::orderBy('created_at','desc')->where('position','sidebar')->first();
+        $footer_banner = Banner::where('position','sidebar')->first();
 
-        $trend_first = Post::latest()->where('trend', 1)->where('category_id', $type)->first();
-        $trend = Post::orderBy('created_at','desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->where('category_id', $type)->paginate(3);
-        $news = Post::orderBy('created_at','desc')->where('category_id', $type)->where('id', "!=", $trend_first->id)->paginate(20);
+        $trend_first = Post::latest()->where('trend', 1)->where('category_id', $header_id->id)->first();
+        $trend = Post::orderBy('created_at','desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->where('category_id', $header_id->id)->paginate(3);
+        $news = Post::orderBy('created_at','desc')->where('category_id', $header_id->id)->where('id', "!=", $trend_first->id)->paginate(20);
         $sidetrend = Post::orderBy('created_at','desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->paginate(6);
         $tuyensinh_first = Post::where('category_id', 37)->first();
         $tuyensinh = Post::orderBy('created_at','desc')->where('category_id', 37)->where('id', "!=", $tuyensinh_first->id)->paginate(4);

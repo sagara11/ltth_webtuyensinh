@@ -31,7 +31,7 @@ Home
                         <span>0 bình luận |</span>
                         @endif
                     </small>
-                    <small><span class="webtuyensinh-link" href="">webtuyensinh</span></small>
+                    <small><span class="webtuyensinh-link" href="">{{ $trend_first->source->web_name }}</span></small>
                 </p>
             </section>
 
@@ -55,7 +55,7 @@ Home
                             <span>0 bình luận |</span>
                             @endif
                         </small>
-                        <small><span class="webtuyensinh-link" href="">webtuyensinh</span></small>
+                        <small><span class="webtuyensinh-link" href="">{{ $item->source->web_name }}</span></small>
                     </p>
                 </div>
                 @endforeach
@@ -84,7 +84,7 @@ Home
                                 <span>0 bình luận |</span>
                                 @endif
                             </small>
-                            <small><span class="webtuyensinh-link" href="">webtuyensinh</span></small>
+                            <small><span class="webtuyensinh-link" href="">{{ $item->source->web_name }}</span></small>
                         </p>
                     </div>
                 </div>
@@ -131,7 +131,7 @@ Home
             </section>
 
             <!-- Video -->
-            <section id="videos">
+            {{-- <section id="videos">
                 <div class="side-header">
                     <i class="far fa-play-circle"></i>
                     <h4>VIDEO</h4>
@@ -165,7 +165,7 @@ Home
                         </p>
                     </div>
                 </div>
-            </section>
+            </section> --}}
 
             <!-- Tuyen sinh -->
             <section id="tuyensinh">

@@ -104,7 +104,7 @@ Route::group(['prefix'=>'elastic'], function () {
 });
 
 Route::get("/",'User\HomepageController@home')->name('home');
-Route::post('danh-muc/{slug}','User\HomepageController@danhmuc')->name('danhmuc');
+Route::get('danh-muc/{slug}','User\HomepageController@danhmuc')->name('danhmuc');
 
 Route::get("/{slug}",'User\HomepageController@chitiettin')->name('chitiettin');
 

@@ -5,7 +5,7 @@
             <div class="header-news col-lg-9">
                 @foreach ($header as $item)
                 <span>
-                    {{ $item->name }}
+                    <b>SỰ KIỆN: </b>{{ $item->name }}
                 </span>
                 @endforeach
             </div>
@@ -113,15 +113,9 @@
 
                 @foreach ($nav_section as $item)
                 <li>
-                    <form id="danhmuc-form-{{ $item->id }}" method="post" action="{{ route('danhmuc', $item->slug) }}">
-                        @csrf
-                        <a onclick="document.getElementById('danhmuc-form-{{ $item->id }}').submit()">
-                            <b>
-                                {{ $item->name }}
-                            </b>
-                        </a>
-                        <input type="hidden" name="type" value="{{ $item->id }}">
-                    </form>
+                    <a href="{{ route('danhmuc',$item->slug) }}">
+                        <b>{{ $item->name }}</b>
+                    </a>
                 </li>
                 @endforeach
             </ul>
