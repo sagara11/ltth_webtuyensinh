@@ -5,8 +5,6 @@
 <link rel="stylesheet" href="{{ asset('css/user_web/layout/baiviet_box.css') }}">
 <link rel="stylesheet" href="{{ asset('css/user_web/layout/paginate.css') }}">
 <link rel="stylesheet" href="{{ asset('css/user_web/page/home.css') }}">
-<link rel="stylesheet" href="{{ asset('slick-1.8.1/slick/slick.css') }}">
-<link rel="stylesheet" href="{{ asset('slick-1.8.1/slick/slick-theme.css') }}" />
 @endsection
 @section('title')
 Home
@@ -17,16 +15,12 @@ Home
         <div class="col-lg-8">
             <!-- Bai viet chinh -->
             <section id="baiviet-chinh">
-                <form id="baiviet-form" method="post" action="{{ route('chitiettin', $trend_first->slug) }}">
-                    @csrf
-                    <a onclick="document.getElementById('baiviet-form').submit()">
-                        <img class="img-fluid" height="450px" src="{{ $trend_first->image }}" alt="">
-                        <h5>
-                            {{ $trend_first->name }}
-                        </h5>
-                    </a>
-                    <input type="hidden" name="id" value="{{ $trend_first->id }}">
-                </form>
+                <a href="{{ route('chitiettin',$trend_first->slug) }}">
+                    <img class="img-fluid" src="{{ $trend_first->image }}" alt="">
+                </a>
+                <h5>
+                    <a href="{{ route('chitiettin',$trend_first->slug) }}"> {{ $trend_first->name }} </a>
+                </h5>
                 <p>
                     <small class="webtuyensinh-section">
                         <span>{{ $trend_first->categories->name }} |</span>
@@ -37,7 +31,7 @@ Home
                         <span>0 bình luận |</span>
                         @endif
                     </small>
-                    <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
+                    <small><span class="webtuyensinh-link" href="">webtuyensinh</span></small>
                 </p>
             </section>
 
@@ -45,16 +39,12 @@ Home
             <section id="baiviet-tieubieu">
                 @foreach ($trend as $item)
                 <div class="tieubieu-box">
-                    <form id="baiviet-form" method="post" action="{{ route('chitiettin', $item->slug) }}">
-                        @csrf
-                        <a onclick="document.getElementById('baiviet-form').submit()">
-                            <img class="img-fluid" src="{{ $item->image }}" alt="">
-                            <h5>
-                                {{ $item->name }}
-                            </h5>
-                        </a>
-                        <input type="hidden" name="id" value="{{ $item->id }}">
-                    </form>
+                    <a href="{{ route('chitiettin',$item->slug) }}">
+                        <img class="img-fluid" src="{{ $item->image }}" alt="">
+                    </a>
+                    <h5>
+                        <a href="{{ route('chitiettin',$item->slug) }}"> {{ $item->name }} </a>
+                    </h5>
                     <p>
                         <small class="webtuyensinh-section">
                             <span>{{ $item->categories->name }} |</span>
@@ -65,7 +55,7 @@ Home
                             <span>0 bình luận |</span>
                             @endif
                         </small>
-                        <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
+                        <small><span class="webtuyensinh-link" href="">webtuyensinh</span></small>
                     </p>
                 </div>
                 @endforeach
@@ -76,18 +66,14 @@ Home
                 @foreach ($news as $item)
                 <div class="baiviet-box">
                     <div class="tintuc-img">
-                        <img class="img-fluid" src="{{ $item->image }}" alt="" />
+                        <a href="{{ route('chitiettin',$item->slug) }}">
+                            <img class="img-fluid" src="{{ $item->image }}" alt="" />
+                        </a>
                     </div>
                     <div class="tintuc-detail">
-                        <form id="baiviet-form" method="post" action="{{ route('chitiettin', $item->slug) }}">
-                            @csrf
-                            <a onclick="document.getElementById('baiviet-form').submit()">
-                                <h5>
-                                    {{ $item->name }}
-                                </h5>
-                            </a>
-                            <input type="hidden" name="id" value="{{ $item->id }}">
-                        </form>
+                        <h5>
+                            <a href="{{ route('chitiettin',$item->slug) }}"> {{ $item->name }} </a>
+                        </h5>
                         <p>
                             <small class="webtuyensinh-section">
                                 <span>{{ $item->categories->name }} |</span>
@@ -98,13 +84,12 @@ Home
                                 <span>0 bình luận |</span>
                                 @endif
                             </small>
-                            <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
+                            <small><span class="webtuyensinh-link" href="">webtuyensinh</span></small>
                         </p>
                     </div>
                 </div>
                 @endforeach
             </section>
-            {{ $news->links() }}
         </div>
 
         <div class="col-lg-4">
@@ -135,9 +120,9 @@ Home
                     <div>
                         @foreach ($sidetrend as $item)
                         <a href="{{ route('chitiettin', $item->id) }}" class="xuhuong-contents">
-                            <img width="25%" height="70px" src="{{ $item->image }}" alt="" />
+                            <img width="25%" src="{{ $item->image }}" alt="" />
                             <p class="xuhuong-contents-des">
-                                "{{ $item->name }}"
+                                {{ $item->name }}
                             </p>
                         </a>
                         @endforeach
@@ -192,14 +177,14 @@ Home
                     <a href="{{ route('chitiettin', $tuyensinh_first->id) }}" class="tuyensinh-main">
                         <img src="{{ $tuyensinh_first->image }}" alt="" />
                         <p class="tuyensinh-des">
-                            "{{ $tuyensinh_first->name }}"
+                            {{ $tuyensinh_first->name }}
                         </p>
                     </a>
                     @foreach ($tuyensinh as $item)
                     <div class="tuyensinh-contents">
                         <a href="{{ route('chitiettin', $item->id) }}">
                             <p>
-                                "{{ $item->name }}"
+                                {{ $item->name }}
                             </p>
                         </a>
                     </div>
@@ -217,14 +202,14 @@ Home
                     <a href="{{ route('chitiettin', $giaoduc_first->id) }}" class="giaoduc-main">
                         <img src="{{ $giaoduc_first->image }}" alt="" />
                         <div class="tuyensinh-des">
-                            "{{ $giaoduc_first->name }}"
+                            {{ $giaoduc_first->name }}
                         </div>
                     </a>
                     @foreach ($giaoduc as $item)
                     <div class="giaoduc-contents">
                         <a href="{{ route('chitiettin', $item->id) }}" class="">
                             <p>
-                                "{{ $item->name }}"
+                                {{ $item->name }}
                             </p>
                         </a>
                     </div>
@@ -258,6 +243,8 @@ Home
 </main>
 @endsection
 @section('js')
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.marquee/1.3.1/jquery.marquee.min.js"></script>
 <script type="text/javascript" src="{{ asset('js/user/home.js') }}"></script>
 <script type="text/javascript" src="{{ asset('slick-1.8.1/slick/slick.js') }}"></script>
 @endsection

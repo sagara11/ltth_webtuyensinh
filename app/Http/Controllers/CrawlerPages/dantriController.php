@@ -24,7 +24,7 @@ class dantriController extends Controller
 
         foreach($post as $key){
             $object = array(
-                'urls' => 'dantri.com.vn'.$key->href,
+                'urls' => 'https://dantri.com.vn'.$key->href,
                 'img' => str_replace("zoom/130_100//","",$src[$count]->src)
             );
             array_push($datas, $object);
@@ -41,7 +41,10 @@ class dantriController extends Controller
 
         // lay cac phan tu cua page
         $name = $post->find('h1.fon31.mgb15')->innerHTML;
-        $slug = trim(str_replace("dantri.com.vn/giao-duc-khuyen-hoc/","",$page_url),'.htm');
+        if(preg_match('/\/.+\/(.+)-\d/m', $page_url, $match)) 
+        {
+            $slug = $match[1];
+        } 
         $description_span = $post->find('h2.fon33.mt1.sapo')->innerHTML;
         $description = trim($description_span, "<span>Dân trí<span/>&nbsp;");
         $content = $post->find('.detail-content');

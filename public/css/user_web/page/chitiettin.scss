@@ -39,6 +39,9 @@
 
 #baiviet-content {
   padding: 10px 0px;
+  img{
+    width: 100%;
+  }
 }
 
 #comment {
@@ -281,5 +284,13 @@
     font-weight: bold;
     color: rgb(59, 89, 151);
     font-size: 28px;
+  }
+}
+
+.fck{
+  div{
+    img{
+      width: 100%;
+    }
   }
 }

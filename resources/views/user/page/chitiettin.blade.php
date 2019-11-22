@@ -5,8 +5,6 @@
 <link rel="stylesheet" href="{{ asset('css/user_web/layout/baiviet_box.css') }}">
 <link rel="stylesheet" href="{{ asset('css/user_web/layout/comment.css') }}">
 <link rel="stylesheet" href="{{ asset('css/user_web/page/chitiettin.css') }}">
-<link rel="stylesheet" href="{{ asset('slick-1.8.1/slick/slick.css') }}">
-<link rel="stylesheet" href="{{ asset('slick-1.8.1/slick/slick-theme.css') }}" />
 @endsection
 @section('title')
 Chi tiết tin
@@ -24,7 +22,15 @@ Chi tiết tin
                 <h5>"{{ $new->name }}"</h5>
                 <div class="webtuyensinh-link">
                     <p>
-                        <small class="webtuyensinh-section">Tuyển sinh | 1 giờ | 3 bình luận | </small>
+                        <small class="webtuyensinh-section">
+                            <span>{{ $new->categories->name }} |</span>
+                            <span>{{ $new->time() }} giờ trước |</span>
+                            @if ($new->comment != NULL )
+                            <span>{{ $new->comment }} bình luận |</span>
+                            @else
+                            <span>0 bình luận |</span>
+                            @endif
+                        </small>
                         <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
                     </p>
                 </div>
@@ -360,6 +366,8 @@ Chi tiết tin
 </main>
 @endsection
 @section('js')
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.marquee/1.3.1/jquery.marquee.min.js"></script>
 <script type="text/javascript" src="{{ asset('js/user/home.js') }}"></script>
 <script type="text/javascript" src="{{ asset('slick-1.8.1/slick/slick.js') }}"></script>
 @endsection

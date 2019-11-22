@@ -42,14 +42,20 @@ class vnexpressController extends Controller
         // lay cac phan tu name, description, image, content, slug
         try{
             $name = $post->find('h1.title_news_detail')->innerHTML;
-            $slug_arr= str_replace("https://vnexpress.net/giao-duc/","",$page_url);
+            if(preg_match('/\/.+\/(.+)-\d/m', $page_url, $match)) 
+            {
+                $slug_arr = $match[1];
+            } 
             $slug = explode('.html?', $slug_arr);
             $description = $post->find('p.description')->innerHTML;
             $content = $post->find('.content_detail')->innerHTML;
         }
         catch(\Exception $e){
             $name = $post->find('h1.title_news_detail')->innerHTML;
-            $slug_arr= str_replace("https://vnexpress.net/giao-duc/","",$page_url);
+            if(preg_match('/\/.+\/(.+)-\d/m', $page_url, $match)) 
+            {
+                $slug_arr = $match[1];
+            } 
             $slug = explode('.html?', $slug_arr);
             $description = $post->find('h2.description')->innerHTML;
             $content = $post->find('.content_detail')->innerHTML;                                                                                                                                                                                       

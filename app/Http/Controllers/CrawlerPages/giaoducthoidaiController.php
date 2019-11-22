@@ -42,13 +42,19 @@ class giaoducthoidaiController extends Controller
         // lay cac phan tu cua page
         try{
             $name = strip_tags($post->find('h1.cms-title')->innerHTML);
-            $slug = trim(str_replace("ps://giaoducthoidai.vn/giao-duc","",$page_url),'.html');
+            if(preg_match('/\/.+\/(.+)-\d/m', $page_url, $match)) 
+            {
+                $slug = $match[1];
+            }
             $description = $post->find('div.summary.cms-desc div')->innerHTML;
             $content = $post->find('.cms-body');
         }
         catch(\Exception $e){
             $name = strip_tags($post->find('h1.cms-title')->innerHTML);
-            $slug = trim(str_replace("ps://giaoducthoidai.vn/giao-duc","",$page_url),'.html');
+            if(preg_match('/\/.+\/(.+)-\d/m', $page_url, $match)) 
+            {
+                $slug = $match[1];
+            }
             $description = $post->find('div.summary.cms-desc')->innerHTML;
             $content = $post->find('.cms-body');
         }
@@ -64,7 +70,3 @@ class giaoducthoidaiController extends Controller
         );
     }
 }
-
-
-
-

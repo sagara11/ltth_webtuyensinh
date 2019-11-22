@@ -37,7 +37,8 @@ class HomepageController extends Controller
         return view('user.page.home', compact('header','trend_first_time','banner','footer_banner','news','trend_first','trend','sidetrend','tuyensinh','tuyensinh_first','giaoduc','giaoduc_first','webtuyensinh_first'));
     }
 
-    function danhmuc($type){
+    function danhmuc(Request $request ,$slug){
+        $type = $request->type;
         $header = Post::orderBy('view','desc')->paginate(3);
 
         $banner = Banner::orderBy('created_at','desc')->paginate(2);
@@ -58,11 +59,10 @@ class HomepageController extends Controller
         return view('user.page.home', compact('header','banner','footer_banner','news','trend_first','trend','sidetrend','tuyensinh','tuyensinh_first','giaoduc','giaoduc_first','webtuyensinh_first'));
     }
 
-    function chitiettin(Request $request, $slug){
-        $id = $request->id;
+    function chitiettin($slug){
         $header = Post::orderBy('view','desc')->paginate(3);
 
-        $new = Post::orderBy('created_at','desc')->where('id', $id)->first();
+        $new = Post::orderBy('created_at','desc')->where('slug', $slug)->first();
         $xuhuong = Post::orderBy('created_at','desc')->where('trend', 1)->get();
         $tuyensinh_first = Post::where('category_id', 37)->first();
         $tuyensinh = Post::orderBy('created_at','desc')->where('category_id', 37)->where('id', "!=", $tuyensinh_first->id)->paginate(4);

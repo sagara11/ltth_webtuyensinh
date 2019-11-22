@@ -4,10 +4,9 @@
         <div class="row">
             <div class="header-news col-lg-9">
                 @foreach ($header as $item)
-                <div>
-                    <i class="fa fa-edit"></i>
-                    <b>SỰ KIỆN: </b>"{{ $item->name }}"
-                </div>
+                <span>
+                    {{ $item->name }}
+                </span>
                 @endforeach
             </div>
             <div class="header-account dropdown col-lg-3">
@@ -111,9 +110,18 @@
                         <i class="fa fa-home"></i>
                     </a>
                 </li>
+
                 @foreach ($nav_section as $item)
                 <li>
-                    <a href="{{ route('danhmuc', $item->id) }}"><b>{{ $item->name }}</b></a>
+                    <form id="danhmuc-form-{{ $item->id }}" method="post" action="{{ route('danhmuc', $item->slug) }}">
+                        @csrf
+                        <a onclick="document.getElementById('danhmuc-form-{{ $item->id }}').submit()">
+                            <b>
+                                {{ $item->name }}
+                            </b>
+                        </a>
+                        <input type="hidden" name="type" value="{{ $item->id }}">
+                    </form>
                 </li>
                 @endforeach
             </ul>
@@ -123,7 +131,6 @@
                 <i onclick="openSearch()" class="fas fa-search"></i>
             </div>
             <div id="searchbar">
-                <a class="closebtn" onclick="closeSearch()">&times;</a>
                 <input class="form-control" type="text" placeholder="Nhập tìm kiếm...">
             </div>
         </div>

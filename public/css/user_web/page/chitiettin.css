@@ -27,6 +27,8 @@
 
 #baiviet-content {
   padding: 10px 0px; }
+  #baiviet-content img {
+    width: 100%; }
 
 #comment {
   padding: 10px 0px; }
@@ -206,5 +208,8 @@
     font-weight: bold;
     color: #3b5997;
     font-size: 28px; }
+
+.fck div img {
+  width: 100%; }
 
 /*# sourceMappingURL=chitiettin.css.map */

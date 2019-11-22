@@ -2,8 +2,10 @@ header {
   padding: 10px 0px;
   background-color: #f65c2c;
   color: white; }
-  header .header-news p {
-    margin: 0px 0px; }
+  header .header-news {
+    overflow: hidden; }
+    header .header-news span {
+      margin-right: 20px; }
   header .header-account {
     padding-left: 55px; }
     header .header-account .dropdown-toggle {
@@ -67,7 +69,11 @@ nav {
         padding: 0px 0px; }
         nav .nav .menu ul li:hover {
           background-color: #f6f6f6; }
+        nav .nav .menu ul li form {
+          text-align: center;
+          width: 100%; }
         nav .nav .menu ul li a {
+          cursor: pointer;
           text-transform: uppercase;
           text-decoration: none;
           color: #333333;
@@ -85,8 +91,9 @@ nav {
         background-color: white;
         padding: 10px 12px;
         border: 1px solid gainsboro;
-        top: 25px;
-        width: 200px;
+        right: 20px;
+        top: 30px;
+        width: 350px;
         z-index: 9999;
         position: absolute;
         display: none; }
@@ -246,5 +253,10 @@ article .modal-footer {
       right: 25px;
       font-size: 36px;
       margin-left: 50px; } }
+.marquee {
+  width: 300px;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background: #ccc; }
 
 /*# sourceMappingURL=header.css.map */
