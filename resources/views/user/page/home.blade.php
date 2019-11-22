@@ -111,7 +111,7 @@ Home
                     <h4>XU HƯỚNG</h4>
                 </div>
                 <div class="side-content">
-                    <a href="{{ route('chitiettin', $trend_first->id) }}" class="xuhuong-main">
+                    <a href="{{ route('chitiettin',$trend_first->slug) }}" class="xuhuong-main">
                         <img class="img-fluid" src="{{ $trend_first->image }}" alt="" />
                         <p>
                             {{ $trend_first->name }}
@@ -119,7 +119,7 @@ Home
                     </a>
                     <div>
                         @foreach ($sidetrend as $item)
-                        <a href="{{ route('chitiettin', $item->id) }}" class="xuhuong-contents">
+                        <a href="{{ route('chitiettin',$item->slug) }}" class="xuhuong-contents">
                             <img width="25%" src="{{ $item->image }}" alt="" />
                             <p class="xuhuong-contents-des">
                                 {{ $item->name }}
@@ -182,7 +182,7 @@ Home
                     </a>
                     @foreach ($tuyensinh as $item)
                     <div class="tuyensinh-contents">
-                        <a href="{{ route('chitiettin', $item->id) }}">
+                        <a href="{{ route('chitiettin',$item->slug) }}">
                             <p>
                                 {{ $item->name }}
                             </p>
@@ -199,7 +199,7 @@ Home
                     <h4 class="d-inline">GIÁO DỤC</h4>
                 </div>
                 <div class="side-content">
-                    <a href="{{ route('chitiettin', $giaoduc_first->id) }}" class="giaoduc-main">
+                    <a href="{{ route('chitiettin',$giaoduc_first->slug) }}" class="giaoduc-main">
                         <img src="{{ $giaoduc_first->image }}" alt="" />
                         <div class="tuyensinh-des">
                             {{ $giaoduc_first->name }}
@@ -207,7 +207,7 @@ Home
                     </a>
                     @foreach ($giaoduc as $item)
                     <div class="giaoduc-contents">
-                        <a href="{{ route('chitiettin', $item->id) }}" class="">
+                        <a href="{{ route('chitiettin',$item->slug) }}" class="">
                             <p>
                                 {{ $item->name }}
                             </p>
