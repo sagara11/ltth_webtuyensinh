@@ -139,11 +139,11 @@ Chi tiết tin
                 <div class="tin-content">
                     @foreach ($tinlienquan as $item)
                     <div class="baiviet-box">
-                        <div class="tintuc-img">
+                        <a href="{{ route('chitiettin',$item->slug) }}" class="tintuc-img">
                             <img class="img-fluid" src="{{ $item->image }}" alt="" />
-                        </div>
+                        </a>
                         <div class="tintuc-detail">
-                            <a href="{{ route('chitiettin', $item->id) }}">
+                            <a href="{{ route('chitiettin',$item->slug) }}">
                                 <h5>
                                     {{ $item->name }}
                                 </h5>
@@ -166,11 +166,11 @@ Chi tiết tin
                 <div class="tin-content">
                     @foreach ($tinmoi as $item)
                     <div class="baiviet-box">
-                        <div class="tintuc-img">
+                        <a href="{{ route('chitiettin',$item->slug) }}" class="tintuc-img">
                             <img class="img-fluid" src="{{ $item->image }}" alt="" />
-                        </div>
+                        </a>
                         <div class="tintuc-detail">
-                            <a href="{{ route('chitiettin', $item->id) }}">
+                            <a href="{{ route('chitiettin',$item->slug) }}">
                                 <h5>
                                     {{ $item->name }}
                                 </h5>
@@ -193,11 +193,11 @@ Chi tiết tin
                 <div class="tin-content">
                     @foreach ($tinnong as $item)
                     <div class="baiviet-box">
-                        <div class="tintuc-img">
+                        <a href="{{ route('chitiettin',$item->slug) }}" class="tintuc-img">
                             <img class="img-fluid" src="{{ $item->image }}" alt="" />
-                        </div>
+                        </a>
                         <div class="tintuc-detail">
-                            <a href="{{ route('chitiettin', $item->id) }}">
+                            <a href="{{ route('chitiettin',$item->slug) }}">
                                 <h5>
                                     {{ $item->name }}
                                 </h5>
@@ -234,7 +234,7 @@ Chi tiết tin
                     <h4>XU HƯỚNG</h4>
                 </div>
                 <div class="side-content">
-                    <a href="{{ route('chitiettin', $new->id) }}" class="xuhuong-main">
+                    <a href="{{ route('chitiettin', $new->slug) }}" class="xuhuong-main">
                         <img class="img-fluid" src="{{ $new->image }}" alt="" />
                         <p>
                             {{ $new->name }}
@@ -242,7 +242,7 @@ Chi tiết tin
                     </a>
                     <div>
                         @foreach ($xuhuong as $item)
-                        <a href="{{ route('chitiettin', $item->id) }}" class="xuhuong-contents">
+                        <a href="{{ route('chitiettin',$item->slug) }}" class="xuhuong-contents">
                             <img width="25%" height="70px" src="{{ $item->image }}" alt="" />
                             <p class="xuhuong-contents-des">
                                 "{{  $item->name }}"
@@ -305,7 +305,7 @@ Chi tiết tin
                     </a>
                     @foreach ($tuyensinh as $item)
                     <div class="tuyensinh-contents">
-                        <a href="{{ route('chitiettin', $item->id) }}">
+                        <a href="{{ route('chitiettin',$item->slug) }}">
                             <p>
                                 "{{  $item->name }}"
                             </p>
@@ -330,7 +330,7 @@ Chi tiết tin
                     </a>
                     @foreach ($giaoduc as $item)
                     <div class="tuyensinh-contents">
-                        <a href="{{ route('chitiettin', $item->id) }}" class="">
+                        <a href="{{ route('chitiettin',$item->slug) }}" class="">
                             <p>
                                 "{{  $item->name }}"
                             </p>

@@ -2,10 +2,13 @@
 <header>
     <div class="container">
         <div class="row">
-            <div class="header-news col-lg-9">
+            <div class="sukien col-lg-1">
+                <b>SỰ KIỆN: </b>
+            </div>
+            <div class="header-news col-lg-8">
                 @foreach ($header as $item)
                 <span>
-                    <b>SỰ KIỆN: </b>{{ $item->name }}
+                    {{ $item->name }}
                 </span>
                 @endforeach
             </div>
@@ -100,7 +103,7 @@
     <div class="nav row">
         <div class="col-lg-2 nav-logo">
             <a href="{{ route('home') }}">
-                <img class="img-fluid" src="{{ asset('media/logo.png') }}" alt="" />
+                <img class="img-fluid" src="{{ asset('media/logo-main.png') }}" alt="" />
             </a>
         </div>
         <div class="menu col-lg-9">

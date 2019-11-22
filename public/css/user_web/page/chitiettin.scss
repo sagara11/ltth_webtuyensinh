@@ -63,6 +63,15 @@
     color: rgb(246, 92, 44);
     font-weight: bold;
   }
+  .tin-content{
+    .baiviet-box{
+      .tintuc-detail{
+        a{
+          text-decoration: none;
+        }
+      }
+    }
+  }
 }
 
 #quangcao {
@@ -95,6 +104,7 @@
     padding: 10px 10px;
     background-color: rgba(246, 92, 44, 0.1);
     .xuhuong-main {
+      text-decoration: none;
       img {
         width: 100%;
         border-radius: 5px;
@@ -106,11 +116,12 @@
     }
     div {
       .xuhuong-contents {
+        text-decoration: none;
         padding: 5px 7px;
         margin: 10px 0px;
         display: flex;
         img {
-          margin-right: 5px;
+          margin-right: 10px;
           border-radius: 5px;
         }
         p {
@@ -203,9 +214,11 @@
     border: 1px solid rgb(213, 213, 213);
     border-top: 2px solid rgb(47, 161, 179);
     .tuyensinh-main {
+      text-decoration: none;
       padding: 8px 0px;
       display: flex;
       img {
+        margin-right: 10px;
         width: 35%;
         border-radius: 5px;
       }
@@ -214,9 +227,11 @@
       }
     }
     .tuyensinh-contents {
+      text-decoration: none;
       padding: 10px 0px;
       border-top: 1px dotted rgb(213, 213, 213);
       a {
+        text-decoration: none;
         p {
           color: rgb(51, 51, 51);
           margin: 0px 0px;
@@ -247,9 +262,11 @@
     border: 1px solid rgb(213, 213, 213);
     border-top: 2px solid rgb(246, 92, 44);
     .tuyensinh-main {
+      text-decoration: none;
       padding: 10px 5px;
       display: flex;
       img {
+        margin-right: 10px;
         border-radius: 5px;
         width: 35%;
       }
@@ -262,6 +279,7 @@
       padding: 15px 8px;
       border-top: 1px dotted rgb(213, 213, 213);
       a {
+        text-decoration: none;
         p {
           text-align: left;
           margin: 0px 0px;

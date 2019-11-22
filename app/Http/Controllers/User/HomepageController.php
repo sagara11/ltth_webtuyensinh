@@ -64,7 +64,7 @@ class HomepageController extends Controller
         $header = Post::orderBy('view','desc')->paginate(3);
 
         $new = Post::orderBy('created_at','desc')->where('slug', $slug)->first();
-        $xuhuong = Post::orderBy('created_at','desc')->where('trend', 1)->get();
+        $xuhuong = Post::orderBy('created_at','desc')->where('trend', 1)->paginate(4);
         $tuyensinh_first = Post::where('category_id', 37)->first();
         $tuyensinh = Post::orderBy('created_at','desc')->where('category_id', 37)->where('id', "!=", $tuyensinh_first->id)->paginate(4);
         $giaoduc_first = Post::where('category_id',34)->first();

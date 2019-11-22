@@ -2,6 +2,8 @@ header {
   padding: 10px 0px;
   background-color: #f65c2c;
   color: white; }
+  header .sukien b {
+    font-size: 15px; }
   header .header-news {
     overflow: hidden; }
     header .header-news span {
