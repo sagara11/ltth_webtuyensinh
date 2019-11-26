@@ -112,4 +112,6 @@ Route::get('/video', 'User\HomepageController@video');
 
 Route::get('/tai-khoan', 'User\HomepageController@taikhoan');
 
+Route::post('/search', 'User\HomepageController@search')->name('search');
+
 Route::post("/sign-in","User\HomepageController@signin")->name('signin');

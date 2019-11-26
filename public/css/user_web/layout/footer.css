@@ -36,6 +36,13 @@ footer {
     color: #e3411f; }
   footer .footer-contain .social .fa-youtube-square {
     color: #ca3737; }
+  footer .footer-contain .appstore-ggplay {
+    border-top: 1px solid gainsboro;
+    display: flex; }
+    footer .footer-contain .appstore-ggplay div {
+      padding: 10px 0px; }
+      footer .footer-contain .appstore-ggplay div img {
+        height: 50px; }
 
 #doitac-container {
   padding: 10px 0px;

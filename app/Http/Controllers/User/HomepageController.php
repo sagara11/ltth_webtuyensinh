@@ -28,13 +28,8 @@ class HomepageController extends Controller
         $giaoduc_first = Post::where('category_id', 34)->first();
         $giaoduc = Post::orderBy('created_at','desc')->where('category_id', 34)->where('id', "!=", $giaoduc_first->id)->paginate(4);
 
-        $now = Carbon::now();
-
-        $trend_first_time = $now->diffInHours($trend_first->created_at);
-
         $webtuyensinh_first = Category::where('id',$trend_first->category_id)->first();
-        // $webtuyensinh = Category::where('id',$trend->category_id)->get();
-        return view('user.page.home', compact('header','trend_first_time','banner','footer_banner','news','trend_first','trend','sidetrend','tuyensinh','tuyensinh_first','giaoduc','giaoduc_first','webtuyensinh_first'));
+        return view('user.page.home', compact('header','banner','footer_banner','news','trend_first','trend','sidetrend','tuyensinh','tuyensinh_first','giaoduc','giaoduc_first','webtuyensinh_first'));
     }
 
     function danhmuc($slug){
@@ -73,6 +68,10 @@ class HomepageController extends Controller
         $tinmoi = Post::orderBy('created_at','desc')->paginate(4);
         $tinnong = Post::orderBy('view','desc')->paginate(4);
         return view('user.page.chitiettin', compact('header','new','xuhuong','tuyensinh_first', 'tuyensinh', 'giaoduc_first', 'giaoduc', 'tinlienquan', 'tinmoi', 'tinnong'));
+    }
+
+    function search(REQUEST $request){
+        dd($request->name_search);
     }
 
     function video(){

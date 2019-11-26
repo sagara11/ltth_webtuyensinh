@@ -2,17 +2,18 @@
 <header>
     <div class="container">
         <div class="row">
-            <div class="sukien col-lg-1">
-                <b>SỰ KIỆN: </b>
+            <div class="sukien">
+                <i class="far fa-edit"></i>
+                <b>TIN MỚI: </b>
             </div>
-            <div class="header-news col-lg-8">
+            <div class="header-news">
                 @foreach ($header as $item)
                 <span>
                     {{ $item->name }}
                 </span>
                 @endforeach
             </div>
-            <div class="header-account dropdown col-lg-3">
+            <div class="header-account dropdown">
                 <div class="dropdown-toggle" data-toggle="dropdown">
                     <img class=" rounded rounded-circle" height="25px" width="25px"
                         src="http://localhost\baotuyensinhView\media\tải xuống (1).png" alt="" />
@@ -128,7 +129,11 @@
                 <i onclick="openSearch()" class="fas fa-search"></i>
             </div>
             <div id="searchbar">
-                <input class="form-control" type="text" placeholder="Nhập tìm kiếm...">
+                <form method="post" action="{{ route('search') }}">
+                    @csrf
+                    <input class="form-control" name="name_search" type="text" placeholder="Nhập tìm kiếm...">
+                    <input type="submit">
+                </form>
             </div>
         </div>
     </div>
@@ -179,7 +184,7 @@
     <ul class="list-unstyled">
         @foreach ($nav_section as $item)
         <li class="col-lg-2">
-            <a href="{{ route('danhmuc', $item->id) }}"><b>{{ $item->name }}</b></a>
+            <a href="{{ route('danhmuc',$item->slug) }}"><b>{{ $item->name }}</b></a>
         </li>
         @endforeach
     </ul>

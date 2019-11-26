@@ -5,20 +5,16 @@
         </div>
         <div class="doitac-contents">
             <div class="doitac-img col-lg-2">
-                <img class="img-fluid" src="{{ asset('media\logo eposi.jpg') }}"
-                    alt="" />
+                <img class="img-fluid" src="{{ asset('media\logo eposi.jpg') }}" alt="" />
             </div>
             <div class="doitac-img col-lg-2">
-                <img class="img-fluid" src="{{ asset('media\tai-xuo-n_636859354346582162_HasThumb.jpg') }}"
-                    alt="" />
+                <img class="img-fluid" src="{{ asset('media\tai-xuo-n_636859354346582162_HasThumb.jpg') }}" alt="" />
             </div>
             <div class="doitac-img col-lg-2">
-                <img class="img-fluid" src="{{ asset('media\sblaw.png') }}"
-                    alt="" />
+                <img class="img-fluid" src="{{ asset('media\sblaw.png') }}" alt="" />
             </div>
             <div class="doitac-img col-lg-2">
-                <img class="img-fluid" src="{{ asset('media\hud logo.png') }}"
-                    alt="" />
+                <img class="img-fluid" src="{{ asset('media\hud logo.png') }}" alt="" />
             </div>
 
             <div class="doitac-img col-lg-2">
@@ -26,8 +22,7 @@
                     alt="" />
             </div>
             <div class="doitac-img col-lg-2">
-                <img class="img-fluid" src="{{ asset('media\tải xuống (2).png') }}"
-                    alt="" />
+                <img class="img-fluid" src="{{ asset('media\tải xuống (2).png') }}" alt="" />
             </div>
         </div>
     </div>
@@ -96,10 +91,12 @@
                 <i class="fab fa-facebook"></i>
                 <img src="" alt="" />
                 <div class="appstore-ggplay">
-                    <img width="120px" height="50px" src="http://localhost\baotuyensinhView\media\google-play-badge.png"
-                        alt="" />
-                    <img width="120px" height="50px" src="http://localhost\baotuyensinhView\media\google-play-badge.png"
-                        alt="" />
+                    <div>
+                        <img src="{{ asset('media/google-play-badge.png') }}" alt="" />
+                    </div>
+                    <div>
+                        <img src="{{ asset('media/app store badge.png') }}" alt="" />
+                    </div>
                 </div>
             </div>
         </div>

@@ -11,15 +11,16 @@ function openSearch() {
     document.getElementById("searchbar").style.display = "block";
 }
 
-$(document).mouseup(function (e)
-                    {
-  var container = $("#searchbar"); // YOUR CONTAINER SELECTOR
+$(document).mouseup(function(e) {
+    var container = $("#searchbar"); // YOUR CONTAINER SELECTOR
 
-  if (!container.is(e.target) // if the target of the click isn't the container...
-      && container.has(e.target).length === 0) // ... nor a descendant of the container
-  {
-    container.hide();
-  }
+    if (
+        !container.is(e.target) && // if the target of the click isn't the container...
+        container.has(e.target).length === 0
+    ) {
+        // ... nor a descendant of the container
+        container.hide();
+    }
 });
 
 $(document).ready(function() {

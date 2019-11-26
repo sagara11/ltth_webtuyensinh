@@ -2,14 +2,21 @@ header {
   padding: 10px 0px;
   background-color: #f65c2c;
   color: white; }
-  header .sukien b {
-    font-size: 15px; }
+  header .row {
+    padding: 0px 15px; }
+  header .sukien {
+    width: 10%; }
+    header .sukien b {
+      font-size: 14px; }
   header .header-news {
+    width: 65%;
     overflow: hidden; }
     header .header-news span {
-      margin-right: 25px; }
+      margin-right: 35px; }
   header .header-account {
-    padding-left: 55px; }
+    width: 25%;
+    display: flex;
+    justify-content: flex-end; }
     header .header-account .dropdown-toggle {
       display: flex;
       align-items: center; }
@@ -30,10 +37,10 @@ header {
           background-color: #f6f6f6; }
 
 nav {
-  padding: 10px 0px; }
+  padding: 0px 0px; }
   nav .nav {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 7px;
+    margin-bottom: 7px;
     align-items: center; }
     nav .nav .nav-logo {
       padding: 0px 15px; }
@@ -54,7 +61,8 @@ nav {
           align-items: center;
           text-decoration: none; }
           nav .nav .menu ul .home a i {
-            padding: 10px 10px;
+            font-size: 16px;
+            padding: 11px 11px;
             background-color: #f65c2c;
             color: white;
             transition: 0.3s; }

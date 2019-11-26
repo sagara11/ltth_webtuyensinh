@@ -24,14 +24,17 @@ Chi tiết tin
                     <p>
                         <small class="webtuyensinh-section">
                             <span>{{ $new->categories->name }} |</span>
-                            <span>{{ $new->time() }} giờ trước |</span>
+                            @if ($new->hour()<=24) <span>{{ $new->hour() }} giờ trước |</span>
+                            @else
+                            <span>{{ $new->day() }} |</span>
+                            @endif
                             @if ($new->comment != NULL )
                             <span>{{ $new->comment }} bình luận |</span>
                             @else
                             <span>0 bình luận |</span>
                             @endif
                         </small>
-                        <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
+                        <small><a class="webtuyensinh-link" href="">{{ $new->source->web_name }}</a></small>
                     </p>
                 </div>
             </section>
@@ -368,6 +371,6 @@ Chi tiết tin
 @section('js')
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.marquee/1.3.1/jquery.marquee.min.js"></script>
-<script type="text/javascript" src="{{ asset('js/user/home.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/user/chitiettin.js') }}"></script>
 <script type="text/javascript" src="{{ asset('slick-1.8.1/slick/slick.js') }}"></script>
 @endsection

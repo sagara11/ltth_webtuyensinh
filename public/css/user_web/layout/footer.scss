@@ -53,6 +53,16 @@ footer {
         color: rgb(202, 55, 55);
       }
     }
+    .appstore-ggplay{
+      border-top: 1px solid rgb(220, 220, 220);
+      display: flex;
+      div{
+        padding: 10px 0px;
+        img{
+          height: 50px;
+        }
+      }
+    }
   }
 }
 

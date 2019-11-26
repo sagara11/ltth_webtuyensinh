@@ -17,8 +17,12 @@ class Post extends Model
     {
     	return $this->belongsTo('App\Crawl','source_id','id');
     }
-    public function time(){
+    public function hour(){
         $now = Carbon::now();
         return $now->diffInHours($this->created_at);
+    }
+    public function day(){
+        $day = $this->created_at->toDateString();
+        return $day;
     }
 }

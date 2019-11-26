@@ -24,12 +24,16 @@ Home
                 <p>
                     <small class="webtuyensinh-section">
                         <span>{{ $trend_first->categories->name }} |</span>
-                        <span>{{ $trend_first->time() }} giờ trước |</span>
-                        @if ($trend_first->comment != NULL )
-                        <span>{{ $trend_first->comment }} bình luận |</span>
-                        @else
-                        <span>0 bình luận |</span>
-                        @endif
+                        @if ($trend_first->hour()<=24) <span>{{ $trend_first->hour() }} giờ trước |</span>
+                            @else
+                            <span>{{ $trend_first->day() }} |</span>
+                            @endif
+
+                            @if ($trend_first->comment != NULL )
+                            <span>{{ $trend_first->comment }} bình luận |</span>
+                            @else
+                            <span>0 bình luận |</span>
+                            @endif
                     </small>
                     <small><span class="webtuyensinh-link" href="">{{ $trend_first->source->web_name }}</span></small>
                 </p>
@@ -43,12 +47,17 @@ Home
                         <img class="img-fluid" src="{{ $item->image }}" alt="">
                     </a>
                     <h5>
-                        <a href="{{ route('chitiettin',$item->slug) }}"> {{ $item->name }} </a>
+                        <a href="{{ route('chitiettin',$item->slug) }}">
+                            {{ $item->name }}
+                        </a>
                     </h5>
                     <p>
                         <small class="webtuyensinh-section">
                             <span>{{ $item->categories->name }} |</span>
-                            <span>{{ $item->time() }} giờ trước |</span>
+                            @if ($trend_first->hour()<=24) <span>{{ $trend_first->hour() }} giờ trước |</span>
+                            @else
+                            <span>{{ $trend_first->day() }} |</span>
+                            @endif
                             @if ($item->comment != NULL )
                             <span>{{ $item->comment }} bình luận |</span>
                             @else
@@ -77,7 +86,11 @@ Home
                         <p>
                             <small class="webtuyensinh-section">
                                 <span>{{ $item->categories->name }} |</span>
-                                <span>{{ $item->time() }} giờ trước |</span>
+                                @if ($trend_first->hour()<=24) 
+                                <span>{{ $trend_first->hour() }} giờ trước |</span>
+                                @else
+                                <span>{{ $trend_first->day() }} |</span>
+                                @endif
                                 @if ($item->comment != NULL )
                                 <span>{{ $item->comment }} bình luận |</span>
                                 @else
@@ -174,7 +187,7 @@ Home
                     <h4>TUYỂN SINH</h4>
                 </div>
                 <div class="side-content">
-                    <a href="{{ route('chitiettin', $tuyensinh_first->id) }}" class="tuyensinh-main">
+                    <a href="{{ route('chitiettin', $tuyensinh_first->slug) }}" class="tuyensinh-main">
                         <img src="{{ $tuyensinh_first->image }}" alt="" />
                         <p class="tuyensinh-des">
                             {{ $tuyensinh_first->name }}
@@ -201,7 +214,7 @@ Home
                 <div class="side-content">
                     <a href="{{ route('chitiettin',$giaoduc_first->slug) }}" class="giaoduc-main">
                         <img src="{{ $giaoduc_first->image }}" alt="" />
-                        <div class="tuyensinh-des">
+                        <div class="side-des">
                             {{ $giaoduc_first->name }}
                         </div>
                     </a>
