@@ -106,12 +106,18 @@ Route::group(['prefix'=>'elastic'], function () {
 Route::get("/",'User\HomepageController@home')->name('home');
 Route::get('danh-muc/{slug}','User\HomepageController@danhmuc')->name('danhmuc');
 
+Route::get('/tai-khoan', 'User\HomepageController@taikhoan')->name('taikhoan');
+
+Route::post("/editaccount/{edit}", "User\HomepageController@edit_account")->name('editaccount');
+
+Route::post("/sign-in","User\HomepageController@signin")->name('signin');
+
+Route::get('/logout',"User\HomepageController@logout")->name('log-out');
+
 Route::get("/{slug}",'User\HomepageController@chitiettin')->name('chitiettin');
 
 Route::get('/video', 'User\HomepageController@video');
 
-Route::get('/tai-khoan', 'User\HomepageController@taikhoan');
+Route::post('/change-password', 'User\HomepageController@change_password')->name('changepassword');
 
 Route::post('/search', 'User\HomepageController@search')->name('search');
-
-Route::post("/sign-in","User\HomepageController@signin")->name('signin');

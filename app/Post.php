@@ -21,6 +21,10 @@ class Post extends Model
         $now = Carbon::now();
         return $now->diffInHours($this->created_at);
     }
+    public function daydiffer(){
+        $now = Carbon::now();
+        return $now->diffInDays($this->created_at);
+    }
     public function day(){
         $day = $this->created_at->toDateString();
         return $day;

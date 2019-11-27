@@ -27,8 +27,9 @@
         #account .account-nav ul li .nav-link {
           border-radius: 0px;
           padding: 10px 5px;
-          color: #f65c2c; }
+          color: #333333; }
         #account .account-nav ul li .active {
+          color: #f65c2c;
           border: none; }
   #account .account-content .tab-content {
     padding: 0px 10px;
@@ -38,6 +39,13 @@
       #account .account-content .tab-content #taikhoancuatoi .account-section-header h3 {
         color: #f65c2c;
         font-size: 20px; }
+    #account .account-content .tab-content #taikhoancuatoi #avatar-file {
+      display: none; }
+    #account .account-content .tab-content #taikhoancuatoi label {
+      width: 100%;
+      padding: 10px 0px;
+      text-align: center;
+      border: 1px dashed #a0a0a0; }
     #account .account-content .tab-content #taikhoancuatoi .account-section-content .col-lg-3 {
       padding: 10px 0px;
       color: gray; }

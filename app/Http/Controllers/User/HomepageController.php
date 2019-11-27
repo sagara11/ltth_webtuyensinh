@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Post;
 use App\User;
 use App\Users;
@@ -110,17 +111,42 @@ class HomepageController extends Controller
 
     function taikhoan()
     {
-        return view('user.page.taikhoan');
+        $header = Post::orderBy('view', 'desc')->paginate(3);
+        $user = Auth::user();
+        return view('user.page.taikhoan', compact('header','user'));
     }
 
     function signin(Request $request)
     {
-        $user = Users::all();
-        foreach ($user as $key) {
-            if ($request->email == $key->email && $request->password == $key->password) {
-                $this->home();
-            }
+        $account = array('email'=>$request->email, 'password'=>$request->password);
+        if(Auth::attempt($account)){
+            return $this->home()->with(Auth::user()->name);
         }
-        // echo "khong co tai khoan";
+        else{
+            dd('khong dung tai khoan');
+        }
+    }
+
+    function logout(){
+        Auth::logout();
+        return $this->home();
+    }
+
+    function edit_account(Request $request, $edit){
+        Users::where('id', Auth::user()->id)
+        ->update([$edit => $request->$edit]);
+        return $this->taikhoan();
+    }
+
+    function change_password(Request $request){
+        dd(Auth::user()->password);
+        if($request->old_password == Auth::user()->password && $request->new_password == $request->new_password_confirm){
+            Users::where('id', Auth::user()->id)
+            ->update(['password' => $request->new_password]);
+            return $this->taikhoan();
+        }   
+        else{
+            dd("nhap sai mat khau");
+        }
     }
 }

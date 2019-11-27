@@ -15,12 +15,12 @@ Tài khoản
     <section class="row" id="account">
         <div class="account-nav col-lg-4">
             <div class="user-info">
-                <img class="rounded rounded-circle" src="{{ asset('media/tải xuống (1).png') }}" alt="">
+                <img class="rounded rounded-circle" src="{{ $user->avatar }}" alt="">
                 <p>
-                    Nguyễn Văn Nam
+                    {{ $user->name }}
                 </p>
                 <p>
-                    <small>Ngày tham gia 20/09/2019</small>
+                    <small>Ngày tham gia {{ $user->created_at->toDateString() }}</small>
                 </p>
             </div>
             <ul class="nav nav-tabs" role="tablist">
@@ -45,69 +45,32 @@ Tài khoản
                     <div class="account-section-header">
                         <h3>TÀI KHOẢN CỦA TÔI</h3>
                     </div>
-                    <input type="file">
+                    <input type="file" class="custom-file-input" id="avatar-file">
+                    <label for="avatar-file">Tải lên ảnh đại diện mới</label>
                     <div class="account-section-content row">
                         <div class="col-lg-3">
                             Tên tài khoản
                         </div>
                         <div class="col-lg-9">
                             <div>
-                                Nguyễn Văn Nam
+                                {{ $user->name }}
                             </div>
                             <div>
                                 <a data-toggle="collapse" data-target="#tentaikhoan" href="">Thay đổi</a>
                             </div>
                             <div class="collapse account-edit" id="tentaikhoan">
-                                <p>
-                                    <b>Tên tài khoản</b>
-                                </p>
-                                <input class="form-control" type="text" placeholder="Nhập tên tài khoản">
-                                <span>
-                                    <button>LƯU LẠI</button>
-                                </span>
-                                <span>Webtuyensinh cam kết bảo mật thông tin này</span>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            Họ và Tên
-                        </div>
-                        <div class="col-lg-9">
-                            <div>
-                                Nguyễn Văn Nam
-                            </div>
-                            <div>
-                                <a data-toggle="collapse" data-target="#hovaten" href="">Thay đổi</a>
-                            </div>
-                            <div class="collapse account-edit" id="hovaten">
-                                <p>
-                                    <b>Họ và tên</b>
-                                </p>
-                                <input class="form-control" type="text" placeholder="Nhập tên tài khoản">
-                                <span>
-                                    <button>LƯU LẠI</button>
-                                </span>
-                                <span>Webtuyensinh cam kết bảo mật thông tin này</span>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            Địa chỉ
-                        </div>
-                        <div class="col-lg-9">
-                            <div>
-                                Long biên, hà nội
-                            </div>
-                            <div>
-                                <a data-toggle="collapse" data-target="#diachi" href="">Thay đổi</a>
-                            </div>
-                            <div class="collapse account-edit" id="diachi">
-                                <p>
-                                    <b>Địa chỉ</b>
-                                </p>
-                                <input class="form-control" type="text" placeholder="Nhập họ và tên">
-                                <span>
-                                    <button>LƯU LẠI</button>
-                                </span>
-                                <span>Webtuyensinh cam kết bảo mật thông tin này</span>
+                                <form method="post" action="{{ route('editaccount','name') }}">
+                                    @csrf
+                                    <p>
+                                        <b>Tên tài khoản</b>
+                                    </p>
+                                    <input name="name" class="form-control" type="text"
+                                        placeholder="Nhập tên tài khoản">
+                                    <span>
+                                        <button type="submit">LƯU LẠI</button>
+                                    </span>
+                                    <span>Webtuyensinh cam kết bảo mật thông tin này</span>
+                                </form>
                             </div>
                         </div>
                         <div class="col-lg-3">
@@ -115,20 +78,23 @@ Tài khoản
                         </div>
                         <div class="col-lg-9">
                             <div>
-                                Demo.gmail.com
+                                {{ $user->email }}
                             </div>
                             <div>
                                 <a data-toggle="collapse" data-target="#email" href="">Thay đổi</a>
                             </div>
                             <div class="collapse account-edit" id="email">
-                                <p>
-                                    <b>Email</b>
-                                </p>
-                                <input class="form-control" type="email" placeholder="Nhập email">
-                                <span>
-                                    <button>LƯU LẠI</button>
-                                </span>
-                                <span>Webtuyensinh cam kết bảo mật thông tin này</span>
+                                <form method="post" action="{{ route('editaccount','email') }}">
+                                    @csrf
+                                    <p>
+                                        <b>Email</b>
+                                    </p>
+                                    <input name="email" class="form-control" type="email" placeholder="Nhập email">
+                                    <span>
+                                        <button type="submit">LƯU LẠI</button>
+                                    </span>
+                                    <span>Webtuyensinh cam kết bảo mật thông tin này</span>
+                                </form>
                             </div>
                         </div>
                         <div class="col-lg-3">
@@ -142,56 +108,18 @@ Tài khoản
                                 <a data-toggle="collapse" data-target="#dienthoai" href="">Thay đổi</a>
                             </div>
                             <div class="collapse account-edit" id="dienthoai">
-                                <p>
-                                    <b>Điện thoại</b>
-                                </p>
-                                <input class="form-control" type="number" placeholder="Nhập điện thoại">
-                                <span>
-                                    <button>LƯU LẠI</button>
-                                </span>
-                                <span>Webtuyensinh cam kết bảo mật thông tin này</span>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            Ngày sinh
-                        </div>
-                        <div class="col-lg-9">
-                            <div>
-                                09/07/2000
-                            </div>
-                            <div>
-                                <a data-toggle="collapse" data-target="#ngaysinh" href="">Thay đổi</a>
-                            </div>
-                            <div class="collapse account-edit" id="ngaysinh">
-                                <p>
-                                    <b>Ngày sinh</b>
-                                </p>
-                                <input class="form-control" type="date" placeholder="Nhập ngày sinh">
-                                <span>
-                                    <button>LƯU LẠI</button>
-                                </span>
-                                <span>Webtuyensinh cam kết bảo mật thông tin này</span>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            Giới tính
-                        </div>
-                        <div class="col-lg-9">
-                            <div>
-                                Nam
-                            </div>
-                            <div>
-                                <a data-toggle="collapse" data-target="#gioitinh" href="">Thay đổi</a>
-                            </div>
-                            <div class="collapse account-edit" id="gioitinh">
-                                <p>
-                                    <b>Giới tính</b>
-                                </p>
-                                <input class="form-control" type="text" placeholder="Nhập giới tính">
-                                <span>
-                                    <button>LƯU LẠI</button>
-                                </span>
-                                <span>Webtuyensinh cam kết bảo mật thông tin này</span>
+                                <form method="post" action="{{ route('editaccount','phone') }}">
+                                    @csrf
+                                    <p>
+                                        <b>Điện thoại</b>
+                                    </p>
+                                    <input name="phone" class="form-control" type="number"
+                                        placeholder="Nhập điện thoại">
+                                    <span>
+                                        <button type="submit">LƯU LẠI</button>
+                                    </span>
+                                    <span>Webtuyensinh cam kết bảo mật thông tin này</span>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -202,35 +130,38 @@ Tài khoản
                     <div class="account-section-header">
                         <h3>ĐỔI MẬT KHẨU</h3>
                     </div>
-                    <div class="row account-section-content">
-                        <div class="col-lg-3">
-                            Mật khẩu cũ
+                    <form method="post" action="{{ route('changepassword') }}">
+                        @csrf
+                        <div class="row account-section-content">
+                            <div class="col-lg-3">
+                                Mật khẩu cũ
+                            </div>
+                            <div class="col-lg-9">
+                                <input type="password" name="old_password">
+                            </div>
+                            <div class="col-lg-3">
+                                Mật khẩu mới
+                            </div>
+                            <div class="col-lg-9">
+                                <input type="password" name="new_password">
+                            </div>
+                            <div class="col-lg-3">
+                                Nhập lại mật khẩu mới
+                            </div>
+                            <div class="col-lg-9">
+                                <input type="password" name="new_password_confirm">
+                            </div>
+                            <div class="col-lg-3">
+                            </div>
+                            <div class="col-lg-9">
+                                <button>LƯU LẠI</button>
+                                <span>Quên mật khẩu?</span>
+                                <span>
+                                    <a href="">Lấy lại mật khẩu</a>
+                                </span>
+                            </div>
                         </div>
-                        <div class="col-lg-9">
-                            <input type="password">
-                        </div>
-                        <div class="col-lg-3">
-                            Mật khẩu mới
-                        </div>
-                        <div class="col-lg-9">
-                            <input type="password">
-                        </div>
-                        <div class="col-lg-3">
-                            Nhập lại mật khẩu mới
-                        </div>
-                        <div class="col-lg-9">
-                            <input type="password">
-                        </div>
-                        <div class="col-lg-3">
-                        </div>
-                        <div class="col-lg-9">
-                            <button>LƯU LẠI</button>
-                            <span>Quên mật khẩu?</span>
-                            <span>
-                                <a href="">Lấy lại mật khẩu</a>
-                            </span>
-                        </div>
-                    </div>
+                    </form>
                 </section>
 
                 {{-- Quan ly binh luan --}}
@@ -341,10 +272,12 @@ Tài khoản
                             </div>
 
                             <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <button id="logout-btn" type="button" >THOÁT</button>
-                                <button id="cancel-btn" type="button" data-dismiss="modal">QUAY LẠI</button>
-                            </div>
+                            <form method="get" action="{{ route('log-out') }}">
+                                <div class="modal-footer">
+                                    <button id="logout-btn" type="submit">THOÁT</button>
+                                    <button id="cancel-btn" type="button" data-dismiss="modal">QUAY LẠI</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </section>
@@ -354,5 +287,7 @@ Tài khoản
 </main>
 @endsection
 @section('js')
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.marquee/1.3.1/jquery.marquee.min.js"></script>
 <script type="text/javascript" src="{{ asset('js/user/home.js') }}"></script>
 @endsection

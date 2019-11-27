@@ -33,6 +33,9 @@ header {
       header .header-account .dropdown-menu ul li {
         cursor: pointer;
         padding: 10px 0px; }
+        header .header-account .dropdown-menu ul li a {
+          color: #333333;
+          text-decoration: none; }
         header .header-account .dropdown-menu ul li:hover {
           background-color: #f6f6f6; }
 
@@ -148,6 +151,20 @@ article .modal-footer {
   padding: 5px 12px; }
 #signin .modal-body .checkbox-btn {
   display: block; }
+#signin .modal-footer .social-btn {
+  width: 100%; }
+  #signin .modal-footer .social-btn button {
+    padding: 5px 0px;
+    border-radius: 3px;
+    border: none;
+    margin: 0px 8px;
+    width: 50%; }
+  #signin .modal-footer .social-btn .facebook-btn {
+    background-color: royalblue;
+    color: white; }
+  #signin .modal-footer .social-btn .gmail-btn {
+    background-color: saddlebrown;
+    color: white; }
 
 .mb-header,
 .mb-nav {

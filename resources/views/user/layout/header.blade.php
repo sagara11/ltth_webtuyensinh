@@ -15,12 +15,42 @@
             </div>
             <div class="header-account dropdown">
                 <div class="dropdown-toggle" data-toggle="dropdown">
+                    @if (Auth::check())
                     <img class=" rounded rounded-circle" height="25px" width="25px"
-                        src="http://localhost\baotuyensinhView\media\tải xuống (1).png" alt="" />
+                        src="{{ Auth::user()->avatar }}" alt="" />
                     <p>
-                        Nguyễn Văn Nam
+                        {{ Auth::user()->name }}
                     </p>
+                    @else
+                    <p>Tài khoản</p>
+                    @endif
                 </div>
+                @if (Auth::check())
+                <div class="dropdown-menu">
+                    <ul>
+                        <li>
+                            <a href="{{ route('taikhoan') }}">
+                                Tài khoản của tôi
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('taikhoan') }}">
+                                Đổi mật khẩu
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('taikhoan') }}">
+                                Quản lý bình luận
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('logout') }}">
+                                Thoát
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                @else
                 <div class="dropdown-menu">
                     <ul>
                         <li data-toggle="modal" data-target="#signin">
@@ -31,6 +61,7 @@
                         </li>
                     </ul>
                 </div>
+                @endif
             </div>
         </div>
     </div>

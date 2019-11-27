@@ -43,6 +43,10 @@ header {
         li {
           cursor: pointer;
           padding: 10px 0px;
+          a{
+            color: rgb(51, 51, 51);
+            text-decoration: none;
+          }
           &:hover {
             background-color: rgb(246, 246, 246);
           }
@@ -199,6 +203,26 @@ article {
     }
     .checkbox-btn {
       display: block;
+    }
+  }
+  .modal-footer{
+    .social-btn{
+      width: 100%;
+      button{
+        padding: 5px 0px;
+        border-radius: 3px;
+        border: none;
+        margin: 0px 8px;
+        width: 50%;
+      }
+      .facebook-btn{
+        background-color: royalblue;
+        color: white;
+      }
+      .gmail-btn{
+        background-color: saddlebrown;
+        color: white;
+      }
     }
   }
 }
