@@ -88,7 +88,6 @@
                 <i class="fab fa-twitter-square"></i>
                 <i class="fab fa-google-plus"></i>
                 <i class="fab fa-youtube-square"></i>
-                <i class="fab fa-facebook"></i>
                 <img src="" alt="" />
                 <div class="appstore-ggplay">
                     <div>

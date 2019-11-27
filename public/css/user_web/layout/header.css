@@ -106,6 +106,12 @@ nav {
         z-index: 9999;
         position: absolute;
         display: none; }
+        nav .nav #search #searchbar #search-submit {
+          margin-top: 10px;
+          padding: 5px 10px;
+          background-color: #f65c2c;
+          border: none;
+          color: white; }
         nav .nav #search #searchbar .closebtn {
           color: #f65c2c;
           font-size: 25px;

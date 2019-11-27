@@ -1,4 +1,7 @@
 @extends('user.layout.master')
+@section('meta')
+<meta name="description" content="Webtuyensinh">
+@endsection
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/user_web/layout/header.css') }}">
 <link rel="stylesheet" href="{{ asset('css/user_web/layout/footer.css') }}">
@@ -86,10 +89,10 @@ Home
                         <p>
                             <small class="webtuyensinh-section">
                                 <span>{{ $item->categories->name }} |</span>
-                                @if ($trend_first->hour()<=24) 
-                                <span>{{ $trend_first->hour() }} giờ trước |</span>
+                                @if ($item->hour()<=24) 
+                                <span>{{ $item->hour() }} giờ trước |</span>
                                 @else
-                                <span>{{ $trend_first->day() }} |</span>
+                                <span>{{ $item->day() }} |</span>
                                 @endif
                                 @if ($item->comment != NULL )
                                 <span>{{ $item->comment }} bình luận |</span>

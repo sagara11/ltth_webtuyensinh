@@ -132,7 +132,9 @@
                 <form method="post" action="{{ route('search') }}">
                     @csrf
                     <input class="form-control" name="name_search" type="text" placeholder="Nhập tìm kiếm...">
-                    <input type="submit">
+                    <button type="submit" id="search-submit">
+                        Tìm kiếm
+                    </button>
                 </form>
             </div>
         </div>

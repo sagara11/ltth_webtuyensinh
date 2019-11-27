@@ -9,87 +9,118 @@ use App\Post;
 use App\User;
 use App\Users;
 use App\Banner;
+use Exception;
 use Illuminate\Support\Carbon;
 
 class HomepageController extends Controller
 {
-    function home(){
-        $header = Post::orderBy('view','desc')->paginate(3);
+    function seo(){
+        $seo_name = Post::where('seo_title',$this->seo_title);
+        $seo_description = Post::where('seo_description',$this->seo_description);
+        $seo_keyword = Pots::where('seo_keyword',$this->seo_keyword);
 
-        $banner = Banner::orderBy('created_at','desc')->where('position','top')->paginate(2);
-        $footer_banner = Banner::orderBy('created_at','desc')->where('position','sidebar')->first();
+        $object = array(
+            'seo_name' => $seo_name,
+            'seo_description' => $seo_description,
+            'seo_keyword' => $seo_keyword
+        );
 
-        $trend_first = Post::latest()->where('trend', 1)->first();
-        $trend = Post::orderBy('created_at','desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->paginate(3);
-        $news = Post::orderBy('created_at','desc')->where('id', "!=", $trend_first->id)->paginate(20);
-        $sidetrend = Post::orderBy('created_at','desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->paginate(6);
-        $tuyensinh_first = Post::where('category_id', 37)->first();
-        $tuyensinh = Post::orderBy('created_at','asc')->where('category_id', 37)->where('id', "!=", $tuyensinh_first->id)->paginate(4);
-        $giaoduc_first = Post::where('category_id', 34)->first();
-        $giaoduc = Post::orderBy('created_at','desc')->where('category_id', 34)->where('id', "!=", $giaoduc_first->id)->paginate(4);
-
-        $webtuyensinh_first = Category::where('id',$trend_first->category_id)->first();
-        return view('user.page.home', compact('header','banner','footer_banner','news','trend_first','trend','sidetrend','tuyensinh','tuyensinh_first','giaoduc','giaoduc_first','webtuyensinh_first'));
+        // return mang url tung page va hinh anh
+        return $object;
     }
 
-    function danhmuc($slug){
+    function home()
+    {
+        $header = Post::orderBy('view', 'desc')->paginate(3);
+
+        $banner = Banner::orderBy('created_at', 'desc')->where('position', 'top')->paginate(2);
+        $footer_banner = Banner::orderBy('created_at', 'desc')->where('position', 'sidebar')->first();
+
+        $trend_first = Post::latest()->where('trend', 1)->first();
+        $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->paginate(3);
+        $news = Post::orderBy('created_at', 'desc')->where('id', "!=", $trend_first->id)->paginate(20);
+        $sidetrend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->paginate(6);
+        $tuyensinh_first = Post::where('category_id', 37)->first();
+        $tuyensinh = Post::orderBy('created_at', 'asc')->where('category_id', 37)->where('id', "!=", $tuyensinh_first->id)->paginate(4);
+        $giaoduc_first = Post::where('category_id', 34)->first();
+        $giaoduc = Post::orderBy('created_at', 'desc')->where('category_id', 34)->where('id', "!=", $giaoduc_first->id)->paginate(4);
+
+        $webtuyensinh_first = Category::where('id', $trend_first->category_id)->first();
+        return view('user.page.home', compact('header', 'banner', 'footer_banner', 'news', 'trend_first', 'trend', 'sidetrend', 'tuyensinh', 'tuyensinh_first', 'giaoduc', 'giaoduc_first', 'webtuyensinh_first'));
+    }
+
+    function danhmuc($slug)
+    {
         $header_id = Category::where('slug', $slug)->first();
 
-        $header = Post::orderBy('view','desc')->paginate(3);
+        $header = Post::orderBy('view', 'desc')->paginate(3);
 
-        $banner = Banner::where('position','top')->paginate(2);
-        $footer_banner = Banner::where('position','sidebar')->first();
-
-        $trend_first = Post::latest()->where('trend', 1)->where('category_id', $header_id->id)->first();
-        $trend = Post::orderBy('created_at','desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->where('category_id', $header_id->id)->paginate(3);
-        $news = Post::orderBy('created_at','desc')->where('category_id', $header_id->id)->where('id', "!=", $trend_first->id)->paginate(20);
-        $sidetrend = Post::orderBy('created_at','desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->paginate(6);
+        $banner = Banner::where('position', 'top')->paginate(2);
+        $footer_banner = Banner::where('position', 'sidebar')->first();
+        try{
+            $trend_first = Post::latest()->where('trend', 1)->where('category_id', $header_id->id)->first();
+            $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->where('category_id', $header_id->id)->paginate(3);
+        }
+        catch(\Exception $e){
+            $trend_first = Post::where('category_id', $header_id->id)->first();
+            $trend = Post::where('category_id', $header_id->id)->where('id','!=',$trend_first->id)->paginate(3);
+        }
+        $news = Post::orderBy('created_at', 'desc')->where('category_id', $header_id->id)->where('id', "!=", $trend_first->id)->paginate(20);
+        $sidetrend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->paginate(6);
         $tuyensinh_first = Post::where('category_id', 37)->first();
-        $tuyensinh = Post::orderBy('created_at','desc')->where('category_id', 37)->where('id', "!=", $tuyensinh_first->id)->paginate(4);
+        $tuyensinh = Post::orderBy('created_at', 'desc')->where('category_id', 37)->where('id', "!=", $tuyensinh_first->id)->paginate(4);
         $giaoduc_first = Post::where('category_id', 34)->first();
-        $giaoduc = Post::orderBy('created_at','desc')->where('category_id', 34)->where('id', "!=", $giaoduc_first->id)->paginate(4);
+        $giaoduc = Post::orderBy('created_at', 'desc')->where('category_id', 34)->where('id', "!=", $giaoduc_first->id)->paginate(4);
 
         $now = Carbon::now();
 
-        $webtuyensinh_first = Category::where('id',$trend_first->category_id)->first();
-        return view('user.page.home', compact('header','banner','footer_banner','news','trend_first','trend','sidetrend','tuyensinh','tuyensinh_first','giaoduc','giaoduc_first','webtuyensinh_first'));
+        // $this->seo();
+
+        $webtuyensinh_first = Category::where('id', $trend_first->category_id)->first();
+        return view('user.page.home', compact('header', 'banner', 'footer_banner', 'news', 'trend_first', 'trend', 'sidetrend', 'tuyensinh', 'tuyensinh_first', 'giaoduc', 'giaoduc_first', 'webtuyensinh_first'));
     }
 
-    function chitiettin($slug){
-        $header = Post::orderBy('view','desc')->paginate(3);
+    function chitiettin($slug)
+    {
+        $header = Post::orderBy('view', 'desc')->paginate(3);
 
-        $new = Post::orderBy('created_at','desc')->where('slug', $slug)->first();
-        $xuhuong = Post::orderBy('created_at','desc')->where('trend', 1)->paginate(4);
+        $new = Post::orderBy('created_at', 'desc')->where('slug', $slug)->first();
+        $xuhuong = Post::orderBy('created_at', 'desc')->where('trend', 1)->paginate(4);
         $tuyensinh_first = Post::where('category_id', 37)->first();
-        $tuyensinh = Post::orderBy('created_at','desc')->where('category_id', 37)->where('id', "!=", $tuyensinh_first->id)->paginate(4);
-        $giaoduc_first = Post::where('category_id',34)->first();
-        $giaoduc = Post::orderBy('created_at','desc')->where('category_id', 34)->where('id', "!=", $giaoduc_first->id)->paginate(4);
-        $tinlienquan = Post::orderBy('created_at','desc')->where('category_id', $new->category_id)->paginate(4);
-        $tinmoi = Post::orderBy('created_at','desc')->paginate(4);
-        $tinnong = Post::orderBy('view','desc')->paginate(4);
-        return view('user.page.chitiettin', compact('header','new','xuhuong','tuyensinh_first', 'tuyensinh', 'giaoduc_first', 'giaoduc', 'tinlienquan', 'tinmoi', 'tinnong'));
+        $tuyensinh = Post::orderBy('created_at', 'desc')->where('category_id', 37)->where('id', "!=", $tuyensinh_first->id)->paginate(4);
+        $giaoduc_first = Post::where('category_id', 34)->first();
+        $giaoduc = Post::orderBy('created_at', 'desc')->where('category_id', 34)->where('id', "!=", $giaoduc_first->id)->paginate(4);
+        $tinlienquan = Post::orderBy('created_at', 'desc')->where('category_id', $new->category_id)->paginate(4);
+        $tinmoi = Post::orderBy('created_at', 'desc')->paginate(4);
+        $tinnong = Post::orderBy('view', 'desc')->paginate(4);
+        return view('user.page.chitiettin', compact('header', 'new', 'xuhuong', 'tuyensinh_first', 'tuyensinh', 'giaoduc_first', 'giaoduc', 'tinlienquan', 'tinmoi', 'tinnong'));
     }
 
-    function search(REQUEST $request){
-        dd($request->name_search);
+    function search(REQUEST $request)
+    {
+        $header = Post::orderBy('view', 'desc')->paginate(3);
+        $news_name = Post::where('name','like', '%'.$request->name_search.'%')->get();
+        return view('user.page.timkiem', compact('header','news_name'));
     }
 
-    function video(){
+    function video()
+    {
         return view('user.page.video');
     }
 
-    function taikhoan(){
+    function taikhoan()
+    {
         return view('user.page.taikhoan');
     }
 
-    function signin(Request $request){
+    function signin(Request $request)
+    {
         $user = Users::all();
-        foreach($user as $key){
-            if($request->email == $key->email && $request->password == $key->password){
+        foreach ($user as $key) {
+            if ($request->email == $key->email && $request->password == $key->password) {
                 $this->home();
             }
         }
         // echo "khong co tai khoan";
     }
 }
- 

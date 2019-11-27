@@ -137,6 +137,13 @@ nav {
         z-index: 9999;
         position: absolute;
         display: none;
+        #search-submit{
+          margin-top: 10px;
+          padding: 5px 10px;
+          background-color: rgb(246, 92, 44);
+          border: none;
+          color: white;
+        }
         .closebtn {
           color: rgb(246, 92, 44);
           font-size: 25px;

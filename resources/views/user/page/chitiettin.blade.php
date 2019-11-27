@@ -1,4 +1,7 @@
 @extends('user.layout.master')
+@section('meta')
+   
+@endsection
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/user_web/layout/header.css') }}">
 <link rel="stylesheet" href="{{ asset('css/user_web/layout/footer.css') }}">
