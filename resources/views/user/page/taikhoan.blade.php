@@ -102,7 +102,7 @@ Tài khoản
                         </div>
                         <div class="col-lg-9">
                             <div>
-                                0124.54.989
+                                {{ $user->phone }}
                             </div>
                             <div>
                                 <a data-toggle="collapse" data-target="#dienthoai" href="">Thay đổi</a>

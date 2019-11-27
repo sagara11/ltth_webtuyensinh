@@ -120,7 +120,7 @@ class HomepageController extends Controller
     {
         $account = array('email'=>$request->email, 'password'=>$request->password);
         if(Auth::attempt($account)){
-            return $this->home()->with(Auth::user()->name);
+            return back()->with(Auth::user()->name);
         }
         else{
             dd('khong dung tai khoan');
@@ -135,7 +135,7 @@ class HomepageController extends Controller
     function edit_account(Request $request, $edit){
         Users::where('id', Auth::user()->id)
         ->update([$edit => $request->$edit]);
-        return $this->taikhoan();
+        return back();
     }
 
     function change_password(Request $request){
@@ -143,7 +143,7 @@ class HomepageController extends Controller
         if($request->old_password == Auth::user()->password && $request->new_password == $request->new_password_confirm){
             Users::where('id', Auth::user()->id)
             ->update(['password' => $request->new_password]);
-            return $this->taikhoan();
+            return back();
         }   
         else{
             dd("nhap sai mat khau");

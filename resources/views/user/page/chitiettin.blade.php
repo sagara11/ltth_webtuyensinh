@@ -1,6 +1,5 @@
 @extends('user.layout.master')
 @section('meta')
-
 @endsection
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/user_web/layout/header.css') }}">
@@ -28,14 +27,14 @@ Chi tiết tin
                         <small class="webtuyensinh-section">
                             <span>{{ $new->categories->name }} |</span>
                             @if ($new->hour()<=24) <span>{{ $new->hour() }} giờ trước |</span>
-                                @else
-                                <span>{{ $new->day() }} |</span>
-                                @endif
-                                @if ($new->comment != NULL )
-                                <span>{{ $new->comment }} bình luận |</span>
-                                @else
-                                <span>0 bình luận |</span>
-                                @endif
+                            @else
+                            <span>{{ $new->day() }} |</span>
+                            @endif
+                            @if ($new->comment != NULL )
+                            <span>{{ $new->comment }} bình luận |</span>
+                            @else
+                            <span>0 bình luận |</span>
+                            @endif
                         </small>
                         <small><a class="webtuyensinh-link" href="">{{ $new->source->web_name }}</a></small>
                     </p>
@@ -125,8 +124,8 @@ Chi tiết tin
                         </div>
                     </div>
                 </div>
-                @if (Auth::check())
                 <div class="your-comment">
+                    @if (Auth::check())
                     <form action="">
                         <input class="form-control" type="textarea" placeholder="Ý kiến của bạn">
                     </form>
@@ -135,14 +134,12 @@ Chi tiết tin
                     </span>
                     <span><b>{{ Auth::user()->name }}</b></span>
                     <button>GỬI</button>
-                </div>
-                @else
-                <div>
+                    @else
                     <p>
-                        Bạn cần đăng nhập để có thể bình luận
-                    </p>
+                        Bạn cần đăng nhập để có thể bình luận   
+                    </p>    
+                    @endif
                 </div>
-                @endif
             </article>
 
             {{-- Tin lien quan --}}
