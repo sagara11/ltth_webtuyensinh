@@ -66,45 +66,29 @@ Chi tiết tin
                     <p>Ý KIẾN BẠN ĐỌC(11)</p>
                 </div>
                 <div class="user-comment">
-                    <div class="comment-box father">
-                        <div class="comment-box-img">
-                            <img class="rounded rounded-circle" src="{{ asset('media/tải xuống (1).png') }}" alt="">
-                        </div>
-                        <div class="comment-box-content">
-                            <span class="user-name">
-                                Nguyễn Văn Nam
-                            </span>
-                            <span class="comment-time">16:50 06/11/2019</span>
-                            <p>
-                                Trong 3 năm gần nhất, ngành dân tộc học cổ truyền...
-                            </p>
-                            <div class="comment-reply">
-                                <span>Trả lời | </span>
-                                <span>Sửa | </span>
-                                <span>Xóa</span>
-                            </div>
-                        </div>
-                        <div class="comment-box children">
+                    @foreach ($comment as $item)
+                    <div>
+                        <div class="comment-box father">
                             <div class="comment-box-img">
-                                <img class="rounded rounded-circle" src="{{ asset('media/tải xuống (1).png') }}" alt="">
+                                <img class="rounded rounded-circle" src="{{ $item->user->avatar }}" alt="">
                             </div>
                             <div class="comment-box-content">
                                 <span class="user-name">
-                                    Nguyễn Văn Nam
+                                    {{ $item->user->name }}
                                 </span>
-                                <span class="comment-time">16:50 06/11/2019</span>
+                            <span class="comment-time">{{ $item->created_at }}</span>
                                 <p>
-                                    Trong 3 năm gần nhất, ngành dân tộc học cổ truyền...
+                                    {{ $item->comment }}
                                 </p>
                                 <div class="comment-reply">
-                                    <span>Trả lời | </span>
+                                <span data-toggle="collapse" data-target="#comment-reply-{{ $item->id }}">Trả lời | </span>
                                     <span>Sửa | </span>
                                     <span>Xóa</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="comment-box father">
+                    <div class="comment-box children">
                         <div class="comment-box-img">
                             <img class="rounded rounded-circle" src="{{ asset('media/tải xuống (1).png') }}" alt="">
                         </div>
@@ -116,28 +100,44 @@ Chi tiết tin
                             <p>
                                 Trong 3 năm gần nhất, ngành dân tộc học cổ truyền...
                             </p>
-                            <div class="comment-reply">
-                                <span>Trả lời | </span>
-                                <span>Sửa | </span>
-                                <span>Xóa</span>
-                            </div>
                         </div>
                     </div>
+                    <div class="your-comment collapse" id="comment-reply-{{ $item->id }}">
+                            @if (Auth::check())
+                        <form method="post" action="{{ route('comment') }}">
+                            @csrf
+                                <input type="hidden" name="post_id" value="{{ $new->id }}">
+                                <input name="your_comment" class="form-control" type="textarea" placeholder="Ý kiến của bạn">
+                            <span>
+                                <img class="rounded rounded-circle" src="{{ Auth::user()->avatar }}" alt="">
+                            </span>
+                            <span><b>{{ Auth::user()->name }}</b></span>
+                            <button type="submit">GỬI</button>
+                            @else
+                            <p>
+                                Bạn cần đăng nhập để có thể bình luận   
+                            </p>    
+                        </form>
+                            @endif
+                        </div>
+                    @endforeach
                 </div>
                 <div class="your-comment">
                     @if (Auth::check())
-                    <form action="">
-                        <input class="form-control" type="textarea" placeholder="Ý kiến của bạn">
-                    </form>
+                <form method="post" action="{{ route('comment') }}">
+                    @csrf
+                        <input type="hidden" name="post_id" value="{{ $new->id }}">
+                        <input name="your_comment" class="form-control" type="textarea" placeholder="Ý kiến của bạn">
                     <span>
                         <img class="rounded rounded-circle" src="{{ Auth::user()->avatar }}" alt="">
                     </span>
                     <span><b>{{ Auth::user()->name }}</b></span>
-                    <button>GỬI</button>
+                    <button type="submit">GỬI</button>
                     @else
                     <p>
                         Bạn cần đăng nhập để có thể bình luận   
                     </p>    
+                </form>
                     @endif
                 </div>
             </article>

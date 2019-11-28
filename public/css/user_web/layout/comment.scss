@@ -28,17 +28,16 @@
         }
       }
     }
-    .children {
-      padding-left: 45px;
-    }
   }
   .father {
     padding-top: 10px;
-    margin-bottom: 10px;
     border-top: 1px solid rgb(238, 238, 238);
     &:first-child {
       border-top: none;
     }
+  }
+  .children {
+    padding-left: 45px;
   }
 }
 .your-comment {

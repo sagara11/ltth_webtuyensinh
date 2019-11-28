@@ -10,6 +10,7 @@ use App\Post;
 use App\User;
 use App\Users;
 use App\Banner;
+use App\Comment;
 use Exception;
 use Illuminate\Support\Carbon;
 
@@ -94,7 +95,13 @@ class HomepageController extends Controller
         $tinlienquan = Post::orderBy('created_at', 'desc')->where('category_id', $new->category_id)->paginate(4);
         $tinmoi = Post::orderBy('created_at', 'desc')->paginate(4);
         $tinnong = Post::orderBy('view', 'desc')->paginate(4);
-        return view('user.page.chitiettin', compact('header', 'new', 'xuhuong', 'tuyensinh_first', 'tuyensinh', 'giaoduc_first', 'giaoduc', 'tinlienquan', 'tinmoi', 'tinnong'));
+        try{
+            $comment = Comment::where('post_id', $new->id)->paginate(5);
+        }
+        catch(\Exception $e){
+            $comment = "Chưa có bình luận";
+        }
+        return view('user.page.chitiettin', compact('comment','header', 'new', 'xuhuong', 'tuyensinh_first', 'tuyensinh', 'giaoduc_first', 'giaoduc', 'tinlienquan', 'tinmoi', 'tinnong'));
     }
 
     function search(REQUEST $request)
@@ -148,5 +155,16 @@ class HomepageController extends Controller
         else{
             dd("nhap sai mat khau");
         }
+    }
+
+    function comment(Request $request){
+        $comment = new Comment;
+        $comment->comment = $request->your_comment;
+        $comment->user_id = Auth::user()->id;
+        $comment->post_id = $request->post_id;
+        $comment->parent_id = NULL;
+        $comment->publish = 1;
+        $comment->save();
+        return back();
     }
 }

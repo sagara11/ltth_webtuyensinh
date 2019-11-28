@@ -17,14 +17,13 @@
   .user-comment .comment-box .comment-box-content .comment-reply span {
     color: gray;
     font-size: 14px; }
-  .user-comment .comment-box .children {
-    padding-left: 45px; }
 .user-comment .father {
   padding-top: 10px;
-  margin-bottom: 10px;
   border-top: 1px solid #eeeeee; }
   .user-comment .father:first-child {
     border-top: none; }
+.user-comment .children {
+  padding-left: 45px; }
 
 .your-comment {
   position: relative;

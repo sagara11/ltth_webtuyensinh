@@ -114,6 +114,8 @@ Route::post("/sign-in","User\HomepageController@signin")->name('signin');
 
 Route::get('/logout',"User\HomepageController@logout")->name('log-out');
 
+Route::post('/comment',"User\HomepageController@comment")->name('comment');
+
 Route::get("/{slug}",'User\HomepageController@chitiettin')->name('chitiettin');
 
 Route::get('/video', 'User\HomepageController@video');
