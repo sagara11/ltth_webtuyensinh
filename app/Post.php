@@ -18,15 +18,8 @@ class Post extends Model
     	return $this->belongsTo('App\Crawl','source_id','id');
     }
     public function hour(){
+        Carbon::setlocale('vi');
         $now = Carbon::now();
-        return $now->diffInHours($this->created_at);
-    }
-    public function daydiffer(){
-        $now = Carbon::now();
-        return $now->diffInDays($this->created_at);
-    }
-    public function day(){
-        $day = $this->created_at->toDateString();
-        return $day;
+        return $this->created_at->diffForHumans($now);
     }
 }

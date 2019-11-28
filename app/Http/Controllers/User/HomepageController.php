@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Post;
 use App\User;
@@ -96,7 +97,7 @@ class HomepageController extends Controller
         $tinmoi = Post::orderBy('created_at', 'desc')->paginate(4);
         $tinnong = Post::orderBy('view', 'desc')->paginate(4);
         try{
-            $comment = Comment::where('post_id', $new->id)->paginate(5);
+            $comment = Comment::where('post_id', $new->id)->where('parent_id', NULL)->paginate(5);
         }
         catch(\Exception $e){
             $comment = "Chưa có bình luận";
@@ -147,25 +148,74 @@ class HomepageController extends Controller
     }
 
     function change_password(Request $request){
-        dd(Auth::user()->password);
-        if($request->old_password == Auth::user()->password && $request->new_password == $request->new_password_confirm){
+        if(Hash::check($request->old_password, Auth::user()->password) && $request->new_password == $request->new_password_confirm){
             Users::where('id', Auth::user()->id)
-            ->update(['password' => $request->new_password]);
-            return back();
+            ->update(['password' => Hash::make($request->new_password)]);
+            Auth::logout();
+            return redirect('/');
         }   
         else{
             dd("nhap sai mat khau");
         }
     }
 
+    function register(Request $request){
+        if($request->password == $request->confirm_password){
+            $user = new Users;
+            $user->email = $request->email;
+            $user->name = $request->name;
+            $user->password = Hash::make($request->password);
+            $user->save();
+            return redirect('/');
+        }
+    }
+
     function comment(Request $request){
-        $comment = new Comment;
-        $comment->comment = $request->your_comment;
-        $comment->user_id = Auth::user()->id;
-        $comment->post_id = $request->post_id;
-        $comment->parent_id = NULL;
-        $comment->publish = 1;
-        $comment->save();
+        if($request->has('submit2')){
+            $comment = new Comment;
+            $comment->comment = $request->your_comment;
+            $comment->user_id = Auth::user()->id;
+            $comment->post_id = $request->post_id;
+            $comment->parent_id = NULL;
+            $comment->publish = 1;
+            $comment->save();
+        }
+        if($request->has('submit1')){
+            $comment = new Comment;
+            $comment->comment = $request->your_comment_reply;
+            $comment->user_id = Auth::user()->id;
+            $comment->post_id = $request->post_id;
+            $comment->parent_id = $request->parent_id;
+            $comment->publish = 1;
+            $comment->save();
+        }
+        return back();
+    }
+
+    function update_avatar(Request $request){
+        // $request->validate([
+        //     'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        // ]);
+
+        $user = Auth::user();
+
+        // Filename cực shock để khỏi bị trùng
+        $fileName = $request->file('avatar')->storeAs('userfiles/images/avatar','avatar'.$user->id.'.jpg');
+        // Thư mục upload
+        $uploadPath = public_path('userfiles/images/avatar'); // Thư mục upload
+        // Bắt đầu chuyển file vào thư mục
+        $request->file('avatar')->move($uploadPath,$fileName);
+        // Thành công, show thành công
+        $photoURL = url($fileName);
+        return $photoURL;
+
+        Users::where('id', Auth::user()->id)
+        ->update(['avatar' => 'file1']);
+        return back();
+    }
+
+    function delete_comment($comment_id){
+        Comment::where('id',$comment_id)->delete();
         return back();
     }
 }

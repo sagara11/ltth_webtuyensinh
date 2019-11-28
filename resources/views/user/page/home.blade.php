@@ -18,7 +18,7 @@ Home
         <div class="col-lg-8">
             <!-- Bai viet chinh -->
             <section id="baiviet-chinh">
-                <a href="{{ route('chitiettin',$trend_first->slug) }}">
+                <a href="{{ route('chitiettin', $trend_first->slug) }}">
                     <img class="img-fluid" src="{{ $trend_first->image }}" alt="">
                 </a>
                 <h5>
@@ -27,18 +27,13 @@ Home
                 <p>
                     <small class="webtuyensinh-section">
                         <span>{{ $trend_first->categories->name }} |</span>
-                        @if ($trend_first->hour()<=24) <span>{{ $trend_first->hour() }} giờ trước |</span>
-                            @elseif($trend_first->hour()>24 && $trend_first->hour()<=168) <span>
-                                {{ $trend_first->daydiffer() }} ngày trước |</span>
-                                @else
-                                <span>{{ $trend_first->day() }} |</span>
-                                @endif
+                        <span>{{ $trend_first->hour() }} |</span>
 
-                                @if ($trend_first->comment != NULL )
-                                <span>{{ $trend_first->comment }} bình luận |</span>
-                                @else
-                                <span>0 bình luận |</span>
-                                @endif
+                        @if ($trend_first->comment != NULL )
+                        <span>{{ $trend_first->comment }} bình luận |</span>
+                        @else
+                        <span>0 bình luận |</span>
+                        @endif
                     </small>
                     <small><span class="webtuyensinh-link" href="">{{ $trend_first->source->web_name }}</span></small>
                 </p>
@@ -59,17 +54,13 @@ Home
                     <p>
                         <small class="webtuyensinh-section">
                             <span>{{ $item->categories->name }} |</span>
-                            @if ($item->hour()<=24) <span>{{ $item->hour() }} giờ trước |</span>
-                                @elseif($item->hour()>24 && $item->hour()<=168) <span>
-                                    {{ $item->daydiffer() }} ngày trước |</span>
-                                    @else
-                                    <span>{{ $item->day() }} |</span>
-                                    @endif
-                                    @if ($item->comment != NULL )
-                                    <span>{{ $item->comment }} bình luận |</span>
-                                    @else
-                                    <span>0 bình luận |</span>
-                                    @endif
+                            <span>{{ $item->hour() }} |</span>
+
+                            @if ($item->comment != NULL )
+                            <span>{{ $item->comment }} bình luận |</span>
+                            @else
+                            <span>0 bình luận |</span>
+                            @endif
                         </small>
                         <small><span class="webtuyensinh-link" href="">{{ $item->source->web_name }}</span></small>
                     </p>
@@ -93,17 +84,13 @@ Home
                         <p>
                             <small class="webtuyensinh-section">
                                 <span>{{ $item->categories->name }} |</span>
-                                @if ($item->hour()<=24) <span>{{ $item->hour() }} giờ trước |</span>
-                                    @elseif($item->hour()>24 && $item->hour()<=168) <span>
-                                        {{ $item->daydiffer() }} ngày trước |</span>
-                                        @else
-                                        <span>{{ $item->day() }} |</span>
-                                        @endif
-                                        @if ($item->comment != NULL )
-                                        <span>{{ $item->comment }} bình luận |</span>
-                                        @else
-                                        <span>0 bình luận |</span>
-                                        @endif
+                                <span>{{ $item->hour() }} |</span>
+
+                                @if ($item->comment != NULL )
+                                <span>{{ $item->comment }} bình luận |</span>
+                                @else
+                                <span>0 bình luận |</span>
+                                @endif
                             </small>
                             <small><span class="webtuyensinh-link" href="">{{ $item->source->web_name }}</span></small>
                         </p>

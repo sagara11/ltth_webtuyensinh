@@ -45,8 +45,12 @@ Tài khoản
                     <div class="account-section-header">
                         <h3>TÀI KHOẢN CỦA TÔI</h3>
                     </div>
-                    <input type="file" class="custom-file-input" id="avatar-file">
-                    <label for="avatar-file">Tải lên ảnh đại diện mới</label>
+                    <form method="post" action="{{ route('updateavatar') }}">
+                        @csrf
+                        <input type="file" name="avatar" id="avatar-file">
+                        <label for="avatar-file">Tải lên ảnh đại diện mới</label>
+                        <input type="submit" placeholder="submit">
+                    </form>
                     <div class="account-section-content row">
                         <div class="col-lg-3">
                             Tên tài khoản
@@ -177,8 +181,11 @@ Tài khoản
                             </p>
                             <div class="webtuyensinh-link">
                                 <p>
-                                    <small class="webtuyensinh-section">{{ $item->post->categories->name }} | {{ $item->post->hour() }} giờ trước | {{ $item->post->comment }} bình luận | </small>
-                                <small><a class="webtuyensinh-link" href="">{{ $item->post->source->name }}</a></small>
+                                    <small class="webtuyensinh-section">{{ $item->post->categories->name }} |
+                                        {{ $item->post->hour() }} giờ trước | {{ $item->post->comment }} bình luận |
+                                    </small>
+                                    <small><a class="webtuyensinh-link"
+                                            href="">{{ $item->post->source->name }}</a></small>
                                 </p>
                             </div>
                             <div class="row your-comment">
@@ -186,8 +193,8 @@ Tài khoản
                                     <img src="" alt="">
                                 </div>
                                 <div class="comment-content">
-                                <span>{{ $user->name }}</span>
-                                <span>- {{ $item->created_at }}</span>
+                                    <span>{{ $user->name }}</span>
+                                    <span>- {{ $item->created_at->toDateString() }}</span>
                                     <p>
                                         {{ $item->comment }}
                                     </p>
@@ -196,7 +203,7 @@ Tài khoản
                                             <a href="">Sửa</a>
                                         </span>
                                         <span>
-                                            <a href="">Xóa</a>
+                                            <a href="{{ route('deletecomment',$item->id) }}">Xóa</a>
                                         </span>
                                     </div>
                                 </div>

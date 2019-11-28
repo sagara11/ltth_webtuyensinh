@@ -27,14 +27,14 @@ Chi tiết tin
                         <small class="webtuyensinh-section">
                             <span>{{ $new->categories->name }} |</span>
                             @if ($new->hour()<=24) <span>{{ $new->hour() }} giờ trước |</span>
-                            @else
-                            <span>{{ $new->day() }} |</span>
-                            @endif
-                            @if ($new->comment != NULL )
-                            <span>{{ $new->comment }} bình luận |</span>
-                            @else
-                            <span>0 bình luận |</span>
-                            @endif
+                                @else
+                                <span>{{ $new->day() }} |</span>
+                                @endif
+                                @if ($new->comment != NULL )
+                                <span>{{ $new->comment }} bình luận |</span>
+                                @else
+                                <span>0 bình luận |</span>
+                                @endif
                         </small>
                         <small><a class="webtuyensinh-link" href="">{{ $new->source->web_name }}</a></small>
                     </p>
@@ -63,7 +63,7 @@ Chi tiết tin
             {{-- Comment --}}
             <article id="comment">
                 <div class="comment-header">
-                    <p>Ý KIẾN BẠN ĐỌC(11)</p>
+                    <p>Ý KIẾN BẠN ĐỌC({{ $comment->count() }})</p>
                 </div>
                 <div class="user-comment">
                     @foreach ($comment as $item)
@@ -76,68 +76,79 @@ Chi tiết tin
                                 <span class="user-name">
                                     {{ $item->user->name }}
                                 </span>
-                            <span class="comment-time">{{ $item->created_at }}</span>
+                                <span class="comment-time">{{ $item->created_at->toDateString() }}</span>
                                 <p>
                                     {{ $item->comment }}
                                 </p>
                                 <div class="comment-reply">
-                                <span data-toggle="collapse" data-target="#comment-reply-{{ $item->id }}">Trả lời | </span>
-                                    <span>Sửa | </span>
-                                    <span>Xóa</span>
+                                    <span data-toggle="collapse" data-target="#comment-reply-{{ $item->id }}">Trả lời |
+                                    </span>
+                                    @if ($item->user->id == Auth::user()->id)
+                                        <span>Sửa | </span>
+                                        <span>
+                                            <a href="{{ route('deletecomment',$item->id) }}">Xóa</a>
+                                        </span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @if (isset($item->child_comments))
+                    @foreach ($item->child_comments as $child_item)
                     <div class="comment-box children">
                         <div class="comment-box-img">
-                            <img class="rounded rounded-circle" src="{{ asset('media/tải xuống (1).png') }}" alt="">
+                            <img class="rounded rounded-circle" src="{{ $child_item->user->avatar }}" alt="">
                         </div>
                         <div class="comment-box-content">
                             <span class="user-name">
-                                Nguyễn Văn Nam
+                                {{ $child_item->user->name }}
                             </span>
-                            <span class="comment-time">16:50 06/11/2019</span>
+                            <span class="comment-time">{{ $child_item->created_at->toDateString() }}</span>
                             <p>
-                                Trong 3 năm gần nhất, ngành dân tộc học cổ truyền...
+                                {{ $child_item->comment }}
                             </p>
                         </div>
                     </div>
-                    <div class="your-comment collapse" id="comment-reply-{{ $item->id }}">
-                            @if (Auth::check())
-                        <form method="post" action="{{ route('comment') }}">
+                    @endforeach
+                    @endif
+                    <div class="mb-3 your-comment collapse" id="comment-reply-{{ $item->id }}">
+                        @if (Auth::check())
+                        <form id="commentsend" method="post" action="{{ route('comment') }}">
                             @csrf
-                                <input type="hidden" name="post_id" value="{{ $new->id }}">
-                                <input name="your_comment" class="form-control" type="textarea" placeholder="Ý kiến của bạn">
+                            <input type="hidden" name="parent_id" value="{{ $item->id }}">
+                            <input type="hidden" name="post_id" value="{{ $new->id }}">
+                            <input name="your_comment_reply" class="form-control" type="textarea"
+                                placeholder="Ý kiến của bạn">
                             <span>
                                 <img class="rounded rounded-circle" src="{{ Auth::user()->avatar }}" alt="">
                             </span>
                             <span><b>{{ Auth::user()->name }}</b></span>
-                            <button type="submit">GỬI</button>
+                            <button name="submit1" type="submit">GỬI</button>
                             @else
                             <p>
-                                Bạn cần đăng nhập để có thể bình luận   
-                            </p>    
+                                Bạn cần đăng nhập để có thể bình luận
+                            </p>
                         </form>
-                            @endif
-                        </div>
+                        @endif
+                    </div>
                     @endforeach
                 </div>
                 <div class="your-comment">
                     @if (Auth::check())
-                <form method="post" action="{{ route('comment') }}">
-                    @csrf
+                    <form id="commentsend2" method="post" action="{{ route('comment') }}">
+                        @csrf
                         <input type="hidden" name="post_id" value="{{ $new->id }}">
                         <input name="your_comment" class="form-control" type="textarea" placeholder="Ý kiến của bạn">
-                    <span>
-                        <img class="rounded rounded-circle" src="{{ Auth::user()->avatar }}" alt="">
-                    </span>
-                    <span><b>{{ Auth::user()->name }}</b></span>
-                    <button type="submit">GỬI</button>
+                        <span>
+                            <img class="rounded rounded-circle" src="{{ Auth::user()->avatar }}" alt="">
+                        </span>
+                        <span><b>{{ Auth::user()->name }}</b></span>
+                        <button name="submit2" type="submit">GỬI</button>
+                    </form>
                     @else
                     <p>
-                        Bạn cần đăng nhập để có thể bình luận   
-                    </p>    
-                </form>
+                        Bạn cần đăng nhập để có thể bình luận
+                    </p>
                     @endif
                 </div>
             </article>

@@ -16,8 +16,8 @@
             <div class="header-account dropdown">
                 <div class="dropdown-toggle" data-toggle="dropdown">
                     @if (Auth::check())
-                    <img class=" rounded rounded-circle" height="25px" width="25px"
-                        src="{{ Auth::user()->avatar }}" alt="" />
+                    <img class=" rounded rounded-circle" height="25px" width="25px" src="{{ Auth::user()->avatar }}"
+                        alt="" />
                     <p>
                         {{ Auth::user()->name }}
                     </p>
@@ -109,23 +109,23 @@
             <div class="modal-header">
                 <p>ĐĂNG KÝ</p>
             </div>
-            <div class="modal-box">
-                <form class="form-group" action="">
-                    <input required class="form-control" type="email" placeholder="Email">
-                    <input required class="form-control" type="text" placeholder="Tên tài khoản">
-                    <input required class="form-control" type="password" placeholder="Mật khẩu">
-                    <input required class="form-control" type="password" placeholder="Xác nhận Mật khẩu">
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button data-dismiss="modal" class="btn btn-danger">
-                    Đóng
-                </button>
+            <form method="post" action="{{ route('register') }}">
+                @csrf
+                <div class="modal-box">
+                    <input name="email" required class="form-control" type="email" placeholder="Email">
+                    <input name="name" required class="form-control" type="text" placeholder="Tên tài khoản">
+                    <input name="password" required class="form-control" type="password" placeholder="Mật khẩu">
+                    <input name="confirm_password" required class="form-control" type="password"
+                        placeholder="Xác nhận Mật khẩu">
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-danger">
+                        Đóng
+                    </button>
 
-                <button type="submit" class="btn btn-success">
-                    Đăng ký
-                </button>
-            </div>
+                    <input type="submit" placeholder="đăng ký">
+                </div>
+            </form>
         </div>
     </div>
 </article>
