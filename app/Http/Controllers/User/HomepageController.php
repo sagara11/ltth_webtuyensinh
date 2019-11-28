@@ -87,12 +87,12 @@ class HomepageController extends Controller
         $header = Post::orderBy('view', 'desc')->paginate(3);
 
         $new = Post::orderBy('created_at', 'desc')->where('slug', $slug)->first();
-        $xuhuong = Post::orderBy('created_at', 'desc')->where('trend', 1)->paginate(4);
+        $xuhuong = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id','!=',$new->id)->paginate(4);
         $tuyensinh_first = Post::where('category_id', 37)->first();
         $tuyensinh = Post::orderBy('created_at', 'desc')->where('category_id', 37)->where('id', "!=", $tuyensinh_first->id)->paginate(4);
         $giaoduc_first = Post::where('category_id', 34)->first();
         $giaoduc = Post::orderBy('created_at', 'desc')->where('category_id', 34)->where('id', "!=", $giaoduc_first->id)->paginate(4);
-        $tinlienquan = Post::orderBy('created_at', 'desc')->where('category_id', $new->category_id)->paginate(4);
+        $tinlienquan = Post::orderBy('created_at', 'desc')->where('category_id', $new->category_id)->where('id','!=',$new->id)->paginate(4);
         $tinmoi = Post::orderBy('created_at', 'desc')->paginate(4);
         $tinnong = Post::orderBy('view', 'desc')->paginate(4);
         try{
@@ -120,7 +120,8 @@ class HomepageController extends Controller
     {
         $header = Post::orderBy('view', 'desc')->paginate(3);
         $user = Auth::user();
-        return view('user.page.taikhoan', compact('header','user'));
+        $comment = Comment::where('user_id', Auth::user()->id)->get();
+        return view('user.page.taikhoan', compact('header','user','comment'));
     }
 
     function signin(Request $request)

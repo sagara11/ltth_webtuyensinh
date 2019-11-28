@@ -245,10 +245,10 @@ Chi tiết tin
                     <h4>XU HƯỚNG</h4>
                 </div>
                 <div class="side-content">
-                    <a href="{{ route('chitiettin', $new->slug) }}" class="xuhuong-main">
-                        <img class="img-fluid" src="{{ $new->image }}" alt="" />
+                    <a href="{{ route('chitiettin', $tinnong[0]->slug) }}" class="xuhuong-main">
+                        <img class="img-fluid" src="{{ $tinnong[0]->image }}" alt="" />
                         <p>
-                            {{ $new->name }}
+                            {{ $tinnong[0]->name }}
                         </p>
                     </a>
                     <div>

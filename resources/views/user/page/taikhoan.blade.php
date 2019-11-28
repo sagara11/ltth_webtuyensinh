@@ -102,7 +102,7 @@ Tài khoản
                         </div>
                         <div class="col-lg-9">
                             <div>
-                                {{ $user->phone }}
+                                0{{ $user->phone }}
                             </div>
                             <div>
                                 <a data-toggle="collapse" data-target="#dienthoai" href="">Thay đổi</a>
@@ -170,14 +170,15 @@ Tài khoản
                         <h3>QUẢN LÝ BÌNH LUẬN</h3>
                     </div>
                     <div class="account-section-content">
+                        @foreach ($comment as $item)
                         <div class="comment-box">
                             <p class="news-name">
-                                Tuyển dụng 50 nhân viên thì ....
+                                {{ $item->post->name }}
                             </p>
                             <div class="webtuyensinh-link">
                                 <p>
-                                    <small class="webtuyensinh-section">Tuyển sinh | 1 giờ | 3 bình luận | </small>
-                                    <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
+                                    <small class="webtuyensinh-section">{{ $item->post->categories->name }} | {{ $item->post->hour() }} giờ trước | {{ $item->post->comment }} bình luận | </small>
+                                <small><a class="webtuyensinh-link" href="">{{ $item->post->source->name }}</a></small>
                                 </p>
                             </div>
                             <div class="row your-comment">
@@ -185,30 +186,10 @@ Tài khoản
                                     <img src="" alt="">
                                 </div>
                                 <div class="comment-content">
-                                    <span>Nguyễn Văn Nam</span>
-                                    <span>- 16:50 06/11/2019</span>
+                                <span>{{ $user->name }}</span>
+                                <span>- {{ $item->created_at }}</span>
                                     <p>
-                                        Trong 3 năm gần nhất, ngành dân tộc hoc tuyển được một học viên.....
-                                    </p>
-                                    <div class="comment-edit">
-                                        <span>
-                                            <a href="">Sửa</a>
-                                        </span>
-                                        <span>
-                                            <a href="">Xóa</a>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row your-comment">
-                                <div class="your-image">
-                                    <img src="" alt="">
-                                </div>
-                                <div class="comment-content">
-                                    <span>Nguyễn Văn Nam</span>
-                                    <span>- 16:50 06/11/2019</span>
-                                    <p>
-                                        Trong 3 năm gần nhất, ngành dân tộc hoc tuyển được một học viên.....
+                                        {{ $item->comment }}
                                     </p>
                                     <div class="comment-edit">
                                         <span>
@@ -221,37 +202,7 @@ Tài khoản
                                 </div>
                             </div>
                         </div>
-                        <div class="comment-box">
-                            <p class="news-name">
-                                Tuyển dụng 50 nhân viên thì ....
-                            </p>
-                            <div class="webtuyensinh-link">
-                                <p>
-                                    <small class="webtuyensinh-section">Tuyển sinh | 1 giờ | 3 bình luận | </small>
-                                    <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
-                                </p>
-                            </div>
-                            <div class="row your-comment">
-                                <div class="your-image">
-                                    <img src="" alt="">
-                                </div>
-                                <div class="comment-content">
-                                    <span>Nguyễn Văn Nam</span>
-                                    <span>- 16:50 06/11/2019</span>
-                                    <p>
-                                        Trong 3 năm gần nhất, ngành dân tộc hoc tuyển được một học viên.....
-                                    </p>
-                                    <div class="comment-edit">
-                                        <span>
-                                            <a href="">Sửa</a>
-                                        </span>
-                                        <span>
-                                            <a href="">Xóa</a>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </section>
 
