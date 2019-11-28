@@ -37,3 +37,35 @@ $(document).ready(function() {
         duplicated: true
     });
 });
+
+$(document).ready(function() {
+    $('.send').click(function() {
+        var parent_id = $(this).attr('id');
+        var comment = $('#comment'+parent_id).val();
+        var token = $('#token').val();
+        
+        if(comment) {
+            $.ajax({
+                type: 'post',
+                url: '/admin/comments/add',
+                headers: { 'X-XSRF-TOKEN' : token },
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-CSRF-Token', token);
+                },
+                data: {type: 'ajax', _csrfToken : token},
+                data: {comment: comment, parent_id: parent_id},
+                success: function(response) {
+                    var res = $.parseJSON(response);
+                    if(!res.status) {
+                        return;
+                    }
+                    location.reload(true);
+                },
+            });        
+        }
+    });
+    $('.response').click(function() {
+        var id = $(this).attr('id');
+        $('#comment'+id).focus();
+    })
+});

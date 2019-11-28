@@ -45,7 +45,7 @@ Tài khoản
                     <div class="account-section-header">
                         <h3>TÀI KHOẢN CỦA TÔI</h3>
                     </div>
-                    <form method="post" action="{{ route('updateavatar') }}">
+                    <form method="post" action="{{ route('updateavatar') }}" enctype="multipart/form-data">
                         @csrf
                         <input type="file" name="avatar" id="avatar-file">
                         <label for="avatar-file">Tải lên ảnh đại diện mới</label>

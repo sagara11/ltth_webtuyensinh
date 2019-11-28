@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\API\UserController;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
 use App\Post;
 use App\User;
 use App\Users;
@@ -129,16 +132,18 @@ class HomepageController extends Controller
     {
         $account = array('email'=>$request->email, 'password'=>$request->password);
         if(Auth::attempt($account)){
-            return back()->with(Auth::user()->name);
+            $data = Auth::user()->name;
+            return $data;
         }
         else{
-            dd('khong dung tai khoan');
+            $data = "Email hoặc mật khẩu không đúng";
+            return $data;
         }
     }
 
     function logout(){
         Auth::logout();
-        return $this->home();
+        return redirect('/');
     }
 
     function edit_account(Request $request, $edit){
@@ -160,13 +165,23 @@ class HomepageController extends Controller
     }
 
     function register(Request $request){
-        if($request->password == $request->confirm_password){
-            $user = new Users;
-            $user->email = $request->email;
-            $user->name = $request->name;
-            $user->password = Hash::make($request->password);
-            $user->save();
-            return redirect('/');
+        $users = Users::all();
+        foreach($users as $user)
+        {
+            if($request->email == $user->email)
+            {
+                $data = "Email này đã tồn tại";
+                return $data;
+            }
+            if($request->password == $request->confirm_password){
+                $user = new Users;
+                $user->email = $request->email;
+                $user->name = $request->name;
+                $user->password = Hash::make($request->password);
+                $user->save();
+                $data = "Đăng ký tài khoản thành công";
+                return $data;
+            }
         }
     }
 
@@ -182,10 +197,11 @@ class HomepageController extends Controller
         }
         if($request->has('submit1')){
             $comment = new Comment;
-            $comment->comment = $request->your_comment_reply;
+            $string = "your_comment_reply-".$request->parent_id[$request->input1];
+            $comment->comment = $request->$string;
             $comment->user_id = Auth::user()->id;
             $comment->post_id = $request->post_id;
-            $comment->parent_id = $request->parent_id;
+            $comment->parent_id = $request->parent_id[$request->input1];
             $comment->publish = 1;
             $comment->save();
         }
@@ -193,24 +209,13 @@ class HomepageController extends Controller
     }
 
     function update_avatar(Request $request){
-        // $request->validate([
-        //     'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        // ]);
+        $avatar_upload = new UserController;
+        $url = $avatar_upload->Xulyupload($request, Auth::user()->id);
+        
+        $avatar = Users::find(Auth::user()->id);
+        $avatar->avatar = $url;
+        $avatar->save();
 
-        $user = Auth::user();
-
-        // Filename cực shock để khỏi bị trùng
-        $fileName = $request->file('avatar')->storeAs('userfiles/images/avatar','avatar'.$user->id.'.jpg');
-        // Thư mục upload
-        $uploadPath = public_path('userfiles/images/avatar'); // Thư mục upload
-        // Bắt đầu chuyển file vào thư mục
-        $request->file('avatar')->move($uploadPath,$fileName);
-        // Thành công, show thành công
-        $photoURL = url($fileName);
-        return $photoURL;
-
-        Users::where('id', Auth::user()->id)
-        ->update(['avatar' => 'file1']);
         return back();
     }
 

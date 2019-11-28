@@ -26,10 +26,7 @@ Chi tiết tin
                     <p>
                         <small class="webtuyensinh-section">
                             <span>{{ $new->categories->name }} |</span>
-                            @if ($new->hour()<=24) <span>{{ $new->hour() }} giờ trước |</span>
-                                @else
-                                <span>{{ $new->day() }} |</span>
-                                @endif
+                            <span>{{ $new->hour() }} |</span>
                                 @if ($new->comment != NULL )
                                 <span>{{ $new->comment }} bình luận |</span>
                                 @else
@@ -65,7 +62,12 @@ Chi tiết tin
                 <div class="comment-header">
                     <p>Ý KIẾN BẠN ĐỌC({{ $comment->count() }})</p>
                 </div>
+                <?php
+                    $i=0;
+                ?>
                 <div class="user-comment">
+                    <form method="post" action="{{ route('comment') }}">
+                        <input id="input1" type="hidden" name="input1">
                     @foreach ($comment as $item)
                     <div>
                         <div class="comment-box father">
@@ -83,11 +85,13 @@ Chi tiết tin
                                 <div class="comment-reply">
                                     <span data-toggle="collapse" data-target="#comment-reply-{{ $item->id }}">Trả lời |
                                     </span>
-                                    @if ($item->user->id == Auth::user()->id)
-                                        <span>Sửa | </span>
-                                        <span>
-                                            <a href="{{ route('deletecomment',$item->id) }}">Xóa</a>
-                                        </span>
+                                    @if (Auth::check())
+                                        @if ($item->user->id == Auth::user()->id)
+                                            <span>Sửa | </span>
+                                            <span>
+                                                <a href="{{ route('deletecomment',$item->id) }}">Xóa</a>
+                                            </span>
+                                        @endif
                                     @endif
                                 </div>
                             </div>
@@ -113,17 +117,16 @@ Chi tiết tin
                     @endif
                     <div class="mb-3 your-comment collapse" id="comment-reply-{{ $item->id }}">
                         @if (Auth::check())
-                        <form id="commentsend" method="post" action="{{ route('comment') }}">
                             @csrf
-                            <input type="hidden" name="parent_id" value="{{ $item->id }}">
+                            <input type="hidden" name="parent_id[]" value="{{ $item->id }}">
                             <input type="hidden" name="post_id" value="{{ $new->id }}">
-                            <input name="your_comment_reply" class="form-control" type="textarea"
+                            <input id="{{ $i }}" name="your_comment_reply-{{ $item->id }}" class="form-control child_rep_comment" type="textarea"
                                 placeholder="Ý kiến của bạn">
                             <span>
                                 <img class="rounded rounded-circle" src="{{ Auth::user()->avatar }}" alt="">
                             </span>
                             <span><b>{{ Auth::user()->name }}</b></span>
-                            <button name="submit1" type="submit">GỬI</button>
+                            <button id="submit_btn" name="submit1" type="submit">GỬI</button>
                             @else
                             <p>
                                 Bạn cần đăng nhập để có thể bình luận
@@ -131,11 +134,14 @@ Chi tiết tin
                         </form>
                         @endif
                     </div>
+                    <?php
+                        $i++;
+                    ?>
                     @endforeach
                 </div>
                 <div class="your-comment">
                     @if (Auth::check())
-                    <form id="commentsend2" method="post" action="{{ route('comment') }}">
+                    <form method="post" action="{{ route('comment') }}">
                         @csrf
                         <input type="hidden" name="post_id" value="{{ $new->id }}">
                         <input name="your_comment" class="form-control" type="textarea" placeholder="Ý kiến của bạn">

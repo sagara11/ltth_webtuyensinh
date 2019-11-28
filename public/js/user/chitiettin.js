@@ -25,6 +25,10 @@ $(document).mouseup(function(e) {
     }
 });
 
+$('body').on('click', '.child_rep_comment', function set(){
+    $('#input1').val(this.id);
+});
+
 $(document).ready(function() {
     for (var i = 0; i < a_tag.length; i++) {
         a_tag[i].removeAttribute("href");
@@ -43,6 +47,7 @@ $(document).ready(function() {
         duplicated: true
     });
 
+    
     // $("#commentsend").submit(function(event){
     //     event.preventDefault();
     //     var post_url = $(this).attr("action");

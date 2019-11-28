@@ -18,9 +18,7 @@
                     @if (Auth::check())
                     <img class=" rounded rounded-circle" height="25px" width="25px" src="{{ Auth::user()->avatar }}"
                         alt="" />
-                    <p>
-                        {{ Auth::user()->name }}
-                    </p>
+                <p>{{ Auth::user()->name }}</p>
                     @else
                     <p>Tài khoản</p>
                     @endif
@@ -75,18 +73,15 @@
                 <p>ĐĂNG NHẬP</p>
             </div>
             <div class="modal-body">
-                <form method="post" action="{{ route('signin') }}" class="form-group">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <input name="email" required class="form-control" type="email" placeholder="Tên tài khoản">
-                    <input name="password" required class="form-control" type="password" placeholder="Mật khẩu">
-                    <input class="checkbox-btn" type="checkbox">
-                    <span>
-                        <button class="submit-btn" type="submit">ĐĂNG NHẬP</button>
-                    </span>
-                    <span>
-                        <a href="">Quên mật khẩu</a>
-                    </span>
-                </form>
+                <input id="s-email" name="email" required class="form-control" type="email" placeholder="Tên tài khoản">
+                <input id="s-pass" name="password" required class="form-control" type="password" placeholder="Mật khẩu">
+                <input class="checkbox-btn" type="checkbox">
+                <span>
+                    <button id="dangnhap_submit" class="submit-btn" type="submit">ĐĂNG NHẬP</button>
+                </span>
+                <span>
+                    <a href="">Quên mật khẩu</a>
+                </span>
             </div>
             <div class="modal-footer">
                 <p>Hoặc đăng nhập với:</p>
@@ -99,6 +94,12 @@
                     </button>
                 </div>
             </div>
+            <button id="modalclose2" data-dismiss="modal">
+                close
+            </button>
+            <p id="s_popup">
+
+            </p>
         </div>
     </div>
 </article>
@@ -109,23 +110,23 @@
             <div class="modal-header">
                 <p>ĐĂNG KÝ</p>
             </div>
-            <form method="post" action="{{ route('register') }}">
-                @csrf
-                <div class="modal-box">
-                    <input name="email" required class="form-control" type="email" placeholder="Email">
-                    <input name="name" required class="form-control" type="text" placeholder="Tên tài khoản">
-                    <input name="password" required class="form-control" type="password" placeholder="Mật khẩu">
-                    <input name="confirm_password" required class="form-control" type="password"
-                        placeholder="Xác nhận Mật khẩu">
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-danger">
-                        Đóng
-                    </button>
+            <div class="modal-box">
+                <input id="email" name="email" required class="form-control" type="email" placeholder="Email">
+                <input id="name" name="name" required class="form-control" type="text" placeholder="Tên tài khoản">
+                <input id="password" name="password" required class="form-control" type="password" placeholder="Mật khẩu">
+                <input id="confirm_password" name="confirm_password" required class="form-control" type="password"
+                    placeholder="Xác nhận Mật khẩu">
+            </div>
+            <div class="modal-footer">
+                <button id="modalclose" data-dismiss="modal" class="btn btn-danger">
+                    Đóng
+                </button>
 
-                    <input type="submit" placeholder="đăng ký">
-                </div>
-            </form>
+                <input id="register_submit" type="submit" placeholder="đăng ký">
+            </div>
+            <p id="popup">
+                
+            </p>
         </div>
     </div>
 </article>
@@ -222,3 +223,75 @@
         @endforeach
     </ul>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>  
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+    <script type="text/javascript" src="/js/ckfinder/ckfinder.js"></script>
+  	<script>CKFinder.config( { connectorPath: '/ckfinder/connector' } );</script>
+    <meta name="csrf_token" content="{{ csrf_token() }}" />
+    <script>$.ajaxSetup({ headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')} })</script>
+
+<script>
+         $(document).ready(function(){
+          $('#register_submit').click(function(){
+            var email = $('#email').val();
+            var password = $('#password').val();
+            var name = $('#name').val();
+            var confirm_password = $('#confirm_password').val();
+              $.ajax({
+                url: "{{ route('register') }}",
+                type:"post",
+                beforeSend: function (xhr) {
+                    var token = $('meta[name="csrf_token"]').attr('content');
+                    if (token) {
+                          return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                    }
+                },
+                data: { email : email,password : password , name : name ,confirm_password : confirm_password },
+                success:function(data){
+                   
+                    if(data == "Đăng ký tài khoản thành công"){
+                        $("#modalclose").click();
+                    }
+                    else{
+                        $('#popup').text(data);
+                    }
+                },
+                error:function(){ 
+                    alert('error');
+                }
+            }); 
+          });
+          $('#dangnhap_submit').click(function(){
+            var s_email = $('#s-email').val();
+            var s_pass = $('#s-pass').val();
+              $.ajax({
+                url: "{{ route('signin') }}",
+                type:"post",
+                beforeSend: function (xhr) {
+                    var token = $('meta[name="csrf_token"]').attr('content');
+                    if (token) {
+                          return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                    }
+                },
+                data: { email : s_email,password : s_pass },
+                success:function(data){
+                   
+                    if(data != "Email hoặc mật khẩu không đúng"){
+                        $("#modalclose2").click();
+                        location.reload();
+                    }
+                    else{
+                        $('#s_popup').text(data);
+                    }
+                },
+                error:function(){ 
+                    alert('error');
+                }
+            }); 
+          });
+      });
+</script>
