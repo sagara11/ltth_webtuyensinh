@@ -282,15 +282,15 @@ Tài khoản
                                     <input id="update_id" type="hidden" name="update_id">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Hình ảnh</label>
-                                        <input type="hidden" name="update_image" placeholder="image" id="url1">
+                                        <input required type="hidden" name="update_image" placeholder="image" id="url1">
                                         <div style="margin-bottom: 15px;">
                                         <img src="" class="img-fluid" alt="" id="avatar1">
                                         </div>
                                         <button type="button" onclick="openPopup1()" class="btn btn-primary">Chọn ảnh</button>
                                     </div>
-                                    <input name="update_name" class="form-control mb-2" type="text" placeholder="Tên bài viết">
-                                    <input name="update_description" class="form-control mb-2" type="text" placeholder="Mô tả bài viết">
-                                    <textarea name="update_content" class="form-control mb-2" name="" id="" rows="10" placeholder="Nội dung bài viết"></textarea>
+                                    <input required name="update_name" class="form-control mb-2" type="text" placeholder="Tên bài viết">
+                                    <input required name="update_description" class="form-control mb-2" type="text" placeholder="Mô tả bài viết">
+                                    <textarea required name="update_content" class="form-control mb-2" name="" id="" rows="10" placeholder="Nội dung bài viết"></textarea>
                                     <button class="btn btn-success" type="submit">Lưu</button>
                                 </div>
                             </div>
