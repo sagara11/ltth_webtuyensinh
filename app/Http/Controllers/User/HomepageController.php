@@ -223,4 +223,9 @@ class HomepageController extends Controller
         Comment::where('id',$comment_id)->delete();
         return back();
     }
+
+    function update_comment(Request $request){
+        Comment::where('id',$request->get_id)->update(['comment' => $request->updatecomment]);
+        return back();
+    }
 }
