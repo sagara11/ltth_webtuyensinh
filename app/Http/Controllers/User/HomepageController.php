@@ -126,9 +126,24 @@ class HomepageController extends Controller
 
     function search(REQUEST $request)
     {
-        $header = Post::orderBy('view', 'desc')->paginate(3);
         $news_name = Post::where('name','like', '%'.$request->name_search.'%')->get();
-        return view('user.page.timkiem', compact('header','news_name'));
+        $header = Post::orderBy('view', 'desc')->paginate(3);
+
+        $banner = Banner::orderBy('created_at', 'desc')->where('position', 'top')->paginate(2);
+        $footer_banner = Banner::orderBy('created_at', 'desc')->where('position', 'sidebar')->first();
+
+        $trend_first = Post::latest()->where('trend', 1)->first();
+        $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->paginate(3);
+        $news = Post::orderBy('created_at', 'desc')->where('id', "!=", $trend_first->id)->paginate(20);
+        $sidetrend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->paginate(6);
+        $tuyensinh_first = Post::where('category_id', 37)->first();
+        $tuyensinh = Post::orderBy('created_at', 'asc')->where('category_id', 37)->where('id', "!=", $tuyensinh_first->id)->paginate(4);
+        $giaoduc_first = Post::where('category_id', 34)->first();
+        $giaoduc = Post::orderBy('created_at', 'desc')->where('category_id', 34)->where('id', "!=", $giaoduc_first->id)->paginate(4);
+
+        $webtuyensinh_first = Category::where('id', $trend_first->category_id)->first();
+        return view('user.page.timkiem', compact('header', 'banner', 'footer_banner', 'news', 'trend_first', 'trend', 'sidetrend', 'tuyensinh', 'tuyensinh_first', 'giaoduc', 'giaoduc_first', 'webtuyensinh_first', 'news_name'));
+
     }
 
     function video()
