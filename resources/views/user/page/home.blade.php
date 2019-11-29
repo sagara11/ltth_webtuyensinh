@@ -57,6 +57,7 @@ Home
             <!-- Bai viet - tin tuc -->
             <section id="baiviet-tintuc">
                 @foreach ($news as $item)
+                @if($item->publish == 1)
                 <div class="baiviet-box">
                     <div class="tintuc-img">
                         <a href="{{ route('chitiettin',$item->slug) }}">
@@ -69,10 +70,11 @@ Home
                             <span>{{ $item->categories->name }} |</span>
                             <span>{{ $item->hour() }} |</span>
                             <!-- <span>{{ $item->comment ? $item->comment : 0 }} bình luận |</span> -->
-                            <span class="webtuyensinh-link" href="">{{ $item->source->web_name }}</span>
+                            <span class="webtuyensinh-link" href="">{{ isset($item->source->web_name) ? $item->source->web_name : '' }}</span>
                         </p>
                     </div>
                 </div>
+                @endif
                 @endforeach
             </section>
         </div>

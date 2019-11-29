@@ -85,6 +85,24 @@
           border-radius: 3px;
           margin-right: 10px;
           border: none; }
+    #account .account-content .tab-content #quanlybaidang .account-section-header {
+      padding: 8px 0px; }
+      #account .account-content .tab-content #quanlybaidang .account-section-header h3 {
+        color: #f65c2c;
+        font-size: 20px; }
+    #account .account-content .tab-content #quanlybaidang .account-section-content {
+      padding: 10px 5px; }
+      #account .account-content .tab-content #quanlybaidang .account-section-content .input-section {
+        margin-bottom: 10px; }
+      #account .account-content .tab-content #quanlybaidang .account-section-content .submit-section {
+        display: flex;
+        justify-content: flex-end; }
+        #account .account-content .tab-content #quanlybaidang .account-section-content .submit-section button {
+          padding: 5px 10px;
+          background-color: #f65c2c;
+          color: white;
+          border: none;
+          border-radius: 3px; }
     #account .account-content .tab-content #quanlybinhluan .account-section-header {
       color: #f65c2c;
       font-size: 20px; }

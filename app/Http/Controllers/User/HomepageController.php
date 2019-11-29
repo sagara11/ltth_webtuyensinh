@@ -244,4 +244,18 @@ class HomepageController extends Controller
         Comment::where('id',$request->get_id)->update(['comment' => $request->updatecomment]);
         return back();
     }
+
+    function news_create(Request $request){
+        $news = new Post;
+        $news->name = $request->news_name;
+        $news->slug = str_slug($request->news_name, '-');
+        $news->description = $request->news_description;
+        $news->content = $request->news_content;
+        $news->category_id = $request->news_section;
+        $news->image = $request->image;
+        $news->type_post = "post";
+        $news->save();
+
+        return redirect('/');
+    }
 }

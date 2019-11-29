@@ -31,6 +31,9 @@ Tài khoản
                     <a class="nav-link" data-toggle="tab" href="#doimatkhau">Đổi mật khẩu</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#quanlybaidang">Quản lý bài đăng</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#quanlybinhluan">Quản lý bình luận</a>
                 </li>
                 <li class="nav-item">
@@ -168,6 +171,69 @@ Tài khoản
                     </form>
                 </section>
 
+                {{-- Quan ly bai dang --}}
+                <section id="quanlybaidang" class="container tab-pane fade"><br>
+                    <div class="account-section-header">
+                        <h3>QUẢN LÝ BÀI ĐĂNG</h3>
+                    </div>
+                    <form class="form-group" method="post" action="{{ route('newscreate') }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="row account-section-content">
+                            <div class="input-section col-lg-3">
+                                Tên bài đăng
+                            </div>
+                            <div class="input-section col-lg-9">
+                                <div>
+                                    <input required name="news_name" class="form-control" type="text" placeholder="Tên bài đăng">
+                                </div>
+                            </div>
+                            <div class="input-section col-lg-3">
+                                Ảnh bài đăng
+                            </div>
+                            <div class="input-section col-lg-9">
+                                <div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Image</label>
+                                        <input type="hidden" name="image" placeholder="image" id="url">
+                                        <div style="margin-bottom: 15px;">
+                                        <img src="/userfiles/images/default_avatar-ea7cf6abde4eec089a4e03cc925d0e893e428b2b6971b12405a9b118c837eaa2.png" class="img-fluid" alt="" id="avatar">
+                                        </div>
+                                            <button type="button" onclick="openPopup()" class="btn btn-primary">Image</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-section col-lg-3">
+                                Danh mục
+                            </div>
+                            <div class="input-section col-lg-9">
+                                <select required class="form-control" name="news_section" id="">
+                                    @foreach ($nav_section as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="input-section col-lg-3">
+                                Mô tả
+                            </div>
+                            <div class="input-section col-lg-9">
+                                <input required name="news_description" type="text" class="form-control" placeholder="Mô tả">
+                            </div>
+                            <div class="input-section col-lg-3">
+                                Nội dung
+                            </div>
+                            <div class="input-section col-lg-9">
+                                <textarea required class="form-control" name="news_content" id="" rows="12"></textarea>
+                            </div>
+
+                            <div class="submit-section col-lg-12">
+                                <button type="submit">
+                                    ĐĂNG BÀI
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+
                 {{-- Quan ly binh luan --}}
                 <section id="quanlybinhluan" class="container tab-pane fade"><br>
                     <div class="account-section-header">
@@ -200,7 +266,8 @@ Tài khoản
                                     </p>
                                     <div class="comment-edit">
                                         <span>
-                                        <a class="update_btn" data-target="#updatecomment" id="{{ $item->id }}" data-toggle="modal" href="">Sửa</a>
+                                            <a class="update_btn" data-target="#updatecomment" id="{{ $item->id }}"
+                                                data-toggle="modal" href="">Sửa</a>
                                         </span>
                                         <span>
                                             <a href="{{ route('deletecomment',$item->id) }}">Xóa</a>
@@ -223,7 +290,7 @@ Tài khoản
                                     <input id="get_id" name="get_id" type="hidden">
                                     <input class="form-control" type="text" name="updatecomment">
                                     <button type="submit">Submit</button>
-                                </div> 
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -264,9 +331,34 @@ Tài khoản
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.marquee/1.3.1/jquery.marquee.min.js"></script>
 <script type="text/javascript" src="{{ asset('js/user/home.js') }}"></script>
+<script type="text/javascript" src="/js/ckfinder/ckfinder.js"></script>
+<script>CKFinder.config( { connectorPath: '/ckfinder/connector' } );</script>
 <script>
     $('body').on('click', '.update_btn', function set(){
     $('#get_id').val(this.id);
 });
+</script>
+<script>
+        function openPopup() {
+            CKFinder.popup( {
+                chooseFiles: true,
+                onInit: function( finder ) {
+                    finder.on( 'files:choose', function( evt ) {
+                        var file = evt.data.files.first();
+                        document.getElementById( 'avatar' ).src = file.getUrl();
+                    } );
+                    finder.on( 'file:choose:resizedImage', function( evt ) {
+                        document.getElementById( 'avatar' ).src = evt.data.resizedUrl;
+                    } );
+                    finder.on( 'files:choose', function( evt ) {
+                        var file = evt.data.files.first();
+                        document.getElementById( 'url' ).value = file.getUrl();
+                    } );
+                    finder.on( 'file:choose:resizedImage', function( evt ) {
+                        document.getElementById( 'url' ).value = evt.data.resizedUrl;
+                    } );
+                }
+            } );
+        }
 </script>
 @endsection

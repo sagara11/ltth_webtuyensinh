@@ -53,60 +53,61 @@ Chi tiết tin
                 <div class="user-comment">
                     <form method="post" action="{{ route('comment') }}">
                         <input id="input1" type="hidden" name="input1">
-                    @foreach ($comment as $item)
-                    <div>
-                        <div class="comment-box father">
-                            <div class="comment-box-img">
-                                <img class="rounded rounded-circle" src="{{ $item->user->avatar }}" alt="">
-                            </div>
-                            <div class="comment-box-content">
-                                <span class="user-name">
-                                    {{ $item->user->name }}
-                                </span>
-                                <span class="comment-time">{{ $item->created_at->toDateString() }}</span>
-                                <p>
-                                    {{ $item->comment }}
-                                </p>
-                                <div class="comment-reply">
-                                    <span data-toggle="collapse" data-target="#comment-reply-{{ $item->id }}">Trả lời |
+                        @foreach ($comment as $item)
+                        <div>
+                            <div class="comment-box father">
+                                <div class="comment-box-img">
+                                    <img class="rounded rounded-circle" src="{{ $item->user->avatar }}" alt="">
+                                </div>
+                                <div class="comment-box-content">
+                                    <span class="user-name">
+                                        {{ $item->user->name }}
                                     </span>
-                                    @if (Auth::check())
+                                    <span class="comment-time">{{ $item->created_at->toDateString() }}</span>
+                                    <p>
+                                        {{ $item->comment }}
+                                    </p>
+                                    <div class="comment-reply">
+                                        <span data-toggle="collapse" data-target="#comment-reply-{{ $item->id }}">Trả
+                                            lời |
+                                        </span>
+                                        @if (Auth::check())
                                         @if ($item->user->id == Auth::user()->id)
-                                            <span>Sửa | </span>
-                                            <span>
-                                                <a href="{{ route('deletecomment',$item->id) }}">Xóa</a>
-                                            </span>
+                                        <span>Sửa | </span>
+                                        <span>
+                                            <a href="{{ route('deletecomment',$item->id) }}">Xóa</a>
+                                        </span>
                                         @endif
-                                    @endif
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    @if (isset($item->child_comments))
-                    @foreach ($item->child_comments as $child_item)
-                    <div class="comment-box children">
-                        <div class="comment-box-img">
-                            <img class="rounded rounded-circle" src="{{ $child_item->user->avatar }}" alt="">
+                        @if (isset($item->child_comments))
+                        @foreach ($item->child_comments as $child_item)
+                        <div class="comment-box children">
+                            <div class="comment-box-img">
+                                <img class="rounded rounded-circle" src="{{ $child_item->user->avatar }}" alt="">
+                            </div>
+                            <div class="comment-box-content">
+                                <span class="user-name">
+                                    {{ $child_item->user->name }}
+                                </span>
+                                <span class="comment-time">{{ $child_item->created_at->toDateString() }}</span>
+                                <p>
+                                    {{ $child_item->comment }}
+                                </p>
+                            </div>
                         </div>
-                        <div class="comment-box-content">
-                            <span class="user-name">
-                                {{ $child_item->user->name }}
-                            </span>
-                            <span class="comment-time">{{ $child_item->created_at->toDateString() }}</span>
-                            <p>
-                                {{ $child_item->comment }}
-                            </p>
-                        </div>
-                    </div>
-                    @endforeach
-                    @endif
-                    <div class="mb-3 your-comment collapse" id="comment-reply-{{ $item->id }}">
-                        @if (Auth::check())
+                        @endforeach
+                        @endif
+                        <div class="mb-3 your-comment collapse" id="comment-reply-{{ $item->id }}">
+                            @if (Auth::check())
                             @csrf
                             <input type="hidden" name="parent_id[]" value="{{ $item->id }}">
                             <input type="hidden" name="post_id" value="{{ $new->id }}">
-                            <input id="{{ $i }}" name="your_comment_reply-{{ $item->id }}" class="form-control child_rep_comment" type="textarea"
-                                placeholder="Ý kiến của bạn">
+                            <input id="{{ $i }}" name="your_comment_reply-{{ $item->id }}"
+                                class="form-control child_rep_comment" type="textarea" placeholder="Ý kiến của bạn">
                             <span>
                                 <img class="rounded rounded-circle" src="{{ Auth::user()->avatar }}" alt="">
                             </span>
@@ -116,116 +117,134 @@ Chi tiết tin
                             <p>
                                 Bạn cần đăng nhập để có thể bình luận
                             </p>
-                        </form>
-                        @endif
-                    </div>
-                    <?php
-                        $i++;
-                    ?>
-                    @endforeach
-                </div>
-                <div class="your-comment">
-                    @if (Auth::check())
-                    <form method="post" action="{{ route('comment') }}">
-                        @csrf
-                        <input type="hidden" name="post_id" value="{{ $new->id }}">
-                        <input name="your_comment" class="form-control" type="textarea" placeholder="Ý kiến của bạn">
-                        <span>
-                            <img class="rounded rounded-circle" src="{{ Auth::user()->avatar }}" alt="">
-                        </span>
-                        <span><b>{{ Auth::user()->name }}</b></span>
-                        <button name="submit2" type="submit">GỬI</button>
                     </form>
-                    @else
-                    <p>
-                        Bạn cần đăng nhập để có thể bình luận
-                    </p>
                     @endif
                 </div>
-            </article>
-
-            {{-- Tin lien quan --}}
-            <section class="tintuc-contain">
-                <div class="tin-header">
-                    <h3>TIN LIÊN QUAN</h3>
-                </div>
-                <div class="tin-content">
-                    @foreach ($tinlienquan as $item)
-                    <div class="baiviet-box">
-                        <a href="{{ route('chitiettin',$item->slug) }}" class="tintuc-img">
-                            <img class="img-fluid" src="{{ $item->image }}" alt="" />
-                        </a>
-                        <div class="tintuc-detail">
-                            <a href="{{ route('chitiettin',$item->slug) }}">
-                                <h5>
-                                    {{ $item->name }}
-                                </h5>
-                            </a>
-                            <p>
-                                <small class="webtuyensinh-section">Tuyển sinh | 1 giờ | 3 bình luận | </small>
-                                <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
-                            </p>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-            </section>
-
-            {{-- Tin moi --}}
-            <section class="tintuc-contain">
-                <div class="tin-header">
-                    <h3>TIN MỚI</h3>
-                </div>
-                <div class="tin-content">
-                    @foreach ($tinmoi as $item)
-                    <div class="baiviet-box">
-                        <a href="{{ route('chitiettin',$item->slug) }}" class="tintuc-img">
-                            <img class="img-fluid" src="{{ $item->image }}" alt="" />
-                        </a>
-                        <div class="tintuc-detail">
-                            <a href="{{ route('chitiettin',$item->slug) }}">
-                                <h5>
-                                    {{ $item->name }}
-                                </h5>
-                            </a>
-                            <p>
-                                <small class="webtuyensinh-section">Tuyển sinh | 1 giờ | 3 bình luận | </small>
-                                <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
-                            </p>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-            </section>
-
-            {{-- Tin nong --}}
-            <section class="tintuc-contain">
-                <div class="tin-header">
-                    <h3>TIN NÓNG</h3>
-                </div>
-                <div class="tin-content">
-                    @foreach ($tinnong as $item)
-                    <div class="baiviet-box">
-                        <a href="{{ route('chitiettin',$item->slug) }}" class="tintuc-img">
-                            <img class="img-fluid" src="{{ $item->image }}" alt="" />
-                        </a>
-                        <div class="tintuc-detail">
-                            <a href="{{ route('chitiettin',$item->slug) }}">
-                                <h5>
-                                    {{ $item->name }}
-                                </h5>
-                            </a>
-                            <p>
-                                <small class="webtuyensinh-section">Tuyển sinh | 1 giờ | 3 bình luận | </small>
-                                <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
-                            </p>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-            </section>
+                <?php
+                        $i++;
+                    ?>
+                @endforeach
         </div>
-         @include('user.layout.sidebar')
+        <div class="your-comment">
+            @if (Auth::check())
+            <form method="post" action="{{ route('comment') }}">
+                @csrf
+                <input type="hidden" name="post_id" value="{{ $new->id }}">
+                <input name="your_comment" class="form-control" type="textarea" placeholder="Ý kiến của bạn">
+                <span>
+                    <img class="rounded rounded-circle" src="{{ Auth::user()->avatar }}" alt="">
+                </span>
+                <span><b>{{ Auth::user()->name }}</b></span>
+                <button name="submit2" type="submit">GỬI</button>
+            </form>
+            @else
+            <p>
+                Bạn cần đăng nhập để có thể bình luận
+            </p>
+            @endif
+        </div>
+        </article>
+
+        {{-- Tin lien quan --}}
+        <section class="tintuc-contain">
+            <div class="tin-header">
+                <h3>TIN LIÊN QUAN</h3>
+            </div>
+            <div class="tin-content">
+                @foreach ($tinlienquan as $item)
+                <div class="baiviet-box">
+                    <a href="{{ route('chitiettin',$item->slug) }}" class="tintuc-img">
+                        <img class="img-fluid" src="{{ $item->image }}" alt="" />
+                    </a>
+                    <div class="tintuc-detail">
+                        <a href="{{ route('chitiettin',$item->slug) }}">
+                            <h5>
+                                {{ $item->name }}
+                            </h5>
+                        </a>
+                        <p>
+                            <small class="webtuyensinh-section">
+                                <span>{{ $item->categories->name }} |</span>
+                                <span>{{ $item->hour() }} |</span>
+                                @if ($item->comment != NULL )
+                                <span>{{ $item->comment }} bình luận |</span>
+                                @else
+                                <span>0 bình luận |</span>
+                                @endif
+                            </small>
+                            <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
+                        </p>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </section>
+
+        {{-- Tin moi --}}
+        <section class="tintuc-contain">
+            <div class="tin-header">
+                <h3>TIN MỚI</h3>
+            </div>
+            <div class="tin-content">
+                @foreach ($tinmoi as $item)
+                @if($item->publish == 1)
+                <div class="baiviet-box">
+                    <a href="{{ route('chitiettin',$item->slug) }}" class="tintuc-img">
+                        <img class="img-fluid" src="{{ $item->image }}" alt="" />
+                    </a>
+                    <div class="tintuc-detail">
+                        <a href="{{ route('chitiettin',$item->slug) }}">
+                            <h5>
+                                {{ $item->name }}
+                            </h5>
+                        </a>
+                        <p>
+                            <small class="webtuyensinh-section">
+                                <span>{{ $item->categories->name }} |</span>
+                                <span>{{ $item->hour() }} |</span>
+                                @if ($item->comment != NULL )
+                                <span>{{ $item->comment }} bình luận |</span>
+                                @else
+                                <span>0 bình luận |</span>
+                                @endif
+                            </small>
+                            <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
+                        </p>
+                    </div>
+                </div>
+                @endif
+                @endforeach
+            </div>
+        </section>
+
+        {{-- Tin nong --}}
+        <section class="tintuc-contain">
+            <div class="tin-header">
+                <h3>TIN NÓNG</h3>
+            </div>
+            <div class="tin-content">
+                @foreach ($tinnong as $item)
+                <div class="baiviet-box">
+                    <a href="{{ route('chitiettin',$item->slug) }}" class="tintuc-img">
+                        <img class="img-fluid" src="{{ $item->image }}" alt="" />
+                    </a>
+                    <div class="tintuc-detail">
+                        <a href="{{ route('chitiettin',$item->slug) }}">
+                            <h5>
+                                {{ $item->name }}
+                            </h5>
+                        </a>
+                        <p>
+                            <small class="webtuyensinh-section">Tuyển sinh | 1 giờ | 3 bình luận | </small>
+                            <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
+                        </p>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </section>
+    </div>
+    @include('user.layout.sidebar')
     </div>
 </main>
 @endsection
@@ -233,5 +252,6 @@ Chi tiết tin
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.marquee/1.3.1/jquery.marquee.min.js"></script>
 <script type="text/javascript" src="{{ asset('js/user/chitiettin.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/user/home.js') }}"></script>
 <script type="text/javascript" src="{{ asset('slick-1.8.1/slick/slick.js') }}"></script>
 @endsection
