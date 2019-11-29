@@ -98,6 +98,8 @@ function rebuild_date( $format, $time = 0 )
             <div class="col-md-9">
                 <ul class="left">  
                     <li> {{ rebuild_date('l, d/M/Y, H:i')}} </li>
+                    <li> <i class="fa fa-phone"> </i> 04 668 39 668 </li>
+                    <li> <i class="fa fa-envelope"> </i> contact@webtuyensinh.edu.vn </li>
                 </ul>
             </div>
             <div class="col-md-3 ">
@@ -216,6 +218,10 @@ function rebuild_date( $format, $time = 0 )
                     @foreach ($nav_section as $item)
                     <li>  <a href="{{ route('danhmuc',$item->slug) }}"> {{ $item->name }}  </a> </li>
                     @endforeach
+                    <li>  <a target="_blank" href="https://hoidaptuyensinh.vn"> Hỏi Đáp  </a> </li>
+                    <li>  <a target="_blank" href="#"> Việc Làm  </a> </li>
+
+
                 </ul>
             </div>
             <div class="col-lg-1">
@@ -271,6 +277,8 @@ function rebuild_date( $format, $time = 0 )
             <a href="{{ route('danhmuc',$item->slug) }}"><b>{{ $item->name }}</b></a>
         </li>
         @endforeach
+        <li>  <a target="_blank" href="https://hoidaptuyensinh.vn"> Hỏi Đáp  </a> </li>
+                    <li>  <a target="_blank" href="#"> Việc Làm  </a> </li>
     </ul>
     <ul class="account">
         <li class="btn btn-danger" data-toggle="modal" data-target="#signin"> Đăng nhập </li>

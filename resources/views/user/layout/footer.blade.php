@@ -56,7 +56,7 @@
                 <div class="col-md-6">
                     <p class="right">
                         <b> Liên hệ tòa soạn </b> <br />
-                        Hotline: 083.888.0123 - Email: contact@webtuyensinh.edu.vn 
+                        Hotline: 04 668 39 668 - Email: contact@webtuyensinh.edu.vn 
                     </p>
                 </div>
             </div>
