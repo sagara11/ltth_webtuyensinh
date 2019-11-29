@@ -83,7 +83,7 @@ class HomepageController extends Controller
         // $this->seo();
 
         $webtuyensinh_first = Category::where('id', $trend_first->category_id)->first();
-        return view('user.page.home', compact('header', 'banner', 'footer_banner', 'news', 'trend_first', 'trend', 'sidetrend', 'tuyensinh', 'tuyensinh_first', 'giaoduc', 'giaoduc_first', 'webtuyensinh_first'));
+        return view('user.page.home', compact('header', 'banner', 'footer_banner', 'news', 'trend_first', 'trend', 'sidetrend', 'tuyensinh', 'tuyensinh_first', 'giaoduc', 'giaoduc_first', 'webtuyensinh_first', 'header_id'));
     }
 
     function chitiettin($slug)

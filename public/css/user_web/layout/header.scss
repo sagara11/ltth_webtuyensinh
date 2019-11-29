@@ -160,50 +160,23 @@ header {
   }
 
 
-article {
+.sign {
   .modal-header {
     background-color: rgb(246, 92, 44);
     color: white;
-    padding: 10px 10px;
-    border: none;
-    span {
-      padding: 10px 10px;
-      width: 100%;
-      font-size: 22px;
-      font-weight: 500;
-      text-align: left;
-    }
-  }
-  .modal-body {
     padding: 10px 20px;
-    form {
-      input {
-        margin: 10px 0px;
-      }
+    border: none;
+    font-size: 16px;
+    p {
+      margin: 0;
     }
-  }
-  .modal-footer {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    .social-btn {
-      display: flex;
-      justify-content: center;
-    }
-  }
-}
-
-#signin {
-  .modal-header{
-    text-align: left;
   }
   .modal-body {
-    #dangnhap_submit{
-      padding: 6px 25px;
-      font-size: 18px;
-    }
+    padding: 20px;
     input {
       margin: 10px 0px;
+      font-size: 14px;
+      padding: 5px;
     }
     .submit-btn {
       background-color: rgb(246, 92, 44);
@@ -215,34 +188,40 @@ article {
     .checkbox-btn {
       display: block;
     }
-    span{
-      a{
-        text-decoration: none;
-        color: rgb(127, 127, 127);
-      }
-    }
     #forgotpass{
       position: absolute;
       right: 20px;
     }
+    
   }
   .modal-footer{
-    border-top: 1px solid rgb(220, 220, 220);
+    border-top: 0;
+    display: block; 
+    padding: 10px 20px;
+
     .social-btn{
-      width: 100%;
-      button{
-        padding: 5px 0px;
+      padding-bottom: 20px;
+      p {
+        margin: 0;
+
+      }
+      a{
+        padding: 10px;
         border-radius: 3px;
         border: none;
-        margin: 0px 8px;
-        width: 50%;
+        width: 48%;
+        display: inline-block;
+        i {
+          font-size: 20px;
+          margin-right: 20px;
+        }
       }
       .facebook-btn{
         background-color: royalblue;
         color: white;
       }
       .gmail-btn{
-        background-color: saddlebrown;
+        background-color: #e44134;
         color: white;
       }
     }
@@ -252,6 +231,7 @@ article {
     }
   }
 }
+
 
 .mb-header,
 .mb-nav {
@@ -392,14 +372,14 @@ article {
         }
       }
     }
+
     .closebtn {
       text-decoration: none;
       color: red;
       position: absolute;
       top: 0;
-      right: 25px;
+      right: 15px;
       font-size: 36px;
-      margin-left: 50px;
     }
     .account {
       margin-top: 10px;

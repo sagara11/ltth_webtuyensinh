@@ -13,7 +13,7 @@ Tài khoản
         <h4>TÀI KHOẢN</h4>
     </section>
     <section class="row" id="account">
-        <div class="account-nav col-lg-4">
+        <div class="account-nav col-lg-3">
             <div class="user-info">
                 <img class="rounded rounded-circle" src="{{ $user->avatar }}" alt="">
                 <p>
@@ -44,7 +44,7 @@ Tài khoản
                 </li>
             </ul>
         </div>
-        <div class="account-content col-lg-8">
+        <div class="account-content col-lg-9">
             <div class="tab-content">
                 {{-- Tai khoan cua toi --}}
                 <section id="taikhoancuatoi" class="container tab-pane active"><br>
@@ -147,19 +147,19 @@ Tài khoản
                                 Mật khẩu cũ
                             </div>
                             <div class="col-lg-9">
-                                <input type="password" name="old_password">
+                                <input class="form-control" type="password" name="old_password">
                             </div>
                             <div class="col-lg-3">
                                 Mật khẩu mới
                             </div>
                             <div class="col-lg-9">
-                                <input type="password" name="new_password">
+                                <input class="form-control" type="password" name="new_password">
                             </div>
                             <div class="col-lg-3">
                                 Nhập lại mật khẩu mới
                             </div>
                             <div class="col-lg-9">
-                                <input type="password" name="new_password_confirm">
+                                <input class="form-control" type="password" name="new_password_confirm">
                             </div>
                             <div class="col-lg-3">
                             </div>

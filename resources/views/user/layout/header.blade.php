@@ -135,11 +135,11 @@ function rebuild_date( $format, $time = 0 )
 </header>
 
 <!-- Dang nhap, dang ky -->
-<article class="modal fade" id="signin">
+<article class="modal fade sign" id="signin">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <span>ĐĂNG NHẬP</span>
+                <p>ĐĂNG NHẬP</p>
                 <span id="modalclose2" data-dismiss="modal">
                     &times;
                 </span>
@@ -148,6 +148,7 @@ function rebuild_date( $format, $time = 0 )
                 <p><b>Đăng nhập với Email:</b></p>
                 <input id="s-email" name="email" required class="form-control" type="email" placeholder="Email">
                 <input id="s-pass" name="password" required class="form-control" type="password" placeholder="Mật khẩu">
+                <p id="s_popup">  </p>
                 <input class="checkbox-btn" type="checkbox">
                 <span>
                     <button id="dangnhap_submit" class="submit-btn" type="submit">ĐĂNG NHẬP</button>
@@ -159,44 +160,44 @@ function rebuild_date( $format, $time = 0 )
             <div class="modal-footer">
                 <p>Hoặc đăng nhập với:</p>
                 <div class="social-btn">
-                    <button class="facebook-btn">
-                        Facebook
-                    </button>
-                    <button class="gmail-btn">
-                        Gmail
-                    </button>
+                    <a class="facebook-btn"> <i class="fa fa-facebook-square"> </i>  Facebook  </a>
+                    <a class="gmail-btn">  <i class="fa fa-google-plus-square"> </i>   Gmail   </a>
                 </div>
             </div>
-            <p id="s_popup">
-
-            </p>
+            
         </div>
     </div>
 </article>
 
-<article class="modal fade" id="signup">
+<article class="modal fade sign" id="signup">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <p>ĐĂNG KÝ</p>
+                <p> TẠO TÀI KHOẢN </p>
+                <span id="modalclose2" data-dismiss="modal">
+                    &times;
+                </span>
             </div>
-            <div class="modal-box">
+
+            <div class="modal-body">
+                <p><b> Tạo tài khoản với Email:</b></p>
                 <input id="email" name="email" required class="form-control" type="email" placeholder="Email">
                 <input id="name" name="name" required class="form-control" type="text" placeholder="Tên tài khoản">
                 <input id="password" name="password" required class="form-control" type="password" placeholder="Mật khẩu">
                 <input id="confirm_password" name="confirm_password" required class="form-control" type="password"
                     placeholder="Xác nhận Mật khẩu">
+                <p id="s_popup">  </p>
+                <input class="checkbox-btn" type="checkbox">
+                <button id="dangnhap_submit" class="submit-btn" type="submit">ĐĂNG KÝ</button>
+                <span id="forgotpass">  <a href="">Quên mật khẩu?</a> </span>
             </div>
             <div class="modal-footer">
-                <button id="modalclose" data-dismiss="modal" class="btn btn-danger">
-                    Đóng
-                </button>
-
-                <input id="register_submit" type="submit" placeholder="đăng ký">
+                <p>Hoặc tạo tài khoản với:</p>
+                <div class="social-btn">
+                    <a class="facebook-btn"> <i class="fa fa-facebook-square"> </i>  Facebook  </a>
+                    <a class="gmail-btn">  <i class="fa fa-google-plus-square"> </i>   Gmail   </a>
+                </div>
             </div>
-            <p id="popup">
-                
-            </p>
         </div>
     </div>
 </article>

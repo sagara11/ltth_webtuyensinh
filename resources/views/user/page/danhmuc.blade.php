@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="{{ asset('css/user_web/page/home.css') }}">
 @endsection
 @section('title')
-Web Tuyển Sinh - Trang thông tin chính thức về tuyển sinh 
+{{ $header_id->name  }} - Web Tuyển Sinh
 @endsection
 @section('content')
 <main class="container">
