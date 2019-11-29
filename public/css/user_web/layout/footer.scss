@@ -102,3 +102,269 @@ footer {
     }
   }
 }
+
+
+ #quangcao {
+    .quangcao-box {
+      margin-bottom: 20px;
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  #xuhuong {
+    margin: 10px 0px;
+    .side-header {
+      background-color: rgba(246, 92, 44, 0.1);
+      margin: 1px 0px;
+      padding: 10px;
+      i {
+        color: #055695;
+        margin-right: 10px;
+      }
+      h4 {
+        font-weight: bold;
+        font-size: 20px;
+        color: #055695;
+        display: inline;
+      }
+    }
+    .side-content {
+      padding: 10px;
+      background-color: rgba(246, 92, 44, 0.1);
+      .featured {
+        margin-bottom: 15px;
+        text-decoration: none;
+        img {
+          width: 100%;
+          border-radius: 5px;
+          height: auto;
+        }
+        h6 {
+          margin: 5px 0;
+          font-size: 14px;
+          a {
+            color: rgb(51, 51, 51);
+          }
+        }
+      }
+      .item {
+        border-bottom: 1px dotted #ccc;
+        padding-bottom: 10px ;
+        margin-bottom: 10px;
+        &::last-child {
+          border-bottom: 0;
+        };
+        .row {
+          margin: 0 -5px;
+          [class*="col-"] {
+            padding: 0 5px;
+          }
+        }
+        img {
+          border-radius: 5px;
+        }
+
+        a {
+          color: rgb(51, 51, 51);
+        }
+        
+      }
+    }
+  }
+
+  #videos {
+    margin: 10px 0px;
+    border: 2px solid #055695;
+    position: relative;
+
+    &::before,
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      background: #fff;
+    }
+    &::before {
+      top: -0.3em;
+      bottom: -0.3em;
+      left: 1em;
+      right: 1em;
+    }
+
+    &::after {
+      left: -0.3em;
+      right: -0.3em;
+      top: 1em;
+      bottom: 1em;
+    }
+    .side-header {
+      border: 1px solid rgb(238, 238, 238);
+      position: relative;
+      z-index: 1;
+      margin-bottom: 2px;
+      padding: 10px 10px;
+      i {
+        margin-right: 10px;
+        color: #055695;
+      }
+      h4 {
+        font-weight: bold;
+        font-size: 20px;
+        color: #055695;
+        display: inline;
+      }
+    }
+    .side-content {
+      border: 1px solid rgb(238, 238, 238);
+      position: relative;
+      z-index: 1;
+      .video {
+        padding: 10px 10px;
+        display: flex;
+        flex-direction: column;
+        video {
+          width: 100%;
+        }
+        p {
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  #tuyensinh {
+    margin: 10px 0px;
+    .side-header {
+      padding: 10px 0px;
+      i {
+        margin-right: 10px;
+        color: #055695;
+      }
+      h4 {
+        color: #055695;
+        font-weight: bold;
+        font-size: 20px;
+        display: inline;
+      }
+    }
+    .side-content {
+      padding: 10px 10px;
+      background-color: rgb(247, 247, 247);
+      border: 1px solid #055695;
+      border-top: 2px solid #055695;
+      .tuyensinh-main {
+        text-decoration: none;
+        padding: 8px 0px;
+        display: flex;
+        img {
+          margin-right: 10px;
+          width: 35%;
+          border-radius: 5px;
+        }
+        p {
+          color: rgb(51, 51, 51);
+        }
+      }
+      .tuyensinh-contents {
+        padding: 10px 0px;
+        border-top: 1px dotted #055695;
+        a {
+          text-decoration: none;
+          p {
+            color: rgb(51, 51, 51);
+            margin: 0px 0px;
+            &::before {
+              display: inline-block;
+              content: "";
+              border-radius: 3.5px;
+              height: 7px;
+              width: 7px;
+              margin-right: 0.5rem;
+              background-color: #055695;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  #giaoduc {
+    margin: 10px 0px;
+    .side-header {
+      padding: 10px 0px;
+      i {
+        margin-right: 10px;
+        color: #055695;
+      }
+      h4 {
+        font-weight: bold;
+        font-size: 20px;
+        display: inline;
+        color: #055695;
+      }
+    }
+    .side-content {
+      padding: 10px 10px;
+      background-color: rgb(247, 247, 247);
+      border: 1px solid #055695;
+      border-top: 2px solid #055695;
+      .giaoduc-main {
+        margin-bottom: 5px;
+        text-decoration: none;
+        display: flex;
+        img {
+          margin-right: 10px;
+          border-radius: 5px;
+          width: 35%;
+        }
+        .side-des {
+          padding: 5px 0px;
+          color: rgb(51, 51, 51);
+        }
+      }
+      .giaoduc-contents {
+        padding: 10px 5px;
+        border-top: 1px dotted #055695;
+        a {
+          text-decoration: none;
+          p {
+            text-align: left;
+            margin: 0px 0px;
+            color: rgb(51, 51, 51);
+            &::before {
+              display: inline-block;
+              content: "";
+              border-radius: 3.5px;
+              height: 7px;
+              width: 7px;
+              margin-right: 0.5rem;
+              background-color: rgb(15, 144, 164);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  #big-ad {
+    img {
+      width: 100%;
+    }
+  }
+
+  #facebook-embed {
+    margin: 10px 0px;
+    i {
+      font-size: 35px;
+      color: rgb(59, 89, 151);
+      margin-bottom: 10px;
+      margin-right: 10px;
+    }
+    span {
+      font-weight: bold;
+      color: rgb(59, 89, 151);
+      font-size: 28px;
+    }
+  }

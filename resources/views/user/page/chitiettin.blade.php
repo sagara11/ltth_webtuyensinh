@@ -16,48 +16,33 @@ Chi tiết tin
     <div class="row">
         <div class="col-lg-8">
             <section id="danhmuc">
-                <h4>TUYỂN SINH</h4>
+                <h4>TUYỂN SINH </h4>
             </section>
 
-            {{-- Ten bai viet --}}
             <section id="baiviet-name">
-                <h5>"{{ $new->name }}"</h5>
+                <h1> {{ $new->name }} </h1>
                 <div class="webtuyensinh-link">
-                    <p>
-                        <small class="webtuyensinh-section">
-                            <span>{{ $new->categories->name }} |</span>
-                            <span>{{ $new->hour() }} |</span>
-                                @if ($new->comment != NULL )
-                                <span>{{ $new->comment }} bình luận |</span>
-                                @else
-                                <span>0 bình luận |</span>
-                                @endif
-                        </small>
-                        <small><a class="webtuyensinh-link" href="">{{ $new->source->web_name }}</a></small>
-                    </p>
+                    <span>{{ $new->categories->name }} |</span>
+                    <span>{{ $new->hour() }} |</span>
+                    @if ($new->comment != NULL )
+                    <span>{{ $new->comment }} bình luận |</span>
+                    @else
+                    <span>0 bình luận |</span>
+                    @endif
+                    <a class="webtuyensinh-link" href="">{{ $new->source->web_name }}</a>
                 </div>
             </section>
 
-            {{-- Description --}}
-            <section id="baiviet-description">
-                <div>
-                    <p>
-                        {!! $new->description !!}
-                    </p>
-                </div>
-            </section>
+            <article id="baiviet-description">
+                {!! $new->description !!}
+            </article>
 
-            {{-- Image --}}
-            {{-- <section id="baiviet-img">
-                <img class="img-fluid" src="{{ $new->image }}" alt="">
-            </section> --}}
 
-            {{-- Content --}}
-            <section id="baiviet-content">
+
+            <article id="baiviet-content">
                 {!! $new->content !!}
-            </section>
+            </article>
 
-            {{-- Comment --}}
             <article id="comment">
                 <div class="comment-header">
                     <p>Ý KIẾN BẠN ĐỌC({{ $comment->count() }})</p>
@@ -240,156 +225,7 @@ Chi tiết tin
                 </div>
             </section>
         </div>
-        <div class="col-lg-4">
-            <!-- Banner quang cao -->
-            <section id="quangcao">
-                <div class="quangcao-box">
-                    <a href="">
-                        <img src="{{ asset('media/Untitled-1.png') }}" alt="" />
-                    </a>
-                </div>
-                <div class="quangcao-box">
-                    <a href="">
-                        <img src="{{ asset('media/Untitled-2.png') }}" alt="" />
-                    </a>
-                </div>
-            </section>
-
-            <!-- Xu huong -->
-            <section id="xuhuong">
-                <div class="side-header">
-                    <i class="fas fa-desktop"></i>
-                    <h4>XU HƯỚNG</h4>
-                </div>
-                <div class="side-content">
-                    <a href="{{ route('chitiettin', $tinnong[0]->slug) }}" class="xuhuong-main">
-                        <img class="img-fluid" src="{{ $tinnong[0]->image }}" alt="" />
-                        <p>
-                            {{ $tinnong[0]->name }}
-                        </p>
-                    </a>
-                    <div>
-                        @foreach ($xuhuong as $item)
-                        <a href="{{ route('chitiettin',$item->slug) }}" class="xuhuong-contents">
-                            <img width="25%" height="70px" src="{{ $item->image }}" alt="" />
-                            <p class="xuhuong-contents-des">
-                                "{{  $item->name }}"
-                            </p>
-                        </a>
-                        @endforeach
-                    </div>
-                </div>
-            </section>
-
-            <!-- Video -->
-            {{-- <section id="videos">
-                <div class="side-header">
-                    <i class="far fa-play-circle"></i>
-                    <h4>VIDEO</h4>
-                </div>
-                <div class="side-content">
-                    <div class="video">
-                        <video>
-                            <source src="http://localhost\baotuyensinhView\media\\trandan.mp4" />
-                        </video>
-                        <p class="video-title">
-                            Hội thảo sáng chế công nghệ sàn ô cờ ACH tiết kiệm chi phí xây
-                            dựng tại Hồ Chí Minh
-                        </p>
-                    </div>
-                    <div class="video">
-                        <video>
-                            <source src="http://localhost\baotuyensinhView\media\\trandan.mp4" />
-                        </video>
-                        <p class="video-title">
-                            Hội thảo sáng chế công nghệ sàn ô cờ ACH tiết kiệm chi phí xây
-                            dựng tại Hồ Chí Minh
-                        </p>
-                    </div>
-                    <div class="video">
-                        <video>
-                            <source src="http://localhost\baotuyensinhView\media\\trandan.mp4" />
-                        </video>
-                        <p class="video-title">
-                            Hội thảo sáng chế công nghệ sàn ô cờ ACH tiết kiệm chi phí xây
-                            dựng tại Hồ Chí Minh
-                        </p>
-                    </div>
-                </div>
-            </section> --}}
-
-            <!-- Tuyen sinh -->
-            <section id="tuyensinh">
-                <div class="side-header">
-                    <i class="fas fa-briefcase"></i>
-                    <h4>TUYỂN SINH</h4>
-                </div>
-                <div class="side-content">
-                    <a href="{{ route('chitiettin', $tuyensinh_first->slug) }}" class="tuyensinh-main">
-                        <img src="{{  $tuyensinh_first->image }}" alt="" />
-                        <p class="tuyensinh-des">
-                            "{{  $tuyensinh_first->name }}"
-                        </p>
-                    </a>
-                    @foreach ($tuyensinh as $item)
-                    <div class="tuyensinh-contents">
-                        <a href="{{ route('chitiettin',$item->slug) }}">
-                            <p>
-                                "{{  $item->name }}"
-                            </p>
-                        </a>
-                    </div>
-                    @endforeach
-                </div>
-            </section>
-
-            <!-- Giao duc -->
-            <section id="giaoduc">
-                <div class="side-header">
-                    <i class="fas fa-book-open"></i>
-                    <h4 class="d-inline">GIÁO DỤC</h4>
-                </div>
-                <div class="side-content">
-                    <a href="{{ route('chitiettin', $giaoduc_first->slug) }}" class="tuyensinh-main">
-                        <img src="{{ $giaoduc_first->image }}" alt="" />
-                        <div class="tuyensinh-des">
-                            "{{  $giaoduc_first->name }}"
-                        </div>
-                    </a>
-                    @foreach ($giaoduc as $item)
-                    <div class="tuyensinh-contents">
-                        <a href="{{ route('chitiettin',$item->slug) }}" class="">
-                            <p>
-                                "{{  $item->name }}"
-                            </p>
-                        </a>
-                    </div>
-                    @endforeach
-                </div>
-            </section>
-
-            <!-- Big advertisement -->
-            <section id="big-ad">
-                <a href="">
-                    <img class="img-fluid" src="{{ asset('media/Untitled-3.jpg') }}" alt="" />
-                </a>
-            </section>
-
-            <!-- Facebook embed -->
-            <section id="facebook-embed">
-                <i class="fab fa-facebook-square"></i>
-                <span>Fanpage facebook</span>
-                <div id="fb-root">
-                    <div class="fb-page" data-href="https://www.facebook.com/baotuyensinh/" data-tabs="timeline"
-                        data-width="350px" data-height="200px" data-small-header="false"
-                        data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
-                        <blockquote cite="https://www.facebook.com/baotuyensinh/" class="fb-xfbml-parse-ignore">
-                            <a href="https://www.facebook.com/baotuyensinh/">BÁO TUYỂN SINH</a>
-                        </blockquote>
-                    </div>
-                </div>
-            </section>
-        </div>
+         @include('user.layout.sidebar')
     </div>
 </main>
 @endsection

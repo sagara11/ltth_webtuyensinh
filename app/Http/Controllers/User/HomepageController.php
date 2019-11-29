@@ -90,6 +90,8 @@ class HomepageController extends Controller
     {
         $header = Post::orderBy('view', 'desc')->paginate(3);
 
+        $banner = Banner::orderBy('created_at', 'desc')->where('position', 'top')->paginate(2);
+
         $new = Post::orderBy('created_at', 'desc')->where('slug', $slug)->first();
         $xuhuong = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id','!=',$new->id)->paginate(4);
         $tuyensinh_first = Post::where('category_id', 37)->first();
@@ -99,13 +101,27 @@ class HomepageController extends Controller
         $tinlienquan = Post::orderBy('created_at', 'desc')->where('category_id', $new->category_id)->where('id','!=',$new->id)->paginate(4);
         $tinmoi = Post::orderBy('created_at', 'desc')->paginate(4);
         $tinnong = Post::orderBy('view', 'desc')->paginate(4);
+
+
+        try{
+            $trend_first = Post::latest()->where('trend', 1)->where('category_id', $new->category_id)->first();
+            $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->where('category_id', $new->category_id)->paginate(3);
+        }
+        catch(\Exception $e){
+            $trend_first = Post::where('category_id', $new->category_id)->first();
+            $trend = Post::where('category_id', $new->category_id)->where('id','!=',$trend_first->id)->paginate(3);
+        }
         try{
             $comment = Comment::where('post_id', $new->id)->where('parent_id', NULL)->paginate(5);
         }
         catch(\Exception $e){
             $comment = "Chưa có bình luận";
         }
-        return view('user.page.chitiettin', compact('comment','header', 'new', 'xuhuong', 'tuyensinh_first', 'tuyensinh', 'giaoduc_first', 'giaoduc', 'tinlienquan', 'tinmoi', 'tinnong'));
+        $sidetrend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->paginate(6);
+
+        $footer_banner = Banner::orderBy('created_at', 'desc')->where('position', 'sidebar')->first();
+         
+        return view('user.page.chitiettin', compact('comment','header', 'new', 'xuhuong', 'tuyensinh_first', 'tuyensinh', 'giaoduc_first', 'giaoduc', 'tinlienquan', 'tinmoi', 'tinnong', 'banner', 'trend', 'trend_first', 'footer_banner', 'sidetrend'));
     }
 
     function search(REQUEST $request)
