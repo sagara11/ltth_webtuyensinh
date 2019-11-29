@@ -121,6 +121,7 @@ Route::post('/updatecomment','User\HomepageController@update_comment')->name('up
 
 Route::post('/uploadavatar',"User\HomepageController@update_avatar")->name('updateavatar');
 Route::post('/newscreate',"User\HomepageController@news_create")->name('newscreate');
+Route::post('/deletepost',"User\HomepageController@deletepost")->name('deletepost');
 
 Route::get("/{slug}",'User\HomepageController@chitiettin')->name('chitiettin');
 

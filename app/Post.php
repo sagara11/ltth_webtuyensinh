@@ -17,6 +17,10 @@ class Post extends Model
     {
     	return $this->belongsTo('App\Crawl','source_id','id');
     }
+    public function user()
+    {
+    	return $this->belongsTo('App\Users','user_id','id');
+    }
     public function hour(){
         Carbon::setlocale('vi');
         $now = Carbon::now();

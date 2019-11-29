@@ -23,7 +23,7 @@ Tài khoản
                     <small>Ngày tham gia {{ $user->created_at->toDateString() }}</small>
                 </p>
             </div>
-            <ul class="nav nav-tabs" role="tablist">
+            <ul id="myTab" class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" data-toggle="tab" href="#taikhoancuatoi">Tài khoản của tôi</a>
                 </li>
@@ -31,7 +31,10 @@ Tài khoản
                     <a class="nav-link" data-toggle="tab" href="#doimatkhau">Đổi mật khẩu</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#quanlybaidang">Quản lý bài đăng</a>
+                    <a class="nav-link" data-toggle="tab" href="#quanlybaidang">Thêm bài đăng</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#danhsachbaidang">Danh sách bài đăng</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#quanlybinhluan">Quản lý bình luận</a>
@@ -52,7 +55,7 @@ Tài khoản
                         @csrf
                         <input type="file" name="avatar" id="avatar-file">
                         <label for="avatar-file">Tải lên ảnh đại diện mới</label>
-                        <input type="submit" placeholder="submit">
+                        <button type="submit">Đăng ảnh</button>
                     </form>
                     <div class="account-section-content row">
                         <div class="col-lg-3">
@@ -171,10 +174,10 @@ Tài khoản
                     </form>
                 </section>
 
-                {{-- Quan ly bai dang --}}
+                {{-- Them bai dang --}}
                 <section id="quanlybaidang" class="container tab-pane fade"><br>
                     <div class="account-section-header">
-                        <h3>QUẢN LÝ BÀI ĐĂNG</h3>
+                        <h3>THÊM BÀI ĐĂNG</h3>
                     </div>
                     <form class="form-group" method="post" action="{{ route('newscreate') }}" enctype="multipart/form-data">
                         @csrf
@@ -232,6 +235,35 @@ Tài khoản
                             </div>
                         </div>
                     </form>
+                </section>
+
+                {{-- Danh sach bai dang --}}
+                <section id="danhsachbaidang" class="container tab-pane fade"><br>
+                    <div class="account-section-header">
+                        <h3>DANH SÁCH BÀI ĐĂNG</h3>
+                    </div>
+                    <div class="account-section-content">
+                        <form method="post" action="{{ route('deletepost') }}">
+                        <input id="post_id" type="hidden" name="post_id">
+                        @foreach ($user_post as $item)
+                            @csrf
+                            <div class="baidang-box">
+                                <div class="baidang-img">
+                                <img class="img-fluid" src="{{ $item->image }}" alt="">
+                                </div>
+                                <div class="baidang-name">
+                                    {{ $item->name }}
+                                </div>
+                                <div class="baidang-date">
+                                    {{ $item->hour() }}
+                                </div>
+                            </div>
+                            <button id="{{ $item->id }}" class="delete_post_btn btn btn-danger" type="submit">
+                                Xóa
+                            </button>
+                        </form>
+                        @endforeach
+                    </div>
                 </section>
 
                 {{-- Quan ly binh luan --}}
@@ -339,26 +371,31 @@ Tài khoản
 });
 </script>
 <script>
-        function openPopup() {
-            CKFinder.popup( {
-                chooseFiles: true,
-                onInit: function( finder ) {
-                    finder.on( 'files:choose', function( evt ) {
-                        var file = evt.data.files.first();
-                        document.getElementById( 'avatar' ).src = file.getUrl();
-                    } );
-                    finder.on( 'file:choose:resizedImage', function( evt ) {
-                        document.getElementById( 'avatar' ).src = evt.data.resizedUrl;
-                    } );
-                    finder.on( 'files:choose', function( evt ) {
-                        var file = evt.data.files.first();
-                        document.getElementById( 'url' ).value = file.getUrl();
-                    } );
-                    finder.on( 'file:choose:resizedImage', function( evt ) {
-                        document.getElementById( 'url' ).value = evt.data.resizedUrl;
-                    } );
-                }
-            } );
-        }
+    function openPopup() {
+        CKFinder.popup( {
+            chooseFiles: true,
+            onInit: function( finder ) {
+                finder.on( 'files:choose', function( evt ) {
+                    var file = evt.data.files.first();
+                    document.getElementById( 'avatar' ).src = file.getUrl();
+                } );
+                finder.on( 'file:choose:resizedImage', function( evt ) {
+                    document.getElementById( 'avatar' ).src = evt.data.resizedUrl;
+                } );
+                finder.on( 'files:choose', function( evt ) {
+                    var file = evt.data.files.first();
+                    document.getElementById( 'url' ).value = file.getUrl();
+                } );
+                finder.on( 'file:choose:resizedImage', function( evt ) {
+                    document.getElementById( 'url' ).value = evt.data.resizedUrl;
+                } );
+            }
+        } );
+    }
+
+    $('body').on('click', '.delete_post_btn', function set(){
+        $('#post_id').val(this.id);
+        return confirm("Bạn có chắc muốn xóa bài?");
+    });
 </script>
 @endsection

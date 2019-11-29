@@ -155,8 +155,9 @@ class HomepageController extends Controller
     {
         $header = Post::orderBy('view', 'desc')->paginate(3);
         $user = Auth::user();
+        $user_post = Post::where('user_id', Auth::user()->id)->get();
         $comment = Comment::where('user_id', Auth::user()->id)->get();
-        return view('user.page.taikhoan', compact('header','user','comment'));
+        return view('user.page.taikhoan', compact('user_post','header','user','comment'));
     }
 
     function signin(Request $request)
@@ -269,9 +270,17 @@ class HomepageController extends Controller
         $news->category_id = $request->news_section;
         $news->image = $request->image;
         $news->type_post = "post";
+        $news->publish = 0;
         $news->source_id = 24;
+        $news->user_id = Auth::user()->id;
         $news->save();
 
-        return redirect('/');
+        return back();
+    }
+
+    function deletepost(Request $request){
+        $del_post = Post::where('id', $request->post_id)->first();
+        $del_post->delete();
+        return back();
     }
 }
