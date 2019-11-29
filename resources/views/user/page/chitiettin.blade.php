@@ -159,13 +159,13 @@ Chi tiết tin
                     @foreach ($tinlienquan as $item)
                     <div class="baiviet-box">
                         <div class="row">
-                            <div class="col-md-3 col-5">
+                            <div class="col-md-3">
                                 <a href="{{ route('chitiettin',$item->slug) }}" class="tintuc-img">
                                     <img class="img-fluid" src="{{ $item->image }}" alt="" />
                                 </a>
                             </div>
 
-                            <div class="col-md-9 col-7">
+                            <div class="col-md-9">
                                 <h5> <a href="{{ route('chitiettin',$item->slug) }}"> {{ $item->name }} </a> </h5>
                                 <p>
                                     <span > {{ $item->categories->name }} </span>
@@ -182,19 +182,19 @@ Chi tiết tin
             {{-- Tin moi --}}
             <section class="tintuc-contain">
                 <div class="tin-header">
-                    <h3> <span>  TIN MỚI </span> </h3>
+                    <h3>TIN MỚI</h3>
                 </div>
                 <div class="tin-content">
                     @foreach ($tinmoi as $item)
-                    <div class="baiviet-box">
+                     <div class="baiviet-box">
                         <div class="row">
-                            <div class="col-md-3 col-5">
+                            <div class="col-md-3">
                                 <a href="{{ route('chitiettin',$item->slug) }}" class="tintuc-img">
                                     <img class="img-fluid" src="{{ $item->image }}" alt="" />
                                 </a>
                             </div>
 
-                            <div class="col-md-9 col-7">
+                            <div class="col-md-9">
                                 <h5> <a href="{{ route('chitiettin',$item->slug) }}"> {{ $item->name }} </a> </h5>
                                 <p>
                                     <span > {{ $item->categories->name }} </span>
@@ -211,19 +211,19 @@ Chi tiết tin
             {{-- Tin nong --}}
             <section class="tintuc-contain">
                 <div class="tin-header">
-                    <h3> <span> TIN NÓNG </span> </h3>
+                    <h3>TIN NÓNG</h3>
                 </div>
                 <div class="tin-content">
                     @foreach ($tinnong as $item)
-                    <div class="baiviet-box">
+                     <div class="baiviet-box">
                         <div class="row">
-                            <div class="col-md-3 col-5">
+                            <div class="col-md-3">
                                 <a href="{{ route('chitiettin',$item->slug) }}" class="tintuc-img">
                                     <img class="img-fluid" src="{{ $item->image }}" alt="" />
                                 </a>
                             </div>
 
-                            <div class="col-md-9 col-7">
+                            <div class="col-md-9">
                                 <h5> <a href="{{ route('chitiettin',$item->slug) }}"> {{ $item->name }} </a> </h5>
                                 <p>
                                     <span > {{ $item->categories->name }} </span>

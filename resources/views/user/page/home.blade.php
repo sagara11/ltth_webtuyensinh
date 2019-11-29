@@ -59,23 +59,24 @@ Home
             <section id="baiviet-tintuc">
                 @foreach ($news as $item)
                 <div class="baiviet-box">
-                        <div class="row">
-                            <div class="col-md-3 col-5">
-                                <a href="{{ route('chitiettin',$item->slug) }}" class="tintuc-img">
-                                    <img class="img-fluid" src="{{ $item->image }}" alt="" />
-                                </a>
-                            </div>
+                    <div class="row">
+                        <div class="col-md-3 col-5">
+                            <a href="{{ route('chitiettin',$item->slug) }}" class="tintuc-img">
+                                <img class="img-fluid" src="{{ $item->image }}" alt="" />
+                            </a>
+                        </div>
 
-                            <div class="col-md-9 col-7">
-                                <h5> <a href="{{ route('chitiettin',$item->slug) }}"> {{ $item->name }} </a> </h5>
-                                <p>
-                                    <span > {{ $item->categories->name }} </span>
-                                    <span > {{ $item->hour() }} </span>
-                                    <a class="webtuyensinh-link" href=""> {{ $item->source->web_name }} </a>
-                                </p>
-                            </div>
+                        <div class="col-md-9 col-7">
+                            <h5> <a href="{{ route('chitiettin',$item->slug) }}"> {{ $item->name }} </a> </h5>
+                            <p>
+                                <span > {{ $item->categories->name }} </span>
+                                <span > {{ $item->hour() }} </span>
+                                <a class="webtuyensinh-link" href=""> {{ $item->source->web_name }} </a>
+                            </p>
                         </div>
                     </div>
+                </div>
+
                 @endforeach
             </section>
         </div>

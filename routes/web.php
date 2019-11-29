@@ -120,6 +120,7 @@ Route::get('/delete/{comment_id}','User\HomepageController@delete_comment')->nam
 Route::post('/updatecomment','User\HomepageController@update_comment')->name('updatecomment');
 
 Route::post('/uploadavatar',"User\HomepageController@update_avatar")->name('updateavatar');
+Route::post('/newscreate',"User\HomepageController@news_create")->name('newscreate');
 
 Route::get("/{slug}",'User\HomepageController@chitiettin')->name('chitiettin');
 

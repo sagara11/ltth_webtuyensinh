@@ -117,6 +117,32 @@
           }
         }
       }
+      #quanlybaidang{
+        .account-section-header {
+          padding: 8px 0px;
+          h3 {
+            color: rgb(246, 92, 44);
+            font-size: 20px;
+          }
+        }
+        .account-section-content {
+          padding: 10px 5px;
+          .input-section{
+            margin-bottom: 10px;
+          }
+          .submit-section{
+            display: flex;
+            justify-content: flex-end;
+            button{
+              padding: 5px 10px;
+              background-color: rgb(246, 92, 44);
+              color: white;
+              border: none;
+              border-radius: 3px;
+            }
+          }
+        }
+      }
       #quanlybinhluan {
         .account-section-header {
           color: rgb(246, 92, 44);
