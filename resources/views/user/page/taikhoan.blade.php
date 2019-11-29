@@ -196,12 +196,12 @@ Tài khoản
                             <div class="input-section col-lg-9">
                                 <div>
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Image</label>
+                                        <label for="exampleInputEmail1">Hình ảnh</label>
                                         <input type="hidden" name="image" placeholder="image" id="url">
                                         <div style="margin-bottom: 15px;">
                                         <img src="/userfiles/images/default_avatar-ea7cf6abde4eec089a4e03cc925d0e893e428b2b6971b12405a9b118c837eaa2.png" class="img-fluid" alt="" id="avatar">
                                         </div>
-                                            <button type="button" onclick="openPopup()" class="btn btn-primary">Image</button>
+                                        <button type="button" onclick="openPopup()" class="btn btn-primary">Chọn ảnh</button>
                                     </div>
                                 </div>
                             </div>
@@ -258,13 +258,45 @@ Tài khoản
                                     {{ $item->hour() }}
                                 </div>
                             </div>
-                            <button id="{{ $item->id }}" class="delete_post_btn btn btn-danger" type="submit">
+                            <button name="delete" id="{{ $item->id }}" class="delete_post_btn btn btn-danger" type="submit">
                                 Xóa
+                            </button>
+                            <button data-toggle="modal" data-target="#update_post_modal" id="{{ $item->id }}" class="update_post_btn btn btn-success" type="button">
+                                Sửa
                             </button>
                         </form>
                         @endforeach
                     </div>
                 </section>
+
+                {{-- Modal update post --}}
+                <form method="post" action="{{ route('updatepost') }}">
+                    @csrf
+                    <div id="update_post_modal" class="modal fade">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    Chỉnh sửa bài viết
+                                </div>
+                                <div class="modal-body">
+                                    <input id="update_id" type="hidden" name="update_id">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Hình ảnh</label>
+                                        <input type="hidden" name="update_image" placeholder="image" id="url1">
+                                        <div style="margin-bottom: 15px;">
+                                        <img src="" class="img-fluid" alt="" id="avatar1">
+                                        </div>
+                                        <button type="button" onclick="openPopup1()" class="btn btn-primary">Chọn ảnh</button>
+                                    </div>
+                                    <input name="update_name" class="form-control mb-2" type="text" placeholder="Tên bài viết">
+                                    <input name="update_description" class="form-control mb-2" type="text" placeholder="Mô tả bài viết">
+                                    <textarea name="update_content" class="form-control mb-2" name="" id="" rows="10" placeholder="Nội dung bài viết"></textarea>
+                                    <button class="btn btn-success" type="submit">Lưu</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
 
                 {{-- Quan ly binh luan --}}
                 <section id="quanlybinhluan" class="container tab-pane fade"><br>
@@ -393,9 +425,34 @@ Tài khoản
         } );
     }
 
+    function openPopup1() {
+        CKFinder.popup( {
+            chooseFiles: true,
+            onInit: function( finder ) {
+                finder.on( 'files:choose', function( evt ) {
+                    var file = evt.data.files.first();
+                    document.getElementById( 'avatar1' ).src = file.getUrl();
+                } );
+                finder.on( 'file:choose:resizedImage', function( evt ) {
+                    document.getElementById( 'avatar1' ).src = evt.data.resizedUrl;
+                } );
+                finder.on( 'files:choose', function( evt ) {
+                    var file = evt.data.files.first();
+                    document.getElementById( 'url1' ).value = file.getUrl();
+                } );
+                finder.on( 'file:choose:resizedImage', function( evt ) {
+                    document.getElementById( 'url1' ).value = evt.data.resizedUrl;
+                } );
+            }
+        } );
+    }
+
     $('body').on('click', '.delete_post_btn', function set(){
         $('#post_id').val(this.id);
         return confirm("Bạn có chắc muốn xóa bài?");
+    });
+    $('body').on('click', '.update_post_btn', function set(){
+        $('#update_id').val(this.id);
     });
 </script>
 @endsection

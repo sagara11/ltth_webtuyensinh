@@ -283,4 +283,14 @@ class HomepageController extends Controller
         $del_post->delete();
         return back();
     }
+
+    function updatepost(Request $request){
+        Post::where('id', $request->update_id)->update([
+            'name'=>$request->update_name,
+            'image'=>$request->update_image,
+            'description'=>$request->update_description,
+            'content'=>$request->update_content
+        ]);
+        return back();
+    }
 }
