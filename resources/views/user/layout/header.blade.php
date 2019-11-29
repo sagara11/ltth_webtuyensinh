@@ -254,24 +254,13 @@ function rebuild_date( $format, $time = 0 )
         </div>
     </div>
     <div class="mb-account">
-        <a data-toggle="modal" data-target="#mb-account-modal">
+        <a data-toggle="modal" onclick="openNav()">
             <i class="fa fa-user-circle"></i>
         </a>
     </div>
 </div>
 
-{{-- Mobile modal --}}
-<div class="modal fade" id="mb-account-modal">
-    <div class="modal-dialog-centered modal-dialog">
-        <div class="modal-content p-3">
-            <h4>ĐĂNG NHẬP</h4>
-            <form class="form-group" action="">
-                <input class="form-control" type="text" placeholder="Tên đăng nhâp">
-                <input type="password" placeholder="Mật khẩu" class="form-control">
-            </form>
-        </div>
-    </div>
-</div>
+
 
 <div id="Sidenav" class="sidenav">
     <a class="closebtn" onclick="closeNav()">&times;</a>
@@ -281,6 +270,10 @@ function rebuild_date( $format, $time = 0 )
             <a href="{{ route('danhmuc',$item->slug) }}"><b>{{ $item->name }}</b></a>
         </li>
         @endforeach
+    </ul>
+    <ul class="account">
+        <li class="btn btn-danger" data-toggle="modal" data-target="#signin"> Đăng nhập </li>
+        <li class="btn btn-danger" data-toggle="modal" data-target="#signup"> Đăng ký </li>
     </ul>
 </div>
 

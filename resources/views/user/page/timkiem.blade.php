@@ -11,38 +11,34 @@ Kết quả tìm kiếm
 @endsection
 @section('content')
 <main class="container">
-    <section id="baiviet-tintuc">
-        @foreach ($news_name as $item)
-        <div class="baiviet-box">
-            <div class="tintuc-img">
-                <a href="{{ route('chitiettin',$item->slug) }}">
-                    <img class="img-fluid" src="{{ $item->image }}" alt="" />
-                </a>
-            </div>
-            <div class="tintuc-detail">
-                <h5>
-                    <a href="{{ route('chitiettin',$item->slug) }}"> {{ $item->name }} </a>
-                </h5>
-                <p>
-                    <small class="webtuyensinh-section">
-                        <span>{{ $item->categories->name }} |</span>
-                        @if ($item->hour()<=24) 
-                        <span>{{ $item->hour() }} giờ trước |</span>
-                        @else
-                        <span>{{ $item->day() }} |</span>
-                        @endif
-                        @if ($item->comment != NULL )
-                        <span>{{ $item->comment }} bình luận |</span>
-                        @else
-                        <span>0 bình luận |</span>
-                        @endif
-                    </small>
-                    <small><span class="webtuyensinh-link" href="">{{ $item->source->web_name }}</span></small>
-                </p>
-            </div>
+    <div class="row">
+        <div class="col-md-8">
+            <section id="baiviet-tintuc">
+                @foreach ($news_name as $item)
+                <div class="baiviet-box">
+                    <div class="row">
+                        <div class="col-md-3 col-5">
+                            <a href="{{ route('chitiettin',$item->slug) }}" class="tintuc-img">
+                                <img class="img-fluid" src="{{ $item->image }}" alt="" />
+                            </a>
+                        </div>
+
+                        <div class="col-md-9 col-7">
+                            <h5> <a href="{{ route('chitiettin',$item->slug) }}"> {{ $item->name }} </a> </h5>
+                            <p>
+                                <span > {{ $item->categories->name }} </span>
+                                <span > {{ $item->hour() }} </span>
+                                <a class="webtuyensinh-link" href=""> {{ $item->source->web_name }} </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </section>
         </div>
-        @endforeach
-    </section>
+        @include('user.layout.sidebar')
+    </div>
+    
 </main>
 @endsection
 @section('js')

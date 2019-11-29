@@ -22,7 +22,9 @@ main #baiviet-tieubieu {
   main #baiviet-tieubieu [class*="col-"] {
     padding: 0 10px; }
   main #baiviet-tieubieu .tieubieu-box img {
-    border-radius: 5px; }
+    border-radius: 5px;
+    height: 150px;
+    object-fit: cover; }
   main #baiviet-tieubieu .tieubieu-box h5 {
     font-size: 16px;
     padding: 5px 0px;

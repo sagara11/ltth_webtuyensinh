@@ -159,13 +159,13 @@ Chi tiết tin
                     @foreach ($tinlienquan as $item)
                     <div class="baiviet-box">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-5">
                                 <a href="{{ route('chitiettin',$item->slug) }}" class="tintuc-img">
                                     <img class="img-fluid" src="{{ $item->image }}" alt="" />
                                 </a>
                             </div>
 
-                            <div class="col-md-9">
+                            <div class="col-md-9 col-7">
                                 <h5> <a href="{{ route('chitiettin',$item->slug) }}"> {{ $item->name }} </a> </h5>
                                 <p>
                                     <span > {{ $item->categories->name }} </span>
@@ -188,13 +188,13 @@ Chi tiết tin
                     @foreach ($tinmoi as $item)
                      <div class="baiviet-box">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-5">
                                 <a href="{{ route('chitiettin',$item->slug) }}" class="tintuc-img">
                                     <img class="img-fluid" src="{{ $item->image }}" alt="" />
                                 </a>
                             </div>
 
-                            <div class="col-md-9">
+                            <div class="col-md-9 col-7">
                                 <h5> <a href="{{ route('chitiettin',$item->slug) }}"> {{ $item->name }} </a> </h5>
                                 <p>
                                     <span > {{ $item->categories->name }} </span>
@@ -217,13 +217,13 @@ Chi tiết tin
                     @foreach ($tinnong as $item)
                      <div class="baiviet-box">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-5">
                                 <a href="{{ route('chitiettin',$item->slug) }}" class="tintuc-img">
                                     <img class="img-fluid" src="{{ $item->image }}" alt="" />
                                 </a>
                             </div>
 
-                            <div class="col-md-9">
+                            <div class="col-md-9 col-7">
                                 <h5> <a href="{{ route('chitiettin',$item->slug) }}"> {{ $item->name }} </a> </h5>
                                 <p>
                                     <span > {{ $item->categories->name }} </span>
@@ -245,6 +245,8 @@ Chi tiết tin
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.marquee/1.3.1/jquery.marquee.min.js"></script>
 <script type="text/javascript" src="{{ asset('js/user/chitiettin.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/user/home.js') }}"></script>
+
 <script type="text/javascript" src="{{ asset('slick-1.8.1/slick/slick.js') }}"></script>
 <!-- Go to www.addthis.com/dashboard to customize your tools --> <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59b0b0bc0881afd4"></script>
 @endsection

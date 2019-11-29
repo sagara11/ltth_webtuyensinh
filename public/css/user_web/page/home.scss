@@ -36,6 +36,8 @@ main {
     .tieubieu-box {
       img {
         border-radius: 5px;
+        height: 150px;
+        object-fit: cover;
       }
       h5 {
         font-size: 16px;

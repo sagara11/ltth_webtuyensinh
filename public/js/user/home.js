@@ -1,9 +1,11 @@
 function openNav() {
+    $('#Sidenav').show();
     document.getElementById("Sidenav").style.width = "250px";
 }
 
 /* Set the width of the side navigation to 0 */
 function closeNav() {
+    $('#Sidenav').hide();
     document.getElementById("Sidenav").style.width = "0";
 }
 
