@@ -16,48 +16,33 @@ Chi tiết tin
     <div class="row">
         <div class="col-lg-8">
             <section id="danhmuc">
-                <h4>TUYỂN SINH</h4>
+                <h4>TUYỂN SINH </h4>
             </section>
 
-            {{-- Ten bai viet --}}
             <section id="baiviet-name">
-                <h5>"{{ $new->name }}"</h5>
+                <h1> {{ $new->name }} </h1>
                 <div class="webtuyensinh-link">
-                    <p>
-                        <small class="webtuyensinh-section">
-                            <span>{{ $new->categories->name }} |</span>
-                            <span>{{ $new->hour() }} |</span>
-                                @if ($new->comment != NULL )
-                                <span>{{ $new->comment }} bình luận |</span>
-                                @else
-                                <span>0 bình luận |</span>
-                                @endif
-                        </small>
-                        <small><a class="webtuyensinh-link" href="">{{ $new->source->web_name }}</a></small>
-                    </p>
+                    <span>{{ $new->categories->name }} |</span>
+                    <span>{{ $new->hour() }} |</span>
+                    @if ($new->comment != NULL )
+                    <span>{{ $new->comment }} bình luận |</span>
+                    @else
+                    <span>0 bình luận |</span>
+                    @endif
+                    <a class="webtuyensinh-link" href="">{{ $new->source->web_name }}</a>
                 </div>
             </section>
 
-            {{-- Description --}}
-            <section id="baiviet-description">
-                <div>
-                    <p>
-                        {!! $new->description !!}
-                    </p>
-                </div>
-            </section>
+            <article id="baiviet-description">
+                {!! $new->description !!}
+            </article>
 
-            {{-- Image --}}
-            {{-- <section id="baiviet-img">
-                <img class="img-fluid" src="{{ $new->image }}" alt="">
-            </section> --}}
 
-            {{-- Content --}}
-            <section id="baiviet-content">
+
+            <article id="baiviet-content">
                 {!! $new->content !!}
-            </section>
+            </article>
 
-            {{-- Comment --}}
             <article id="comment">
                 <div class="comment-header">
                     <p>Ý KIẾN BẠN ĐỌC({{ $comment->count() }})</p>
