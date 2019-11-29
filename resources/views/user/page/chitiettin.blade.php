@@ -159,13 +159,13 @@ Chi tiết tin
                     @foreach ($tinlienquan as $item)
                     <div class="baiviet-box">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-5">
                                 <a href="{{ route('chitiettin',$item->slug) }}" class="tintuc-img">
                                     <img class="img-fluid" src="{{ $item->image }}" alt="" />
                                 </a>
                             </div>
 
-                            <div class="col-md-9">
+                            <div class="col-md-9 col-7">
                                 <h5> <a href="{{ route('chitiettin',$item->slug) }}"> {{ $item->name }} </a> </h5>
                                 <p>
                                     <span > {{ $item->categories->name }} </span>
@@ -182,24 +182,26 @@ Chi tiết tin
             {{-- Tin moi --}}
             <section class="tintuc-contain">
                 <div class="tin-header">
-                    <h3>TIN MỚI</h3>
+                    <h3> <span>  TIN MỚI </span> </h3>
                 </div>
                 <div class="tin-content">
                     @foreach ($tinmoi as $item)
                     <div class="baiviet-box">
-                        <a href="{{ route('chitiettin',$item->slug) }}" class="tintuc-img">
-                            <img class="img-fluid" src="{{ $item->image }}" alt="" />
-                        </a>
-                        <div class="tintuc-detail">
-                            <a href="{{ route('chitiettin',$item->slug) }}">
-                                <h5>
-                                    {{ $item->name }}
-                                </h5>
-                            </a>
-                            <p>
-                                <small class="webtuyensinh-section">Tuyển sinh | 1 giờ | 3 bình luận | </small>
-                                <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
-                            </p>
+                        <div class="row">
+                            <div class="col-md-3 col-5">
+                                <a href="{{ route('chitiettin',$item->slug) }}" class="tintuc-img">
+                                    <img class="img-fluid" src="{{ $item->image }}" alt="" />
+                                </a>
+                            </div>
+
+                            <div class="col-md-9 col-7">
+                                <h5> <a href="{{ route('chitiettin',$item->slug) }}"> {{ $item->name }} </a> </h5>
+                                <p>
+                                    <span > {{ $item->categories->name }} </span>
+                                    <span > {{ $item->hour() }} </span>
+                                    <a class="webtuyensinh-link" href=""> {{ $item->source->web_name }} </a>
+                                </p>
+                            </div>
                         </div>
                     </div>
                     @endforeach
@@ -209,24 +211,26 @@ Chi tiết tin
             {{-- Tin nong --}}
             <section class="tintuc-contain">
                 <div class="tin-header">
-                    <h3>TIN NÓNG</h3>
+                    <h3> <span> TIN NÓNG </span> </h3>
                 </div>
                 <div class="tin-content">
                     @foreach ($tinnong as $item)
                     <div class="baiviet-box">
-                        <a href="{{ route('chitiettin',$item->slug) }}" class="tintuc-img">
-                            <img class="img-fluid" src="{{ $item->image }}" alt="" />
-                        </a>
-                        <div class="tintuc-detail">
-                            <a href="{{ route('chitiettin',$item->slug) }}">
-                                <h5>
-                                    {{ $item->name }}
-                                </h5>
-                            </a>
-                            <p>
-                                <small class="webtuyensinh-section">Tuyển sinh | 1 giờ | 3 bình luận | </small>
-                                <small><a class="webtuyensinh-link" href="">webtuyensinh</a></small>
-                            </p>
+                        <div class="row">
+                            <div class="col-md-3 col-5">
+                                <a href="{{ route('chitiettin',$item->slug) }}" class="tintuc-img">
+                                    <img class="img-fluid" src="{{ $item->image }}" alt="" />
+                                </a>
+                            </div>
+
+                            <div class="col-md-9 col-7">
+                                <h5> <a href="{{ route('chitiettin',$item->slug) }}"> {{ $item->name }} </a> </h5>
+                                <p>
+                                    <span > {{ $item->categories->name }} </span>
+                                    <span > {{ $item->hour() }} </span>
+                                    <a class="webtuyensinh-link" href=""> {{ $item->source->web_name }} </a>
+                                </p>
+                            </div>
                         </div>
                     </div>
                     @endforeach

@@ -17,45 +17,36 @@ main #baiviet-chinh p {
     font-weight: 500;
     color: #055695; }
 main #baiviet-tieubieu {
-  margin-top: 10px;
-  display: flex; }
-  main #baiviet-tieubieu .tieubieu-box {
-    padding: 0px 5px;
-    width: 33.33%; }
-    main #baiviet-tieubieu .tieubieu-box img {
-      border-radius: 5px;
-      width: 100%;
-      height: 58%; }
-    main #baiviet-tieubieu .tieubieu-box h5 {
-      font-size: 15px;
-      padding: 5px 0px;
-      margin-top: 10px;
-      overflow: hidden;
-      line-height: 22px; }
-      main #baiviet-tieubieu .tieubieu-box h5 a {
-        color: #333333;
-        cursor: pointer;
-        text-decoration: none;
-        height: 100%; }
-    main #baiviet-tieubieu .tieubieu-box p {
-      color: #a7a7a7;
-      margin: 0px 0px; }
-      main #baiviet-tieubieu .tieubieu-box p .webtuyensinh-section {
-        font-weight: 500;
-        color: #055695; }
-      main #baiviet-tieubieu .tieubieu-box p .webtuyensinh-link {
-        font-weight: 500;
-        color: #055695; }
-    main #baiviet-tieubieu .tieubieu-box:first-child {
-      padding-left: 0px; }
-    main #baiviet-tieubieu .tieubieu-box:last-child {
-      padding-right: 0px; }
+  margin: 0 -10px;
+  margin-top: 10px; }
+  main #baiviet-tieubieu [class*="col-"] {
+    padding: 0 10px; }
+  main #baiviet-tieubieu .tieubieu-box img {
+    border-radius: 5px; }
+  main #baiviet-tieubieu .tieubieu-box h5 {
+    font-size: 16px;
+    padding: 5px 0px;
+    line-height: 22px;
+    margin: 0; }
+    main #baiviet-tieubieu .tieubieu-box h5 a {
+      color: #333333;
+      cursor: pointer;
+      text-decoration: none;
+      height: 100%; }
+  main #baiviet-tieubieu .tieubieu-box p {
+    color: #a7a7a7;
+    margin: 0px 0px; }
+    main #baiviet-tieubieu .tieubieu-box p .webtuyensinh-section {
+      font-weight: 500;
+      color: #055695; }
+    main #baiviet-tieubieu .tieubieu-box p .webtuyensinh-link {
+      font-weight: 500;
+      color: #055695; }
 main #baiviet-tintuc {
   padding-top: 15px;
   border-top: 1px solid #eeeeee;
   margin-top: 10px; }
   main #baiviet-tintuc .baiviet-box {
-    margin: 10px 0px;
     display: flex; }
     main #baiviet-tintuc .baiviet-box .tintuc-img {
       padding: 0px 15px 15px 0px;
@@ -82,6 +73,8 @@ main #baiviet-tintuc {
   main #baiviet-tieubieu {
     display: block; }
     main #baiviet-tieubieu .tieubieu-box {
-      width: 100%; } }
+      width: 100%;
+      margin-bottom: 10px;
+      padding-bottom: 10px; } }
 
 /*# sourceMappingURL=home.css.map */

@@ -1,18 +1,28 @@
 .baiviet-box {
   border-bottom: 1px solid #eeeeee;
-  margin-bottom: 10px;
-  padding-bottom: 10px; }
+  margin-bottom: 15px;
+  padding-bottom: 15px; }
+  .baiviet-box .row {
+    margin: 0 -7px; }
+    .baiviet-box .row [class*="col-"] {
+      padding: 0 7px; }
   .baiviet-box img {
     border-radius: 5px;
     width: 100%; }
-  .baiviet-box .tintuc-detail h5 a {
-    color: #333333; }
-  .baiviet-box .tintuc-detail p span {
+  .baiviet-box h5 a {
+    color: #333333;
+    font-size: 18px; }
+  .baiviet-box p span {
     margin-right: 10px;
     display: inline-block;
     color: #a7a7a7; }
-  .baiviet-box .tintuc-detail p .webtuyensinh-link {
+  .baiviet-box p .webtuyensinh-link {
     color: #1f97aa;
     font-weight: bold; }
+
+@media only screen and (max-width: 600px) {
+  .baiviet-box h5 a {
+    font-size: 16px;
+    line-height: 20px; } }
 
 /*# sourceMappingURL=baiviet_box.css.map */

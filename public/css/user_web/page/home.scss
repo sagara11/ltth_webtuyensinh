@@ -28,22 +28,20 @@ main {
   }
 
   #baiviet-tieubieu {
+    margin: 0 -10px;
     margin-top: 10px;
-    display: flex;
+    [class*="col-"] {
+      padding: 0 10px;
+    }
     .tieubieu-box {
-      padding: 0px 5px;
-      width: 33.33%;
       img {
         border-radius: 5px;
-        width: 100%;
-        height: 58%;
       }
       h5 {
-        font-size: 15px;
+        font-size: 16px;
         padding: 5px 0px;
-        margin-top: 10px;
-        overflow: hidden;
         line-height: 22px;
+        margin: 0;
         a {
           color: rgb(51, 51, 51);
           cursor: pointer;
@@ -63,12 +61,7 @@ main {
           color: #055695;
         }
       }
-      &:first-child {
-        padding-left: 0px;
-      }
-      &:last-child {
-        padding-right: 0px;
-      }
+      
     }
   }
 
@@ -77,7 +70,6 @@ main {
     border-top: 1px solid rgb(238, 238, 238);
     margin-top: 10px;
     .baiviet-box {
-      margin: 10px 0px;
       display: flex;
       .tintuc-img {
         padding: 0px 15px 15px 0px;
@@ -118,6 +110,8 @@ main {
       display: block;
       .tieubieu-box {
         width: 100%;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
       }
     }
   }

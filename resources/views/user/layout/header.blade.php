@@ -92,7 +92,7 @@ function rebuild_date( $format, $time = 0 )
 }
 
 ?>
-<header>
+<header class="d-none d-lg-block">
     <div class="container">
         <div class="row">
             <div class="col-md-9">
@@ -202,7 +202,7 @@ function rebuild_date( $format, $time = 0 )
 </article>
 
 <!-- Navigation -->
-<nav class="nav">
+<nav class="nav d-none d-lg-block">
     <div class="container">
         <div class="row">
             <div class="col-lg-2">
@@ -245,7 +245,7 @@ function rebuild_date( $format, $time = 0 )
     </div>
     <div class="logo">
         <a href="{{ route('home') }}">
-            <img class="img-fluid" src="{{ asset('media/1 Trang chủ.png') }}" alt="" />
+            <img class="img-fluid" src="{{ asset('media/logo-main.png') }}" alt="Logo" />
         </a>
     </div>
     <div class="mb-search">

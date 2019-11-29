@@ -27,12 +27,12 @@
                     @foreach ($sidetrend as $item)
                     <div class="item">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-4 col-5">
                                 <a href="{{ route('chitiettin',$item->slug) }}" >
                                     <img class="img-fluid" src="{{ $item->image }}" alt="{{ $item->name }}" />
                                 </a>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-8 col-7">
                                 <p>  <a href="{{ route('chitiettin',$item->slug) }}">  {{ $item->name }} </a>  </p>
                             </div>
                         </div>

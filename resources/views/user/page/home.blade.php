@@ -33,23 +33,24 @@ Home
             </section>
 
             <!-- Bai viet tieu bieu -->
-            <section id="baiviet-tieubieu">
+            <section class="row" id="baiviet-tieubieu">
                 @foreach ($trend as $item)
-                <div class="tieubieu-box">
-                    <a href="{{ route('chitiettin',$item->slug) }}">
-                        <img class="img-fluid" src="{{ $item->image }}" alt="{{$item->slug}}">
-                    </a>
-                    <h5>
-                        <a href="{{ route('chitiettin',$item->slug) }}">
-                            {{ $item->name }}
-                        </a>
-                    </h5>
-                    <p>
-                        <span>{{ $item->categories->name }} |</span>
-                        <span>{{ $item->hour() }} |</span>
-                        <!-- <span>{{ $item->comment ? $item->comment : 0 }} bình luận |</span> -->
-                        <span class="webtuyensinh-link" href="">{{ $item->source->web_name }}</span>
-                    </p>
+                <div class="col-md-4  tieubieu-box">
+                    <div class="row">
+                        <div class="col-md-12 col-5">
+                            <a href="{{ route('chitiettin',$item->slug) }}">
+                                <img class="img-fluid" src="{{ $item->image }}" alt="{{$item->slug}}">
+                            </a>
+                        </div>
+                        <div class="col-md-12 col-7">
+                            <h5> <a href="{{ route('chitiettin',$item->slug) }}">  {{ $item->name }} </a> </h5>
+                            <p>
+                                <span>{{ $item->categories->name }} |</span>
+                                <span>{{ $item->hour() }} |</span>
+                                <span class="webtuyensinh-link" href="">{{ $item->source->web_name }}</span>
+                            </p>
+                        </div>
+                    </div>
                 </div>
                 @endforeach
             </section>
@@ -58,21 +59,23 @@ Home
             <section id="baiviet-tintuc">
                 @foreach ($news as $item)
                 <div class="baiviet-box">
-                    <div class="tintuc-img">
-                        <a href="{{ route('chitiettin',$item->slug) }}">
-                            <img class="img-fluid" src="{{ $item->image }}" alt="{{$item->slug}}" />
-                        </a>
+                        <div class="row">
+                            <div class="col-md-3 col-5">
+                                <a href="{{ route('chitiettin',$item->slug) }}" class="tintuc-img">
+                                    <img class="img-fluid" src="{{ $item->image }}" alt="" />
+                                </a>
+                            </div>
+
+                            <div class="col-md-9 col-7">
+                                <h5> <a href="{{ route('chitiettin',$item->slug) }}"> {{ $item->name }} </a> </h5>
+                                <p>
+                                    <span > {{ $item->categories->name }} </span>
+                                    <span > {{ $item->hour() }} </span>
+                                    <a class="webtuyensinh-link" href=""> {{ $item->source->web_name }} </a>
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="tintuc-detail">
-                        <h5> <a href="{{ route('chitiettin',$item->slug) }}"> {{ $item->name }} </a> </h5>
-                        <p>
-                            <span>{{ $item->categories->name }} |</span>
-                            <span>{{ $item->hour() }} |</span>
-                            <!-- <span>{{ $item->comment ? $item->comment : 0 }} bình luận |</span> -->
-                            <span class="webtuyensinh-link" href="">{{ $item->source->web_name }}</span>
-                        </p>
-                    </div>
-                </div>
                 @endforeach
             </section>
         </div>
