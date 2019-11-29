@@ -28,5 +28,9 @@ class AppServiceProvider extends ServiceProvider
             $nav_section = Category::where('parent_id', NULL)->get();
             $view->with('nav_section', $nav_section);
         });
+        view()->composer('user.layout.footer',function($view){
+            $nav_section = Category::where('parent_id', NULL)->get();
+            $view->with('nav_section', $nav_section);
+        });
     }
 }

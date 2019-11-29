@@ -1,124 +1,126 @@
-header {
-  padding: 10px 0px;
-  background-color: #f65c2c;
-  color: white; }
-  header .row {
-    padding: 0px 15px; }
-  header .sukien {
-    width: 10%; }
-    header .sukien b {
-      font-size: 14px; }
-  header .header-news {
-    width: 65%;
-    overflow: hidden; }
-    header .header-news span {
-      margin-right: 35px; }
-  header .header-account {
-    width: 25%;
-    display: flex;
-    justify-content: flex-end; }
-    header .header-account .dropdown-toggle {
-      display: flex;
-      align-items: center; }
-      header .header-account .dropdown-toggle img {
-        margin-right: 10px; }
-      header .header-account .dropdown-toggle p {
-        margin: 0px 0px; }
-      header .header-account .dropdown-toggle::after {
-        margin-left: 20px; }
-    header .header-account .dropdown-menu ul {
-      padding: 0px 10px;
-      margin: 0px 0px;
-      list-style: none; }
-      header .header-account .dropdown-menu ul li {
-        cursor: pointer;
-        padding: 10px 0px; }
-        header .header-account .dropdown-menu ul li a {
-          color: #333333;
-          text-decoration: none; }
-        header .header-account .dropdown-menu ul li:hover {
-          background-color: #f6f6f6; }
+body {
+  font-size: 14px; }
 
-nav {
-  padding: 0px 0px; }
-  nav .nav {
-    margin-top: 7px;
-    margin-bottom: 7px;
-    align-items: center; }
-    nav .nav .nav-logo {
-      padding: 0px 15px; }
-      nav .nav .nav-logo img {
-        width: 80%;
-        height: 80px; }
-    nav .nav .menu ul {
-      padding: 0px 0px;
-      margin: 0px 0px;
+header {
+  padding: 5px 0px;
+  background-color: #eee;
+  border-bottom: 1px solid #ccc; }
+  header .left {
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    margin-top: 2px; }
+    header .left li {
+      list-style: none;
+      display: inline-block;
       align-items: center;
-      list-style-type: none; }
-      nav .nav .menu ul .home {
-        width: 10%; }
-        nav .nav .menu ul .home a {
-          height: fit-content;
-          width: fit-content;
-          display: flex;
-          align-items: center;
-          text-decoration: none; }
-          nav .nav .menu ul .home a i {
-            font-size: 16px;
-            padding: 11px 11px;
-            background-color: #f65c2c;
-            color: white;
-            transition: 0.3s; }
-            nav .nav .menu ul .home a i:hover {
-              transform: scale(1.2, 1.2); }
-        nav .nav .menu ul .home:hover {
-          background-color: white; }
-      nav .nav .menu ul li {
-        align-items: center;
-        height: 60px;
-        display: flex;
-        justify-content: center;
-        padding: 14px; }
-        nav .nav .menu ul li:hover {
-          background-color: #f6f6f6; }
-        nav .nav .menu ul li form {
-          text-align: center;
-          width: 100%; }
-        nav .nav .menu ul li a {
-          cursor: pointer;
-          text-transform: uppercase;
-          text-decoration: none;
-          color: #333333;
-          font-size: 14px; }
-    nav .nav #search {
+      font-size: 14px; }
+  header .dropdown {
+    cursor: pointer;
+    float: right; }
+    header .dropdown .dropdown-toggle {
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center; }
-      nav .nav #search i {
-        text-align: right;
-        font-size: 20px;
-        color: #7f7f7f; }
-      nav .nav #search #searchbar {
-        background-color: white;
-        padding: 10px 12px;
-        border: 1px solid gainsboro;
-        right: 20px;
-        top: 30px;
-        width: 350px;
-        z-index: 9999;
-        position: absolute;
-        display: none; }
-        nav .nav #search #searchbar #search-submit {
-          margin-top: 10px;
-          padding: 5px 10px;
+      header .dropdown .dropdown-toggle img {
+        margin-right: 10px; }
+      header .dropdown .dropdown-toggle p {
+        margin: 0px; }
+      header .dropdown .dropdown-toggle::after {
+        margin-left: 10px; }
+    header .dropdown .dropdown-menu {
+      top: 26px !important;
+      right: 0 !important;
+      transform: inherit !important;
+      left: inherit !important;
+      border-radius: 0; }
+      header .dropdown .dropdown-menu ul {
+        padding: 0px 10px;
+        margin: 0px 0px;
+        list-style: none; }
+        header .dropdown .dropdown-menu ul li {
+          cursor: pointer;
+          padding: 10px 0px; }
+          header .dropdown .dropdown-menu ul li a {
+            color: #333333;
+            text-decoration: none; }
+          header .dropdown .dropdown-menu ul li:hover {
+            background-color: #f6f6f6; }
+
+nav.nav {
+  padding: 5px 0;
+  align-items: center; }
+  nav.nav .logo {
+    display: block;
+    padding: 5px 0; }
+    nav.nav .logo img {
+      /*width: 80%;*/
+      height: 70px; }
+  nav.nav .menu ul {
+    padding: 17px 0px;
+    margin: 0px 0px;
+    /*float: right;*/
+    text-align: right;
+    list-style-type: none; }
+    nav.nav .menu ul .home {
+      width: 10%; }
+      nav.nav .menu ul .home a {
+        height: fit-content;
+        width: fit-content;
+        display: flex;
+        align-items: center;
+        text-decoration: none; }
+        nav.nav .menu ul .home a i {
+          font-size: 16px;
+          padding: 11px 11px;
           background-color: #f65c2c;
-          border: none;
-          color: white; }
-        nav .nav #search #searchbar .closebtn {
-          color: #f65c2c;
-          font-size: 25px;
-          text-decoration: none; }
+          color: white;
+          transition: 0.3s; }
+          nav.nav .menu ul .home a i:hover {
+            transform: scale(1.2, 1.2); }
+      nav.nav .menu ul .home:hover {
+        background-color: white; }
+    nav.nav .menu ul li {
+      display: inline-block; }
+      nav.nav .menu ul li:hover {
+        background-color: #f6f6f6; }
+      nav.nav .menu ul li a {
+        display: block;
+        padding: 10px 15px;
+        cursor: pointer;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: #333333;
+        font-size: 14px;
+        font-weight: bold; }
+  nav.nav #search {
+    padding: 20px 0;
+    position: relative;
+    text-align: right; }
+    nav.nav #search i {
+      padding: 10px;
+      text-align: right;
+      font-size: 20px;
+      color: #7f7f7f; }
+    nav.nav #search .searchbar {
+      background-color: white;
+      padding: 10px 12px;
+      border: 1px solid gainsboro;
+      right: 0px;
+      top: 60px;
+      width: 300px;
+      z-index: 9999;
+      position: absolute;
+      display: none; }
+      nav.nav #search .searchbar #search-submit {
+        margin-top: 10px;
+        padding: 5px 10px;
+        background-color: #f65c2c;
+        border: none;
+        color: white; }
+      nav.nav #search .searchbar .closebtn {
+        color: #f65c2c;
+        font-size: 25px;
+        text-decoration: none; }
 
 article .modal-header {
   background-color: #f65c2c;

@@ -1,101 +1,63 @@
-<article id="doitac-container">
-    <div class="doitac container">
-        <div class="doitac-header">
-            <p>Liên kết đối tác:</p>
-        </div>
-        <div class="doitac-contents">
-            <div class="doitac-img col-lg-2">
-                <img class="img-fluid" src="{{ asset('media\logo eposi.jpg') }}" alt="" />
-            </div>
-            <div class="doitac-img col-lg-2">
-                <img class="img-fluid" src="{{ asset('media\tai-xuo-n_636859354346582162_HasThumb.jpg') }}" alt="" />
-            </div>
-            <div class="doitac-img col-lg-2">
-                <img class="img-fluid" src="{{ asset('media\sblaw.png') }}" alt="" />
-            </div>
-            <div class="doitac-img col-lg-2">
-                <img class="img-fluid" src="{{ asset('media\hud logo.png') }}" alt="" />
-            </div>
 
-            <div class="doitac-img col-lg-2">
-                <img class="img-fluid" src="{{ asset('media\28471172_1881865558770747_2414351670779431115_n.png') }}"
-                    alt="" />
-            </div>
-            <div class="doitac-img col-lg-2">
-                <img class="img-fluid" src="{{ asset('media\tải xuống (2).png') }}" alt="" />
-            </div>
-        </div>
-    </div>
-</article>
 <footer>
-    <div class="footer-contain container">
+    <div class="container">
         <div class="row">
-            <ul class="col-lg-3 info-contain">
-                <li>
-                    <h6>Giới thiệu Báo Tuyển Sinh</h6>
-                </li>
-                <li>
-                    <a href="">Kênh thông tin tuyển sinh</a>
-                </li>
-                <li>
-                    <a href="">Giấy phép ĐKKD: xxxxxxxx do</a>
-                </li>
-                <li>
-                    <a href="">Sở Kế Hoạch và Đầu Tư tp.Hà Nội cấp, chịu trách nhiệm nội dung</a>
-                </li>
-                <li>
-                    <a href="">Nguyễn Văn A</a>
-                </li>
-            </ul>
-            <ul class="col-lg-3 info-contain">
-                <li>
-                    <h6>Liên hệ</h6>
-                </li>
-                <li>
-                    <a href="">HỢP TÁC TRUYỀN THÔNG</a>
-                </li>
-                <li class="li-section">
-                    <a href="">xxxxxxxx(máy lẻ 62.370)</a>
-                </li>
-                <li class="li-section">
-                    <a href="">contact@bts.vn</a>
-                </li>
-                <li class="li-section">
-                    <a href="">xxxxxxxx(máy lẻ 62.370)</a>
-                </li>
-            </ul>
-            <ul class="col-lg-3 info-contain">
-                <li>
-                    <h6>Quy định, chính sách</h6>
-                </li>
-                <li class="li-section">
-                    <a href="">Thảo luận sử dụng</a>
-                </li>
-                <li class="li-section">
-                    <a href="">Quy chế hoạt động</a>
-                </li>
-                <li class="li-section">
-                    <a href="">Quy định bảo mật thông tin</a>
-                </li>
+            <div class="col-md-9">
+                <div class="row menu">
+                    @php 
+                        foreach ($nav_section as $key => $item):
+                        if($key==0) continue;
+                        if($key == 5 ) break;
+                    @endphp
+                    <div class="col-md-3 col-6">
+                        <h6> {{ $item->name }} </h6>
+                        <ul>
+                            @php 
+                                foreach($item->child_category as $k => $val):
+                                if($k == 4 ) break;
+                            @endphp
+                             <li>  <a href="{{ route('danhmuc',$val->slug) }}"> {{ $val->name }}  </a> </li>
+                            @php
+                                endforeach;
+                            @endphp
+                        </ul>
+                    </div>
+                   
+                    @php 
+                        endforeach;
+                    @endphp 
+                </div>
+            </div>
+            
+            <div class="col-md-3 ">
+                <div class="social">
+                    <h6> Liên kết </h6>
+                    <ul> 
+                        <li> <a href=""> <i class="fa fa-facebook"></i> </a> </li>
+                        <li> <a href=""> <i class="fa fa-twitter"></i> </a> </li>
+                        <li> <a href=""> <i class="fa fa-google-plus"></i> </a> </li>
+                        <li> <a href=""> <i class="fa fa-youtube"></i> </a> </li>
+                    </ul>
+                    <ul class="app">
+                        <li> <img src="{{ asset('media/google-play-badge.png') }}" alt="" />  </li>
+                        <li> <img src="{{ asset('media/app store badge.png') }}" alt="" />  </li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+        <div class="copyright">
+            <div class="row">
+                <div class="col-md-6">
+                    <p> © Copyright 2019 Web Tuyển Sinh. All rights reserved. <br /> 
 
-                <li class="li-section">
-                    <a href="">Cơ chế giải quyết tranh cãi</a>
-                </li>
-            </ul>
-            <div class="col-lg-3 info-contain social">
-                <h6><b>Liên kết</b></h6>
-                <i class="fab fa-facebook"></i>
-                <i class="fab fa-twitter-square"></i>
-                <i class="fab fa-google-plus"></i>
-                <i class="fab fa-youtube-square"></i>
-                <img src="" alt="" />
-                <div class="appstore-ggplay">
-                    <div>
-                        <img src="{{ asset('media/google-play-badge.png') }}" alt="" />
-                    </div>
-                    <div>
-                        <img src="{{ asset('media/app store badge.png') }}" alt="" />
-                    </div>
+                        Giấy phép số XXX do bộ thông tin truyền thông cấp ngày xx/xx/xxxx </p>
+                </div>
+                <div class="col-md-6">
+                    <p class="right">
+                        <b> Liên hệ tòa soạn </b> <br />
+                        Hotline: 083.888.0123 - Email: contact@webtuyensinh.edu.vn 
+                    </p>
                 </div>
             </div>
         </div>

@@ -1,70 +1,76 @@
 footer {
-  padding: 40px 0px;
-  background-color: #f6f6f6; }
-  footer .footer-contain .info-contain {
-    list-style-type: none; }
-    footer .footer-contain .info-contain li {
+  padding-top: 50px;
+  background-color: #eee; }
+  footer .menu h6 {
+    font-weight: bold;
+    font-size: 14px;
+    color: #333333;
+    text-transform: uppercase; }
+  footer .menu ul {
+    list-style-type: none;
+    padding: 0; }
+    footer .menu ul li {
       padding: 5px 0px; }
-      footer .footer-contain .info-contain li h6 {
-        font-weight: bold;
-        font-size: 16px;
-        color: #333333; }
-      footer .footer-contain .info-contain li a {
+      footer .menu ul li::before {
+        display: inline-block;
+        content: "";
+        border-radius: 3.5px;
+        height: 7px;
+        width: 7px;
+        margin-right: 0.5rem;
+        background-color: #055695; }
+      footer .menu ul li a {
         text-decoration: none;
         color: #333333; }
-        footer .footer-contain .info-contain li a:hover {
+        footer .menu ul li a:hover {
           color: #e3411f; }
-    footer .footer-contain .info-contain .li-section::before {
-      display: inline-block;
-      content: "";
-      border-radius: 3.5px;
-      height: 7px;
-      width: 7px;
-      margin-right: 0.5rem;
-      background-color: #0f90a4; }
-  footer .footer-contain .social h6 {
+  footer .social h6 {
+    font-weight: bold;
+    font-size: 14px;
+    color: #333333;
+    text-transform: uppercase;
     margin-bottom: 20px; }
-  footer .footer-contain .social i {
-    margin-right: 5px;
-    margin-bottom: 30px;
-    font-size: 25px; }
-  footer .footer-contain .social .fa-facebook {
-    color: #5072a9; }
-  footer .footer-contain .social .fa-twitter-square {
-    color: #1cb7eb; }
-  footer .footer-contain .social .fa-google-plus {
-    color: #e3411f; }
-  footer .footer-contain .social .fa-youtube-square {
-    color: #ca3737; }
-  footer .footer-contain .appstore-ggplay {
+  footer .social ul {
+    padding: 0;
+    margin: 0; }
+    footer .social ul li {
+      list-style: none;
+      display: inline-block; }
+      footer .social ul li a {
+        display: inline-block;
+        margin-right: 5px; }
+        footer .social ul li a i {
+          width: 30px;
+          height: 30px;
+          text-align: center;
+          line-height: 30px;
+          color: white;
+          border-radius: 50%; }
+        footer .social ul li a .fa-facebook {
+          background-color: #5072a9; }
+        footer .social ul li a .fa-twitter {
+          background-color: #1cb7eb; }
+        footer .social ul li a .fa-google-plus {
+          background-color: #e3411f; }
+        footer .social ul li a .fa-youtube {
+          background-color: #ca3737; }
+  footer .social .app {
+    padding: 20px 0;
+    margin-top: 20px;
+    border-top: 1px solid gainsboro; }
+    footer .social .app img {
+      height: 35px;
+      margin-right: 5px; }
+  footer .copyright {
     border-top: 1px solid gainsboro;
-    display: flex; }
-    footer .footer-contain .appstore-ggplay div {
-      padding: 10px 0px; }
-      footer .footer-contain .appstore-ggplay div img {
-        height: 50px; }
+    padding: 5px 0; }
+    footer .copyright .right {
+      text-align: right; }
 
-#doitac-container {
-  padding: 10px 0px;
-  border: 1px solid #d5d5d5; }
-  #doitac-container .doitac {
-    display: flex; }
-    #doitac-container .doitac .doitac-header {
-      display: flex;
-      width: 15%;
-      align-items: center; }
-      #doitac-container .doitac .doitac-header p {
-        margin: auto 0px; }
-    #doitac-container .doitac .doitac-contents {
-      width: 85%;
-      display: flex; }
-      #doitac-container .doitac .doitac-contents .doitac-img {
-        display: flex;
-        align-items: center;
-        justify-content: center; }
-
-@media only screen and (max-width: 600px) {
-  .footer-contain div {
-    justify-content: center; } }
+@media only screen and (max-width: 900px) {
+  .copyright {
+    text-align: center; }
+    .copyright .right {
+      text-align: center !important; } }
 
 /*# sourceMappingURL=footer.css.map */

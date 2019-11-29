@@ -15,27 +15,20 @@ Home
 @section('content')
 <main class="container">
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-md-8">
             <!-- Bai viet chinh -->
             <section id="baiviet-chinh">
                 <a href="{{ route('chitiettin', $trend_first->slug) }}">
-                    <img class="img-fluid" src="{{ $trend_first->image }}" alt="">
+                    <img class="img-fluid" src="{{ $trend_first->image }}" alt="{{ $trend_first->name }}">
                 </a>
                 <h5>
                     <a href="{{ route('chitiettin',$trend_first->slug) }}"> {{ $trend_first->name }} </a>
                 </h5>
                 <p>
-                    <small class="webtuyensinh-section">
-                        <span>{{ $trend_first->categories->name }} |</span>
-                        <span>{{ $trend_first->hour() }} |</span>
-
-                        @if ($trend_first->comment != NULL )
-                        <span>{{ $trend_first->comment }} bình luận |</span>
-                        @else
-                        <span>0 bình luận |</span>
-                        @endif
-                    </small>
-                    <small><span class="webtuyensinh-link" href="">{{ $trend_first->source->web_name }}</span></small>
+                    <span>{{ $trend_first->categories->name }} |</span>
+                    <span>{{ $trend_first->hour() }} |</span>
+                    <!-- <span>{{ $trend_first->comment ? $trend_first->comment : 0 }} bình luận |</span> -->
+                    <span class="webtuyensinh-link" href="">{{ $trend_first->source->web_name }}</span>
                 </p>
             </section>
 
@@ -44,7 +37,7 @@ Home
                 @foreach ($trend as $item)
                 <div class="tieubieu-box">
                     <a href="{{ route('chitiettin',$item->slug) }}">
-                        <img class="img-fluid" src="{{ $item->image }}" alt="">
+                        <img class="img-fluid" src="{{ $item->image }}" alt="$item->slug">
                     </a>
                     <h5>
                         <a href="{{ route('chitiettin',$item->slug) }}">
@@ -52,17 +45,10 @@ Home
                         </a>
                     </h5>
                     <p>
-                        <small class="webtuyensinh-section">
-                            <span>{{ $item->categories->name }} |</span>
-                            <span>{{ $item->hour() }} |</span>
-
-                            @if ($item->comment != NULL )
-                            <span>{{ $item->comment }} bình luận |</span>
-                            @else
-                            <span>0 bình luận |</span>
-                            @endif
-                        </small>
-                        <small><span class="webtuyensinh-link" href="">{{ $item->source->web_name }}</span></small>
+                        <span>{{ $item->categories->name }} |</span>
+                        <span>{{ $item->hour() }} |</span>
+                        <!-- <span>{{ $item->comment ? $item->comment : 0 }} bình luận |</span> -->
+                        <span class="webtuyensinh-link" href="">{{ $item->source->web_name }}</span>
                     </p>
                 </div>
                 @endforeach
@@ -74,31 +60,21 @@ Home
                 <div class="baiviet-box">
                     <div class="tintuc-img">
                         <a href="{{ route('chitiettin',$item->slug) }}">
-                            <img class="img-fluid" src="{{ $item->image }}" alt="" />
+                            <img class="img-fluid" src="{{ $item->image }}" alt="$item->slug" />
                         </a>
                     </div>
                     <div class="tintuc-detail">
-                        <h5>
-                            <a href="{{ route('chitiettin',$item->slug) }}"> {{ $item->name }} </a>
-                        </h5>
+                        <h5> <a href="{{ route('chitiettin',$item->slug) }}"> {{ $item->name }} </a> </h5>
                         <p>
-                            <small class="webtuyensinh-section">
-                                <span>{{ $item->categories->name }} |</span>
-                                <span>{{ $item->hour() }} |</span>
-
-                                @if ($item->comment != NULL )
-                                <span>{{ $item->comment }} bình luận |</span>
-                                @else
-                                <span>0 bình luận |</span>
-                                @endif
-                            </small>
-                            <small><span class="webtuyensinh-link" href="">{{ $item->source->web_name }}</span></small>
+                            <span>{{ $item->categories->name }} |</span>
+                            <span>{{ $item->hour() }} |</span>
+                            <!-- <span>{{ $item->comment ? $item->comment : 0 }} bình luận |</span> -->
+                            <span class="webtuyensinh-link" href="">{{ $item->source->web_name }}</span>
                         </p>
                     </div>
                 </div>
                 @endforeach
             </section>
-            {{ $news->links() }}
         </div>
 
         <div class="col-lg-4">
@@ -106,8 +82,8 @@ Home
             <section id="quangcao">
                 @foreach ($banner as $item)
                 <div class="quangcao-box">
-                    <a href="">
-                        <img src="{{ $item->image }}" alt="" />
+                    <a target="_blank" href="{{ $item->link }}">
+                        <img src="{{ $item->image }}" alt="{{ $item->name }}" />
                     </a>
                 </div>
                 @endforeach
@@ -116,7 +92,7 @@ Home
             <!-- Xu huong -->
             <section id="xuhuong">
                 <div class="side-header">
-                    <i class="fas fa-desktop"></i>
+                    <i class="fa fa-desktop"></i>
                     <h4>XU HƯỚNG</h4>
                 </div>
                 <div class="side-content">
@@ -142,7 +118,7 @@ Home
             <!-- Video -->
             {{-- <section id="videos">
                 <div class="side-header">
-                    <i class="far fa-play-circle"></i>
+                    <i class="fa fa-play-circle"></i>
                     <h4>VIDEO</h4>
                 </div>
                 <div class="side-content">
@@ -179,7 +155,7 @@ Home
             <!-- Tuyen sinh -->
             <section id="tuyensinh">
                 <div class="side-header">
-                    <i class="fas fa-briefcase"></i>
+                    <i class="fa fa-briefcase"></i>
                     <h4>TUYỂN SINH</h4>
                 </div>
                 <div class="side-content">
@@ -204,7 +180,7 @@ Home
             <!-- Giao duc -->
             <section id="giaoduc">
                 <div class="side-header">
-                    <i class="fas fa-book-open"></i>
+                    <i class="fa fa-book"></i>
                     <h4 class="d-inline">GIÁO DỤC</h4>
                 </div>
                 <div class="side-content">
@@ -228,14 +204,14 @@ Home
 
             <!-- Big advertisement -->
             <section id="big-ad">
-                <a href="">
-                    <img src="{{ $footer_banner->image }}" alt="" />
+                <a href="$footer_banner->link" target="_blank">
+                    <img src="{{ $footer_banner->image }}" alt="$footer_banner->name" />
                 </a>
             </section>
 
             <!-- Facebook embed -->
             <section id="facebook-embed">
-                <i class="fab fa-facebook-square"></i>
+                <i class="fa fa-facebook"></i>
                 <span>Fanpage facebook</span>
                 <div id="fb-root">
                     <div class="fb-page" data-href="https://www.facebook.com/baotuyensinh/" data-tabs="timeline"

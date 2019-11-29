@@ -1,16 +1,28 @@
 footer {
-  padding: 40px 0px;
-  background-color: rgb(246, 246, 246);
-  .footer-contain {
-    .info-contain {
+  padding-top: 50px;
+  background-color: #eee;
+  .menu {
+    h6 {
+      font-weight: bold;
+      font-size: 14px;
+      color: rgb(51, 51, 51);
+      text-transform: uppercase;
+    }
+    ul {
       list-style-type: none;
+      padding: 0;
       li {
         padding: 5px 0px;
-        h6 {
-          font-weight: bold;
-          font-size: 16px;
-          color: rgb(51, 51, 51);
+        &::before {
+          display: inline-block;
+          content: "";
+          border-radius: 3.5px;
+          height: 7px;
+          width: 7px;
+          margin-right: 0.5rem;
+          background-color: #055695;
         }
+
         a {
           text-decoration: none;
           color: rgb(51, 51, 51);
@@ -19,82 +31,74 @@ footer {
           }
         }
       }
-      .li-section {
-        &::before {
+    }
+  }
+  .social {
+    h6 {
+      font-weight: bold;
+      font-size: 14px;
+      color: rgb(51, 51, 51);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    ul {
+      padding: 0;
+      margin: 0;
+      li {
+        list-style: none;
+        display: inline-block;
+        a {
           display: inline-block;
-          content: "";
-          border-radius: 3.5px;
-          height: 7px;
-          width: 7px;
-          margin-right: 0.5rem;
-          background-color: rgb(15, 144, 164);
+          
+          margin-right: 5px;
+          i {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+            border-radius: 50%;
+          }
+          .fa-facebook {
+            background-color: rgb(80, 114, 169);
+          }
+          .fa-twitter {
+            background-color:  rgb(28, 183, 235);
+          }
+          .fa-google-plus {
+            background-color:  rgb(227, 65, 31);
+          }
+          .fa-youtube {
+            background-color:  rgb(202, 55, 55);
+          }
         }
+       
       }
     }
-    .social {
-      h6 {
-        margin-bottom: 20px;
-      }
-      i {
-        margin-right: 5px;
-        margin-bottom: 30px;
-        font-size: 25px;
-      }
-      .fa-facebook {
-        color: rgb(80, 114, 169);
-      }
-      .fa-twitter-square {
-        color: rgb(28, 183, 235);
-      }
-      .fa-google-plus {
-        color: rgb(227, 65, 31);
-      }
-      .fa-youtube-square {
-        color: rgb(202, 55, 55);
-      }
-    }
-    .appstore-ggplay{
+    .app{
+      padding: 20px 0;
+      margin-top: 20px;
       border-top: 1px solid rgb(220, 220, 220);
-      display: flex;
-      div{
-        padding: 10px 0px;
-        img{
-          height: 50px;
-        }
+      img{
+        height: 35px;
+        margin-right: 5px;
       }
+    }
+    
+  }
+  .copyright {
+    border-top: 1px solid gainsboro;
+    padding: 5px 0;
+    .right {
+      text-align: right;
     }
   }
 }
-
-#doitac-container {
-  padding: 10px 0px;
-  border: 1px solid rgb(213, 213, 213);
-  .doitac {
-    display: flex;
-    .doitac-header {
-      display: flex;
-      width: 15%;
-      align-items: center;
-      p {
-        margin: auto 0px;
-      }
-    }
-    .doitac-contents {
-      width: 85%;
-      display: flex;
-      .doitac-img{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-    }
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  .footer-contain {
-    div {
-      justify-content: center;
+@media only screen and (max-width: 900px) { 
+  .copyright { 
+    text-align: center;
+    .right {
+      text-align: center !important;
     }
   }
 }

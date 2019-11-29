@@ -1,65 +1,134 @@
 <!-- Page header -->
+<?php
+function rebuild_date( $format, $time = 0 )
+{
+    if ( ! $time ) $time = time();
+
+    $lang = array();
+    $lang['sun'] = 'CN';
+    $lang['mon'] = 'T2';
+    $lang['tue'] = 'T3';
+    $lang['wed'] = 'T4';
+    $lang['thu'] = 'T5';
+    $lang['fri'] = 'T6';
+    $lang['sat'] = 'T7';
+    $lang['sunday'] = 'Chủ nhật';
+    $lang['monday'] = 'Thứ hai';
+    $lang['tuesday'] = 'Thứ ba';
+    $lang['wednesday'] = 'Thứ tư';
+    $lang['thursday'] = 'Thứ năm';
+    $lang['friday'] = 'Thứ sáu';
+    $lang['saturday'] = 'Thứ bảy';
+    $lang['january'] = 'Tháng Một';
+    $lang['february'] = 'Tháng Hai';
+    $lang['march'] = 'Tháng Ba';
+    $lang['april'] = 'Tháng Tư';
+    $lang['may'] = 'Tháng Năm';
+    $lang['june'] = 'Tháng Sáu';
+    $lang['july'] = 'Tháng Bảy';
+    $lang['august'] = 'Tháng Tám';
+    $lang['september'] = 'Tháng Chín';
+    $lang['october'] = 'Tháng Mười';
+    $lang['november'] = 'Tháng M. một';
+    $lang['december'] = 'Tháng M. hai';
+    $lang['jan'] = 'T01';
+    $lang['feb'] = 'T02';
+    $lang['mar'] = 'T03';
+    $lang['apr'] = 'T04';
+    $lang['may2'] = 'T05';
+    $lang['jun'] = 'T06';
+    $lang['jul'] = 'T07';
+    $lang['aug'] = 'T08';
+    $lang['sep'] = 'T09';
+    $lang['oct'] = 'T10';
+    $lang['nov'] = 'T11';
+    $lang['dec'] = 'T12';
+
+    $format = str_replace( "r", "D, d M Y H:i:s O", $format );
+    $format = str_replace( array( "D", "M" ), array( "[D]", "[M]" ), $format );
+    $return = date( $format, $time );
+
+    $replaces = array(
+        '/\[Sun\](\W|$)/' => $lang['sun'] . "$1",
+        '/\[Mon\](\W|$)/' => $lang['mon'] . "$1",
+        '/\[Tue\](\W|$)/' => $lang['tue'] . "$1",
+        '/\[Wed\](\W|$)/' => $lang['wed'] . "$1",
+        '/\[Thu\](\W|$)/' => $lang['thu'] . "$1",
+        '/\[Fri\](\W|$)/' => $lang['fri'] . "$1",
+        '/\[Sat\](\W|$)/' => $lang['sat'] . "$1",
+        '/\[Jan\](\W|$)/' => $lang['jan'] . "$1",
+        '/\[Feb\](\W|$)/' => $lang['feb'] . "$1",
+        '/\[Mar\](\W|$)/' => $lang['mar'] . "$1",
+        '/\[Apr\](\W|$)/' => $lang['apr'] . "$1",
+        '/\[May\](\W|$)/' => $lang['may2'] . "$1",
+        '/\[Jun\](\W|$)/' => $lang['jun'] . "$1",
+        '/\[Jul\](\W|$)/' => $lang['jul'] . "$1",
+        '/\[Aug\](\W|$)/' => $lang['aug'] . "$1",
+        '/\[Sep\](\W|$)/' => $lang['sep'] . "$1",
+        '/\[Oct\](\W|$)/' => $lang['oct'] . "$1",
+        '/\[Nov\](\W|$)/' => $lang['nov'] . "$1",
+        '/\[Dec\](\W|$)/' => $lang['dec'] . "$1",
+        '/Sunday(\W|$)/' => $lang['sunday'] . "$1",
+        '/Monday(\W|$)/' => $lang['monday'] . "$1",
+        '/Tuesday(\W|$)/' => $lang['tuesday'] . "$1",
+        '/Wednesday(\W|$)/' => $lang['wednesday'] . "$1",
+        '/Thursday(\W|$)/' => $lang['thursday'] . "$1",
+        '/Friday(\W|$)/' => $lang['friday'] . "$1",
+        '/Saturday(\W|$)/' => $lang['saturday'] . "$1",
+        '/January(\W|$)/' => $lang['january'] . "$1",
+        '/February(\W|$)/' => $lang['february'] . "$1",
+        '/March(\W|$)/' => $lang['march'] . "$1",
+        '/April(\W|$)/' => $lang['april'] . "$1",
+        '/May(\W|$)/' => $lang['may'] . "$1",
+        '/June(\W|$)/' => $lang['june'] . "$1",
+        '/July(\W|$)/' => $lang['july'] . "$1",
+        '/August(\W|$)/' => $lang['august'] . "$1",
+        '/September(\W|$)/' => $lang['september'] . "$1",
+        '/October(\W|$)/' => $lang['october'] . "$1",
+        '/November(\W|$)/' => $lang['november'] . "$1",
+        '/December(\W|$)/' => $lang['december'] . "$1" );
+
+    return preg_replace( array_keys( $replaces ), array_values( $replaces ), $return );
+}
+
+?>
 <header>
     <div class="container">
         <div class="row">
-            <div class="sukien">
-                <i class="far fa-edit"></i>
-                <b>TIN MỚI: </b>
+            <div class="col-md-9">
+                <ul class="left">  
+                    <li> {{ rebuild_date('l, d/M/Y, H:i')}} </li>
+                </ul>
             </div>
-            <div class="header-news">
-                @foreach ($header as $item)
-                <span>
-                    {{ $item->name }}
-                </span>
-                @endforeach
-            </div>
-            <div class="header-account dropdown">
-                <div class="dropdown-toggle" data-toggle="dropdown">
+            <div class="col-md-3 ">
+                <div class="dropdown">
+                    <div class="dropdown-toggle" data-toggle="dropdown">
+                        @if (Auth::check())
+                        <img class=" rounded rounded-circle" height="25px" width="25px" src="{{ Auth::user()->avatar }}"
+                            alt="" />
+                    <p>{{ Auth::user()->name }}</p>
+                        @else
+                        <p>Tài khoản</p>
+                        @endif
+                    </div>
                     @if (Auth::check())
-                    <img class=" rounded rounded-circle" height="25px" width="25px" src="{{ Auth::user()->avatar }}"
-                        alt="" />
-                <p>{{ Auth::user()->name }}</p>
+                    <div class="dropdown-menu">
+                        <ul>
+                            <li> <a href="{{ route('taikhoan') }}">  Tài khoản của tôi  </a>  </li>
+                            <li> <a href="{{ route('taikhoan') }}"> Đổi mật khẩu  </a> </li>
+                            <li> <a href="{{ route('taikhoan') }}"> Quản lý bình luận  </a> </li>
+                            <li> <a href="{{ route('logout') }}"> Thoát </a> </li>
+                        </ul>
+                    </div>
                     @else
-                    <p>Tài khoản</p>
+                    <div class="dropdown-menu">
+                        <ul>
+                            <li data-toggle="modal" data-target="#signin"> Đăng nhập </li>
+                            <li data-toggle="modal" data-target="#signup"> Đăng ký </li>
+                        </ul>
+                    </div>
                     @endif
                 </div>
-                @if (Auth::check())
-                <div class="dropdown-menu">
-                    <ul>
-                        <li>
-                            <a href="{{ route('taikhoan') }}">
-                                Tài khoản của tôi
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('taikhoan') }}">
-                                Đổi mật khẩu
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('taikhoan') }}">
-                                Quản lý bình luận
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('logout') }}">
-                                Thoát
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                @else
-                <div class="dropdown-menu">
-                    <ul>
-                        <li data-toggle="modal" data-target="#signin">
-                            Đăng nhập
-                        </li>
-                        <li data-toggle="modal" data-target="#signup">
-                            Đăng ký
-                        </li>
-                    </ul>
-                </div>
-                @endif
             </div>
         </div>
     </div>
@@ -132,52 +201,42 @@
 </article>
 
 <!-- Navigation -->
-<nav class="container">
-    <div class="nav row">
-        <div class="col-lg-2 nav-logo">
-            <a href="{{ route('home') }}">
-                <img class="img-fluid" src="{{ asset('media/logo-main.png') }}" alt="" />
-            </a>
+<nav class="nav">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2">
+                <a class="logo" href="{{ route('home') }}">
+                    <img class="img-fluid" src="{{ asset('media/logo-main.png') }}" alt="" />
+                </a>
+            </div>
+            <div class="menu col-lg-9">
+                <ul>
+                    @foreach ($nav_section as $item)
+                    <li>  <a href="{{ route('danhmuc',$item->slug) }}"> {{ $item->name }}  </a> </li>
+                    @endforeach
+                </ul>
+            </div>
+            <div class="col-lg-1">
+                <div id="search">
+                    <i onclick="openSearch()" class="fa fa-search"></i>
+                    <form class="searchbar" method="post" action="{{ route('search') }}">
+                        @csrf
+                        <input class="form-control" name="name_search" type="text" placeholder="Nhập tìm kiếm...">
+                    </form>
+                </div>
+                
+            </div>
         </div>
-        <div class="menu col-lg-9">
-            <ul class="row">
-                <li class="home">
-                    <a href="{{ route('home') }}">
-                        <i class="fa fa-home"></i>
-                    </a>
-                </li>
 
-                @foreach ($nav_section as $item)
-                <li>
-                    <a href="{{ route('danhmuc',$item->slug) }}">
-                        <b>{{ $item->name }}</b>
-                    </a>
-                </li>
-                @endforeach
-            </ul>
-        </div>
-        <div id="search" class="col-lg-1">
-            <div>
-                <i onclick="openSearch()" class="fas fa-search"></i>
-            </div>
-            <div id="searchbar">
-                <form method="post" action="{{ route('search') }}">
-                    @csrf
-                    <input class="form-control" name="name_search" type="text" placeholder="Nhập tìm kiếm...">
-                    <button type="submit" id="search-submit">
-                        Tìm kiếm
-                    </button>
-                </form>
-            </div>
-        </div>
     </div>
+    
 </nav>
 
 {{-- Mobile responsive --}}
 <div class="mb-nav sticky-top">
     <div class="mb-menu">
         <a onclick="openNav()">
-            <i class="fas fa-bars"></i>
+            <i class="fa fa-bars"></i>
         </a>
     </div>
     <div class="space">
@@ -195,7 +254,7 @@
     </div>
     <div class="mb-account">
         <a data-toggle="modal" data-target="#mb-account-modal">
-            <i class="far fa-user-circle"></i>
+            <i class="fa fa-user-circle"></i>
         </a>
     </div>
 </div>
@@ -224,13 +283,8 @@
     </ul>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>  
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
-    <script type="text/javascript" src="/js/ckfinder/ckfinder.js"></script>
-  	<script>CKFinder.config( { connectorPath: '/ckfinder/connector' } );</script>
     <meta name="csrf_token" content="{{ csrf_token() }}" />
     <script>$.ajaxSetup({ headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')} })</script>
 

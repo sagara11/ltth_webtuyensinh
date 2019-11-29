@@ -8,11 +8,11 @@ function closeNav() {
 }
 
 function openSearch() {
-    document.getElementById("searchbar").style.display = "block";
+    $(".searchbar").show();
 }
 
 $(document).mouseup(function(e) {
-    var container = $("#searchbar"); // YOUR CONTAINER SELECTOR
+    var container = $(".searchbar"); // YOUR CONTAINER SELECTOR
 
     if (
         !container.is(e.target) && // if the target of the click isn't the container...
