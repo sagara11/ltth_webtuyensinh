@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Post;
+use Illuminate\Support\Carbon;
+
 class Comment extends Model
 {
     protected $table = "comments";
@@ -23,5 +25,10 @@ class Comment extends Model
     public function parent_comment()
     {
         return $this->belongsTo('App\Comment', 'parent_id');
+    }
+     public function hour(){
+        Carbon::setlocale('vi');
+        $now = Carbon::now();
+        return $this->created_at->diffForHumans($now);
     }
 }

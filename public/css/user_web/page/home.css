@@ -8,12 +8,14 @@ main #baiviet-chinh h5 {
     cursor: pointer;
     text-decoration: none;
     color: #333333; }
-main #baiviet-chinh p .webtuyensinh-section {
-  font-weight: 500;
-  color: #055695; }
-main #baiviet-chinh p .webtuyensinh-link {
-  font-weight: 500;
-  color: #055695; }
+main #baiviet-chinh p {
+  color: #a7a7a7; }
+  main #baiviet-chinh p .webtuyensinh-section {
+    font-weight: 500;
+    color: #055695; }
+  main #baiviet-chinh p .webtuyensinh-link {
+    font-weight: 500;
+    color: #055695; }
 main #baiviet-tieubieu {
   margin-top: 10px;
   display: flex; }
@@ -36,6 +38,7 @@ main #baiviet-tieubieu {
         text-decoration: none;
         height: 100%; }
     main #baiviet-tieubieu .tieubieu-box p {
+      color: #a7a7a7;
       margin: 0px 0px; }
       main #baiviet-tieubieu .tieubieu-box p .webtuyensinh-section {
         font-weight: 500;
@@ -66,12 +69,14 @@ main #baiviet-tintuc {
         color: #333333;
         cursor: pointer;
         text-decoration: none; }
-      main #baiviet-tintuc .baiviet-box .tintuc-detail p .webtuyensinh-section {
-        font-weight: 500;
-        color: #055695; }
-      main #baiviet-tintuc .baiviet-box .tintuc-detail p .webtuyensinh-link {
-        font-weight: 500;
-        color: #055695; }
+      main #baiviet-tintuc .baiviet-box .tintuc-detail p {
+        color: #a7a7a7; }
+        main #baiviet-tintuc .baiviet-box .tintuc-detail p .webtuyensinh-section {
+          font-weight: 500;
+          color: #055695; }
+        main #baiviet-tintuc .baiviet-box .tintuc-detail p .webtuyensinh-link {
+          font-weight: 500;
+          color: #055695; }
 
 @media only screen and (max-width: 600px) {
   main #baiviet-tieubieu {
