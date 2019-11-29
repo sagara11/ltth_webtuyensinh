@@ -106,7 +106,7 @@ Tài khoản
                         </div>
                         <div class="col-lg-9">
                             <div>
-                                0{{ $user->phone }}
+                                {{ $user->phone }}
                             </div>
                             <div>
                                 <a data-toggle="collapse" data-target="#dienthoai" href="">Thay đổi</a>
@@ -182,7 +182,7 @@ Tài khoản
                             <div class="webtuyensinh-link">
                                 <p>
                                     <small class="webtuyensinh-section">{{ $item->post->categories->name }} |
-                                        {{ $item->post->hour() }} giờ trước | {{ $item->post->comment }} bình luận |
+                                        {{ $item->post->hour() }} | {{ $item->post->comment }} bình luận |
                                     </small>
                                     <small><a class="webtuyensinh-link"
                                             href="">{{ $item->post->source->name }}</a></small>

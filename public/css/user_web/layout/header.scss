@@ -149,6 +149,7 @@ header {
           color: white;
         }
         .closebtn {
+          cursor: pointer;
           color: rgb(246, 92, 44);
           font-size: 25px;
           text-decoration: none;
@@ -162,16 +163,18 @@ article {
   .modal-header {
     background-color: rgb(246, 92, 44);
     color: white;
-    padding: 10px 15px;
-    p {
+    padding: 10px 10px;
+    border: none;
+    span {
+      padding: 10px 10px;
       width: 100%;
-      font-size: 35px;
-      font-weight: bold;
-      text-align: center;
+      font-size: 22px;
+      font-weight: 500;
+      text-align: left;
     }
   }
   .modal-body {
-    padding: 10px 10px;
+    padding: 10px 20px;
     form {
       input {
         margin: 10px 0px;
@@ -190,7 +193,14 @@ article {
 }
 
 #signin {
+  .modal-header{
+    text-align: left;
+  }
   .modal-body {
+    #dangnhap_submit{
+      padding: 6px 25px;
+      font-size: 18px;
+    }
     input {
       margin: 10px 0px;
     }
@@ -204,8 +214,19 @@ article {
     .checkbox-btn {
       display: block;
     }
+    span{
+      a{
+        text-decoration: none;
+        color: rgb(127, 127, 127);
+      }
+    }
+    #forgotpass{
+      position: absolute;
+      right: 20px;
+    }
   }
   .modal-footer{
+    border-top: 1px solid rgb(220, 220, 220);
     .social-btn{
       width: 100%;
       button{
@@ -223,6 +244,10 @@ article {
         background-color: saddlebrown;
         color: white;
       }
+    }
+    #modalclose2{
+      position: absolute;
+      right: 20px;
     }
   }
 }

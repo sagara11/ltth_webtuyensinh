@@ -139,17 +139,21 @@ function rebuild_date( $format, $time = 0 )
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <p>ĐĂNG NHẬP</p>
+                <span>ĐĂNG NHẬP</span>
+                <span id="modalclose2" data-dismiss="modal">
+                    &times;
+                </span>
             </div>
             <div class="modal-body">
-                <input id="s-email" name="email" required class="form-control" type="email" placeholder="Tên tài khoản">
+                <p><b>Đăng nhập với Email:</b></p>
+                <input id="s-email" name="email" required class="form-control" type="email" placeholder="Email">
                 <input id="s-pass" name="password" required class="form-control" type="password" placeholder="Mật khẩu">
                 <input class="checkbox-btn" type="checkbox">
                 <span>
                     <button id="dangnhap_submit" class="submit-btn" type="submit">ĐĂNG NHẬP</button>
                 </span>
-                <span>
-                    <a href="">Quên mật khẩu</a>
+                <span id="forgotpass">
+                    <a href="">Quên mật khẩu?</a>
                 </span>
             </div>
             <div class="modal-footer">
@@ -163,9 +167,6 @@ function rebuild_date( $format, $time = 0 )
                     </button>
                 </div>
             </div>
-            <button id="modalclose2" data-dismiss="modal">
-                close
-            </button>
             <p id="s_popup">
 
             </p>

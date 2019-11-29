@@ -118,6 +118,7 @@ nav.nav {
         border: none;
         color: white; }
       nav.nav #search .searchbar .closebtn {
+        cursor: pointer;
         color: #f65c2c;
         font-size: 25px;
         text-decoration: none; }
@@ -125,14 +126,16 @@ nav.nav {
 article .modal-header {
   background-color: #f65c2c;
   color: white;
-  padding: 10px 15px; }
-  article .modal-header p {
+  padding: 10px 10px;
+  border: none; }
+  article .modal-header span {
+    padding: 10px 10px;
     width: 100%;
-    font-size: 35px;
-    font-weight: bold;
-    text-align: center; }
+    font-size: 22px;
+    font-weight: 500;
+    text-align: left; }
 article .modal-body {
-  padding: 10px 10px; }
+  padding: 10px 20px; }
   article .modal-body form input {
     margin: 10px 0px; }
 article .modal-footer {
@@ -143,6 +146,11 @@ article .modal-footer {
     display: flex;
     justify-content: center; }
 
+#signin .modal-header {
+  text-align: left; }
+#signin .modal-body #dangnhap_submit {
+  padding: 6px 25px;
+  font-size: 18px; }
 #signin .modal-body input {
   margin: 10px 0px; }
 #signin .modal-body .submit-btn {
@@ -153,20 +161,31 @@ article .modal-footer {
   padding: 5px 12px; }
 #signin .modal-body .checkbox-btn {
   display: block; }
-#signin .modal-footer .social-btn {
-  width: 100%; }
-  #signin .modal-footer .social-btn button {
-    padding: 5px 0px;
-    border-radius: 3px;
-    border: none;
-    margin: 0px 8px;
-    width: 50%; }
-  #signin .modal-footer .social-btn .facebook-btn {
-    background-color: royalblue;
-    color: white; }
-  #signin .modal-footer .social-btn .gmail-btn {
-    background-color: saddlebrown;
-    color: white; }
+#signin .modal-body span a {
+  text-decoration: none;
+  color: #7f7f7f; }
+#signin .modal-body #forgotpass {
+  position: absolute;
+  right: 20px; }
+#signin .modal-footer {
+  border-top: 1px solid gainsboro; }
+  #signin .modal-footer .social-btn {
+    width: 100%; }
+    #signin .modal-footer .social-btn button {
+      padding: 5px 0px;
+      border-radius: 3px;
+      border: none;
+      margin: 0px 8px;
+      width: 50%; }
+    #signin .modal-footer .social-btn .facebook-btn {
+      background-color: royalblue;
+      color: white; }
+    #signin .modal-footer .social-btn .gmail-btn {
+      background-color: saddlebrown;
+      color: white; }
+  #signin .modal-footer #modalclose2 {
+    position: absolute;
+    right: 20px; }
 
 .mb-header,
 .mb-nav {
