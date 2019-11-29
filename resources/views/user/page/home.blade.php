@@ -76,7 +76,6 @@ Home
                         </div>
                     </div>
                 </div>
-
                 @endforeach
             </section>
         </div>
