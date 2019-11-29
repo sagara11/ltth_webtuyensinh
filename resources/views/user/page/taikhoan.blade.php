@@ -200,7 +200,7 @@ Tài khoản
                                     </p>
                                     <div class="comment-edit">
                                         <span>
-                                            <a href="">Sửa</a>
+                                        <a class="update_btn" data-target="#updatecomment" id="{{ $item->id }}" data-toggle="modal" href="">Sửa</a>
                                         </span>
                                         <span>
                                             <a href="{{ route('deletecomment',$item->id) }}">Xóa</a>
@@ -212,6 +212,22 @@ Tài khoản
                         @endforeach
                     </div>
                 </section>
+
+                <form method="post" action="{{ route('updatecomment') }}">
+                    @csrf
+                    <div class="modal fade" id="updatecomment">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <h4>Chỉnh sửa bình luận</h4>
+                                    <input id="get_id" name="get_id" type="hidden">
+                                    <input class="form-control" type="text" name="updatecomment">
+                                    <button type="submit">Submit</button>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                </form>
 
                 {{-- Thoat --}}
                 <section class="modal fade" id="thoat">
@@ -248,4 +264,9 @@ Tài khoản
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.marquee/1.3.1/jquery.marquee.min.js"></script>
 <script type="text/javascript" src="{{ asset('js/user/home.js') }}"></script>
+<script>
+    $('body').on('click', '.update_btn', function set(){
+    $('#get_id').val(this.id);
+});
+</script>
 @endsection

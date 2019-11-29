@@ -117,6 +117,7 @@ Route::post('/register',"User\HomepageController@register")->name('register');
 Route::post('/comment',"User\HomepageController@comment")->name('comment');
 Route::post('/reply',"User\HomepageController@replycomment")->name('replycomment');
 Route::get('/delete/{comment_id}','User\HomepageController@delete_comment')->name('deletecomment');
+Route::post('/updatecomment','User\HomepageController@update_comment')->name('updatecomment');
 
 Route::post('/uploadavatar',"User\HomepageController@update_avatar")->name('updateavatar');
 
