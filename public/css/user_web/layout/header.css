@@ -14,7 +14,8 @@ header {
       list-style: none;
       display: inline-block;
       align-items: center;
-      font-size: 14px; }
+      font-size: 13px;
+      margin-right: 7px; }
   header .dropdown {
     cursor: pointer;
     float: right; }
@@ -123,67 +124,55 @@ nav.nav {
         font-size: 25px;
         text-decoration: none; }
 
-article .modal-header {
+.sign .modal-header {
   background-color: #f65c2c;
   color: white;
-  padding: 10px 10px;
-  border: none; }
-  article .modal-header span {
-    padding: 10px 10px;
-    width: 100%;
-    font-size: 22px;
-    font-weight: 500;
-    text-align: left; }
-article .modal-body {
-  padding: 10px 20px; }
-  article .modal-body form input {
-    margin: 10px 0px; }
-article .modal-footer {
-  align-items: flex-start;
-  display: flex;
-  flex-direction: column; }
-  article .modal-footer .social-btn {
-    display: flex;
-    justify-content: center; }
-
-#signin .modal-header {
-  text-align: left; }
-#signin .modal-body #dangnhap_submit {
-  padding: 6px 25px;
-  font-size: 18px; }
-#signin .modal-body input {
-  margin: 10px 0px; }
-#signin .modal-body .submit-btn {
-  background-color: #f65c2c;
-  color: white;
+  padding: 10px 20px;
   border: none;
-  border-radius: 3px;
-  padding: 5px 12px; }
-#signin .modal-body .checkbox-btn {
-  display: block; }
-#signin .modal-body span a {
-  text-decoration: none;
-  color: #7f7f7f; }
-#signin .modal-body #forgotpass {
-  position: absolute;
-  right: 20px; }
-#signin .modal-footer {
-  border-top: 1px solid gainsboro; }
-  #signin .modal-footer .social-btn {
-    width: 100%; }
-    #signin .modal-footer .social-btn button {
-      padding: 5px 0px;
+  font-size: 16px; }
+  .sign .modal-header p {
+    margin: 0; }
+.sign .modal-body {
+  padding: 20px; }
+  .sign .modal-body input {
+    margin: 10px 0px;
+    font-size: 14px;
+    padding: 5px; }
+  .sign .modal-body .submit-btn {
+    background-color: #f65c2c;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 5px 12px; }
+  .sign .modal-body .checkbox-btn {
+    display: block; }
+  .sign .modal-body #forgotpass {
+    position: absolute;
+    right: 20px; }
+.sign .modal-footer {
+  border-top: 0;
+  display: block;
+  padding: 10px 20px; }
+  .sign .modal-footer .social-btn {
+    padding-bottom: 20px; }
+    .sign .modal-footer .social-btn p {
+      margin: 0; }
+    .sign .modal-footer .social-btn a {
+      padding: 10px;
       border-radius: 3px;
       border: none;
-      margin: 0px 8px;
-      width: 50%; }
-    #signin .modal-footer .social-btn .facebook-btn {
+      width: 48%;
+      display: inline-block; }
+      .sign .modal-footer .social-btn a i {
+        font-size: 20px;
+        margin-right: 20px; }
+    .sign .modal-footer .social-btn .facebook-btn {
       background-color: royalblue;
       color: white; }
-    #signin .modal-footer .social-btn .gmail-btn {
-      background-color: saddlebrown;
+    .sign .modal-footer .social-btn .gmail-btn {
+      background-color: #e44134;
       color: white; }
-  #signin .modal-footer #modalclose2 {
+  .sign .modal-footer #modalclose2 {
     position: absolute;
     right: 20px; }
 
@@ -303,9 +292,8 @@ article .modal-footer {
       color: red;
       position: absolute;
       top: 0;
-      right: 25px;
-      font-size: 36px;
-      margin-left: 50px; }
+      right: 15px;
+      font-size: 36px; }
     .sidenav .account {
       margin-top: 10px;
       padding: 0; }

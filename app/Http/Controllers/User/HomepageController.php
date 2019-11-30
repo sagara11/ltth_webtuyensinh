@@ -17,7 +17,7 @@ use App\Banner;
 use App\Comment;
 use Exception;
 use Illuminate\Support\Carbon;
-
+use Mail;
 class HomepageController extends Controller
 {
     function seo(){
@@ -83,7 +83,7 @@ class HomepageController extends Controller
         // $this->seo();
 
         $webtuyensinh_first = Category::where('id', $trend_first->category_id)->first();
-        return view('user.page.home', compact('header', 'banner', 'footer_banner', 'news', 'trend_first', 'trend', 'sidetrend', 'tuyensinh', 'tuyensinh_first', 'giaoduc', 'giaoduc_first', 'webtuyensinh_first'));
+        return view('user.page.home', compact('header', 'banner', 'footer_banner', 'news', 'trend_first', 'trend', 'sidetrend', 'tuyensinh', 'tuyensinh_first', 'giaoduc', 'giaoduc_first', 'webtuyensinh_first', 'header_id'));
     }
 
     function chitiettin($slug)
@@ -162,7 +162,7 @@ class HomepageController extends Controller
 
     function signin(Request $request)
     {
-        $account = array('email'=>$request->email, 'password'=>$request->password);
+        $account = array('email'=>$request->s_email, 'password'=>$request->s_password);
         if(Auth::attempt($account)){
             $data = Auth::user()->name;
             return $data;
@@ -196,16 +196,13 @@ class HomepageController extends Controller
         }
     }
 
-    function register(Request $request){
-        $users = Users::all();
-        foreach($users as $user)
+    function register(Request $request)
+    {
+        $users = Users::where('email',$request->email)->first();
+        if(empty($users))
         {
-            if($request->email == $user->email)
+            if($request->password == $request->confirm_password)
             {
-                $data = "Email này đã tồn tại";
-                return $data;
-            }
-            if($request->password == $request->confirm_password){
                 $user = new Users;
                 $user->email = $request->email;
                 $user->name = $request->name;
@@ -214,6 +211,16 @@ class HomepageController extends Controller
                 $data = "Đăng ký tài khoản thành công";
                 return $data;
             }
+            else
+            {
+                $data = "Mật khẩu nhập không đúng !!!";
+                return $data;
+            }
+        }
+        else
+        {
+            $data = "Email này đã tồn tại";
+            return $data;
         }
     }
 
@@ -268,12 +275,17 @@ class HomepageController extends Controller
         $news->description = $request->news_description;
         $news->content = $request->news_content;
         $news->category_id = $request->news_section;
-        $news->image = $request->image;
+        $news->image = 'hello';
         $news->type_post = "post";
         $news->publish = 0;
         $news->source_id = 24;
         $news->user_id = Auth::user()->id;
         $news->save();
+
+        $temp = Post::where('image','hello')->first();
+        $data = new UserController;
+        $temp->image = $data->Xulyupload($request,$temp->id);
+        $temp->save();
 
         return back();
     }
@@ -285,12 +297,64 @@ class HomepageController extends Controller
     }
 
     function updatepost(Request $request){
+        $data = new UserController;
+        $image = $data->Xulyupload($request,$request->update_id);
         Post::where('id', $request->update_id)->update([
             'name'=>$request->update_name,
-            'image'=>$request->update_image,
+            'image'=>$image,
             'description'=>$request->update_description,
             'content'=>$request->update_content
         ]);
         return back();
+    }
+    public function forgot_password(Request $request)
+    {
+        $data = User::where('email',$request->forgotemail)->first();
+        if(empty($data))
+        {
+            $inf = "khong ton tai email nay !";
+            return $inf;
+        }
+        else
+        {
+            $email = $data->email;
+            Mail::send('admin/mailfb', array('name'=>$data->name,'content'=>'Please click the link below to retrieve your password !!!', 'link'=>'Link:'.env('Email').''), function($message) use($email) {
+                $message->to($email, 'Verified Password!!!')->subject('Please click the link below to retrieve your password !!!');
+            });
+        }
+    }
+    function loadmore(Request $request)
+    {
+        $posts = Post::select()->limit(10)->where('publish', 1)->where('type_post', '=', 'post')->orderBy('id','desc');
+        if($request->name) {
+            $posts->where('name', 'like','%' .$request->name. '%');
+        }
+        if($request->last_id) {
+            $posts->where('id', '<', $request->last_id );
+        }
+        $posts = $posts->get();
+        $html ='';
+        if($posts) {
+            foreach ($posts as $key => $item) {
+            $html .= '<div class="baiviet-box" id="'.$item->id.'">';
+            $html .= '<div class="row">';
+            $html .= '<div class="col-md-3 col-5">';
+            $html .= '<a href="'.route("chitiettin",$item->slug).'" class="tintuc-img">';
+            $html .= '<img class="img-fluid" src="'.$item->image.'" alt="" />';
+            $html .= '</a>';
+            $html .= '</div>';
+            $html .= '<div class="col-md-9 col-7">';
+            $html .= '<h5> <a href="'.route("chitiettin",$item->slug).'">'.$item->name.' </a> </h5>';
+            $html .= '<p>';
+            $html .= '<span >'.$item->categories->name.'</span>';
+            $html .= '<span >'.$item->hour().'</span>';
+            $html .= '<a class="webtuyensinh-link" href="">'.$item->source->web_name.'</a>';
+            $html .= '</p>';
+            $html .= '</div>';
+            $html .= '</div>';
+            $html .= '</div>';
+            }
+        }
+        exit(json_encode(['html' => $html]));
     }
 }

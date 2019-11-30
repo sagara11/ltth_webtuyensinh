@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="{{ asset('css/user_web/page/chitiettin.css') }}">
 @endsection
 @section('title')
-Chi tiết tin
+{{ $new->name}}
 @endsection
 @section('content')
 <main class="container">

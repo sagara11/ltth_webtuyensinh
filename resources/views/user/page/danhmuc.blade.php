@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="{{ asset('css/user_web/page/home.css') }}">
 @endsection
 @section('title')
-Web Tuyển Sinh - Trang thông tin chính thức về tuyển sinh 
+{{ $header_id->name  }} - Web Tuyển Sinh
 @endsection
 @section('content')
 <main class="container">
@@ -58,7 +58,7 @@ Web Tuyển Sinh - Trang thông tin chính thức về tuyển sinh
             <!-- Bai viet - tin tuc -->
             <section id="baiviet-tintuc">
                 @foreach ($news as $item)
-                <div class="baiviet-box" id="{{ $item->id }}">
+                <div class="baiviet-box">
                     <div class="row">
                         <div class="col-md-3 col-5">
                             <a href="{{ route('chitiettin',$item->slug) }}" class="tintuc-img">

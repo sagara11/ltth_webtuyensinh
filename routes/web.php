@@ -12,6 +12,11 @@
 */
 Auth::routes();
 
+Route::get('/redirect/{social}', 'SocialAuthController@redirect');
+Route::get('/callback/{social}', 'SocialAuthController@callback');
+Route::get('/loadmore', '\App\Http\Controllers\User\HomepageController@loadmore');
+
+
 Route::get('/crawl/{frequency}', 'CrawlController@crawl_routine')->name('crawl');
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
@@ -113,7 +118,7 @@ Route::post("/editaccount/{edit}", "User\HomepageController@edit_account")->name
 Route::post("/sign-in","User\HomepageController@signin")->name('signin');
 Route::get('/logout',"User\HomepageController@logout")->name('log-out');
 Route::post('/register',"User\HomepageController@register")->name('register');
-
+Route::post('/forgot',"User\HomepageController@forgot_password")->name('forgot');
 Route::post('/comment',"User\HomepageController@comment")->name('comment');
 Route::post('/reply',"User\HomepageController@replycomment")->name('replycomment');
 Route::get('/delete/{comment_id}','User\HomepageController@delete_comment')->name('deletecomment');
@@ -131,3 +136,8 @@ Route::get('/video', 'User\HomepageController@video');
 Route::post('/change-password', 'User\HomepageController@change_password')->name('changepassword');
 
 Route::post('/search', 'User\HomepageController@search')->name('search');
+
+Route::get('login/facebook', 'SocialAccountController@redirectToProvider');
+
+Route::get('login/facebook/callback', 'SocialAccountController@handleProviderCallback');
+
