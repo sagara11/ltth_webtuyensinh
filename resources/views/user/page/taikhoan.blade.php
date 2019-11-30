@@ -53,9 +53,12 @@ Tài khoản
                     </div>
                     <form method="post" action="{{ route('updateavatar') }}" enctype="multipart/form-data">
                         @csrf
-                        <input type="file" name="avatar" id="avatar-file">
+                        <input onchange="readURL(this);" required type="file" name="avatar" id="avatar-file">
                         <label for="avatar-file">Tải lên ảnh đại diện mới</label>
-                        <button type="submit">Đăng ảnh</button>
+                        <img height="60px" width="100px" id="blah" src="#" alt="https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwi5u7iWwJHmAhXMBIgKHe2OCU0QjRx6BAgBEAQ&url=https%3A%2F%2Ftazacommune.com%2Fwp-content%2Fplugins%2Fwp-appkit%2Fdefault-themes%2Fq-ios%2Fimg%2F&psig=AOvVaw3ueBNr0YKxcGGyMJrKEdpk&ust=1575188389604547" />
+                        <div class="mt-2">
+                            <button type="submit">Đăng ảnh</button>
+                        </div>
                     </form>
                     <div class="account-section-content row">
                         <div class="col-lg-3">
@@ -199,7 +202,7 @@ Tài khoản
                                 <div>
                                     <div class="form-group">
                                         <p>Hình ảnh</p>
-                                        <input type="file" name="avatar">
+                                        <input required type="file" name="avatar">
                                     </div>
                                 </div>
                             </div>
@@ -456,5 +459,19 @@ Tài khoản
     $('body').on('click', '.update_post_btn', function set(){
         $('#update_id').val(this.id);
     });
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah')
+                    .attr('src', e.target.result)
+                    .width(150)
+                    .height(200);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 </script>
 @endsection
