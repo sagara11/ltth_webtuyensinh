@@ -33,6 +33,8 @@ class SocialAccountService
                 $user->password = bcrypt('social');
                 $user->avatar = "http://graph.facebook.com/".$providerUser->getId()."/picture?type=square";
                 $user->role_id = 2;
+                $user->publish = 1;
+
                 $user->save();
               }
               else{
@@ -42,6 +44,8 @@ class SocialAccountService
                 $user->password = bcrypt('social');
                 $user->avatar = $providerUser->avatar;
                 $user->role_id = 2;
+                $user->publish = 1;
+                
                 $user->save();
               }
             }
