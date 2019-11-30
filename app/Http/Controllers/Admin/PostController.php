@@ -21,8 +21,17 @@ class PostController extends Controller
     }
     public function create(Post $users)
     {
-    	$category = Category::where('parent_id','!=',NULL)->get();
-    	return view('admin/post/create', ['categories' => $category]);
+       
+        $categories = Category::select('id','name','updated_at','parent_id','publish');
+        
+        $categories->where('parent_id', NULL);
+        
+        $categories->with(array( 'child_category' => function($q) {
+                return $q->select('id','name','updated_at','parent_id','publish');
+            }
+        ));
+        $categories = $categories->get();
+    	return view('admin/post/create', ['categories' => $categories]);
     }
     public function store(Request $request)
     {
@@ -51,9 +60,17 @@ class PostController extends Controller
         }
         else
         {
-            $category = Category::where('parent_id','!=',NULL)->get();
+            $categories = Category::select('id','name','updated_at','parent_id','publish');
+        
+            $categories->where('parent_id', NULL);
+            
+            $categories->with(array( 'child_category' => function($q) {
+                    return $q->select('id','name','updated_at','parent_id','publish');
+                }
+            ));
+            $categories = $categories->get();
         	$request->session()->flash('fail', 'Hãy điền đầy đủ thông tin!');
-       		return view('admin/post/create', ['categories' => $category]);
+       		return view('admin/post/create', ['categories' => $categories]);
         }
     }
     public function slug(Request $request) {
@@ -63,15 +80,23 @@ class PostController extends Controller
     public function edit(Request $request)
     {
 	    	$id = $request->id ;
-	    	$category = Category::where('parent_id','!=',NULL)->get();
+	    	$categories = Category::select('id','name','updated_at','parent_id','publish');
+        
+            $categories->where('parent_id', NULL);
+            
+            $categories->with(array( 'child_category' => function($q) {
+                    return $q->select('id','name','updated_at','parent_id','publish');
+                }
+            ));
+            $categories = $categories->get();
         	$post = Post::find($id);
         	// $user = Post::find($id)->categories->name;
-	    	return view('admin/post/edit',['id'=>$id, 'categories'=> $category ,'post'=>$post]);
+	    	return view('admin/post/edit',['id'=>$id, 'categories'=> $categories ,'post'=>$post]);
 	}
     public function update(Request $request)
     {
     	$posts = Post::find($request->getid);
-    	$category = Category::where('parent_id','!=',NULL)->get();
+    	// $category = Category::where('parent_id','!=',NULL)->get();
     	if($request->name != '' && $request->description != '' && $request->content != '')
     	{
             //$temp = new ElasticsearchController();
@@ -96,9 +121,18 @@ class PostController extends Controller
         }
         else
         {
+            $categories = Category::select('id','name','updated_at','parent_id','publish');
+        
+            $categories->where('parent_id', NULL);
+            
+            $categories->with(array( 'child_category' => function($q) {
+                    return $q->select('id','name','updated_at','parent_id','publish');
+                }
+            ));
+            $categories = $categories->get();
         	$id=$request->getid;
         	$request->session()->flash('fail', 'Hãy điền đầy đủ thông tin!');
-       		return view('admin/post/edit',['categories'=> $category,'id'=>$id,'post'=>$posts]);
+       		return view('admin/post/edit',['categories'=> $categories,'id'=>$id,'post'=>$posts]);
         }
     }
     public function destroy(Request $request)

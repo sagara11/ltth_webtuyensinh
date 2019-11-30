@@ -46,7 +46,12 @@
                           <option value="All">All--</option>
                             @foreach($categories as $row)
                             {
-                                <option value="{{ $row->id }}">{{ $row->name }}</option>
+                              <option style="color: red;" value="{{ $row->id }}">----{{ $row->name }}</option>
+                              @if(isset($row->child_category))
+                              @foreach ($row->child_category as $column)
+                                <option value="{{ $column->id }}">{{ $column->name }}</option>
+                              @endforeach
+                              @endif
                             }
                             @endforeach
                         </select>

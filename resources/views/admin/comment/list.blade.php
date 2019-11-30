@@ -62,68 +62,74 @@
             <div>
               <p style="display: none;">{{$i=1}}</p>
               @foreach($comments as $rows)
-                <div class="father-contain">
+                <div style="border-top: 1px solid rgb(51,51,51); padding: 5px;" class="p-2 father-contain">
                     <input type="checkbox" name="checkbox[]" id="checkall{{$i}}" class="checkall checkall{{$i}}" data-number="{{$i}}" value="{{$rows->id}}">
                     <img
-                        class="father-img"
+                        height="40px"
+                        class="father-img rounded rounded-circle"
                         src="{{ $rows->user->avatar }}"
                         alt=""
                     />
-                    <div class="comment">
+                    <span>
+                      {{ $rows->user->name }}
+                    </span>
+                    <div style="display: flex; justify-content: space-between; class="comment">
                         <div>
-                            <div class="content1">
-                                <p>
-                                    {{ $rows->comment }}
-                                </p>
-                            </div>
-                            <span style="position: absolute; left: 700px; background-color: {{ $rows->publish ? '#4caf50' : '#c41700' }}; color: white; padding: 5px 5px;">{{ $rows->publish ? 'ON' : 'OFF' }}</span>
-                        </div>
-                        <div class="likes-reply">
-                            <a href="" title="">Thích</a>
-                            <a href="" title="">Trả lời</a>
+                          <div class="content1">
+                              <p style="font-size: 20px">
+                                  {{ $rows->comment }}
+                              </p>
+                              <p>
+                                <small><b>Bài viết:</b> {{ $rows->post->name }}</small>
+                              </p>
+                          </div>
+                          <div class="likes-reply">
                             <p>
                                 <span>
                                     {{$rows->created_at}}
                                 </span>
                             </p>
-                        </div>
-                        <div>
-                          <span>
-                            <i style="color: #3c8dbc;" class="fa fa-plus"></i>
-                          </span>
-                          <a data-toggle="collapse" data-target=".collapse{{$x}}" href="" title="">Xem thêm phản hồi</a>
-                        </div>
+                          </div>
+                          <div>
+                            <span>
+                              <i style="color: #3c8dbc;" class="fa fa-plus"></i>
+                            </span>
+                            <a data-toggle="collapse" data-target=".collapse{{$x}}" href="" title="">Xem thêm phản hồi</a>
+                          </div>
+                      </div>
+                    
+                      <div style="position: absolute; left: 700px; background-color: {{ $rows->publish ? '#4caf50' : '#c41700' }}; color: white; padding: 5px 5px;">{{ $rows->publish ? 'ON' : 'OFF' }}</div>
+                    
                     </div>
                 </div>
                 @if(isset($rows->child_comments))
                   @foreach($rows->child_comments as $row)
-                <div class="collapse collapse{{$x}} children-contain">
+                <div style="padding-left: 30px" class="collapse collapse{{$x}} children-contain">
                   <div class="left">
                     <input type="checkbox" name="checkbox[]" class="check check{{$i}}" value="{{ $row->id }}" data-childnumber="{{$i}}">
                     <img
-                        class="rounded rounded-circle children-img"
+                      height="40px"
+                        class="father-img rounded rounded-circle"
                         src="{{ $row->user->avatar }}"
                     />
                   </div>
                   
-                    <div class="comment">
-                        <div>
-                            <div class="content1">
-                                <p>
-                                    {{ $row->comment }}
-                                </p>
-                            </div>
-                            <span style="position: absolute; left: 800px; color: white; padding: 5px 5px; background-color: {{ $row->publish ? '#4caf50' : '#c41700' }};">{{ $row->publish ? 'ON' : 'OFF' }}</span>
-                        </div>
-                        <div class="likes-reply">
-                            <a href="" title="">Thích</a>
-                            <a href="" title="">Trả lời</a>
-                            <p>
-                                <span>
-                                    {{$row->created_at}}
-                                </span>
-                            </p>
-                        </div>
+                    <div style="display: flex; justify-content: space-between;" class="comment">
+                      <div>
+                          <div class="content1">
+                              <p style="font-size: 20px">
+                                  {{ $row->comment }}
+                              </p>
+                          </div>
+                          <div class="likes-reply">
+                              <p>
+                                  <span>
+                                      {{$row->created_at}}
+                                  </span>
+                              </p>
+                          </div>
+                      </div>
+                      <div style="position: absolute; left: 800px; color: white; padding: 5px 5px; background-color: {{ $row->publish ? '#4caf50' : '#c41700' }};">{{ $row->publish ? 'ON' : 'OFF' }}</div>
                     </div>
                 </div> 
                   @endforeach

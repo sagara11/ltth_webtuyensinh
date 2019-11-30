@@ -34,10 +34,11 @@ Chi tiết tin
                 {!! $new->description !!}
             </article>
 
-
-
             <article id="baiviet-content">
-                {!! $new->content !!}
+                <div style="overflow-wrap: break-word;">
+                    {!! $new->content !!}
+                </div>
+                
             </article>
 
             <article id="comment">

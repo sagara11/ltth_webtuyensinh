@@ -29,7 +29,10 @@ class CommentController extends Controller
         $posts = Post::all();
 
         $post = $request->post_id ? $request->post_id : 'All';
-
+        if($post == 'All')
+        {
+            return $this->sub_index($request);
+        }
         if(isset($request->post_id) && $request->post_id != 'All')
         $name = Post::find($post);
 
@@ -50,7 +53,26 @@ class CommentController extends Controller
         $comments = $comments->orderBy('created_at','DESC')->paginate(10);
         return view('admin/comment/list',['comments'=>$comments,'post'=>$posts,'name'=> $post != 'All' ? $name->name : '--All--','post_id'=>$post,'x'=>1]);
     }
+    public function sub_index(Request $request)
+    {
+        $posts = Post::all();
+        $comments = Comment::where('parent_id', NULL);
+        
+        $comments->with(array( 'user' => function($q) {
+                return $q->select('id','name','avatar');
+            }
+        ));
 
+        $comments->with(['child_comments' => ( function ($q) {
+                return $q->with(array( 'user' => function($q) {
+                    return $q->select('id','name','avatar');
+                }
+            ));
+            }
+        )]);
+        $comments = $comments->orderBy('created_at','DESC')->paginate(10);
+        return view('admin/comment/list',['comments'=>$comments,'post'=>$posts,'name'=>'--All--','post_id'=>'All','x'=>1]);
+    }
     /**
      * Show the form for creating a new user
      *

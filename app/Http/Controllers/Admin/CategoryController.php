@@ -19,7 +19,7 @@ class CategoryController extends Controller
     public function index(Category $categories)
     {
         $key=false;
-    	$category = category::where('parent_id',NULL)->get();
+    	$category = Category::where('parent_id',NULL)->get();
             
         $categories = Category::select('id','name','updated_at','parent_id','publish');
         
