@@ -297,9 +297,11 @@ class HomepageController extends Controller
     }
 
     function updatepost(Request $request){
+        $data = new UserController;
+        $image = $data->Xulyupload($request,$request->update_id);
         Post::where('id', $request->update_id)->update([
             'name'=>$request->update_name,
-            'image'=>$request->update_image,
+            'image'=>$image,
             'description'=>$request->update_description,
             'content'=>$request->update_content
         ]);
