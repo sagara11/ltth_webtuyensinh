@@ -293,4 +293,20 @@ class HomepageController extends Controller
         ]);
         return back();
     }
+    public function forgot_password(Request $request)
+    {
+        $data = User::where('email',$request->email)->first();
+        if(empty($data))
+        {
+            $data = "khong ton tai email nay !";
+            return $data;
+        }
+        else
+        {
+            $email = $data->email;
+            Mail::send('admin/mailfb', array('name'=>$data->name,'content'=>'Please click the link below to retrieve your password !!!', 'link'=>'Link:'.env('Email').''), function($message) use($email) {
+                $message->to($email, 'Verified Password!!!')->subject('Please click the link below to retrieve your password !!!');
+            });
+        }
+    }
 }

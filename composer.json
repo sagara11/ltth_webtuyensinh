@@ -20,7 +20,7 @@
         "jeroennoten/laravel-adminlte": "^1.27",
         "laravel/framework": "5.8.*",
         "laravel/passport": "^7.5",
-        "laravel/socialite": "^4.2",
+        "laravel/socialite": "^4.3",
         "laravel/tinker": "^1.0",
         "newerton/google-api-php-client": "^2.2",
         "paquettg/php-html-parser": "^2.1",

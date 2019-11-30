@@ -40,12 +40,9 @@ return [
     ],
     
     'facebook' => [
-    'client_id' => env('FACEBOOK_KEY'),
-    'client_secret' => env('FACEBOOK_SECRET'),
+    'client_id' => env('FACEBOOK_APP_ID'),
+    'client_secret' => env('FACEBOOK_APP_SECRET'),
     'redirect' => env('FACEBOOK_REDIRECT_URI'),
-    'app_id' => env('413891859271505'),
-    'app_secret' => env('f678f181e0829f8708594e9a742d0886'),
-    'default_graph_version' => env('v2.10'),
     ],
 
 ];

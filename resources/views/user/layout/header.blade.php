@@ -96,7 +96,7 @@ function rebuild_date( $format, $time = 0 )
     <div class="container">
         <div class="row">
             <div class="col-md-9">
-                <ul class="left">  
+                <ul class="left">
                     <li> {{ rebuild_date('l, d/M/Y, H:i')}} </li>
                     <li> <i class="fa fa-phone"> </i> 04 668 39 668 </li>
                     <li> <i class="fa fa-envelope"> </i> contact@webtuyensinh.edu.vn </li>
@@ -108,7 +108,7 @@ function rebuild_date( $format, $time = 0 )
                         @if (Auth::check())
                         <img class=" rounded rounded-circle" height="25px" width="25px" src="{{ Auth::user()->avatar }}"
                             alt="" />
-                    <p>{{ Auth::user()->name }}</p>
+                        <p>{{ Auth::user()->name }}</p>
                         @else
                         <p>Tài khoản</p>
                         @endif
@@ -116,9 +116,9 @@ function rebuild_date( $format, $time = 0 )
                     @if (Auth::check())
                     <div class="dropdown-menu">
                         <ul>
-                            <li> <a href="{{ route('taikhoan') }}">  Tài khoản của tôi  </a>  </li>
-                            <li> <a href="{{ route('taikhoan') }}"> Đổi mật khẩu  </a> </li>
-                            <li> <a href="{{ route('taikhoan') }}"> Quản lý bình luận  </a> </li>
+                            <li> <a href="{{ route('taikhoan') }}"> Tài khoản của tôi </a> </li>
+                            <li> <a href="{{ route('taikhoan') }}"> Đổi mật khẩu </a> </li>
+                            <li> <a href="{{ route('taikhoan') }}"> Quản lý bình luận </a> </li>
                             <li> <a href="{{ route('logout') }}"> Thoát </a> </li>
                         </ul>
                     </div>
@@ -137,72 +137,90 @@ function rebuild_date( $format, $time = 0 )
 </header>
 
 <!-- Dang nhap, dang ky -->
-<article class="modal fade sign" id="signin">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <p>ĐĂNG NHẬP</p>
-                <span id="modalclose2" data-dismiss="modal">
-                    &times;
-                </span>
-            </div>
-            <div class="modal-body">
-                <p><b>Đăng nhập với Email:</b></p>
-                <input id="s-email" name="email" required class="form-control" type="email" placeholder="Email">
-                <input id="s-pass" name="password" required class="form-control" type="password" placeholder="Mật khẩu">
-                <p id="s_popup">  </p>
-                <input class="checkbox-btn" type="checkbox">
-                <span>
-                    <button id="dangnhap_submit" class="submit-btn" type="submit">ĐĂNG NHẬP</button>
-                </span>
-                <span id="forgotpass">
-                    <a href="">Quên mật khẩu?</a>
-                </span>
-            </div>
-            <div class="modal-footer">
-                <p>Hoặc đăng nhập với:</p>
-                <div class="social-btn">
-                    <a class="facebook-btn"> <i class="fa fa-facebook-square"> </i>  Facebook  </a>
-                    <a class="gmail-btn">  <i class="fa fa-google-plus-square"> </i>   Gmail   </a>
+<form>
+    <article class="modal fade sign" id="signin">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p>ĐĂNG NHẬP</p>
+                    <span id="modalclose2" data-dismiss="modal">
+                        &times;
+                    </span>
                 </div>
-            </div>
-            
-        </div>
-    </div>
-</article>
-
-<article class="modal fade sign" id="signup">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <p> TẠO TÀI KHOẢN </p>
-                <span id="modalclose2" data-dismiss="modal">
-                    &times;
-                </span>
-            </div>
-
-            <div class="modal-body">
-                <p><b> Tạo tài khoản với Email:</b></p>
-                <input id="email" name="email" required class="form-control" type="email" placeholder="Email">
-                <input id="name" name="name" required class="form-control" type="text" placeholder="Tên tài khoản">
-                <input id="password" name="password" required class="form-control" type="password" placeholder="Mật khẩu">
-                <input id="confirm_password" name="confirm_password" required class="form-control" type="password"
-                    placeholder="Xác nhận Mật khẩu">
-                <p id="s_popup">  </p>
-                <input class="checkbox-btn" type="checkbox">
-                <button id="dangnhap_submit" class="submit-btn" type="submit">ĐĂNG KÝ</button>
-                <span id="forgotpass">  <a href="">Quên mật khẩu?</a> </span>
-            </div>
-            <div class="modal-footer">
-                <p>Hoặc tạo tài khoản với:</p>
-                <div class="social-btn">
-                    <a class="facebook-btn"> <i class="fa fa-facebook-square"> </i>  Facebook  </a>
-                    <a class="gmail-btn">  <i class="fa fa-google-plus-square"> </i>   Gmail   </a>
+                <div class="modal-body">
+                    <p><b>Đăng nhập với Email:</b></p>
+                    <input required id="s-email" name="email" required class="form-control" type="email"
+                        placeholder="Email">
+                    <input required id="s-pass" name="password" required class="form-control" type="password"
+                        placeholder="Mật khẩu">
+                    <p id="s_popup"> </p>
+                    <input class="checkbox-btn" type="checkbox">
+                    <span>
+                        <button id="dangnhap_submit" class="submit-btn" type="submit">ĐĂNG NHẬP</button>
+                    </span>
+                    <span id="forgotpass">
+                        <a data-dismiss="#signin" data-target="#quenmatkhau" data-toggle="modal">Quên mật khẩu?</a>
+                    </span>
                 </div>
+                <div class="modal-footer">
+                    <p>Hoặc đăng nhập với:</p>
+                    <div class="social-btn">
+                        <a class="facebook-btn"> <i class="fa fa-facebook-square"> </i> Facebook </a>
+                        <a class="gmail-btn"> <i class="fa fa-google-plus-square"> </i> Gmail </a>
+                    </div>
+                </div>
+
             </div>
         </div>
+    </article>
+</form>
+
+{{-- Quen mat khau modal --}}
+<div class="modal fade" id="quenmatkhau">
+    <div class="modal-content">
+        <div class="modal-dialog modal-dialog-centered">
+            <input id="email" type="email" placeholder="Nhap email" name="email">
+            <input id="send_email" type="submit" name="send_email" value="submit">
+            <p id="email-popup"></p>
+        </div>
     </div>
-</article>
+</div>
+
+<form>
+    <article class="modal fade sign" id="signup">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p> TẠO TÀI KHOẢN </p>
+                    <span id="modalclose2" data-dismiss="modal">
+                        &times;
+                    </span>
+                </div>
+
+                <div class="modal-body">
+                    <p><b> Tạo tài khoản với Email:</b></p>
+                    <input required id="email" name="email" required class="form-control" type="email"
+                        placeholder="Email" />
+                    <input required id="name" name="name" required class="form-control" type="text"
+                        placeholder="Tên tài khoản" />
+                    <input required id="password" name="password" required class="form-control" type="password"
+                        placeholder="Mật khẩu" />
+                    <input required id="confirm_password" name="confirm_password" required class="form-control"
+                        type="password" placeholder="Xác nhận Mật khẩu" />
+                    <p id="s_popup"> </p>
+                    <button id="dangnhap_submit" class="submit-btn" type="submit">ĐĂNG KÝ</button>
+                </div>
+                <div class="modal-footer">
+                    <p>Hoặc tạo tài khoản với:</p>
+                    <div class="social-btn">
+                        <a class="facebook-btn"> <i class="fa fa-facebook-square"> </i> Facebook </a>
+                        <a class="gmail-btn"> <i class="fa fa-google-plus-square"> </i> Gmail </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</form>
 
 <!-- Navigation -->
 <nav class="nav d-none d-lg-block">
@@ -216,10 +234,10 @@ function rebuild_date( $format, $time = 0 )
             <div class="menu col-lg-9">
                 <ul>
                     @foreach ($nav_section as $item)
-                    <li>  <a href="{{ route('danhmuc',$item->slug) }}"> {{ $item->name }}  </a> </li>
+                    <li> <a href="{{ route('danhmuc',$item->slug) }}"> {{ $item->name }} </a> </li>
                     @endforeach
-                    <li>  <a target="_blank" href="https://hoidaptuyensinh.vn"> Hỏi Đáp  </a> </li>
-                    <li>  <a target="_blank" href="#"> Việc Làm  </a> </li>
+                    <li> <a target="_blank" href="https://hoidaptuyensinh.vn"> Hỏi Đáp </a> </li>
+                    <li> <a target="_blank" href="#"> Việc Làm </a> </li>
 
 
                 </ul>
@@ -232,12 +250,12 @@ function rebuild_date( $format, $time = 0 )
                         <input class="form-control" name="name_search" type="text" placeholder="Nhập tìm kiếm...">
                     </form>
                 </div>
-                
+
             </div>
         </div>
 
     </div>
-    
+
 </nav>
 
 {{-- Mobile responsive --}}
@@ -277,8 +295,8 @@ function rebuild_date( $format, $time = 0 )
             <a href="{{ route('danhmuc',$item->slug) }}"><b>{{ $item->name }}</b></a>
         </li>
         @endforeach
-        <li>  <a target="_blank" href="https://hoidaptuyensinh.vn"> Hỏi Đáp  </a> </li>
-                    <li>  <a target="_blank" href="#"> Việc Làm  </a> </li>
+        <li> <a target="_blank" href="https://hoidaptuyensinh.vn"> Hỏi Đáp </a> </li>
+        <li> <a target="_blank" href="#"> Việc Làm </a> </li>
     </ul>
     <ul class="account">
         <li class="btn btn-danger" data-toggle="modal" data-target="#signin"> Đăng nhập </li>
@@ -286,20 +304,19 @@ function rebuild_date( $format, $time = 0 )
     </ul>
 </div>
 
-    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
-    <meta name="csrf_token" content="{{ csrf_token() }}" />
-    <script>$.ajaxSetup({ headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')} })</script>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+<meta name="csrf_token" content="{{ csrf_token() }}" />
+<script>
+    $.ajaxSetup({ headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')} })
+</script>
 
 <script>
-         $(document).ready(function(){
-          $('#register_submit').click(function(){
+    $(document).ready(function(){
+          $('#send_email').click(function(){
             var email = $('#email').val();
-            var password = $('#password').val();
-            var name = $('#name').val();
-            var confirm_password = $('#confirm_password').val();
               $.ajax({
-                url: "{{ route('register') }}",
+                url: "{{ route('forgot') }}",
                 type:"post",
                 beforeSend: function (xhr) {
                     var token = $('meta[name="csrf_token"]').attr('content');
@@ -307,14 +324,41 @@ function rebuild_date( $format, $time = 0 )
                           return xhr.setRequestHeader('X-CSRF-TOKEN', token);
                     }
                 },
-                data: { email : email,password : password , name : name ,confirm_password : confirm_password },
+                data: { email : email},
                 success:function(data){
-                   
-                    if(data == "Đăng ký tài khoản thành công"){
-                        $("#modalclose").click();
+                    if(data == "khong ton tai email nay !"){
+                        $('#email-popup').text(data);
                     }
                     else{
-                        $('#popup').text(data);
+                        location.reload();
+                    }
+                },
+                error:function(){ 
+                    alert('error');
+                }
+            }); 
+          });
+          $('#dangnhap_submit').click(function(){
+            var s_email = $('#s-email').val();
+            var s_pass = $('#s-pass').val();
+              $.ajax({
+                url: "{{ route('signin') }}",
+                type:"post",
+                beforeSend: function (xhr) {
+                    var token = $('meta[name="csrf_token"]').attr('content');
+                    if (token) {
+                          return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                    }
+                },
+                data: { email : s_email,password : s_pass },
+                success:function(data){
+                   
+                    if(data != "Email hoặc mật khẩu không đúng"){
+                        $("#modalclose2").click();
+                        location.reload();
+                    }
+                    else{
+                        $('#s_popup').text(data);
                     }
                 },
                 error:function(){ 
