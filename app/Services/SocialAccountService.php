@@ -19,7 +19,7 @@ class SocialAccountService
         if ($account) {
             return $account->user;
         } else {
-            $email = $providerUser->getEmail() ?? $providerUser->getNickname();
+            $email = $providerUser->getEmail() ?  $providerUser->getEmail() : $providerUser->getNickname();
             $account = new SocialAccount([
                 'provider_user_id' => $providerUser->getId(),
                 'provider' => $social
@@ -45,7 +45,7 @@ class SocialAccountService
                 $user->avatar = $providerUser->avatar;
                 $user->role_id = 2;
                 $user->publish = 1;
-                
+
                 $user->save();
               }
             }
