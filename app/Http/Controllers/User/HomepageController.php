@@ -323,4 +323,38 @@ class HomepageController extends Controller
             });
         }
     }
+    function loadmore(Request $request)
+    {
+        $posts = Post::select()->limit(10)->where('publish', 1)->where('type_post', '=', 'post')->orderBy('id','desc');
+        if($request->name) {
+            $posts->where('name', 'like','%' .$request->name. '%');
+        }
+        if($request->last_id) {
+            $posts->where('id', '<', $request->last_id );
+        }
+        $posts = $posts->get();
+        $html ='';
+        if($posts) {
+            foreach ($posts as $key => $item) {
+            $html .= '<div class="baiviet-box" id="'.$item->id.'">';
+            $html .= '<div class="row">';
+            $html .= '<div class="col-md-3 col-5">';
+            $html .= '<a href="'.route("chitiettin",$item->slug).'" class="tintuc-img">';
+            $html .= '<img class="img-fluid" src="'.$item->image.'" alt="" />';
+            $html .= '</a>';
+            $html .= '</div>';
+            $html .= '<div class="col-md-9 col-7">';
+            $html .= '<h5> <a href="'.route("chitiettin",$item->slug).'">'.$item->name.' </a> </h5>';
+            $html .= '<p>';
+            $html .= '<span >'.$item->categories->name.'</span>';
+            $html .= '<span >'.$item->hour().'</span>';
+            $html .= '<a class="webtuyensinh-link" href="">'.$item->source->web_name.'</a>';
+            $html .= '</p>';
+            $html .= '</div>';
+            $html .= '</div>';
+            $html .= '</div>';
+            }
+        }
+        exit(json_encode(['html' => $html]));
+    }
 }

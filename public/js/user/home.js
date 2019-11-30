@@ -26,19 +26,51 @@ $(document).mouseup(function(e) {
 });
 
 $(document).ready(function() {
-    $(".header-news").marquee({
-        //speed in milliseconds of the marquee
-        duration: 16000,
-        //gap in pixels between the tickers
-        gap: 50,
-        //time in milliseconds before the marquee will start animating
-        delayBeforeStart: 0,
-        //'left' or 'right'
-        direction: "left",
-        //true or false - should the marquee be duplicated to show an effect of continues flow
-        duplicated: true
+    $(window).scroll(function() {
+        localStorage.setItem("scroll", true);
+        console.log('scr');
+        if( ( $(window).scrollTop() + $(window).height()  ) === $(document).height()) {
+            var last_id = $("#baiviet-tintuc .baiviet-box:last").attr("id");
+            $('html, body').stop().animate({
+                scrollTop: $(document).height() -100
+            }, 100);
+
+            loadMoreData(last_id);
+            
+            
+        }
     });
 });
+
+
+function loadMoreData(last_id){
+    // var category_id = $('#category_id').val();
+    // var name = $('#s').val();
+    $.ajax(
+    {
+        url: '/loadmore',
+        type: "get",
+        data:{
+            last_id : last_id,
+            // category: category_id,
+            // name: name,
+        },
+        beforeSend: function()
+        {
+            // $('.ajax-load').show();
+        }
+    })
+    .done(function(data)
+    {
+        var data = $.parseJSON(data);
+        console.log('---------------');
+        $('#baiviet-tintuc').append(data.html);
+    })
+    .fail(function(jqXHR, ajaxOptions, thrownError)
+    {
+          alert('server not responding...');
+    });
+}
 
 $(document).ready(function() {
     $('.send').click(function() {
