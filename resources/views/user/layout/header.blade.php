@@ -165,8 +165,8 @@ function rebuild_date( $format, $time = 0 )
                 <div class="modal-footer">
                     <p>Hoặc đăng nhập với:</p>
                     <div class="social-btn">
-                        <a class="facebook-btn"> <i class="fa fa-facebook-square"> </i> Facebook </a>
-                        <a class="gmail-btn"> <i class="fa fa-google-plus-square"> </i> Gmail </a>
+                        <a href="/redirect/facebook" class="facebook-btn"> <i class="fa fa-facebook-square"> </i> Facebook </a>
+                        <a href="/redirect/facebook" class="gmail-btn"> <i class="fa fa-google-plus-square"> </i> Gmail </a>
                     </div>
                 </div>
 
