@@ -125,7 +125,7 @@ function rebuild_date( $format, $time = 0 )
                     @else
                     <div class="dropdown-menu">
                         <ul>
-                            <li data-toggle="modal" data-target="#signin"> Đăng nhập </li>
+                            <li data-toggle="modal" data-target="#signin">  Đăng nhập </li>
                             <li data-toggle="modal" data-target="#signup"> Đăng ký </li>
                         </ul>
                     </div>
@@ -165,8 +165,8 @@ function rebuild_date( $format, $time = 0 )
             <div class="modal-footer">
                 <p>Hoặc đăng nhập với:</p>
                 <div class="social-btn">
-                    <a class="facebook-btn"> <i class="fa fa-facebook-square"> </i> Facebook </a>
-                    <a class="gmail-btn"> <i class="fa fa-google-plus-square"> </i> Gmail </a>
+                    <a href="/redirect/facebook" class="facebook-btn"> <i class="fa fa-facebook-square"> </i> Facebook </a>
+                    <a href="/redirect/google" class="gmail-btn"> <i class="fa fa-google-plus-square"> </i> Gmail </a>
                 </div>
             </div>
 
