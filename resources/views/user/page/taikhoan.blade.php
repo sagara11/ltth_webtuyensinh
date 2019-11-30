@@ -55,7 +55,7 @@ Tài khoản
                         @csrf
                         <input onchange="readURL(this);" required type="file" name="avatar" id="avatar-file">
                         <label for="avatar-file">Tải lên ảnh đại diện mới</label>
-                        <img height="60px" width="100px" id="blah" src="#" alt="https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwi5u7iWwJHmAhXMBIgKHe2OCU0QjRx6BAgBEAQ&url=https%3A%2F%2Ftazacommune.com%2Fwp-content%2Fplugins%2Fwp-appkit%2Fdefault-themes%2Fq-ios%2Fimg%2F&psig=AOvVaw3ueBNr0YKxcGGyMJrKEdpk&ust=1575188389604547" />
+                        <img height="60px" width="100px" id="blah" src="#" alt="" />
                         <div class="mt-2">
                             <button type="submit">Đăng ảnh</button>
                         </div>

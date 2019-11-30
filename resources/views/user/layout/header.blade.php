@@ -208,7 +208,7 @@ function rebuild_date( $format, $time = 0 )
                 <input id="confirm_password" name="confirm_password" class="form-control"
                     type="password" placeholder="Xác nhận Mật khẩu" >
                 <p id="s_popup"> </p>
-                <input id="register_submit" class="submit-bt" type="submit">
+                <button id="register_submit" class="submit-btn" type="submit">Đăng ký</button>
             </div>
             <div class="modal-footer">
                 <p>Hoặc tạo tài khoản với:</p>
