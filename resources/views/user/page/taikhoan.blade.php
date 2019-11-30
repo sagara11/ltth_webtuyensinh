@@ -196,12 +196,8 @@ Tài khoản
                             <div class="input-section col-lg-9">
                                 <div>
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Hình ảnh</label>
-                                        <input type="hidden" name="image" placeholder="image" id="url">
-                                        <div style="margin-bottom: 15px;">
-                                        <img src="/userfiles/images/default_avatar-ea7cf6abde4eec089a4e03cc925d0e893e428b2b6971b12405a9b118c837eaa2.png" class="img-fluid" alt="" id="avatar">
-                                        </div>
-                                        <button type="button" onclick="openPopup()" class="btn btn-primary">Chọn ảnh</button>
+                                        <p>Hình ảnh</p>
+                                        <input type="file" name="avatar">
                                     </div>
                                 </div>
                             </div>

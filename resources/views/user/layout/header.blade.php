@@ -151,7 +151,7 @@ function rebuild_date( $format, $time = 0 )
                 <p><b>Đăng nhập với Email:</b></p>
                 <input id="s-email" name="s_email" required class="form-control" type="email"
                     placeholder="Email">
-                <input id="s-pass" name="s_password" required class="form-control" type="password"
+                <input id="s-password" name="s_password" required class="form-control" type="password"
                     placeholder="Mật khẩu">
                 <p id="s_popup"> </p>
                 <input class="checkbox-btn" type="checkbox">
@@ -349,7 +349,7 @@ function rebuild_date( $format, $time = 0 )
           });
           $('#dangnhap_submit').click(function(){
             var s_email = $('#s-email').val();
-            var s_pass = $('#s-pass').val();
+            var s_password = $('#s-password').val();
               $.ajax({
                 url: "{{ route('signin') }}",
                 type:"post",
@@ -359,7 +359,7 @@ function rebuild_date( $format, $time = 0 )
                           return xhr.setRequestHeader('X-CSRF-TOKEN', token);
                     }
                 },
-                data: { s_mail : s_email,s_password : s_pass },
+                data: { s_email : s_email, s_password : s_password },
                 success:function(data){
                    
                     if(data != "Email hoặc mật khẩu không đúng"){

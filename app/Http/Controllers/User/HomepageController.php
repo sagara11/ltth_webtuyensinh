@@ -275,12 +275,17 @@ class HomepageController extends Controller
         $news->description = $request->news_description;
         $news->content = $request->news_content;
         $news->category_id = $request->news_section;
-        $news->image = $request->image;
+        $news->image = 'hello';
         $news->type_post = "post";
         $news->publish = 0;
         $news->source_id = 24;
         $news->user_id = Auth::user()->id;
         $news->save();
+
+        $temp = Post::where('image','hello')->first();
+        $data = new UserController;
+        $temp->image = $data->Xulyupload($request,$temp->id);
+        $temp->save();
 
         return back();
     }
