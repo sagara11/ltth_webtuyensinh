@@ -17,7 +17,7 @@ use App\Banner;
 use App\Comment;
 use Exception;
 use Illuminate\Support\Carbon;
-
+use Mail;
 class HomepageController extends Controller
 {
     function seo(){
@@ -162,7 +162,7 @@ class HomepageController extends Controller
 
     function signin(Request $request)
     {
-        $account = array('email'=>$request->email, 'password'=>$request->password);
+        $account = array('email'=>$request->s_email, 'password'=>$request->s_password);
         if(Auth::attempt($account)){
             $data = Auth::user()->name;
             return $data;
@@ -196,16 +196,13 @@ class HomepageController extends Controller
         }
     }
 
-    function register(Request $request){
-        $users = Users::all();
-        foreach($users as $user)
+    function register(Request $request)
+    {
+        $users = Users::where('email',$request->email)->first();
+        if(empty($users))
         {
-            if($request->email == $user->email)
+            if($request->password == $request->confirm_password)
             {
-                $data = "Email này đã tồn tại";
-                return $data;
-            }
-            if($request->password == $request->confirm_password){
                 $user = new Users;
                 $user->email = $request->email;
                 $user->name = $request->name;
@@ -214,6 +211,16 @@ class HomepageController extends Controller
                 $data = "Đăng ký tài khoản thành công";
                 return $data;
             }
+            else
+            {
+                $data = "Mật khẩu nhập không đúng !!!";
+                return $data;
+            }
+        }
+        else
+        {
+            $data = "Email này đã tồn tại";
+            return $data;
         }
     }
 
@@ -295,11 +302,11 @@ class HomepageController extends Controller
     }
     public function forgot_password(Request $request)
     {
-        $data = User::where('email',$request->email)->first();
+        $data = User::where('email',$request->forgotemail)->first();
         if(empty($data))
         {
-            $data = "khong ton tai email nay !";
-            return $data;
+            $inf = "khong ton tai email nay !";
+            return $inf;
         }
         else
         {
