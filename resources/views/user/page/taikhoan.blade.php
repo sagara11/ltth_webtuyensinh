@@ -179,7 +179,8 @@ Tài khoản
                     <div class="account-section-header">
                         <h3>THÊM BÀI ĐĂNG</h3>
                     </div>
-                    <form class="form-group" method="post" action="{{ route('newscreate') }}" enctype="multipart/form-data">
+                    <form class="form-group" method="post" action="{{ route('newscreate') }}"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="row account-section-content">
                             <div class="input-section col-lg-3">
@@ -187,7 +188,8 @@ Tài khoản
                             </div>
                             <div class="input-section col-lg-9">
                                 <div>
-                                    <input required name="news_name" class="form-control" type="text" placeholder="Tên bài đăng">
+                                    <input required name="news_name" class="form-control" type="text"
+                                        placeholder="Tên bài đăng">
                                 </div>
                             </div>
                             <div class="input-section col-lg-3">
@@ -215,7 +217,8 @@ Tài khoản
                                 Mô tả
                             </div>
                             <div class="input-section col-lg-9">
-                                <input required name="news_description" type="text" class="form-control" placeholder="Mô tả">
+                                <input required name="news_description" type="text" class="form-control"
+                                    placeholder="Mô tả">
                             </div>
                             <div class="input-section col-lg-3">
                                 Nội dung
@@ -239,13 +242,13 @@ Tài khoản
                         <h3>DANH SÁCH BÀI ĐĂNG</h3>
                     </div>
                     <div class="account-section-content">
-                        <form method="post" action="{{ route('deletepost') }}">
-                        <input id="post_id" type="hidden" name="post_id">
-                        @foreach ($user_post as $item)
+                        <form method="post" action="{{ route('deletepost') }}" enctype="multipart/form-data">
+                            <input id="post_id" type="hidden" name="post_id">
+                            @foreach ($user_post as $item)
                             @csrf
                             <div class="baidang-box">
                                 <div class="baidang-img">
-                                <img class="img-fluid" src="{{ $item->image }}" alt="">
+                                    <img class="img-fluid" src="{{ $item->image }}" alt="">
                                 </div>
                                 <div class="baidang-name">
                                     {{ $item->name }}
@@ -254,10 +257,12 @@ Tài khoản
                                     {{ $item->hour() }}
                                 </div>
                             </div>
-                            <button name="delete" id="{{ $item->id }}" class="delete_post_btn btn btn-danger" type="submit">
+                            <button name="delete" id="{{ $item->id }}" class="delete_post_btn btn btn-danger"
+                                type="submit">
                                 Xóa
                             </button>
-                            <button data-toggle="modal" data-target="#update_post_modal" id="{{ $item->id }}" class="update_post_btn btn btn-success" type="button">
+                            <button data-toggle="modal" data-target="#update_post_modal" id="{{ $item->id }}"
+                                class="update_post_btn btn btn-success" type="button">
                                 Sửa
                             </button>
                         </form>
@@ -266,7 +271,7 @@ Tài khoản
                 </section>
 
                 {{-- Modal update post --}}
-                <form method="post" action="{{ route('updatepost') }}">
+                <form method="post" action="{{ route('updatepost') }}" enctype="multipart/form-data">
                     @csrf
                     <div id="update_post_modal" class="modal fade">
                         <div class="modal-dialog modal-dialog-centered">
@@ -277,16 +282,15 @@ Tài khoản
                                 <div class="modal-body">
                                     <input id="update_id" type="hidden" name="update_id">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Hình ảnh</label>
-                                        <input required type="hidden" name="update_image" placeholder="image" id="url1">
-                                        <div style="margin-bottom: 15px;">
-                                        <img src="" class="img-fluid" alt="" id="avatar1">
-                                        </div>
-                                        <button type="button" onclick="openPopup1()" class="btn btn-primary">Chọn ảnh</button>
+                                        <p>Hình ảnh</p>
+                                        <input type="file" name="avatar">
                                     </div>
-                                    <input required name="update_name" class="form-control mb-2" type="text" placeholder="Tên bài viết">
-                                    <input required name="update_description" class="form-control mb-2" type="text" placeholder="Mô tả bài viết">
-                                    <textarea required name="update_content" class="form-control mb-2" name="" id="" rows="10" placeholder="Nội dung bài viết"></textarea>
+                                    <input required name="update_name" class="form-control mb-2" type="text"
+                                        placeholder="Tên bài viết">
+                                    <input required name="update_description" class="form-control mb-2" type="text"
+                                        placeholder="Mô tả bài viết">
+                                    <textarea required name="update_content" class="form-control mb-2" name="" id=""
+                                        rows="10" placeholder="Nội dung bài viết"></textarea>
                                     <button class="btn btn-success" type="submit">Lưu</button>
                                 </div>
                             </div>
@@ -392,7 +396,9 @@ Tài khoản
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.marquee/1.3.1/jquery.marquee.min.js"></script>
 <script type="text/javascript" src="{{ asset('js/user/home.js') }}"></script>
 <script type="text/javascript" src="/js/ckfinder/ckfinder.js"></script>
-<script>CKFinder.config( { connectorPath: '/ckfinder/connector' } );</script>
+<script>
+    CKFinder.config( { connectorPath: '/ckfinder/connector' } );
+</script>
 <script>
     $('body').on('click', '.update_btn', function set(){
     $('#get_id').val(this.id);
