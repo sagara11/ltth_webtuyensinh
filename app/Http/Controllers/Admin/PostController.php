@@ -16,8 +16,16 @@ class PostController extends Controller
     public function index(Post $post)
     {
         $key = false;
-    	$category = Category::all();
-    	return view('admin/post/list',['post'=> $post->paginate(8) , 'categories'=> $category,'id' => 'All','key'=>$key,'publish'=>'All','danhmuc'=>"All",'search'=>'']);
+    	$categories = Category::select('id','name','updated_at','parent_id','publish');
+        
+        $categories->where('parent_id', NULL);
+        
+        $categories->with(array( 'child_category' => function($q) {
+                return $q->select('id','name','updated_at','parent_id','publish');
+            }
+        ));
+        $categories = $categories->get();
+    	return view('admin/post/list',['post'=> $post->orderby('created_at','desc')->paginate(8) , 'categories'=> $categories,'id' => 'All','key'=>$key,'publish'=>'All','danhmuc'=>"All",'search'=>'']);
     }
     public function create(Post $users)
     {
@@ -35,7 +43,7 @@ class PostController extends Controller
     }
     public function store(Request $request)
     {
-    	if($request->name != '' && $request->image != '' && $request->description != '' && $request->content != '')
+    	if($request->name != '' && $request->image != '' && $request->description != '' && $request->content != '' && $request->information != 'All' )
     	{
             //$temp = new ElasticsearchController();
 	    	$user = new Post();
@@ -97,7 +105,7 @@ class PostController extends Controller
     {
     	$posts = Post::find($request->getid);
     	// $category = Category::where('parent_id','!=',NULL)->get();
-    	if($request->name != '' && $request->description != '' && $request->content != '')
+    	if($request->name != '' && $request->description != '' && $request->content != '' && $request->information != 'All' )
     	{
             //$temp = new ElasticsearchController();
 	    	$posts->name = $request->name ;
@@ -131,7 +139,7 @@ class PostController extends Controller
             ));
             $categories = $categories->get();
         	$id=$request->getid;
-        	$request->session()->flash('fail', 'Hãy điền đầy đủ thông tin!');
+        	$request->session()->flash('fail', 'Hãy điền đầy đủ thông tin!(Kiểm tra lại phần ảnh và phần danh mục)');
        		return view('admin/post/edit',['categories'=> $categories,'id'=>$id,'post'=>$posts]);
         }
     }
@@ -167,7 +175,15 @@ class PostController extends Controller
 	public function filter(Request $request)
 	{
         $key = true;
-        $category = Category::all();
+        $category = Category::select('id','name','updated_at','parent_id','publish');
+        
+        $category->where('parent_id', NULL);
+        
+        $category->with(array( 'child_category' => function($q) {
+                return $q->select('id','name','updated_at','parent_id','publish');
+            }
+        ));
+        $category = $category->get();
 		
         $requests = array('category_id' => $request->categories,'publish' => $request->publish,'name'=>$request->search ? $request->search : '');
 
@@ -191,7 +207,7 @@ class PostController extends Controller
                 }
             ));
         
-            $post = $post->paginate(8);
+            $post = $post->orderBy('created_at','desc')->paginate(8);
             
             $data = Category::where('id',$request->categories)->first();
 

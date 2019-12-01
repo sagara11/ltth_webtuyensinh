@@ -26,7 +26,7 @@ Tài khoản
             </div>
             <ul id="myTab" class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
-                    <a href="{{ route('taikhoan') }}" class="nav-link active">Tài khoản của tôi</a>
+                    <a href="{{ route('taikhoan') }}" class="nav-link">Tài khoản của tôi</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('doimatkhau') }}" class="nav-link">Đổi mật khẩu</a>
@@ -35,10 +35,10 @@ Tài khoản
                     <a href="{{ route('thembaidang') }}" class="nav-link">Thêm bài đăng</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('danhsachbaidang') }}" class="nav-link">Danh sách bài đăng</a>
+                    <a href="{{ route('danhsachbaidang') }}" class="nav-link active">Danh sách bài đăng</a>
                 </li>
                 <li class="nav-item">
-                <a href="{{ route('quanlybinhluan') }}" class="nav-link">Quản lý bình luận</a>
+                    <a href="{{ route('quanlybinhluan') }}" class="nav-link">Quản lý bình luận</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="modal" data-target="#thoat" href="">Thoát</a>
@@ -47,97 +47,103 @@ Tài khoản
         </div>
         <div class="account-content col-lg-9">
             <div class="tab-content">
-                {{-- Tai khoan cua toi --}}
-                <section id="taikhoancuatoi" class="container tab-pane active"><br>
+
+                {{-- Danh sach bai dang --}}
+                <section id="danhsachbaidang"><br>
                     <div class="account-section-header">
-                        <h3>TÀI KHOẢN CỦA TÔI</h3>
+                        <h3>DANH SÁCH BÀI ĐĂNG</h3>
                     </div>
-                    <form method="post" action="{{ route('updateavatar') }}" enctype="multipart/form-data">
+                    <form method="post" action="{{ route('deletepost') }}" enctype="multipart/form-data">
                         @csrf
-                        <input onchange="readURL(this);" required type="file" name="avatar" id="avatar-file">
-                        <label for="avatar-file">Tải lên ảnh đại diện mới</label>
-                        <img height="60px" width="100px" id="blah" src="#" alt="" />
-                        <div class="mt-2">
-                            <button type="submit">Đăng ảnh</button>
-                        </div>
+                        <input id="post_id" type="hidden" name="post_id">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Ảnh</th>
+                                    <th>Danh mục</th>
+                                    <th>Tên bài viết</th>
+                                    <th>Thời gian</th>
+                                    <th>Sửa</th>
+                                    <th>Xóa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($user_post as $item)
+                                <tr>
+                                    <td>
+                                        <img height="45px" width="65px" src="{{ $item->image }}" alt="">
+                                    </td>
+                                    <td>
+                                        {{ $item->categories->name }}
+                                    </td>
+                                    <td>
+                                        {{ $item->name }}
+                                    </td>
+                                    <td>
+                                        {{ $item->hour() }}
+                                    </td>
+                                    <td>
+                                        <button data-toggle="modal" data-target="#update_post_modal" id="{{ $item->id }}"
+                                            class="update_post_btn btn btn-success" type="button">
+                                            Sửa
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button name="delete" id="{{ $item->id }}" class="delete_post_btn btn btn-danger"
+                                            type="submit">
+                                            Xóa
+                                        </button>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </form>
-                    <div class="account-section-content row">
-                        <div class="col-lg-3">
-                            Tên tài khoản
-                        </div>
-                        <div class="col-lg-9">
-                            <div>
-                                {{ $user->name }}
-                            </div>
-                            <div>
-                                <a data-toggle="collapse" data-target="#tentaikhoan" href="">Thay đổi</a>
-                            </div>
-                            <div class="collapse account-edit" id="tentaikhoan">
-                                <form method="post" action="{{ route('editaccount','name') }}">
-                                    @csrf
-                                    <p>
-                                        <b>Tên tài khoản</b>
-                                    </p>
-                                    <input name="name" class="form-control" type="text"
-                                        placeholder="Nhập tên tài khoản">
-                                    <span>
-                                        <button type="submit">LƯU LẠI</button>
-                                    </span>
-                                    <span>Webtuyensinh cam kết bảo mật thông tin này</span>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            Email
-                        </div>
-                        <div class="col-lg-9">
-                            <div>
-                                {{ $user->email }}
-                            </div>
-                            <div>
-                                <a data-toggle="collapse" data-target="#email" href="">Thay đổi</a>
-                            </div>
-                            <div class="collapse account-edit" id="email">
-                                <form method="post" action="{{ route('editaccount','email') }}">
-                                    @csrf
-                                    <p>
-                                        <b>Email</b>
-                                    </p>
-                                    <input name="email" class="form-control" type="email" placeholder="Nhập email">
-                                    <span>
-                                        <button type="submit">LƯU LẠI</button>
-                                    </span>
-                                    <span>Webtuyensinh cam kết bảo mật thông tin này</span>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            Điện thoại
-                        </div>
-                        <div class="col-lg-9">
-                            <div>
-                                {{ $user->phone }}
-                            </div>
-                            <div>
-                                <a data-toggle="collapse" data-target="#dienthoai" href="">Thay đổi</a>
-                            </div>
-                            <div class="collapse account-edit" id="dienthoai">
-                                <form method="post" action="{{ route('editaccount','phone') }}">
-                                    @csrf
-                                    <p>
-                                        <b>Điện thoại</b>
-                                    </p>
-                                    <input name="phone" class="form-control" type="number"
-                                        placeholder="Nhập điện thoại">
-                                    <span>
-                                        <button type="submit">LƯU LẠI</button>
-                                    </span>
-                                    <span>Webtuyensinh cam kết bảo mật thông tin này</span>
-                                </form>
+                </section>
+
+                {{-- Modal update post --}}
+                <form method="post" action="{{ route('updatepost') }}" enctype="multipart/form-data">
+                    @csrf
+                    <div id="update_post_modal" class="modal fade">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    Chỉnh sửa bài viết
+                                </div>
+                                <div class="modal-body">
+                                    <input id="update_id" type="hidden" name="update_id">
+                                    <div class="form-group">
+                                        <p>Hình ảnh</p>
+                                        <input type="file" name="avatar">
+                                    </div>
+                                    <input required name="update_name" class="form-control mb-2" type="text"
+                                        placeholder="Tên bài viết">
+                                    <input required name="update_description" class="form-control mb-2" type="text"
+                                        placeholder="Mô tả bài viết">
+                                    <textarea required name="update_content" class="form-control mb-2" name="" id=""
+                                        rows="10" placeholder="Nội dung bài viết"></textarea>
+                                    <button class="btn btn-success" type="submit">Lưu</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </section>
+                </form>
+
+                <form method="post" action="{{ route('updatecomment') }}">
+                    @csrf
+                    <div class="modal fade" id="updatecomment">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <h4>Chỉnh sửa bình luận</h4>
+                                    <input id="get_id" name="get_id" type="hidden">
+                                    <input class="form-control" type="text" name="updatecomment">
+                                    <button type="submit" class="m-2 btn btn-success">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
 
                 {{-- Thoat --}}
                 <section class="modal fade" id="thoat">

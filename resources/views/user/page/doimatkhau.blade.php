@@ -26,10 +26,10 @@ Tài khoản
             </div>
             <ul id="myTab" class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
-                    <a href="{{ route('taikhoan') }}" class="nav-link active">Tài khoản của tôi</a>
+                    <a href="{{ route('taikhoan') }}" class="nav-link">Tài khoản của tôi</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('doimatkhau') }}" class="nav-link">Đổi mật khẩu</a>
+                    <a href="{{ route('doimatkhau') }}" class="nav-link active">Đổi mật khẩu</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('thembaidang') }}" class="nav-link">Thêm bài đăng</a>
@@ -38,7 +38,7 @@ Tài khoản
                     <a href="{{ route('danhsachbaidang') }}" class="nav-link">Danh sách bài đăng</a>
                 </li>
                 <li class="nav-item">
-                <a href="{{ route('quanlybinhluan') }}" class="nav-link">Quản lý bình luận</a>
+                    <a href="{{ route('quanlybinhluan') }}" class="nav-link">Quản lý bình luận</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="modal" data-target="#thoat" href="">Thoát</a>
@@ -47,96 +47,44 @@ Tài khoản
         </div>
         <div class="account-content col-lg-9">
             <div class="tab-content">
-                {{-- Tai khoan cua toi --}}
-                <section id="taikhoancuatoi" class="container tab-pane active"><br>
+
+                {{-- Doi mat khau --}}
+                <section id="doimatkhau"><br>
                     <div class="account-section-header">
-                        <h3>TÀI KHOẢN CỦA TÔI</h3>
+                        <h3>ĐỔI MẬT KHẨU</h3>
                     </div>
-                    <form method="post" action="{{ route('updateavatar') }}" enctype="multipart/form-data">
+                    <form method="post" action="{{ route('changepassword') }}">
                         @csrf
-                        <input onchange="readURL(this);" required type="file" name="avatar" id="avatar-file">
-                        <label for="avatar-file">Tải lên ảnh đại diện mới</label>
-                        <img height="60px" width="100px" id="blah" src="#" alt="" />
-                        <div class="mt-2">
-                            <button type="submit">Đăng ảnh</button>
+                        <div class="row account-section-content">
+                            <div class="col-lg-3">
+                                Mật khẩu cũ
+                            </div>
+                            <div class="col-lg-9">
+                                <input class="form-control" type="password" name="old_password">
+                            </div>
+                            <div class="col-lg-3">
+                                Mật khẩu mới
+                            </div>
+                            <div class="col-lg-9">
+                                <input class="form-control" type="password" name="new_password">
+                            </div>
+                            <div class="col-lg-3">
+                                Nhập lại mật khẩu mới
+                            </div>
+                            <div class="col-lg-9">
+                                <input class="form-control" type="password" name="new_password_confirm">
+                            </div>
+                            <div class="col-lg-3">
+                            </div>
+                            <div class="col-lg-9">
+                                <button>LƯU LẠI</button>
+                                <span>Quên mật khẩu?</span>
+                                <span>
+                                    <a href="">Lấy lại mật khẩu</a>
+                                </span>
+                            </div>
                         </div>
                     </form>
-                    <div class="account-section-content row">
-                        <div class="col-lg-3">
-                            Tên tài khoản
-                        </div>
-                        <div class="col-lg-9">
-                            <div>
-                                {{ $user->name }}
-                            </div>
-                            <div>
-                                <a data-toggle="collapse" data-target="#tentaikhoan" href="">Thay đổi</a>
-                            </div>
-                            <div class="collapse account-edit" id="tentaikhoan">
-                                <form method="post" action="{{ route('editaccount','name') }}">
-                                    @csrf
-                                    <p>
-                                        <b>Tên tài khoản</b>
-                                    </p>
-                                    <input name="name" class="form-control" type="text"
-                                        placeholder="Nhập tên tài khoản">
-                                    <span>
-                                        <button type="submit">LƯU LẠI</button>
-                                    </span>
-                                    <span>Webtuyensinh cam kết bảo mật thông tin này</span>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            Email
-                        </div>
-                        <div class="col-lg-9">
-                            <div>
-                                {{ $user->email }}
-                            </div>
-                            <div>
-                                <a data-toggle="collapse" data-target="#email" href="">Thay đổi</a>
-                            </div>
-                            <div class="collapse account-edit" id="email">
-                                <form method="post" action="{{ route('editaccount','email') }}">
-                                    @csrf
-                                    <p>
-                                        <b>Email</b>
-                                    </p>
-                                    <input name="email" class="form-control" type="email" placeholder="Nhập email">
-                                    <span>
-                                        <button type="submit">LƯU LẠI</button>
-                                    </span>
-                                    <span>Webtuyensinh cam kết bảo mật thông tin này</span>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            Điện thoại
-                        </div>
-                        <div class="col-lg-9">
-                            <div>
-                                {{ $user->phone }}
-                            </div>
-                            <div>
-                                <a data-toggle="collapse" data-target="#dienthoai" href="">Thay đổi</a>
-                            </div>
-                            <div class="collapse account-edit" id="dienthoai">
-                                <form method="post" action="{{ route('editaccount','phone') }}">
-                                    @csrf
-                                    <p>
-                                        <b>Điện thoại</b>
-                                    </p>
-                                    <input name="phone" class="form-control" type="number"
-                                        placeholder="Nhập điện thoại">
-                                    <span>
-                                        <button type="submit">LƯU LẠI</button>
-                                    </span>
-                                    <span>Webtuyensinh cam kết bảo mật thông tin này</span>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
                 </section>
 
                 {{-- Thoat --}}

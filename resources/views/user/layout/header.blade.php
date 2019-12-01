@@ -176,17 +176,23 @@ function rebuild_date( $format, $time = 0 )
 
 
 {{-- Quen mat khau modal --}}
-<div class="modal fade" id="quenmatkhau">
-    <div class="modal-content d-flex">
-        <div style="text-align: center;">
-            <p>Nhập email tài khoản để xác nhận</p>
-            <input id="forgotemail" type="email" placeholder="Nhap email" name="forgotemail">
-            <input id="send_email" type="submit" name="send_email" value="submit">
-            <p id="email-popup"></p>
-            <button onclick="close_forgot()">Thoát</button>
+<article class="modal fade" id="quenmatkhau">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p>Nhập email tài khoản để xác nhận</p>
+            </div>
+            <div class="modal-body">
+                <input class="form-control" id="forgotemail" type="email" placeholder="Nhap email" name="forgotemail">
+                <div class="btn-group">
+                    <button id="send_email" type="submit" name="send_email" value="submit">Gửi</button>
+                    <button class="btn btn-danger" onclick="close_forgot()">Thoát</button>
+                </div>
+                <p id="email-popup"></p>
+            </div>
         </div>
     </div>
-</div>
+</article>
 
 <article class="modal fade sign" id="signup">
     <div class="modal-dialog modal-dialog-centered">
@@ -207,6 +213,9 @@ function rebuild_date( $format, $time = 0 )
                     placeholder="Mật khẩu" >
                 <input id="confirm_password" name="confirm_password" class="form-control"
                     type="password" placeholder="Xác nhận Mật khẩu" >
+                <p style="color: red;" id="register-info">
+
+                </p>
                 <p id="s_popup"> </p>
                 <button id="register_submit" class="submit-btn" type="submit">Đăng ký</button>
             </div>
@@ -217,9 +226,6 @@ function rebuild_date( $format, $time = 0 )
                     <a href="/redirect/google" class="gmail-btn"> <i class="fa fa-google-plus-square"> </i> Gmail </a>
                 </div>
             </div>
-            <p style="color: red; text-align:center" id="register-info">
-
-            </p>
         </div>
     </div>
 </article>
@@ -248,8 +254,7 @@ function rebuild_date( $format, $time = 0 )
             <div class="col-lg-1">
                 <div id="search">
                     <i onclick="openSearch()" class="fa fa-search"></i>
-                    <form class="searchbar" method="post" action="{{ route('search') }}">
-                        @csrf
+                    <form class="searchbar" method="get" action="{{ route('search') }}">
                         <input class="form-control" name="name_search" type="text" placeholder="Nhập tìm kiếm...">
                     </form>
                 </div>
@@ -335,7 +340,7 @@ function rebuild_date( $format, $time = 0 )
                 },
                 data: { forgotemail : forgotemail},
                 success:function(data){
-                    if(data == "khong ton tai email nay !"){
+                    if(data == "Không tồn tại email này !"){
                         $('#email-popup').text(data);
                     }
                     else{

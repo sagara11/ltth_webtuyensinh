@@ -12,6 +12,7 @@ use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 use App\Post;
 use App\User;
+use App\Crawl;
 use App\Users;
 use App\Banner;
 use App\Comment;
@@ -157,7 +158,44 @@ class HomepageController extends Controller
         $user = Auth::user();
         $user_post = Post::where('user_id', Auth::user()->id)->get();
         $comment = Comment::where('user_id', Auth::user()->id)->get();
-        return view('user.page.taikhoan', compact('user_post','header','user','comment'));
+        $active = 'All';
+        return view('user.page.taikhoan', compact('active','user_post','header','user','comment'));
+    }
+
+    function doimatkhau(){
+        $header = Post::orderBy('view', 'desc')->paginate(3);
+        $user = Auth::user();
+        $user_post = Post::where('user_id', Auth::user()->id)->get();
+        $comment = Comment::where('user_id', Auth::user()->id)->get();
+        $active = 'All';
+        return view('user.page.doimatkhau', compact('active','user_post','header','user','comment'));
+    }
+
+    function thembaidang(){
+        $header = Post::orderBy('view', 'desc')->paginate(3);
+        $user = Auth::user();
+        $user_post = Post::where('user_id', Auth::user()->id)->get();
+        $comment = Comment::where('user_id', Auth::user()->id)->get();
+        $active = 'All';
+        return view('user.page.thembaidang', compact('active','user_post','header','user','comment'));
+    }
+
+    function danhsachbaidang(){
+        $header = Post::orderBy('view', 'desc')->paginate(3);
+        $user = Auth::user();
+        $user_post = Post::where('user_id', Auth::user()->id)->get();
+        $comment = Comment::where('user_id', Auth::user()->id)->get();
+        $active = 'All';
+        return view('user.page.danhsachbaidang', compact('active','user_post','header','user','comment'));
+    }
+
+    function quanlybinhluan(){
+        $header = Post::orderBy('view', 'desc')->paginate(3);
+        $user = Auth::user();
+        $user_post = Post::where('user_id', Auth::user()->id)->get();
+        $comment = Comment::where('user_id', Auth::user()->id)->get();
+        $active = 'All';
+        return view('user.page.quanlybinhluan', compact('active','user_post','header','user','comment'));
     }
 
     function signin(Request $request)
@@ -207,6 +245,7 @@ class HomepageController extends Controller
                 $user->email = $request->email;
                 $user->name = $request->name;
                 $user->password = Hash::make($request->password);
+                $user->publish = 1;
                 $user->save();
                 $data = "Đăng ký tài khoản thành công";
                 return $data;
@@ -258,9 +297,9 @@ class HomepageController extends Controller
         return back();
     }
 
-    function delete_comment($comment_id){
-        Comment::where('id',$comment_id)->delete();
-        return back();
+    function delete_comment(Request $request){
+        Comment::where('id', $request->comment_delete_id)->delete();
+        return redirect()->back()->with('active', 'quanlybinhluan');
     }
 
     function update_comment(Request $request){
@@ -269,6 +308,7 @@ class HomepageController extends Controller
     }
 
     function news_create(Request $request){
+        $webtuyensinh = Crawl::where('categories_name', NULL)->first();
         $news = new Post;
         $news->name = $request->news_name;
         $news->slug = str_slug($request->news_name, '-');
@@ -278,7 +318,7 @@ class HomepageController extends Controller
         $news->image = 'hello';
         $news->type_post = "post";
         $news->publish = 0;
-        $news->source_id = 24;
+        $news->source_id = $webtuyensinh->id;
         $news->user_id = Auth::user()->id;
         $news->save();
 
@@ -287,7 +327,7 @@ class HomepageController extends Controller
         $temp->image = $data->Xulyupload($request,$temp->id);
         $temp->save();
 
-        return back();
+        return $this->danhsachbaidang();
     }
 
     function deletepost(Request $request){
@@ -309,10 +349,10 @@ class HomepageController extends Controller
     }
     public function forgot_password(Request $request)
     {
-        $data = User::where('email',$request->forgotemail)->first();
+        $data = Users::where('email',$request->forgotemail)->first();
         if(empty($data))
         {
-            $inf = "khong ton tai email nay !";
+            $inf = "Không tồn tại email này !";
             return $inf;
         }
         else
