@@ -177,7 +177,7 @@
                                 <p>
                                     <span > {{ $item->categories->name }} </span>
                                     <span > {{ $item->hour() }} </span>
-                                    <a class="webtuyensinh-link" href=""> {{ $item->source->web_name }} </a>
+                                    <a class="webtuyensinh-link" href="{{ route('nguon_tin', $item->source->id) }}"> {{ $item->source->web_name }} </a>
                                 </p>
                             </div>
                         </div>
@@ -206,7 +206,7 @@
                                 <p>
                                     <span > {{ $item->categories->name }} </span>
                                     <span > {{ $item->hour() }} </span>
-                                    <a class="webtuyensinh-link" href=""> {{ $item->source->web_name }} </a>
+                                    <a class="webtuyensinh-link" href="{{ route('nguon_tin', $item->source->id) }}"> {{ $item->source->web_name }} </a>
                                 </p>
                             </div>
                         </div>
@@ -235,7 +235,7 @@
                                 <p>
                                     <span > {{ $item->categories->name }} </span>
                                     <span > {{ $item->hour() }} </span>
-                                    <a class="webtuyensinh-link" href=""> {{ $item->source->web_name }} </a>
+                                    <a class="webtuyensinh-link" href="{{ route('nguon_tin', $item->source->id) }}"> {{ $item->source->web_name }} </a>
                                 </p>
                             </div>
                         </div>
