@@ -59,7 +59,7 @@ class tuoitreController extends Controller
             'slug' => $slug,
             'content' => $content,
             'post_link' => $post_link,
-            'create_at' => $created_at
+            'created_at' => $created_at
         );
     }
 }

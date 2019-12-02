@@ -116,6 +116,7 @@ Route::get('/tai-khoan-2', 'User\HomepageController@doimatkhau')->name('doimatkh
 Route::get('/tai-khoan-3', 'User\HomepageController@thembaidang')->name('thembaidang');
 Route::get('/tai-khoan-4', 'User\HomepageController@danhsachbaidang')->name('danhsachbaidang');
 Route::get('/tai-khoan-5', 'User\HomepageController@quanlybinhluan')->name('quanlybinhluan');
+Route::get('/nguon-tin/{danhmuc_id}',"User\HomepageController@nguontin")->name('nguon_tin');
 
 
 Route::post("/editaccount/{edit}", "User\HomepageController@edit_account")->name('editaccount');
@@ -126,7 +127,7 @@ Route::post('/register',"User\HomepageController@register")->name('register');
 Route::post('/forgot',"User\HomepageController@forgot_password")->name('forgot');
 Route::post('/comment',"User\HomepageController@comment")->name('comment');
 Route::post('/reply',"User\HomepageController@replycomment")->name('replycomment');
-Route::get('/delete/{comment_id}','User\HomepageController@delete_comment')->name('deletecomment');
+Route::post('/deletecomment','User\HomepageController@delete_comment')->name('deletecomment');
 Route::post('/updatecomment','User\HomepageController@update_comment')->name('updatecomment');
 
 Route::get('/search', 'User\HomepageController@search')->name('search');

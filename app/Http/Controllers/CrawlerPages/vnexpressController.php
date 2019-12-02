@@ -70,7 +70,7 @@ class vnexpressController extends Controller
             'description' => $description,
             'slug' => $slug[0],
             'content' => $content,
-            'post_link' => $post_link
+            'post_link' => $post_link,
         );
     }
 }

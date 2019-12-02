@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="{{ asset('css/user_web/page/home.css') }}">
 @endsection
 @section('title')
-Web Tuyển Sinh - Trang thông tin chính thức về tuyển sinh 
+Web Tuyển Sinh - Trang thông tin chính thức về tuyển sinh
 @endsection
 @section('content')
 <main class="container">
@@ -28,7 +28,7 @@ Web Tuyển Sinh - Trang thông tin chính thức về tuyển sinh
                     <span>{{ $trend_first->categories->name }} |</span>
                     <span>{{ $trend_first->hour() }} |</span>
                     <!-- <span>{{ $trend_first->comment ? $trend_first->comment : 0 }} bình luận |</span> -->
-                    <span class="webtuyensinh-link" href="">{{ $trend_first->source->web_name }}</span>
+                    <a class="webtuyensinh-link" href="{{ route('nguon_tin', $trend_first->source->id) }}">{{ $trend_first->source->web_name }}</a>
                 </p>
             </section>
 
@@ -43,11 +43,11 @@ Web Tuyển Sinh - Trang thông tin chính thức về tuyển sinh
                             </a>
                         </div>
                         <div class="col-md-12 col-7">
-                            <h5> <a href="{{ route('chitiettin',$item->slug) }}">  {{ $item->name }} </a> </h5>
+                            <h5> <a href="{{ route('chitiettin',$item->slug) }}"> {{ $item->name }} </a> </h5>
                             <p>
                                 <span>{{ $item->categories->name }} |</span>
                                 <span>{{ $item->hour() }} |</span>
-                                <span class="webtuyensinh-link" href="">{{ $item->source->web_name }}</span>
+                                <a class="webtuyensinh-link" href="{{ route('nguon_tin', $item->source->id) }}">{{ $item->source->web_name }}</a>
                             </p>
                         </div>
                     </div>
@@ -69,9 +69,9 @@ Web Tuyển Sinh - Trang thông tin chính thức về tuyển sinh
                         <div class="col-md-9 col-7">
                             <h5> <a href="{{ route('chitiettin',$item->slug) }}"> {{ $item->name }} </a> </h5>
                             <p>
-                                <span > {{ $item->categories->name }} </span>
-                                <span > {{ $item->hour() }} </span>
-                                <a class="webtuyensinh-link" href=""> {{ $item->source->web_name }} </a>
+                                <span> {{ $item->categories->name }} </span>
+                                <span> {{ $item->hour() }} </span>
+                                <a class="webtuyensinh-link" href="{{ route('nguon_tin', $item->source->id) }}"> {{ $item->source->web_name }} </a>
                             </p>
                         </div>
                     </div>
@@ -79,7 +79,7 @@ Web Tuyển Sinh - Trang thông tin chính thức về tuyển sinh
                 @endforeach
             </section>
         </div>
-         @include('user.layout.sidebar')
+        @include('user.layout.sidebar')
     </div>
 </main>
 @endsection

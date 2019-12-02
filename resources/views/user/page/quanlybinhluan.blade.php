@@ -49,7 +49,7 @@ Tài khoản
             <div class="tab-content">
 
                 {{-- Quan ly binh luan --}}
-                <section id="quanlybinhluan"><br>
+                <section id="quanlybinhluan" class="container tab-pane-active"><br>
                     <div class="account-section-header">
                         <h3>QUẢN LÝ BÌNH LUẬN</h3>
                     </div>
@@ -79,18 +79,16 @@ Tài khoản
                                         {{ $item->comment }}
                                     </p>
                                     <div class="comment-edit">
-                                        <form action="">
-                                            <span>
-                                                <button type="submit" class="m-1 btn btn-success update_btn" data-target="#updatecomment" id="{{ $item->id }}"
-                                                    data-toggle="modal">Sửa
-                                                </button>
-                                            </span>
-                                        </form>
+                                        <span>
+                                            <button class="m-1 btn btn-success update_btn" data-target="#updatecomment" id="{{ $item->id }}"
+                                                data-toggle="modal">Sửa
+                                            </button>
+                                        </span>
                                         <form method="post" action="{{ route('deletecomment') }}">
                                             @csrf
                                             <span>
                                                 <input type="hidden" name="comment_delete_id" value="{{ $item->id }}">
-                                                <button class="m-1 btn btn-danger" type="submit">Xóa</button>
+                                                <button id="deletecomment" class="m-1 btn btn-danger" type="submit">Xóa</button>
                                             </span>
                                         </form>
                                     </div>
@@ -227,6 +225,13 @@ Tài khoản
             reader.readAsDataURL(input.files[0]);
         }
     }
+    // $('#deletecomment').click(function(){
+    //     var confirm = window.confirm('Bạn có muốn xóa bình luận này');
+    //     if(confirm){
+    //         $("#deleteconfirm").type = "submit";
+    //         $("#deleteconfirm").click();
+    //     }
+    // });
 </script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.js"></script>

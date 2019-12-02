@@ -49,7 +49,7 @@ Tài khoản
             <div class="tab-content">
 
                 {{-- Danh sach bai dang --}}
-                <section id="danhsachbaidang"><br>
+                <section id="danhsachbaidang" class="container tab-pane-active"><br>
                     <div class="account-section-header">
                         <h3>DANH SÁCH BÀI ĐĂNG</h3>
                     </div>

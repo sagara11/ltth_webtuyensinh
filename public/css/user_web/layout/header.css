@@ -216,7 +216,6 @@ nav.nav {
       width: 20%; }
     .mb-nav .mb-search {
       background-color: white;
-      width: 15%;
       display: flex;
       justify-content: flex-end; }
     .mb-nav .mb-search > div {
