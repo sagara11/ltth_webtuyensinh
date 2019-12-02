@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Session;
 use App\Post;
 use App\User;
 use App\Crawl;
@@ -378,6 +379,30 @@ class HomepageController extends Controller
         ]);
         return back();
     }
+
+    function verify_password(Request $request){
+        $your_user = Users::where('email', $request->your_email)->first();
+        if(empty($your_user)){
+            Session::flash('error', "Không tồn tại email này");
+            return redirect('/xacnhanmatkhau');
+        }
+        else{
+            if($request->new_password == $request->confirm_new_pasword){
+                $your_user->password = Hash::make($request->new_password);
+                $your_user->save();
+                return redirect('/');
+            }
+            else{
+                Session::flash('error', "Mật khẩu xác nhận không khớp");
+                return redirect('/xacnhanmatkhau');
+            }
+        }
+    }
+ 
+    function xacnhanmatkhau(Request $request){
+        return view('user.page.verify');
+    }
+
     public function forgot_password(Request $request)
     {
         $data = Users::where('email',$request->forgotemail)->first();
@@ -389,11 +414,12 @@ class HomepageController extends Controller
         else
         {
             $email = $data->email;
-            Mail::send('admin/mailfb', array('name'=>$data->name,'content'=>'Please click the link below to retrieve your password !!!', 'link'=>'Link:'.env('Email').''), function($message) use($email) {
+            Mail::send('admin/mailfb', array('name'=>$data->name,'content'=>'Please click the link below to retrieve your password !!!', 'link'=>'Link:'.env('Email').'', 'your_email'=>$email), function($message) use($email) {
                 $message->to($email, 'Verified Password!!!')->subject('Please click the link below to retrieve your password !!!');
             });
         }
     }
+
     function loadmore(Request $request)
     {
         $posts = Post::select()->limit(10)->where('publish', 1)->where('type_post', '=', 'post')->orderBy('id','desc');

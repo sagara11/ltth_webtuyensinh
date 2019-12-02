@@ -127,6 +127,10 @@ Route::post("/sign-in","User\HomepageController@signin")->name('signin');
 Route::get('/logout',"User\HomepageController@logout")->name('log-out');
 Route::post('/register',"User\HomepageController@register")->name('register');
 Route::post('/forgot',"User\HomepageController@forgot_password")->name('forgot');
+Route::post('/verify_password',"User\HomepageController@verify_password")->name('verify');
+Route::get('/xacnhanmatkhau',"User\HomepageController@xacnhanmatkhau")->name('xacnhanmatkhau');
+
+
 Route::post('/comment',"User\HomepageController@comment")->name('comment');
 Route::post('/reply',"User\HomepageController@replycomment")->name('replycomment');
 Route::post('/deletecomment','User\HomepageController@delete_comment')->name('deletecomment');

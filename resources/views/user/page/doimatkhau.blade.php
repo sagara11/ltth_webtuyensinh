@@ -6,7 +6,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.css" rel="stylesheet">
 @endsection
 @section('title')
-Tài khoản
+Web Tuyển Sinh - Trang thông tin chính thức về tuyển sinh
 @endsection
 @section('content')
 <main class="container">

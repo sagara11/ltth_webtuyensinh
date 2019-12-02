@@ -60,13 +60,24 @@ class giaoducthoidaiController extends Controller
         }
         $post_link = $page_url;
 
+        $str = $post->find('span.time')->innerHTML;
+        $string1 = explode(", ", $str)[1];
+
+        $string3 = explode(" ", $string1)[0];
+
+        $string2 = explode("/", $string3);
+        $date = $string2[1]."/".$string2[0]."/".$string2[2];
+
+        $created_at = date("d-m-Y",strtotime($date));
+
         //gan thuoc tinh cua trang
         return array(
             'name' => $name,
             'description' => $description,
             'slug' => $slug,
             'content' => $content,
-            'post_link' => $post_link
+            'post_link' => $post_link,
+            'created_at' => $created_at
         );
     }
 }

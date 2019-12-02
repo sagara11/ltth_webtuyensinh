@@ -50,7 +50,11 @@ class dantriController extends Controller
         $description = strip_tags($description);
         $content = $post->find('.detail-content');
 
+        $str = $post->find('.date-time')->innerHTML;
+        $string1 = explode(" ", $str)[2];
 
+        $string2 = explode("/", $string1);
+        $created_at = date("d-m-Y",strtotime($string2[1]."/".$string2[0]."/".$string2[2]));
 
         $post_link = $page_url;
 
@@ -61,6 +65,7 @@ class dantriController extends Controller
             'slug' => $slug,
             'content' => $content,
             'post_link' => $post_link,
+            'created_at' => $created_at
         );
     }
 }

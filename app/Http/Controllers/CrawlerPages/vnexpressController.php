@@ -64,6 +64,12 @@ class vnexpressController extends Controller
 
         $post_link = $page_url;
 
+        $str = $post->find('span.time')->innerHTML;
+        $string1 = explode(", ", $str)[1];
+
+        $string2 = explode("/", $string1);
+        $created_at = date("d-m-Y",strtotime($string2[1]."/".$string2[0]."/".$string2[2]));
+
         //gan thuoc tinh cua trang
         return array(
             'name' => $name,
@@ -71,6 +77,7 @@ class vnexpressController extends Controller
             'slug' => $slug[0],
             'content' => $content,
             'post_link' => $post_link,
+            'created_at' => $created_at
         );
     }
 }
