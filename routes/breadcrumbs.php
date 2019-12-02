@@ -93,3 +93,12 @@ Breadcrumbs::for('filterUser', function ($trail,$key) {
         $trail->push('Tìm User',route('filterUser'));
     }
 });
+// Binh luan
+Breadcrumbs::for('indexComment', function ($trail) {
+     $trail->push('Trang chủ', route('indexComment'));
+     $trail->push('Bình luận', route('indexComment'));
+});
+Breadcrumbs::for('index_newComment', function ($trail) {
+    $trail->parent('indexComment');
+    $trail->push('Bình luận mới nhất',route('index_newComment'));
+});

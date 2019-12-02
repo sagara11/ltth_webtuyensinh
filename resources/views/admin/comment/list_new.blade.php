@@ -7,7 +7,7 @@
   Danh sách Comment
   <small>Comment</small>
 </h1>
-{{Breadcrumbs::render('indexComment')}}
+{{Breadcrumbs::render('index_newComment')}}
 @endsection
 @section('content')
 @if (session('success'))
@@ -26,7 +26,7 @@
 
       </div> 
       <div class="col-lg-9">
-        <form action="{{ route('indexComment') }}" method="get" accept-charset="utf-8">
+        <form action="{{ route('index_newComment') }}" method="get" accept-charset="utf-8">
           <div class="row">
             <div class="col-lg-6">
               <div class="form-group">
@@ -47,7 +47,7 @@
           </div>
         </form>
       </div>
-      <form action="{{ route('activateComment')}}" method ="post">
+      <form action="{{ route('activate_newComment')}}" method ="post">
         @csrf
         <div class="col-lg-2">
           <div style="width: 100%;">
@@ -62,8 +62,9 @@
     <div>
       <p style="display: none;">{{$i=1}}</p>
       @foreach($comments as $rows)
-      <div style="border-top: 1px solid rgb(220,220,220); padding: 5px 0px; " class="father-contain">
-        <div style="display: flex; justify-content: space-between;">
+      <div style="border-top: 1px solid rgb(220,220,220); padding: 5px 0px" class=" father-contain">
+        
+        <div style="display: flex; justify-content: space-between;"> 
           <div>
             <b>
               {{ $rows->user->name }}
@@ -79,8 +80,8 @@
           <div style="background-color: {{ $rows->publish ? '#4caf50' : '#c41700' }}; color: white; padding: 5px 5px;">{{ $rows->publish ? 'ON' : 'OFF' }}</div>
 
         </div>
-        <div style="display: flex;" class="comment">
-          <input style="margin-right: 5px;" type="checkbox" name="checkbox[]" id="checkall{{$i}}" class="checkall checkall{{$i}}" data-number="{{$i}}" value="{{$rows->id}}">
+        <div style="display: flex;"class="comment">
+          <input style="margin-right: 5px;" type="checkbox" name="checkbox[]" id="checkall{{$i}}" class="checkall checkall{{$i}}" data-number="{{$i}}" value="{{$rows->id}}"> 
           <div style="width: fit-content;">
             <img style="border-radius: 20px;" 
             height="40px"
@@ -90,7 +91,7 @@
             alt=""
             />
           </div>
-          <div style="width: 80%; margin-left: 10px">
+          <div style="width: 80%;">
             <div style="margin-right:10px;padding: 5px 10px; border-radius: 15px; background-color: rgb(220, 220, 220);" class="content1">
               <p style="font-size: 20px; margin: 0px 0px">
                 {{ $rows->comment }}
@@ -101,66 +102,15 @@
                 <small><b>Bài viết:</b> {{ $rows->post->name }}</small>
               </p>
             </div>
-            <div>
-              <span>
-                <i style="color: #3c8dbc;" class="fa fa-plus"></i>
-              </span>
-              <a data-toggle="collapse" data-target=".collapse{{$x}}" href="" title="">Xem thêm phản hồi</a>
-            </div>
           </div>
-
           <!-- <div style="position: absolute; left: 700px; background-color: {{ $rows->publish ? '#4caf50' : '#c41700' }}; color: white; padding: 5px 5px;">{{ $rows->publish ? 'ON' : 'OFF' }}</div> -->
-
         </div>
-      </div>
-      @if(isset($rows->child_comments))
-      @foreach($rows->child_comments as $row)
-      <div style="padding-left: 30px; padding-bottom: 10px; " class="collapse collapse{{$x}} children-contain">
-        <div class="left">
-          <div style="display: flex; justify-content: space-between;">
-            <div>
-              <b>
-                {{ $row->user->name }}
-              </b>
-            </div>
-            <div class="likes-reply">
-              <p>
-                <span>
-                  {{$row->created_at}}
-                </span>
-              </p>
-            </div>
-            <div style="color: white; padding: 5px 5px; background-color: {{ $row->publish ? '#4caf50' : '#c41700' }};">{{ $row->publish ? 'ON' : 'OFF' }}</div>
-          </div>
-
-          <div style="display: flex;" class="comment">
-            <input style="margin-right: 5px;" type="checkbox" name="checkbox[]" class="check check{{$i}}" value="{{ $row->id }}" data-childnumber="{{$i}}">
-            <div style="width: fit-content;">
-              <img style="border-radius: 20px;"
-              height="40px"
-              width="40px;" 
-              class="father-img"
-              src="{{ $row->user->avatar }}"
-              />
-            </div>
-            <div style="width: 80%; margin-left: 10px">
-              <div style="margin-right:10px;padding: 5px 10px; border-radius: 15px; background-color: rgb(220, 220, 220);" class="content1">
-                <p style="font-size: 20px; margin: 0px 0px">
-                  {{ $row->comment }}
-                </p>
-              </div>
-            </div>
-          </div>
-          <!-- <div style="position: absolute; left: 800px; color: white; padding: 5px 5px; background-color: {{ $row->publish ? '#4caf50' : '#c41700' }};">{{ $row->publish ? 'ON' : 'OFF' }}</div> -->
-        </div>
-      </div> 
-      @endforeach
-      @endif
-      <input type="hidden" name="id" value="{{$rows->id}}">
+      <input type="hidden" name="id" value="{{$rows->post_id ? $rows->post_id : ''}}">
       <p style="display: none;">{{$i++}}</p>
       <p style="display: none;">{{$x++}}</p>
       @endforeach
     </form>
+  </div>
   </div>
 </div>
 <div class="row">

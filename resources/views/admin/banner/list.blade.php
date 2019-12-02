@@ -11,94 +11,94 @@
 @endsection
 @section('content')
 @if (session('success'))
-        <div class="alert alert-success">{{session('success')}}</div>
+<div class="alert alert-success">{{session('success')}}</div>
 @endif
 @if (session('delete'))
-        <div class="alert alert-success">{{session('delete')}}</div>
+<div class="alert alert-success">{{session('delete')}}</div>
 @endif
 @if (session('fail'))
-        <div class="alert alert-danger">{{session('fail')}}</div>
+<div class="alert alert-danger">{{session('fail')}}</div>
 @endif
 @if (session('search'))
-        <div class="alert alert-danger">{{session('search')}}</div>
+<div class="alert alert-danger">{{session('search')}}</div>
 @endif
-    <div class="box">
-        <div class="box-header">
-            <h3 class="box-title">Banners</h3>
-        </div>
-        <div class="dataTables_length">
-            <div class="row">
-                <div class="col-lg-1">
-                    <form style="padding-left: 20px; padding-top: 25px;" action="{{ route('createBanner') }}" method="get" accept-charset="utf-8">
-                        <button class="btn btn-primary" type="submit"><i class="fa fa-plus"> </i></button>
-                    </form>
-                </div> 
-                <!-- /.filter -->
-                <div class="col-lg-9">
-                    <form action="{{ route('methodBanner') }}" method="post" accept-charset="utf-8">
-                        @csrf
-                        <div class="row">
-                            <div class="col-lg-6">
-                              <div class="form-group">
-                                <label for="exampleInputEmail1">Tìm Kiếm</label>
-                                <input value="{{ isset($search) ? $search : '' }}"  name="name" type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Tên Banner...">
-                              </div>
-                            </div>
-                            <div class="form-group col-md-2">
-                               <label for="inputState">Position</label>
-                                  <select id="postion" class="form-control" name="position">
-                                    @if($position!='All')
-                                    <option style="display: none;" value="{{$position}}">{{$position}}</option>
-                                    @endif
-                                    <option class="dropdown-item" value="All">All</option>
-                                    <option class="dropdown-item" value="Top">Top</option>
-                                    <option class="dropdown-item" value="Banner">Banner</option>
-                                    <option class="dropdown-item" value="Sidebar">SideBar</option>
-                                    <option class="dropdown-item" value="Sidebar_cate">SideBar_cate</option>
-                                  </select>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label for="inputState">Publish</label>
-                                <select class="form-control"  name="publish">
-                                    @if($publish!='All')
-                                    <option style="display: none;" value="{{$publish}}">{{$publish ? 'ON' : 'OFF'}}</option>
-                                    @endif
-                                    <option class="dropdown-item" value="All">All</option>
-                                    <option class="dropdown-item" value="1">ON</option>
-                                    <option class="dropdown-item" value="0">OFF</option>
-                                </select>
-                            </div>
-                            <div class="col-md-1">
-                                <button class="btn btn-primary" type="submit" id="search" value="Search" style="margin-top: 24px; padding: 10px 12px; border: 0px" class=" animation-on-hover" type="submit"><i class="fa fa-search"> </i></button>
-                            </div>
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">Banners</h3>
+    </div>
+    <div class="dataTables_length">
+        <div class="row">
+            <div class="col-lg-1">
+                <form style="padding-left: 20px; padding-top: 25px;" action="{{ route('createBanner') }}" method="get" accept-charset="utf-8">
+                    <button class="btn btn-primary" type="submit"><i class="fa fa-plus"> </i></button>
+                </form>
+            </div> 
+            <!-- /.filter -->
+            <div class="col-lg-9">
+                <form action="{{ route('methodBanner') }}" method="post" accept-charset="utf-8">
+                    @csrf
+                    <div class="row">
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Tìm Kiếm</label>
+                            <input value="{{ isset($search) ? $search : '' }}"  name="name" type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Tên Banner...">
                         </div>
-                    </form>
+                    </div>
+                    <div class="form-group col-md-2">
+                     <label for="inputState">Position</label>
+                     <select id="postion" class="form-control" name="position">
+                        @if($position!='All')
+                        <option style="display: none;" value="{{$position}}">{{$position}}</option>
+                        @endif
+                        <option class="dropdown-item" value="All">All</option>
+                        <option class="dropdown-item" value="Top">Top</option>
+                        <option class="dropdown-item" value="Banner">Banner</option>
+                        <option class="dropdown-item" value="Sidebar">SideBar</option>
+                        <option class="dropdown-item" value="Sidebar_cate">SideBar_cate</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputState">Publish</label>
+                    <select class="form-control"  name="publish">
+                        @if($publish!='All')
+                        <option style="display: none;" value="{{$publish}}">{{$publish ? 'ON' : 'OFF'}}</option>
+                        @endif
+                        <option class="dropdown-item" value="All">All</option>
+                        <option class="dropdown-item" value="1">ON</option>
+                        <option class="dropdown-item" value="0">OFF</option>
+                    </select>
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-primary" type="submit" id="search" value="Search" style="margin-top: 24px; padding: 10px 12px; border: 0px" class=" animation-on-hover" type="submit"><i class="fa fa-search"> </i></button>
                 </div>
             </div>
+        </form>
+    </div>
+</div>
 <!-- /.method -->
-    <form action="{{ route('methodBanner')}}" method ="post">
-        @csrf
-            <!-- /.box-header -->
-            <div style="padding: 0px 28px;" class="box-body ">
-              <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-                <div class="row">
-                    <div class="col-lg-9">
-                        
-                    </div>
-                    <div style="display: flex;" class="col-lg-3">
-                        <div>
-                            <label>Chọn Tác Vụ</label>
-                            <select id="select" name="option" class="form-control">
-                                <option value="all">All--</option>
-                                <option value="activate">Kích hoạt/Vô hiệu hóa</option>
-                                <option value="delete">Xóa</option>
-                            </select>
-                        </div>
-                        <div style="padding-top: 24px;">
-                            <input onclick="confirm()" class="btn btn-primary" id="confirm-btn" type="button" value="OK" name="confirm1">
-                        </div>
-                    </div>
+<form action="{{ route('methodBanner')}}" method ="post">
+    @csrf
+    <!-- /.box-header -->
+    <div style="padding: 0px 28px;" class="box-body ">
+      <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+        <div class="row">
+            <div class="col-lg-9">
+                
+            </div>
+            <div style="display: flex;" class="col-lg-3">
+                <div>
+                    <label>Chọn Tác Vụ</label>
+                    <select id="select" name="option" class="form-control">
+                        <option value="all">All--</option>
+                        <option value="activate">Kích hoạt/Vô hiệu hóa</option>
+                        <option value="delete">Xóa</option>
+                    </select>
                 </div>
+                <div style="padding-top: 24px;">
+                    <input onclick="confirm()" class="btn btn-primary" id="confirm-btn" type="button" value="OK" name="confirm1">
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="table-responsive">
                 <table class="table table-hover " >
@@ -114,7 +114,7 @@
                     </thead>
                     <tbody>
                         @foreach ($banners as $row)
-                           <tr  id="detail_{{ $row->id }}">
+                        <tr  id="detail_{{ $row->id }}">
                             <td><input type="checkbox" name="checkbox[]" class="check" value="{{ $row->id }}"></td>   
                             <td style="width: 20%;">
                                 <div>
@@ -130,25 +130,25 @@
                         </tr>
                         @endforeach
                     </tbody>
-                  </table>
-                </div>
-            </form>
-          </div>
-      </div>
-        <div class="row">
-            <div class="col-sm-5">
-                <div class="dataTables_info" id="example1_info" role="status" aria-live="polite"></div>
+                </table>
             </div>
-            <div class="col-sm-7">
-                <div class="pagination">
-                        <tr>{{ $banners->appends($_GET)->links() }}</tr>
-                </div>
-            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-5">
+        <div class="dataTables_info" id="example1_info" role="status" aria-live="polite"></div>
+    </div>
+    <div class="col-sm-7">
+        <div class="pagination">
+            <tr>{{ $banners->appends($_GET)->links() }}</tr>
         </div>
     </div>
 </div>
-        <!-- /.box-body -->
-    </div>
+</div>
+</div>
+<!-- /.box-body -->
+</div>
 @endsection
 @section('css')
     <link

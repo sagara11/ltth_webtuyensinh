@@ -29,6 +29,7 @@ class CommentController extends Controller
         $posts = Post::all();
 
         $post = $request->post_id ? $request->post_id : 'All';
+
         if($post == 'All')
         {
             return $this->sub_index($request);
@@ -53,6 +54,39 @@ class CommentController extends Controller
         $comments = $comments->orderBy('created_at','DESC')->paginate(10);
         return view('admin/comment/list',['comments'=>$comments,'post'=>$posts,'name'=> $post != 'All' ? $name->name : '--All--','post_id'=>$post,'x'=>1]);
     }
+    public function index_new(Request $request)
+    { 
+        if(isset($request->date))
+        {
+            return $this->filter($request->date);
+        }
+        $posts = Post::all();
+
+        $post = $request->post_id ? $request->post_id : 'All';
+        if($post == 'All')
+        {
+            return $this->sub_index2($request);
+        }
+        if(isset($request->post_id) && $request->post_id != 'All')
+        $name = Post::find($post_id);
+
+        $comments = Comment::where('post_id', $post);
+        
+        $comments->with(array( 'user' => function($q) {
+                return $q->select('id','name','avatar');
+            }
+        ));
+
+        // $comments->with(['child_comments' => ( function ($q) use ($post) {
+        //         return $q->where('post_id', $post)->with(array( 'user' => function($q) {
+        //             return $q->select('id','name','avatar');
+        //         }
+        //     ));
+        //     }
+        // )]);
+        $comments = $comments->orderBy('created_at','DESC')->paginate(10);
+        return view('admin/comment/list_new',['comments'=>$comments,'post'=>$posts,'name'=> $post != 'All' ? $name->name : '--All--','post_id'=>$post,'x'=>1]);
+    }
     public function sub_index(Request $request)
     {
         $posts = Post::all();
@@ -72,6 +106,18 @@ class CommentController extends Controller
         )]);
         $comments = $comments->orderBy('created_at','DESC')->paginate(10);
         return view('admin/comment/list',['comments'=>$comments,'post'=>$posts,'name'=>'--All--','post_id'=>'All','x'=>1]);
+    }
+    public function sub_index2(Request $request)
+    {
+        $posts = Post::all();
+        $comments = Comment::select('id','parent_id','comment','publish','user_id','post_id','created_at');
+        
+        $comments->with(array( 'user' => function($q) {
+                return $q->select('id','name','avatar');
+            }
+        ));
+        $comments = $comments->orderBy('created_at','DESC')->paginate(10);
+        return view('admin/comment/list_new',['comments'=>$comments,'post'=>$posts,'name'=>'--All--','post_id'=>'All','x'=>1]);
     }
     /**
      * Show the form for creating a new user
@@ -121,8 +167,53 @@ class CommentController extends Controller
             // $this->activate_parent($id[0]);
         }
         $request->session()->flash('success', 'Kích hoạt / Vô hiệu hóa thành công !!!');
-        // $url = "https://demo.baotuyensinh.edu.vn/admin/comment/list?post_id=".$request->id."";
-        $url = "https://webtuyensinh.edu.vn/admin/comment/list?post_id=".$request->id."";
+        $url = "/admin/comment/list";
+        return Redirect::to($url);
+    }
+    public function activate_new(Request $request)
+    {
+        if($request->checkbox == null)
+        {
+            $request->session()->flash('fail', 'Xin mời bạn hãy chọn bất kì 1 ô nào đó !!! ');
+            return redirect()->route('indexComment');
+        }
+        $id=$request->checkbox;
+
+        if (is_array($id) && !empty($id[1])) 
+        {
+            foreach ($id as $item) 
+            {
+                $list = Comment::findOrfail($item);
+                if($list->publish) 
+                {
+                    $list->publish = false;
+                    $list->save();
+                } else {
+                    $list->publish = true;
+                    $list->save();
+                }
+            }
+            // if($request->checkall)
+            // $this->activate_parent($id[0]);
+        } 
+        else 
+        {
+            $list = Comment::findOrfail($id[0]);
+
+            if($list->publish) 
+            {
+                $list->publish = false;
+                $list->save();
+            } else 
+            {
+                $list->publish = true;
+                $list->save();
+            }
+            // if($request->checkall)
+            // $this->activate_parent($id[0]);
+        }
+        $request->session()->flash('success', 'Kích hoạt / Vô hiệu hóa thành công !!!');
+        $url = "/admin/comment/list_new";
         return Redirect::to($url);
     }
     public function activate_parent($id)
