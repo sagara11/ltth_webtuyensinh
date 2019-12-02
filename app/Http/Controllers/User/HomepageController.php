@@ -346,14 +346,14 @@ class HomepageController extends Controller
         $news->description = $request->news_description;
         $news->content = $request->news_content;
         $news->category_id =$forum->id;
-        $news->image = $request->avatar;
+        $news->image = "avatar";
         $news->type_post = "forum";
         $news->publish = 0;
         $news->source_id = $webtuyensinh->id;
         $news->user_id = Auth::user()->id;
         $news->save();
 
-        $temp = Post::where('image','hello')->first();
+        $temp = Post::where('image','avatar')->first();
         $data = new UserController;
         $temp->image = $data->Xulyupload($request,$temp->id);
         $temp->save();
