@@ -58,7 +58,7 @@ Tài khoản
                         <label for="avatar-file">Tải lên ảnh đại diện mới</label>
                         <img height="60px" width="100px" id="blah" src="#" alt="" />
                         <div class="mt-2">
-                            <button type="submit">Đăng ảnh</button>
+                            <button class="btn btn-success" type="submit">Đăng ảnh</button>
                         </div>
                     </form>
                     <div class="account-section-content row">

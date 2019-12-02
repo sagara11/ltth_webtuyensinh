@@ -47,6 +47,7 @@ class dantriController extends Controller
         } 
         $description_span = $post->find('h2.fon33.mt1.sapo')->innerHTML;
         $description = trim($description_span, "<span>Dân trí<span/>&nbsp;");
+        $description = strip_tags($description);
         $content = $post->find('.detail-content');
 
 
