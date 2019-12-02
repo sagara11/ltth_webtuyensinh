@@ -124,6 +124,17 @@ nav.nav {
         font-size: 25px;
         text-decoration: none; }
 
+#quenmatkhau .modal-header {
+  background-color: #f65c2c;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  font-size: 16px; }
+  #quenmatkhau .modal-header p {
+    margin: 0; }
+#quenmatkhau .modal-body {
+  padding: 20px; }
+
 .sign .modal-header {
   background-color: #f65c2c;
   color: white;
@@ -205,7 +216,6 @@ nav.nav {
       width: 20%; }
     .mb-nav .mb-search {
       background-color: white;
-      width: 15%;
       display: flex;
       justify-content: flex-end; }
     .mb-nav .mb-search > div {

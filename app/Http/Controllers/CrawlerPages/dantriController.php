@@ -48,6 +48,9 @@ class dantriController extends Controller
         $description_span = $post->find('h2.fon33.mt1.sapo')->innerHTML;
         $description = trim($description_span, "<span>Dân trí<span/>&nbsp;");
         $content = $post->find('.detail-content');
+
+
+
         $post_link = $page_url;
 
         //gan thuoc tinh cua trang
@@ -56,7 +59,7 @@ class dantriController extends Controller
             'description' => $description,
             'slug' => $slug,
             'content' => $content,
-            'post_link' => $post_link
+            'post_link' => $post_link,
         );
     }
 }

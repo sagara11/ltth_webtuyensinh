@@ -49,7 +49,7 @@ Tài khoản
             <div class="tab-content">
 
                 {{-- Doi mat khau --}}
-                <section id="doimatkhau"><br>
+                <section id="doimatkhau" class="container tab-pane-active"><br>
                     <div class="account-section-header">
                         <h3>ĐỔI MẬT KHẨU</h3>
                     </div>

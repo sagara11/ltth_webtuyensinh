@@ -25,7 +25,8 @@
                     <span>{{ $new->categories->name }} |</span>
                     <span>{{ $new->hour() }} |</span>
                     <span> {{ $comment->count() }} bình luận |</span>
-                    <a class="webtuyensinh-link" href="">{{ $new->source->web_name }}</a>
+                    <a class="webtuyensinh-link" href="{{ route('nguon_tin', $new->source->id) }}">{{ $new->source->web_name }}</a>
+                    <span class="new_view">| {{ $new->view }} lượt xem</span>
                 </div>
                 <!-- Go to www.addthis.com/dashboard to customize your tools --> <div class="addthis_inline_share_toolbox"></div>
             </section>
@@ -35,11 +36,16 @@
             </article>
 
             <article id="baiviet-content">
-                <div style="overflow-wrap: break-word;">
+                <div style="overflow-wrap: break-word;" class="clearfix">
                     {!! $new->content !!}
                 </div>
-                
             </article>
+
+            <section id="news_source">
+                <a target="_blank" rel="nofollow" href="{{ $new->post_link }}">
+                    Theo <b>{{ $new->source->web_name }}</b>
+                </a>
+            </section>
 
             <article id="comment">
                 <div class="comment-header">

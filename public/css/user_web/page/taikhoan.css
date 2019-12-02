@@ -119,9 +119,16 @@
           color: white;
           border: none;
           border-radius: 3px; }
+    #account .account-content .tab-content #danhsachbaidang .account-section-header {
+      padding: 8px 0px; }
+      #account .account-content .tab-content #danhsachbaidang .account-section-header h3 {
+        color: #f65c2c;
+        font-size: 20px; }
     #account .account-content .tab-content #quanlybinhluan .account-section-header {
-      color: #f65c2c;
-      font-size: 20px; }
+      padding: 8px 0px; }
+      #account .account-content .tab-content #quanlybinhluan .account-section-header h3 {
+        color: #f65c2c;
+        font-size: 20px; }
     #account .account-content .tab-content #quanlybinhluan .account-section-content .comment-box {
       padding: 10px 10px;
       border-bottom: 1px solid #eeeeee; }

@@ -163,10 +163,22 @@
           }
         }
       }
+      #danhsachbaidang{
+        .account-section-header {
+          padding: 8px 0px;
+          h3 {
+            color: rgb(246, 92, 44);
+            font-size: 20px;
+          }
+        }
+      }
       #quanlybinhluan {
         .account-section-header {
-          color: rgb(246, 92, 44);
-          font-size: 20px;
+          padding: 8px 0px;
+          h3 {
+            color: rgb(246, 92, 44);
+            font-size: 20px;
+          }
         }
         .account-section-content {
           .comment-box {

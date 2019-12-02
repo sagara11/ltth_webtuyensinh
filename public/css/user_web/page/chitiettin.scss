@@ -21,7 +21,7 @@
 #baiviet-name {
   h1 {
     font-size: 24px;
-    marign: 0;
+    margin: 0;
   }
   .webtuyensinh-section {
     margin: 10px 0;
@@ -30,8 +30,10 @@
       color: rgb(31, 151, 170);
       font-weight: bold;
     }
+    .new_view{
+      text-align: right;
+    }
   }
-  
 }
 
 #baiviet-description {
@@ -48,6 +50,16 @@
   img{
     max-width: 100%;
     height: auto;
+  }
+}
+
+#news_source{
+  a{
+    border-radius: 4px;
+    background-color: rgb(238, 238, 238);
+    padding: 5px 10px;
+    text-decoration: none;
+    color: rgb(51, 51, 51);
   }
 }
 

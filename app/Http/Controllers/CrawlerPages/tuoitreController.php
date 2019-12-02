@@ -49,12 +49,17 @@ class tuoitreController extends Controller
             $slug = $match[1];
         } 
 
+        $date = $post->find('date-time')->innerHTML;
+        $create = strtotime($date);
+        $created_at =  date('d/M/Y H:i:s', $create);
+
         return array(
             'name' => $name,
             'description' => $description,
             'slug' => $slug,
             'content' => $content,
-            'post_link' => $post_link
+            'post_link' => $post_link,
+            'created_at' => $created_at
         );
     }
 }

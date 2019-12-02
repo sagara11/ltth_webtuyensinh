@@ -92,6 +92,7 @@ class HomepageController extends Controller
         $header = Post::orderBy('view', 'desc')->paginate(3);
 
         $banner = Banner::orderBy('created_at', 'desc')->where('position', 'top')->paginate(2);
+        $footer_banner = Banner::orderBy('created_at', 'desc')->where('position', 'sidebar')->first();
 
         $new = Post::orderBy('created_at', 'desc')->where('slug', $slug)->where('publish',1)->first();
         $xuhuong = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id','!=',$new->id)->paginate(4);
@@ -102,6 +103,9 @@ class HomepageController extends Controller
         $tinlienquan = Post::orderBy('created_at', 'desc')->where('category_id', $new->category_id)->where('publish',1)->where('id','!=',$new->id)->paginate(4);
         $tinmoi = Post::orderBy('created_at', 'desc')->where('publish',1)->paginate(4);
         $tinnong = Post::orderBy('view', 'desc')->where('publish',1)->paginate(4);
+
+        $new->view =  $new->view + 1;
+        $new->save();
 
 
         try{
@@ -123,6 +127,32 @@ class HomepageController extends Controller
         $footer_banner = Banner::orderBy('created_at', 'desc')->where('position', 'sidebar')->first();
          
         return view('user.page.chitiettin', compact('comment','header', 'new', 'xuhuong', 'tuyensinh_first', 'tuyensinh', 'giaoduc_first', 'giaoduc', 'tinlienquan', 'tinmoi', 'tinnong', 'banner', 'trend', 'trend_first', 'footer_banner', 'sidetrend'));
+    }
+
+    function nguontin($danhmuc_id)
+    {
+        $header = Post::orderBy('view', 'desc')->paginate(3);
+
+        $banner = Banner::orderBy('created_at', 'desc')->where('position', 'top')->paginate(2);
+        $footer_banner = Banner::orderBy('created_at', 'desc')->where('position', 'sidebar')->first();
+
+        $data = Post::where('source_id',$danhmuc_id);
+
+        $data_first = $data->where('source_id',$danhmuc_id)->orderBy('view','desc')->first();
+
+        $data_second = Post::where('source_id',$danhmuc_id)->where('id','!=',$data_first->id)->orderBy('view','desc')->paginate(3);
+
+        $data_third = Post::where('source_id',$danhmuc_id)->orderBy('created_at','desc')->paginate(20);
+
+        $tuyensinh_first = Post::where('category_id', 37)->first();
+        $tuyensinh = Post::orderBy('created_at', 'desc')->where('category_id', 37)->where('id', "!=", $tuyensinh_first->id)->where('publish',1)->paginate(4);
+        $giaoduc_first = Post::where('category_id', 34)->first();
+        $giaoduc = Post::orderBy('created_at', 'desc')->where('category_id', 34)->where('id', "!=", $giaoduc_first->id)->paginate(4);
+        $tinlienquan = Post::orderBy('created_at', 'desc')->where('category_id', $data_first->category_id)->where('publish',1)->where('id','!=',$data_first->id)->paginate(4);
+        $tinmoi = Post::orderBy('created_at', 'desc')->where('publish',1)->paginate(4);
+        $tinnong = Post::orderBy('view', 'desc')->where('publish',1)->paginate(4);
+     
+        return view('user.page.nguontin', compact('header', 'data_first','data_second','data_third','tuyensinh_first', 'tuyensinh', 'giaoduc_first', 'giaoduc', 'tinlienquan', 'tinmoi', 'tinnong', 'banner', 'footer_banner'));
     }
 
     function search(REQUEST $request)
@@ -309,14 +339,15 @@ class HomepageController extends Controller
 
     function news_create(Request $request){
         $webtuyensinh = Crawl::where('categories_name', NULL)->first();
+        $forum = Category::where('name', 'Forum')->first();
         $news = new Post;
         $news->name = $request->news_name;
         $news->slug = str_slug($request->news_name, '-');
         $news->description = $request->news_description;
         $news->content = $request->news_content;
-        $news->category_id = $request->news_section;
-        $news->image = 'hello';
-        $news->type_post = "post";
+        $news->category_id =$forum->id;
+        $news->image = $request->avatar;
+        $news->type_post = "forum";
         $news->publish = 0;
         $news->source_id = $webtuyensinh->id;
         $news->user_id = Auth::user()->id;

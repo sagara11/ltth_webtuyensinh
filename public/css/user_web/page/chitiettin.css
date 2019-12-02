@@ -16,13 +16,15 @@
 
 #baiviet-name h1 {
   font-size: 24px;
-  marign: 0; }
+  margin: 0; }
 #baiviet-name .webtuyensinh-section {
   margin: 10px 0;
   color: #a7a7a7; }
   #baiviet-name .webtuyensinh-section .webtuyensinh-link {
     color: #1f97aa;
     font-weight: bold; }
+  #baiviet-name .webtuyensinh-section .new_view {
+    text-align: right; }
 
 #baiviet-description {
   margin: 10px 0px;
@@ -36,6 +38,13 @@
   #baiviet-content img {
     max-width: 100%;
     height: auto; }
+
+#news_source a {
+  border-radius: 4px;
+  background-color: #eeeeee;
+  padding: 5px 10px;
+  text-decoration: none;
+  color: #333333; }
 
 #comment {
   padding: 10px 0px; }

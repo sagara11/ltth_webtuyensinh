@@ -78,21 +78,11 @@ Tài khoản
                                 </div>
                             </div>
                             <div class="input-section col-lg-3">
-                                Danh mục
-                            </div>
-                            <div class="input-section col-lg-9">
-                                <select required class="form-control" name="news_section" id="">
-                                    @foreach ($nav_section as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="input-section col-lg-3">
                                 Mô tả
                             </div>
                             <div class="input-section col-lg-9">
-                                <input required name="news_description" type="text" class="form-control"
-                                    placeholder="Mô tả">
+                                <textarea rows="5" required name="news_description" type="text" class="form-control"
+                                    placeholder="Mô tả"></textarea>
                             </div>
                             <div class="input-section col-lg-3">
                                 Nội dung

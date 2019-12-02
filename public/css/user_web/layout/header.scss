@@ -160,6 +160,21 @@ header {
     }
   }
 
+  #quenmatkhau{
+    .modal-header {
+      background-color: rgb(246, 92, 44);
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      font-size: 16px;
+      p {
+        margin: 0;
+      }
+    }
+    .modal-body {
+      padding: 20px;
+    }
+  }
 
 .sign {
   .modal-header {
@@ -269,7 +284,6 @@ header {
     }
     .mb-search{
       background-color: white;
-      width: 15%;
       display: flex;
       justify-content: flex-end;
     }

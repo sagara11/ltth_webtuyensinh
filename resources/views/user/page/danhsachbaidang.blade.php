@@ -49,7 +49,7 @@ Tài khoản
             <div class="tab-content">
 
                 {{-- Danh sach bai dang --}}
-                <section id="danhsachbaidang"><br>
+                <section id="danhsachbaidang" class="container tab-pane-active"><br>
                     <div class="account-section-header">
                         <h3>DANH SÁCH BÀI ĐĂNG</h3>
                     </div>
@@ -74,7 +74,7 @@ Tài khoản
                                         <img height="45px" width="65px" src="{{ $item->image }}" alt="">
                                     </td>
                                     <td>
-                                        {{ $item->categories->name }}
+                                        Forum
                                     </td>
                                     <td>
                                         {{ $item->name }}
