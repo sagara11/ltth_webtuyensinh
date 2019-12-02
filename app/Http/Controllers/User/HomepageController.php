@@ -103,6 +103,9 @@ class HomepageController extends Controller
         $tinmoi = Post::orderBy('created_at', 'desc')->where('publish',1)->paginate(4);
         $tinnong = Post::orderBy('view', 'desc')->where('publish',1)->paginate(4);
 
+        $new->view =  $new->view + 1;
+        $new->save();
+
 
         try{
             $trend_first = Post::latest()->where('trend', 1)->where('category_id', $new->category_id)->first();
@@ -309,14 +312,15 @@ class HomepageController extends Controller
 
     function news_create(Request $request){
         $webtuyensinh = Crawl::where('categories_name', NULL)->first();
+        $forum = Category::where('name', 'Forum')->first();
         $news = new Post;
         $news->name = $request->news_name;
         $news->slug = str_slug($request->news_name, '-');
         $news->description = $request->news_description;
         $news->content = $request->news_content;
-        $news->category_id = $request->news_section;
-        $news->image = 'hello';
-        $news->type_post = "post";
+        $news->category_id =$forum->id;
+        $news->image = $request->avatar;
+        $news->type_post = "forum";
         $news->publish = 0;
         $news->source_id = $webtuyensinh->id;
         $news->user_id = Auth::user()->id;

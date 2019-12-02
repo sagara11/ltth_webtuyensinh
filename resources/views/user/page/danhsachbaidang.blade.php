@@ -74,7 +74,7 @@ Tài khoản
                                         <img height="45px" width="65px" src="{{ $item->image }}" alt="">
                                     </td>
                                     <td>
-                                        {{ $item->categories->name }}
+                                        Forum
                                     </td>
                                     <td>
                                         {{ $item->name }}

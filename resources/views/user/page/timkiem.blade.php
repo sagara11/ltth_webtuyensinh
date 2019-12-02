@@ -5,12 +5,19 @@
 <link rel="stylesheet" href="{{ asset('css/user_web/layout/baiviet_box.css') }}">
 <link rel="stylesheet" href="{{ asset('css/user_web/layout/paginate.css') }}">
 <link rel="stylesheet" href="{{ asset('css/user_web/page/home.css') }}">
+<link rel="stylesheet" href="{{ asset('css/user_web/page/chitiettin.css') }}">
 @endsection
 @section('title')
 Kết quả tìm kiếm
 @endsection
 @section('content')
 <main class="container">
+    <section id="danhmuc">
+        <h4> Tìm kiếm </h4>
+    </section>
+    <section>
+        Tìm thấy {{ $news_name->count() }} kết quả
+    </section>
     <div class="row">
         <div class="col-md-8">
             <section id="baiviet-tintuc">
@@ -26,8 +33,8 @@ Kết quả tìm kiếm
                         <div class="col-md-9 col-7">
                             <h5> <a href="{{ route('chitiettin',$item->slug) }}"> {{ $item->name }} </a> </h5>
                             <p>
-                                <span > {{ $item->categories->name }} </span>
-                                <span > {{ $item->hour() }} </span>
+                                <span> {{ $item->categories->name }} </span>
+                                <span> {{ $item->hour() }} </span>
                                 <a class="webtuyensinh-link" href=""> {{ $item->source->web_name }} </a>
                             </p>
                         </div>
@@ -38,7 +45,7 @@ Kết quả tìm kiếm
         </div>
         @include('user.layout.sidebar')
     </div>
-    
+
 </main>
 @endsection
 @section('js')

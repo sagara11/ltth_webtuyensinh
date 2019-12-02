@@ -52,6 +52,8 @@ class CrawlController extends Controller
                         $data->image = $value['img'];
                         $data->slug = $post['slug'];
                         $data->content = ($post['content']);
+                        $data->content = preg_replace('/<(div|\/div|a|\/a)[^>]{0,}>/', '', $data->content);
+                        $data->content = preg_replace('/style=\"(.*?)\"/', '', $data->content);
                         $data->type_post= 'post';
                         $data->publish = 1;
                         $data->view = 0;

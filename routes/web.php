@@ -111,7 +111,12 @@ Route::group(['prefix'=>'elastic'], function () {
 Route::get("/",'User\HomepageController@home')->name('home');
 Route::get('danh-muc/{slug}','User\HomepageController@danhmuc')->name('danhmuc');
 
-Route::get('/tai-khoan', 'User\HomepageController@taikhoan')->name('taikhoan');
+Route::get('/tai-khoan-1', 'User\HomepageController@taikhoan')->name('taikhoan');
+Route::get('/tai-khoan-2', 'User\HomepageController@doimatkhau')->name('doimatkhau');
+Route::get('/tai-khoan-3', 'User\HomepageController@thembaidang')->name('thembaidang');
+Route::get('/tai-khoan-4', 'User\HomepageController@danhsachbaidang')->name('danhsachbaidang');
+Route::get('/tai-khoan-5', 'User\HomepageController@quanlybinhluan')->name('quanlybinhluan');
+
 
 Route::post("/editaccount/{edit}", "User\HomepageController@edit_account")->name('editaccount');
 
@@ -124,6 +129,8 @@ Route::post('/reply',"User\HomepageController@replycomment")->name('replycomment
 Route::get('/delete/{comment_id}','User\HomepageController@delete_comment')->name('deletecomment');
 Route::post('/updatecomment','User\HomepageController@update_comment')->name('updatecomment');
 
+Route::get('/search', 'User\HomepageController@search')->name('search');
+
 Route::post('/uploadavatar',"User\HomepageController@update_avatar")->name('updateavatar');
 Route::post('/newscreate',"User\HomepageController@news_create")->name('newscreate');
 Route::post('/deletepost',"User\HomepageController@deletepost")->name('deletepost');
@@ -134,8 +141,6 @@ Route::get("/{slug}",'User\HomepageController@chitiettin')->name('chitiettin');
 Route::get('/video', 'User\HomepageController@video');
 
 Route::post('/change-password', 'User\HomepageController@change_password')->name('changepassword');
-
-Route::post('/search', 'User\HomepageController@search')->name('search');
 
 Route::get('login/facebook', 'SocialAccountController@redirectToProvider');
 

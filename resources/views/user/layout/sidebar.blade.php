@@ -17,14 +17,14 @@
                 </div>
                 <div class="side-content">
                     <div class="featured">
-                    <a href="{{ route('chitiettin',$trend_first->slug) }}" class="xuhuong-main">
-                        <img class="img-fluid" src="{{ $trend_first->image }}" alt="{{ $trend_first->name }}" />
+                    <a href="{{ route('chitiettin',$xuhuong_first->slug) }}" class="xuhuong-main">
+                        <img class="img-fluid" src="{{ $xuhuong_first->image }}" alt="{{ $xuhuong_first->name }}" />
                     </a>
                     <h6>
-                        <a href="{{ route('chitiettin',$trend_first->slug) }}"> {{ $trend_first->name }} </a>
+                        <a href="{{ route('chitiettin',$xuhuong_first->slug) }}"> {{ $xuhuong_first->name }} </a>
                     </h6>
                 </div>
-                    @foreach ($sidetrend as $item)
+                    @foreach ($xuhuong as $item)
                     <div class="item">
                         <div class="row">
                             <div class="col-md-4 col-5">

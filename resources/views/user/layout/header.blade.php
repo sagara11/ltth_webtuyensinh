@@ -185,8 +185,8 @@ function rebuild_date( $format, $time = 0 )
             <div class="modal-body">
                 <input class="form-control" id="forgotemail" type="email" placeholder="Nhap email" name="forgotemail">
                 <div class="btn-group">
-                    <button id="send_email" type="submit" name="send_email" value="submit">Gửi</button>
-                    <button class="btn btn-danger" onclick="close_forgot()">Thoát</button>
+                    <button class="btn btn-success m-1" id="send_email" type="submit" name="send_email" value="submit">Gửi</button>
+                    <button class="btn btn-danger m-1" onclick="close_forgot()">Thoát</button>
                 </div>
                 <p id="email-popup"></p>
             </div>
@@ -321,7 +321,7 @@ function rebuild_date( $format, $time = 0 )
 
 <script>
     function forgotpass(){
-        $('#signin').hide();
+        $('#modalclose_dangnhap').click();
     }
     function close_forgot(){
         location.reload();
