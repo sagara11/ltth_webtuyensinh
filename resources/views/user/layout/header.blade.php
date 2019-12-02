@@ -117,15 +117,15 @@ function rebuild_date( $format, $time = 0 )
                     <div class="dropdown-menu">
                         <ul>
                             <li> <a href="{{ route('taikhoan') }}"> Tài khoản của tôi </a> </li>
-                            <li> <a href="{{ route('taikhoan') }}"> Đổi mật khẩu </a> </li>
-                            <li> <a href="{{ route('taikhoan') }}"> Quản lý bình luận </a> </li>
+                            <li> <a href="{{ route('doimatkhau') }}"> Đổi mật khẩu </a> </li>
+                            <li> <a href="{{ route('quanlybinhluan') }}"> Quản lý bình luận </a> </li>
                             <li> <a href="{{ route('logout') }}"> Thoát </a> </li>
                         </ul>
                     </div>
                     @else
                     <div class="dropdown-menu">
                         <ul>
-                            <li data-toggle="modal" data-target="#signin">  Đăng nhập </li>
+                            <li data-toggle="modal" data-target="#signin"> Đăng nhập </li>
                             <li data-toggle="modal" data-target="#signup"> Đăng ký </li>
                         </ul>
                     </div>
@@ -149,8 +149,7 @@ function rebuild_date( $format, $time = 0 )
             </div>
             <div class="modal-body">
                 <p><b>Đăng nhập với Email:</b></p>
-                <input id="s-email" name="s_email" required class="form-control" type="email"
-                    placeholder="Email">
+                <input id="s-email" name="s_email" required class="form-control" type="email" placeholder="Email">
                 <input id="s-password" name="s_password" required class="form-control" type="password"
                     placeholder="Mật khẩu">
                 <p id="s_popup"> </p>
@@ -165,7 +164,8 @@ function rebuild_date( $format, $time = 0 )
             <div class="modal-footer">
                 <p>Hoặc đăng nhập với:</p>
                 <div class="social-btn">
-                    <a href="/redirect/facebook" class="facebook-btn"> <i class="fa fa-facebook-square"> </i> Facebook </a>
+                    <a href="/redirect/facebook" class="facebook-btn"> <i class="fa fa-facebook-square"> </i> Facebook
+                    </a>
                     <a href="/redirect/google" class="gmail-btn"> <i class="fa fa-google-plus-square"> </i> Gmail </a>
                 </div>
             </div>
@@ -185,7 +185,8 @@ function rebuild_date( $format, $time = 0 )
             <div class="modal-body">
                 <input class="form-control" id="forgotemail" type="email" placeholder="Nhap email" name="forgotemail">
                 <div class="btn-group">
-                    <button class="btn btn-success m-1" id="send_email" type="submit" name="send_email" value="submit">Gửi</button>
+                    <button class="btn btn-success m-1" id="send_email" type="submit" name="send_email"
+                        value="submit">Gửi</button>
                     <button class="btn btn-danger m-1" onclick="close_forgot()">Thoát</button>
                 </div>
                 <p id="email-popup"></p>
@@ -205,14 +206,11 @@ function rebuild_date( $format, $time = 0 )
             </div>
             <div class="modal-body">
                 <p><b> Tạo tài khoản với Email:</b></p>
-                <input id="email" name="email" class="form-control" type="email"
-                    placeholder="Email" >
-                <input id="name" name="name" class="form-control" type="text"
-                    placeholder="Tên tài khoản" >
-                <input id="password" name="password" class="form-control" type="password"
-                    placeholder="Mật khẩu" >
-                <input id="confirm_password" name="confirm_password" class="form-control"
-                    type="password" placeholder="Xác nhận Mật khẩu" >
+                <input id="email" name="email" class="form-control" type="email" placeholder="Email">
+                <input id="name" name="name" class="form-control" type="text" placeholder="Tên tài khoản">
+                <input id="password" name="password" class="form-control" type="password" placeholder="Mật khẩu">
+                <input id="confirm_password" name="confirm_password" class="form-control" type="password"
+                    placeholder="Xác nhận Mật khẩu">
                 <p style="color: red;" id="register-info">
 
                 </p>
@@ -222,7 +220,8 @@ function rebuild_date( $format, $time = 0 )
             <div class="modal-footer">
                 <p>Hoặc tạo tài khoản với:</p>
                 <div class="social-btn">
-                    <a href="/redirect/facebook" class="facebook-btn"> <i class="fa fa-facebook-square"> </i> Facebook </a>
+                    <a href="/redirect/facebook" class="facebook-btn"> <i class="fa fa-facebook-square"> </i> Facebook
+                    </a>
                     <a href="/redirect/google" class="gmail-btn"> <i class="fa fa-google-plus-square"> </i> Gmail </a>
                 </div>
             </div>
@@ -281,11 +280,13 @@ function rebuild_date( $format, $time = 0 )
             <img class="img-fluid" src="{{ asset('media/logo-main.png') }}" alt="Logo" />
         </a>
     </div>
-    <div class="mb-search">
-        <div>
-            <input type="text" placeholder="       Search . . ." required>
+    <form style="width: 15%;" class="searchbar" method="get" action="{{ route('search') }}">
+        <div class="mb-search">
+            <div>
+                <input name="name_search" type="text" placeholder="       Search . . ." required>
+            </div>
         </div>
-    </div>
+    </form>
     <div class="mb-account">
         <a data-toggle="modal" onclick="openNav()">
             <i class="fa fa-user-circle"></i>
@@ -298,6 +299,24 @@ function rebuild_date( $format, $time = 0 )
 <div id="Sidenav" class="sidenav">
     <a class="closebtn" onclick="closeNav()">&times;</a>
     <ul class="list-unstyled">
+        @if(Auth::check())
+        <div>
+            <a href="{{ route('taikhoan') }}" class="m-2">
+                <img height="30px" width="30px" class="rounded rounded-circle" src="{{Auth::user()->avatar}}">
+                {{ Auth::user()->name }}
+            </a>
+        </div>
+        <div>
+            <a style="text-decoration: navajowhite; color: red;" href="{{ route('logout') }}">
+                Đăng xuất
+            </a>
+        </div>
+        @else
+        <ul class="account">
+            <li class="btn btn-danger" data-toggle="modal" data-target="#signin"> Đăng nhập </li>
+            <li class="btn btn-danger" data-toggle="modal" data-target="#signup"> Đăng ký </li>
+        </ul>
+        @endif
         @foreach ($nav_section as $item)
         <li class="col-lg-2">
             <a href="{{ route('danhmuc',$item->slug) }}"><b>{{ $item->name }}</b></a>
@@ -305,10 +324,6 @@ function rebuild_date( $format, $time = 0 )
         @endforeach
         <li> <a target="_blank" href="https://hoidaptuyensinh.vn"> Hỏi Đáp </a> </li>
         <li> <a target="_blank" href="#"> Việc Làm </a> </li>
-    </ul>
-    <ul class="account">
-        <li class="btn btn-danger" data-toggle="modal" data-target="#signin"> Đăng nhập </li>
-        <li class="btn btn-danger" data-toggle="modal" data-target="#signup"> Đăng ký </li>
     </ul>
 </div>
 
