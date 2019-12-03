@@ -24,11 +24,10 @@ class HomepageController extends Controller
 {
     function home()
     {
-        try{
-            $trend_first = Post::latest()->where('trend', 1)->where('publish',1)->where('type_post','post')->first();
-            $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('publish',1)->where('type_post','post')->offset(1)->paginate(3);
-        }
-        catch(\Exception $e){
+        
+        $trend_first = Post::where('trend', 1)->where('publish',1)->where('type_post','post')->first();
+        $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('publish',1)->where('type_post','post')->offset(1)->paginate(3);
+        if(empty($trend_first)){
             $trend_first = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->first();
             $trend = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->offset(1)->paginate(3);
         }
@@ -42,11 +41,9 @@ class HomepageController extends Controller
         if(isset($header_id)==false){
             return view('user.layout.error404');
         }
-        try{
-            $trend_first = Post::latest()->where('trend', 1)->where('category_id', $header_id->id)->where('type_post','post')->first();
+            $trend_first = Post::where('trend', 1)->where('category_id', $header_id->id)->where('type_post','post')->first();
             $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->offset(1)->where('category_id', $header_id->id)->where('type_post','post')->paginate(3);
-        }
-        catch(\Exception $e){
+        if(empty($trend_first)){
             $trend_first = Post::where('category_id', $header_id->id)->where('type_post','post')->first();
             $trend = Post::where('category_id', $header_id->id)->where('type_post','post')->offset(1)->paginate(3);
         }
@@ -74,12 +71,9 @@ class HomepageController extends Controller
         $new->view =  $new->view + 1;
         $new->save();
 
-
-        try{
-            $trend_first = Post::latest()->where('trend', 1)->where('category_id', $new->category_id)->where('type_post','post')->first();
+            $trend_first = Post::where('trend', 1)->where('category_id', $new->category_id)->where('type_post','post')->first();
             $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->where('category_id', $new->category_id)->where('type_post','post')->paginate(3);
-        }
-        catch(\Exception $e){
+        if(empty($trend_first)){
             $trend_first = Post::where('category_id', $new->category_id)->where('type_post','post')->first();
             $trend = Post::where('category_id', $new->category_id)->where('id','!=',$trend_first->id)->where('type_post','post')->paginate(3);
         }
@@ -115,11 +109,10 @@ class HomepageController extends Controller
         $name = $request->name_search;
         $news_name = Post::where('name','like', '%'.$request->name_search.'%')->where('type_post','post')->get();
 
-        try{
-            $trend_first = Post::latest()->where('trend', 1)->where('publish',1)->where('type_post','post')->first();
-            $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->where('type_post','post')->paginate(3);
-        }
-        catch(\Exception $e){
+        $trend_first = Post::where('trend', 1)->where('publish',1)->where('type_post','post')->first();
+        $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->where('type_post','post')->paginate(3);
+        
+        if(empty($trend_first)){
             $trend_first = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->first();
             $trend = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->offset(1)->paginate(3);
         }
