@@ -73,7 +73,9 @@ Web Tuyển Sinh - Trang thông tin chính thức về tuyển sinh
                                 <span> {{ $item->categories->name }} </span>
                                 @endif
                                 <span> {{ $item->hour() }} </span>
+                                @if (isset($item->source->id))
                                 <a class="webtuyensinh-link" href="{{ route('nguon_tin', $item->source->id) }}"> {{ $item->source->web_name }} </a>
+                                @endif
                             </p>
                         </div>
                     </div>

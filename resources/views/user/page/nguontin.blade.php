@@ -33,7 +33,9 @@ Web Tuyển Sinh - Trang thông tin chính thức về tuyển sinh
                             <p>
                                 <span> {{ isset($item->categories->name) ? $item->categories->name : '' }} </span>
                                 <span> {{ $item->hour() }} </span>
+                                @if (asset($item->source->web_name))
                                 <a class="webtuyensinh-link" href=""> {{ isset($item->source->web_name) ? $item->source->web_name : '' }} </a>
+                                @endif
                             </p>
                         </div>
                     </div>

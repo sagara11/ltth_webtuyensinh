@@ -28,8 +28,10 @@
                     @endif
                     <span>{{ $new->hour() }} |</span>
                     <span> {{ $comment->count() }} bình luận |</span>
+                    @if ($new->source->id)
                     <a class="webtuyensinh-link"
-                        href="{{ route('nguon_tin', $new->source->id) }}">{{ $new->source->web_name }}</a>
+                    href="{{ route('nguon_tin', $new->source->id) }}">{{ $new->source->web_name }}</a>
+                    @endif
                     <span class="new_view">| {{ $new->view }} lượt xem</span>
                 </div>
                 <!-- Go to www.addthis.com/dashboard to customize your tools -->
