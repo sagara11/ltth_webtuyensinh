@@ -18,7 +18,7 @@ class PostsController extends BaseController
      * @param  \App\User  $model
      * @return \Illuminate\View\View
      */
-     public function posts(Request $request)
+    public function posts(Request $request)
     {
         $type = 'post';
         $posts = Post::select('id','name','image','description','created_at','view','comment','category_id','source_id');
@@ -51,11 +51,25 @@ class PostsController extends BaseController
             $posts->where('name','like','%' .$name. '%');
         }
         if($category_id !='all'){
-            $posts->where('category_id',$category_id);
+            $data = Category::find($category_id);
+            if($data->parent_id == NULL)
+            {
+                $category_id_temp = Category::select('id')->where('parent_id',$data->id)->get();
+
+                foreach ($category_id_temp as $row) {
+                    $categories_id[] = $row->id;
+                }
+                array_push($categories_id,(int)$category_id);
+
+                $posts = $posts->whereIn('category_id',$categories_id);
+            }
+            else{
+                $posts = $posts->where('category_id',$category_id);
+            }
         }
         
         $posts = $posts->orderBy('created_at','desc')->paginate($limit);
-
+      
         return $this->sendResponse($posts, 'Post read successfully.','posts');
     }
     public function sort($select,$limit)
@@ -64,30 +78,30 @@ class PostsController extends BaseController
         if($select == 'hot')
         {
             $posts = Post::orderBy('view','DESC')->select('id','name','image','description','created_at','view','comment','category_id')->with(array(
-            'categories' => function($posts)
-            {
-                $posts->select('id','name');
-            }))->where('publish', 1);
+                'categories' => function($posts)
+                {
+                    $posts->select('id','name');
+                }))->where('publish', 1);
             $posts = $posts->paginate($limit);
             return $this->sendResponse($posts, 'Post sorted successfully.','posts');
         }
         elseif($select == 'newest')
         {
             $posts = Post::orderBy('created_at','DESC')->select('id','name','image','description','created_at','view','comment','category_id')->with(array(
-            'categories' => function($posts)
-            {
-                $posts->select('id','name');
-            }))->where('publish', 1);
+                'categories' => function($posts)
+                {
+                    $posts->select('id','name');
+                }))->where('publish', 1);
             $posts = $posts->paginate($limit);
             return $this->sendResponse($posts, 'Post sorted successfully.','posts');
         }
         elseif($select == 'trend')
         {
             $posts = Post::where('trend',1)->select('id','name','image','description','created_at','view','comment','category_id')->with(array(
-            'categories' => function($posts)
-            {
-                $posts->select('id','name');
-            }))->where('publish', 1);
+                'categories' => function($posts)
+                {
+                    $posts->select('id','name');
+                }))->where('publish', 1);
             $posts = $posts->paginate($limit);
             return $this->sendResponse($posts, 'Post sorted successfully.','posts');
         }
@@ -144,30 +158,30 @@ class PostsController extends BaseController
                 $related = $related->get();
 
                 $response = [
-                            'status'  => true,
-                            'post'    =>$post,
-                            'related' =>$related,
-                        ];
+                    'status'  => true,
+                    'post'    =>$post,
+                    'related' =>$related,
+                ];
                 return response()->json($response);
             }catch(\Exception $e)
             {
                 $response = [
-                            'status'  => false,
-                            'message'    =>"Post does not exists !!!",
-                        ];
-                        return response()->json($response);
+                    'status'  => false,
+                    'message'    =>"Post does not exists !!!",
+                ];
+                return response()->json($response);
             }
             
         }
         else
         {
-             $response = [
-                        'status' => false,
-                        'message' => 'Please fill the id !!!',
-                    ];
-            return response()->json($response);
-        }
+           $response = [
+            'status' => false,
+            'message' => 'Please fill the id !!!',
+        ];
+        return response()->json($response);
     }
+}
     /**
      * Show the form for creating a new user
      *

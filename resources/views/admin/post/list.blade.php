@@ -47,7 +47,7 @@
                      <select style=" color: black ; width: 100%;"class="form-control" name="categories">
                         @if(isset($danhmuc_id))
                         @if($danhmuc_id != "All")
-                        <option style="display: none;" value="{{$post[0] ? $post[0]->categories->id : $danhmuc_id }}">{{$post[0] ? $post[0]->categories->name : $danhmuc}}</option>
+                        <option style="display: none;" value="{{$danhmuc_id}}">{{$danhmuc}}</option>
                         @endif
                         @endif
                         <option value="All">All</option>
