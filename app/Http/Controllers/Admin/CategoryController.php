@@ -7,7 +7,6 @@ use DB;
 use Illuminate\Support\Str;
 use Session;
 
- 
 class CategoryController extends Controller
 {
     /**
@@ -16,9 +15,10 @@ class CategoryController extends Controller
      * @param  \App\User  $model
      * @return \Illuminate\View\View
      */
-    public function index(Category $categories)
+    public function index()
     {
         $key=false;
+        // $categories = Category::orderBy('created_at','desc')->paginate(3);
     	$category = Category::where('parent_id',NULL)->get();
             
         $categories = Category::select('id','name','updated_at','parent_id','publish');
@@ -29,7 +29,7 @@ class CategoryController extends Controller
                 return $q->select('id','name','updated_at','parent_id','publish');
             }
         ));
-        $categories = $categories->paginate(3);
+        $categories = $categories->orderBy('created_at','desc')->paginate(3);
         return view('admin/category/list', ['categories' => $categories, 'category'=> $category,'publish'=>'All','key'=>$key,'muctin'=>'All']);
     }
 
@@ -175,7 +175,7 @@ class CategoryController extends Controller
     {
         if($request->option == 'delete'&& $request->checkbox != null)
         {
-            return $this->destroy($request);
+           return $this->destroy($request);
         }
         elseif($request->option == 'activate'&& $request->checkbox != null)
         {
@@ -189,7 +189,7 @@ class CategoryController extends Controller
     }
     public function destroy(Request $request)
     {
-    	$id = $request->checkbox   ;
+    	$id = $request->checkbox ;
     	if(is_array($id))
     	{
     		foreach ($id as $row) 
@@ -204,7 +204,7 @@ class CategoryController extends Controller
     		 $categories->delete();
     	}
         $request->session()->flash('delete', 'Bài viết được xóa thành công!');
-    	return redirect()->route('indexCategory');
+    	 return redirect()->route('indexCategory');
     }
     public function activate(Request $request)
     {

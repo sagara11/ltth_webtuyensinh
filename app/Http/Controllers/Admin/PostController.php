@@ -5,6 +5,7 @@ use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Database\Seeder;
 use DB;
+use App\Crawl;
 use App\Category;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Admin\ElasticsearchController;
@@ -45,6 +46,7 @@ class PostController extends Controller
     {
     	if($request->name != '' && $request->image != '' && $request->description != '' && $request->content != '' && $request->information != 'All' )
     	{
+            $webtuyensinh = Crawl::where('categories_name', NULL)->first();
             //$temp = new ElasticsearchController();
 	    	$user = new Post();
 	    	$user->name = $request->name ;
@@ -52,7 +54,7 @@ class PostController extends Controller
 	    	$user->slug = $request->slug ;
 	    	$user->image= $request->image ;
 	    	$user->description = $request->description ;
-            $user->source_id = 12 ;
+            $user->source_id = $webtuyensinh->id ;
 	    	$user->content = $request->content ;
 	    	$user->seo_keyword = $request->seo_keyword ;
 	    	$user->seo_title = $request->seo_title ;
@@ -107,13 +109,14 @@ class PostController extends Controller
     	// $category = Category::where('parent_id','!=',NULL)->get();
     	if($request->name != '' && $request->description != '' && $request->content != '' && $request->information != 'All' )
     	{
+            $webtuyensinh = Crawl::where('categories_name', NULL)->first();
             //$temp = new ElasticsearchController();
 	    	$posts->name = $request->name ;
             $posts->category_id = $request->information ;
 	    	$posts->slug = $request->slug ;
 	    	$posts->image= $request->image ;
 	    	$posts->description = $request->description ;
-            $posts->source_id = 12 ;
+            $posts->source_id = $webtuyensinh->id ;
 	    	$posts->content = $request->content ;
 	    	$posts->seo_keyword = $request->seo_keyword ;
 	    	$posts->seo_title = $request->seo_title ;
@@ -189,26 +192,37 @@ class PostController extends Controller
 
     	foreach ($requests as $key => $value) 
     	{
-    		if($value != 'All' && $value != '' && $key != 'name')
+    		if($value != 'All' && $value != '')
 			{
+                if($key != 'name')
+                {
 	    		 $DB[] = array($key, '=', $value); 
+                }
+                else
+                {
+                    if($value != '')
+                    $DB[] = array($key,'like','%' .$value. '%');
+                }
 	    	}
-            if($key == 'name')
-            {
-                $DB[] = array($key,'like','%' .$value. '%');
-            }
     	}
         if(isset($DB))
         {
+            $data = Category::find($request->categories);
+
+            $category_id = Category::select('id')->where('parent_id',$data->id)->get();
+
+            foreach ($category_id as $row) {
+                $categories_id[] = $row->id;
+            }
             $post = Post::where($DB);
 
             $post->with(array( 'categories' => function($q) {
                 return $q->select('id','name','updated_at','publish');
                 }
             ));
-        
-            $post = $post->orderBy('created_at','desc')->paginate(8);
             
+            $post = $post->whereIn('category_id',$categories_id)->orderBy('created_at','desc')->paginate(8);
+
             $data = Category::where('id',$request->categories)->first();
 
             if($post[0]==null)

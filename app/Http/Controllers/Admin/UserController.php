@@ -17,7 +17,7 @@ class UserController extends Controller
     public function index(User $users)
     {
         $key = false ;
-        return view('admin/users/list', ['users' => $users->paginate(8),'key'=>$key,'publish'=>'All']);
+        return view('admin/users/list', ['users' => $users->paginate(8),'key'=>$key,'publish'=>'All','role'=>'All']);
     }
 
     /**
@@ -148,8 +148,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-     public function method(Request $request)
-     {
+    public function method(Request $request)
+    {
         if($request->option == 'delete' && $request->checkbox != null)
         {
             return $this->delete($request);
@@ -158,7 +158,11 @@ class UserController extends Controller
         {
             return $this->activate($request); 
         }
-        elseif($request->publish != 'All' && $request->publish != null)
+        elseif($request->option == 'phancap')
+        {
+            return $this->phancap($request);
+        }
+        elseif($request->publish != 'All' || $request->phancap != 'All')
         {
             return $this->filter($request);
         }
@@ -172,12 +176,57 @@ class UserController extends Controller
             return redirect()->route('indexUser');
         }
     }
+    public function phancap(Request $request)
+    {
+        if(Auth::user()->role_id)
+        {
+            if(isset($request->option))
+            {
+                $id=$request->checkbox;
+                if (is_array($id)) 
+                {
+                    foreach ($id as $item) 
+                    {
+                        $list = User::findOrfail($item);
+                        if($list->role_id) 
+                        {
+                            $list->role_id = false;
+                            $list->save();
+                        } else {
+                            $list->role_id = true;
+                            $list->save();
+                        }
+                    }
+                } 
+                else 
+                {
+                    $list = User::findOrfail($id);
+                    if($list->role_id) 
+                    {
+                        $list->role_id = false;
+                        $list->save();
+                    } else 
+                    {
+                        $list->role_id = true;
+                        $list->save();
+                    }
+                }
+                $request->session()->flash('success', 'Phân cấp/Bỏ cấp thành công !!!');
+                return redirect()->route('indexUser'); 
+            }
+        }
+        else
+        {
+            $request->session()->flash('fail', 'Bạn không có quyền làm điều này !!!');
+            return redirect()->route('indexUser'); 
+        }
+    }
     public function search(Request $request)
     {
         $key = true;
         $data = $request->search;
         $user = User::where('name', 'like','%' .$data. '%')->orWhere('email', 'like','%' .$data. '%')->orWhere('phone', 'like','%' .$data. '%');
-        return view('admin/users/list',['users'=>$user->paginate(5),'key'=>$key,'publish'=>'All','search'=>$request->search]);
+        return view('admin/users/list',['users'=>$user->paginate(5),'key'=>$key,'publish'=>'All','search'=>$request->search,'role'=>'All']);
     }
     public function activate(Request $request)
     {
@@ -185,7 +234,7 @@ class UserController extends Controller
         {
             $id=$request->checkbox;
             if (is_array($id)) 
-                {
+            {
                 foreach ($id as $item) 
                 {
                     $list = User::findOrfail($item);
@@ -222,7 +271,7 @@ class UserController extends Controller
         {
             $id = $request->checkbox;
             if (is_array($id)) 
-                {
+            {
                 foreach ($id as $item) 
                 {
                     $list = User::findOrfail($item);
@@ -242,7 +291,7 @@ class UserController extends Controller
     public function filter(Request $request)
     {
         $key = true ;
-        $requests = array('publish'=>$request->publish);
+        $requests = array('publish'=>$request->publish,'role_id'=>$request->phancap);
         foreach ($requests as $key => $value) 
         {
             if($value != 'All')
@@ -255,11 +304,11 @@ class UserController extends Controller
             $user = User::where($DB)->paginate(8);
             if($user[0] == null)
             {
-                return view('admin/users/list',['users'=>$user,'key'=>$key,'publish'=>$request->publish]);
+                return view('admin/users/list',['users'=>$user,'key'=>$key,'publish'=>$request->publish,'role'=>$request->phancap]);
             }
             else
             {
-                return view('admin/users/list',['users'=>$user,'key'=>$key,'publish'=>$request->publish]);
+                return view('admin/users/list',['users'=>$user,'key'=>$key,'publish'=>$request->publish,'role'=>$request->phancap]);
             }
         }  
         else
@@ -267,6 +316,6 @@ class UserController extends Controller
             return redirect()->route('indexUser');
         }
         $user = new User();
-        return view('admin/users/list',['users'=>$user->paginate(8),'key'=>$key,'publish'=>$request->publish]);
+        return view('admin/users/list',['users'=>$user->paginate(8),'key'=>$key,'publish'=>$request->publish,'role'=>'All']);
     }
 }

@@ -43,7 +43,20 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-sm-5">
+                    <div class="col-sm-1" style="margin-left: 20px">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Cấp độ</label>
+                            <select class="form-control" name="phancap">
+                                @if($role != 'All')
+                                 <option style="display: none;" value="{{$role}}">{{ $role == 1 ? 'Admin' : 'User' }}</option>}
+                                @endif
+                                <option value="All">--All--</option>
+                                <option value="1">Admin</option>
+                                <option value="0">User</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
                         <div class="form-group">
                             <input type="text" name="search"
                             placeholder="Ten,SoDT,Email,..."
@@ -72,6 +85,7 @@
                                 <option value="all">All--</option>
                                 <option value="activate">Kích hoạt/Vô hiệu hóa</option>
                                 <option value="delete">Xóa</option>
+                                <option value="phancap">Phân quyền/Bỏ quyền</option>
                             </select>
                             <input onclick="confirm()" class="btn btn-primary" id="confirm-btn" type="button" value="OK" name="confirm1">
                             </div>
@@ -88,18 +102,22 @@
                             <td>Email</td>
                             <td>Phone</td>
                             <td>Publish</td>
+                            <td>Cấp Độ</td>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($users as $temp)
                             <tr id="detail">
                             <td><input type="checkbox" name="checkbox[]" class="check" value="{{ $temp->id }}"></td>
-                            <td><img style="height: 80px; width: 100px;" src="{{$temp->avatar ? $temp->avatar : '/userfiles/images/default_avatar-ea7cf6abde4eec089a4e03cc925d0e893e428b2b6971b12405a9b118c837eaa2.png'}}" alt=""></td>
+                            <td><img style="height: 80px; width: 100px;" src="{{$temp->avatar  ? $temp->avatar : '/userfiles/images/default_avatar-ea7cf6abde4eec089a4e03cc925d0e893e428b2b6971b12405a9b118c837eaa2.png'}}" alt=""></td>
                             <td>{{ $temp->name }}</td>
                             <td><a href="{{ route('editUser') }}?id={{ $temp->id }}" style="color: green">{{ $temp->email }}</a></td>
                             <td>{{$temp->phone}}</td>
                             <td> 
                                 <span style="background-color: {{ $temp->publish ? '#4caf50' : '#c41700' }}; color: white; padding: 5px 5px;">{{ $temp->publish ? 'ON' : 'OFF' }}</span>
+                            </td>
+                            <td>
+                                <span style="background-color: {{ $temp->role_id == 0 ? '#4caf50' : '#c41700' }}; color: white; padding: 5px 5px;">{{ $temp->role_id == 0 ? 'User' : 'Admin' }}</span>
                             </td>
                         </tr>
                         @endforeach

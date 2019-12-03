@@ -75,6 +75,8 @@ Route::group(['prefix' => 'admin'], function() {
 		Route::get('comment/list','\App\Http\Controllers\Admin\CommentController@index')->name('indexComment');
 		Route::get('comment/list_new','\App\Http\Controllers\Admin\CommentController@index_new')->name('index_newComment');
 		Route::post('comment/activate','\App\Http\Controllers\Admin\CommentController@activate')->name('activateComment');
+		Route::post('comment/method','\App\Http\Controllers\Admin\CommentController@method')->name('methodComment');
+		Route::post('comment/method_new','\App\Http\Controllers\Admin\CommentController@method_new')->name('method_newComment');
 		Route::post('comment/activate_new','\App\Http\Controllers\Admin\CommentController@activate_new')->name('activate_newComment');
 		Route::get('comment/create','\App\Http\Controllers\Admin\CommentController@create')->name('createComment');
 		Route::get('user/filter','\App\Http\Controllers\Admin\UserController@filter')->name('filterUser');
