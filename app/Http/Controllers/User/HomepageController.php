@@ -25,14 +25,14 @@ class HomepageController extends Controller
     function home()
     {
         try{
-            $trend_first = Post::latest()->where('trend', 1)->where('publish',1)->first();
-            $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('publish',1)->offset(1)->paginate(3);
+            $trend_first = Post::latest()->where('trend', 1)->where('publish',1)->where('type_post','post')->first();
+            $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('publish',1)->where('type_post','post')->offset(1)->paginate(3);
         }
         catch(\Exception $e){
-            $trend_first = Post::orderBy('id', 'desc')->where('publish',1)->first();
-            $trend = Post::orderBy('id', 'desc')->where('publish',1)->offset(1)->paginate(3);
+            $trend_first = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->first();
+            $trend = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->offset(1)->paginate(3);
         }
-        $news = Post::orderBy('id', 'desc')->where('publish',1)->paginate(20);
+        $news = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->paginate(20);
         return view('user.page.home', compact('news', 'trend_first', 'trend'));
     }
 
@@ -43,21 +43,21 @@ class HomepageController extends Controller
             return view('user.layout.error404');
         }
         try{
-            $trend_first = Post::latest()->where('trend', 1)->where('category_id', $header_id->id)->first();
-            $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->offset(1)->where('category_id', $header_id->id)->paginate(3);
+            $trend_first = Post::latest()->where('trend', 1)->where('category_id', $header_id->id)->where('type_post','post')->first();
+            $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->offset(1)->where('category_id', $header_id->id)->where('type_post','post')->paginate(3);
         }
         catch(\Exception $e){
-            $trend_first = Post::where('category_id', $header_id->id)->first();
-            $trend = Post::where('category_id', $header_id->id)->offset(1)->paginate(3);
+            $trend_first = Post::where('category_id', $header_id->id)->where('type_post','post')->first();
+            $trend = Post::where('category_id', $header_id->id)->where('type_post','post')->offset(1)->paginate(3);
         }
-        $news = Post::orderBy('id', 'desc')->where('category_id', $header_id->id)->where('id', "!=", $trend_first->id)->where('publish',1)->paginate(20);
+        $news = Post::orderBy('id', 'desc')->where('category_id', $header_id->id)->where('id', "!=", $trend_first->id)->where('publish',1)->where('type_post','post')->paginate(20);
         $now = Carbon::now();
         return view('user.page.home', compact('news', 'trend_first', 'trend', 'header_id'));
     }
 
     function chitiettin($slug)
     {
-        $header = Post::orderBy('view', 'desc')->paginate(3);
+        $header = Post::orderBy('view', 'desc')->where('type_post','post')->paginate(3);
 
         $banner = Banner::orderBy('created_at', 'desc')->where('position', 'top')->paginate(2);
         $footer_banner = Banner::orderBy('created_at', 'desc')->where('position', 'sidebar')->first();
@@ -66,22 +66,22 @@ class HomepageController extends Controller
         if(isset($new)==false){
             return view('user.layout.error404');
         }
-        $xuhuong = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id','!=',$new->id)->paginate(4);
-        $tinlienquan = Post::orderBy('created_at', 'desc')->where('category_id', $new->category_id)->where('publish',1)->where('id','!=',$new->id)->paginate(4);
-        $tinmoi = Post::orderBy('created_at', 'desc')->where('publish',1)->paginate(4);
-        $tinnong = Post::orderBy('view', 'desc')->where('publish',1)->paginate(4);
+        $xuhuong = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id','!=',$new->id)->where('type_post','post')->paginate(4);
+        $tinlienquan = Post::orderBy('created_at', 'desc')->where('category_id', $new->category_id)->where('publish',1)->where('id','!=',$new->id)->where('type_post','post')->paginate(4);
+        $tinmoi = Post::orderBy('created_at', 'desc')->where('publish',1)->where('type_post','post')->paginate(4);
+        $tinnong = Post::orderBy('view', 'desc')->where('publish',1)->where('type_post','post')->paginate(4);
 
         $new->view =  $new->view + 1;
         $new->save();
 
 
         try{
-            $trend_first = Post::latest()->where('trend', 1)->where('category_id', $new->category_id)->first();
-            $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->where('category_id', $new->category_id)->paginate(3);
+            $trend_first = Post::latest()->where('trend', 1)->where('category_id', $new->category_id)->where('type_post','post')->first();
+            $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->where('category_id', $new->category_id)->where('type_post','post')->paginate(3);
         }
         catch(\Exception $e){
-            $trend_first = Post::where('category_id', $new->category_id)->first();
-            $trend = Post::where('category_id', $new->category_id)->where('id','!=',$trend_first->id)->paginate(3);
+            $trend_first = Post::where('category_id', $new->category_id)->where('type_post','post')->first();
+            $trend = Post::where('category_id', $new->category_id)->where('id','!=',$trend_first->id)->where('type_post','post')->paginate(3);
         }
         try{
             $comment = Comment::where('post_id', $new->id)->where('parent_id', NULL)->paginate(5);
@@ -89,7 +89,7 @@ class HomepageController extends Controller
         catch(\Exception $e){
             $comment = "Chưa có bình luận";
         }
-        $sidetrend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->paginate(6);
+        $sidetrend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->where('type_post','post')->paginate(6);
 
         $footer_banner = Banner::orderBy('created_at', 'desc')->where('position', 'sidebar')->first();
          
@@ -102,10 +102,10 @@ class HomepageController extends Controller
 
         $data_first = $data->where('source_id',$danhmuc_id)->orderBy('view','desc')->first();
 
-        $data_third = Post::where('source_id',$danhmuc_id)->orderBy('created_at','desc')->paginate(20);
-        $tinlienquan = Post::orderBy('created_at', 'desc')->where('category_id', $data_first->category_id)->where('publish',1)->where('id','!=',$data_first->id)->paginate(4);
-        $tinmoi = Post::orderBy('created_at', 'desc')->where('publish',1)->paginate(4);
-        $tinnong = Post::orderBy('view', 'desc')->where('publish',1)->paginate(4);
+        $data_third = Post::where('source_id',$danhmuc_id)->orderBy('created_at','desc')->where('type_post','post')->paginate(20);
+        $tinlienquan = Post::orderBy('created_at', 'desc')->where('category_id', $data_first->category_id)->where('publish',1)->where('id','!=',$data_first->id)->where('type_post','post')->paginate(4);
+        $tinmoi = Post::orderBy('created_at', 'desc')->where('publish',1)->where('type_post','post')->paginate(4);
+        $tinnong = Post::orderBy('view', 'desc')->where('publish',1)->where('type_post','post')->paginate(4);
      
         return view('user.page.nguontin', compact('data_first','data_third', 'tinlienquan', 'tinmoi', 'tinnong'));
     }
@@ -113,10 +113,16 @@ class HomepageController extends Controller
     function search(REQUEST $request)
     {
         $name = $request->name_search;
-        $news_name = Post::where('name','like', '%'.$request->name_search.'%')->get();
+        $news_name = Post::where('name','like', '%'.$request->name_search.'%')->where('type_post','post')->get();
 
-        $trend_first = Post::latest()->where('trend', 1)->first();
-        $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->paginate(3);
+        try{
+            $trend_first = Post::latest()->where('trend', 1)->where('publish',1)->where('type_post','post')->first();
+            $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->where('type_post','post')->paginate(3);
+        }
+        catch(\Exception $e){
+            $trend_first = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->first();
+            $trend = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->offset(1)->paginate(3);
+        }
         $news = Post::orderBy('created_at', 'desc')->where('id', "!=", $trend_first->id)->paginate(20);
 
         $webtuyensinh_first = Category::where('id', $trend_first->category_id)->first();
@@ -131,7 +137,7 @@ class HomepageController extends Controller
 
     function taikhoan()
     {
-        $header = Post::orderBy('view', 'desc')->paginate(3);
+        $header = Post::orderBy('view', 'desc')->where('type_post','post')->paginate(3);
         $user = Auth::user();
         $user_post = Post::where('user_id', Auth::user()->id)->get();
         $comment = Comment::where('user_id', Auth::user()->id)->get();
@@ -139,7 +145,7 @@ class HomepageController extends Controller
     }
 
     function doimatkhau(){
-        $header = Post::orderBy('view', 'desc')->paginate(3);
+        $header = Post::orderBy('view', 'desc')->where('type_post','post')->paginate(3);
         $user = Auth::user();
         $user_post = Post::where('user_id', Auth::user()->id)->get();
         $comment = Comment::where('user_id', Auth::user()->id)->get();
@@ -147,7 +153,7 @@ class HomepageController extends Controller
     }
 
     function thembaidang(){
-        $header = Post::orderBy('view', 'desc')->paginate(3);
+        $header = Post::orderBy('view', 'desc')->where('type_post','post')->paginate(3);
         $user = Auth::user();
         $user_post = Post::where('user_id', Auth::user()->id)->get();
         $comment = Comment::where('user_id', Auth::user()->id)->get();
@@ -155,7 +161,7 @@ class HomepageController extends Controller
     }
 
     function danhsachbaidang(){
-        $header = Post::orderBy('view', 'desc')->paginate(3);
+        $header = Post::orderBy('view', 'desc')->where('type_post','post')->paginate(3);
         $user = Auth::user();
         $user_post = Post::where('user_id', Auth::user()->id)->get();
         $comment = Comment::where('user_id', Auth::user()->id)->get();
@@ -163,7 +169,7 @@ class HomepageController extends Controller
     }
 
     function quanlybinhluan(){
-        $header = Post::orderBy('view', 'desc')->paginate(3);
+        $header = Post::orderBy('view', 'desc')->where('type_post','post')->paginate(3);
         $user = Auth::user();
         $user_post = Post::where('user_id', Auth::user()->id)->get();
         $comment = Comment::where('user_id', Auth::user()->id)->get();
