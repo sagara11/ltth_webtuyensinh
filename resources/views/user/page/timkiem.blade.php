@@ -16,7 +16,7 @@ Kết quả tìm kiếm
         <h4> Tìm kiếm </h4>
     </section>
     <section>
-        Tìm thấy {{ $news_name->count() }} kết quả
+        Tìm thấy {{ $news_name->count() }} kết quả cho từ khóa "{{ $name}}"
     </section>
     <div class="row">
         <div class="col-md-8">

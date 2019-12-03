@@ -74,6 +74,7 @@ class CrawlController extends Controller
                         }
                     } 
                     catch(\Exception $e){
+                        echo " + Error ";
                         continue;
                     }
                 }

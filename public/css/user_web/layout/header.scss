@@ -18,9 +18,61 @@ header {
       margin-right: 7px;
     }
   }
+
+  .right {
+    padding: 0;
+    margin: 0;
+    font-size: 13px;
+    float: right;
+    li {
+      list-style: none;
+      display: inline-block;
+      float: right;
+      margin-left: 10px;
+    }
+    .input-group {
+      margin: 0 !important;
+      input {
+        width: 200px;
+        height: 25px;
+        padding: 3px 10px;
+        border-right: 0;
+        font-size: 13px;
+        &:focus {
+          border-color: #ced4da;
+          -webkit-box-shadow: none;
+          box-shadow: none;
+          outline: none;
+        };
+      }
+      button {
+        height: 25px;
+        padding: 2px 5px;
+        background:white;
+        border-bottom-right-radius: 5px !important;
+        border-top-right-radius: 5px !important;
+        border-left: 0;
+        border-color: #ced4da;
+        color: #ccc;
+        font-size: 13px;
+        &:focus {
+          border-color: #ced4da;
+          -webkit-box-shadow: none;
+          box-shadow: none;
+          outline: none;
+        };
+
+      }
+    }
+    .dk {
+      background-color: #055695;
+      padding: 3px 10px ;
+      border-radius: 3px;
+      color: white;
+    }
+  }
   .dropdown {
     cursor: pointer;
-    float: right;
     .dropdown-toggle {
       display: flex;
       align-items: center;
@@ -35,21 +87,25 @@ header {
       }
     }
     .dropdown-menu {
-      top: 26px !important;
+      top: 28px !important;
       right: 0 !important;
       transform: inherit !important;
       left: inherit !important;
       border-radius: 0;
       ul {
-        padding: 0px 10px;
-        margin: 0px 0px;
+        margin: 0px;
+        padding: 0;
         list-style: none;
         li {
           cursor: pointer;
-          padding: 10px 0px;
+          
+          float: left;
+          width: 100%;
           a{
             color: rgb(51, 51, 51);
             text-decoration: none;
+            padding: 10px;
+            display: inline-block;
           }
           &:hover {
             background-color: rgb(246, 246, 246);
@@ -82,17 +138,12 @@ header {
 
         list-style-type: none;
         .home {
-          width: 10%;
           a {
-            height: fit-content;
-            width: fit-content;
-            display: flex;
-            align-items: center;
-            text-decoration: none;
+            padding: 7px 10px;
+            background-color: rgb(246, 92, 44);
+            display: inline-block;
             i {
-              font-size: 16px;
-              padding: 11px 11px;
-              background-color: rgb(246, 92, 44);
+              
               color: white;
               transition: 0.3s;
               &:hover {
@@ -384,6 +435,7 @@ header {
         a {
           text-transform: uppercase;
           color: rgb(51, 51, 51);
+          font-weight: bold;
         }
       }
     }

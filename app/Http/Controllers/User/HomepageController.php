@@ -158,6 +158,7 @@ class HomepageController extends Controller
 
     function search(REQUEST $request)
     {
+        $name = $request->name_search;
         $news_name = Post::where('name','like', '%'.$request->name_search.'%')->get();
         $header = Post::orderBy('view', 'desc')->paginate(3);
 
@@ -174,7 +175,7 @@ class HomepageController extends Controller
         $giaoduc = Post::orderBy('created_at', 'desc')->where('category_id', 34)->where('id', "!=", $giaoduc_first->id)->paginate(4);
 
         $webtuyensinh_first = Category::where('id', $trend_first->category_id)->first();
-        return view('user.page.timkiem', compact('header', 'banner', 'footer_banner', 'news', 'trend_first', 'trend', 'sidetrend', 'tuyensinh', 'tuyensinh_first', 'giaoduc', 'giaoduc_first', 'webtuyensinh_first', 'news_name'));
+        return view('user.page.timkiem', compact('header', 'banner', 'footer_banner', 'news', 'trend_first', 'trend', 'sidetrend', 'tuyensinh', 'tuyensinh_first', 'giaoduc', 'giaoduc_first', 'webtuyensinh_first', 'news_name', 'name'));
 
     }
 

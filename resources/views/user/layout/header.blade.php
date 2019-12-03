@@ -95,42 +95,50 @@ function rebuild_date( $format, $time = 0 )
 <header class="d-none d-lg-block">
     <div class="container">
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-6">
                 <ul class="left">
                     <li> {{ rebuild_date('l, d/M/Y, H:i')}} </li>
                     <li> <i class="fa fa-phone"> </i> 04 668 39 668 </li>
                     <li> <i class="fa fa-envelope"> </i> contact@webtuyensinh.edu.vn </li>
                 </ul>
             </div>
-            <div class="col-md-3 ">
-                <div class="dropdown">
-                    <div class="dropdown-toggle" data-toggle="dropdown">
-                        @if (Auth::check())
-                        <img class=" rounded rounded-circle" height="25px" width="25px" src="{{ Auth::user()->avatar }}"
-                            alt="" />
-                        <p>{{ Auth::user()->name }}</p>
-                        @else
-                        <p>Tài khoản</p>
-                        @endif
-                    </div>
+            <div class="col-md-6 ">
+                <ul class="right">
+                    
                     @if (Auth::check())
-                    <div class="dropdown-menu">
-                        <ul>
-                            <li> <a href="{{ route('taikhoan') }}"> Tài khoản của tôi </a> </li>
-                            <li> <a href="{{ route('doimatkhau') }}"> Đổi mật khẩu </a> </li>
-                            <li> <a href="{{ route('quanlybinhluan') }}"> Quản lý bình luận </a> </li>
-                            <li> <a href="{{ route('logout') }}"> Thoát </a> </li>
-                        </ul>
-                    </div>
-                    @else
-                    <div class="dropdown-menu">
-                        <ul>
-                            <li data-toggle="modal" data-target="#signin"> Đăng nhập </li>
-                            <li data-toggle="modal" data-target="#signup"> Đăng ký </li>
-                        </ul>
-                    </div>
+                     <li> 
+                        <div class="dropdown">
+                            <div class="dropdown-toggle" data-toggle="dropdown">
+                                <img class=" rounded rounded-circle" height="25px" width="25px" src="{{ Auth::user()->avatar }}"
+                                    alt="" />
+                                <p>{{ Auth::user()->name }}</p>
+                            </div>
+                          
+                            <div class="dropdown-menu">
+                                <ul>
+                                    <li> <a href="{{ route('taikhoan') }}"> Tài khoản của tôi </a> </li>
+                                    <li> <a href="{{ route('doimatkhau') }}"> Đổi mật khẩu </a> </li>
+                                    <li> <a href="{{ route('quanlybinhluan') }}"> Quản lý bình luận </a> </li>
+                                    <li> <a href="{{ route('logout') }}"> Thoát </a> </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </li>
+                    @else 
+                        
+                        <li class="dk" data-toggle="modal" data-target="#signup"> Đăng ký </li>
+                        <li class="dk" data-toggle="modal" data-target="#signin"> Đăng nhập </li>
                     @endif
-                </div>
+                    <li> 
+                        <form class="input-group mb-3" metho="get" action="/search">
+                          <input type="text" name="name_search" class="form-control" placeholder="Tìm kiếm" aria-label="Username" aria-describedby="basic-addon1">
+                          <div class="input-group-prepend">
+                            <button class="btn btn-success"> <i class="fa fa-search"> </i> </button>
+                          </div>
+                        </form>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
@@ -239,8 +247,9 @@ function rebuild_date( $format, $time = 0 )
                     <img class="img-fluid" src="{{ asset('media/logo-main.png') }}" alt="" />
                 </a>
             </div>
-            <div class="menu col-lg-9">
+            <div class="menu col-lg-10">
                 <ul>
+                    <li class="home"> <a href="/"> <i class="fa fa-home"> </i> </a> </li>
                     @foreach ($nav_section as $item)
                     <li> <a href="{{ route('danhmuc',$item->slug) }}"> {{ $item->name }} </a> </li>
                     @endforeach
@@ -250,15 +259,7 @@ function rebuild_date( $format, $time = 0 )
 
                 </ul>
             </div>
-            <div class="col-lg-1">
-                <div id="search">
-                    <i onclick="openSearch()" class="fa fa-search"></i>
-                    <form class="searchbar" method="get" action="{{ route('search') }}">
-                        <input class="form-control" name="name_search" type="text" placeholder="Nhập tìm kiếm...">
-                    </form>
-                </div>
-
-            </div>
+            
         </div>
 
     </div>
