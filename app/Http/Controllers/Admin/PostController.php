@@ -207,13 +207,13 @@ class PostController extends Controller
     	}
         if(isset($DB))
         {
-            $data = Category::find($request->categories);
+            // $data = Category::find($request->categories);
 
-            $category_id = Category::select('id')->where('parent_id',$data->id)->get();
+            // $category_id = Category::select('id')->where('parent_id',$data->id)->get();
 
-            foreach ($category_id as $row) {
-                $categories_id[] = $row->id;
-            }
+            // foreach ($category_id as $row) {
+            //     $categories_id[] = $row->id;
+            // }
             $post = Post::where($DB);
 
             $post->with(array( 'categories' => function($q) {
@@ -221,7 +221,7 @@ class PostController extends Controller
                 }
             ));
             
-            $post = $post->whereIn('category_id',$categories_id)->orderBy('created_at','desc')->paginate(8);
+            $post = $post->orderBy('created_at','desc')->paginate(8);
 
             $data = Category::where('id',$request->categories)->first();
 
