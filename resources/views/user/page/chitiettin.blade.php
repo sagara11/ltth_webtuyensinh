@@ -30,7 +30,7 @@
                     <span> {{ $comment->count() }} bình luận |</span>
                     @if ($new->source->id)
                     <a class="webtuyensinh-link"
-                    href="{{ route('nguon_tin', $new->source->id) }}">{{ $new->source->web_name }}</a>
+                        href="{{ route('nguon_tin', $new->source->id) }}">{{ $new->source->web_name }}</a>
                     @endif
                     <span class="new_view">| {{ $new->view }} lượt xem</span>
                 </div>
@@ -49,9 +49,11 @@
             </article>
 
             <section id="news_source">
+                @if (isset($new->source->web_name))
                 <a target="_blank" rel="nofollow" href="{{ $new->post_link }}">
                     Theo <b>{{ $new->source->web_name }}</b>
                 </a>
+                @endif
             </section>
 
             <article id="comment">
@@ -191,7 +193,7 @@
                             <span> {{ $item->hour() }} </span>
                             @if (isset($item->source->id))
                             <a class="webtuyensinh-link" href="{{ route('nguon_tin', $item->source->id) }}">
-                                    {{ $item->source->web_name }} </a>
+                                {{ $item->source->web_name }} </a>
                             @endif
                         </p>
                     </div>
@@ -225,7 +227,7 @@
                             <span> {{ $item->hour() }} </span>
                             @if (isset($item->source->id))
                             <a class="webtuyensinh-link" href="{{ route('nguon_tin', $item->source->id) }}">
-                                    {{ $item->source->web_name }} </a>
+                                {{ $item->source->web_name }} </a>
                             @endif
                         </p>
                     </div>
@@ -255,9 +257,9 @@
                         <p>
                             <span> {{ $item->categories->name }} </span>
                             <span> {{ $item->hour() }} </span>
-                            @if (asset($item->source->id))
+                            @if (isset($item->source->id))
                             <a class="webtuyensinh-link" href="{{ route('nguon_tin', $item->source->id) }}">
-                                    {{ $item->source->web_name }} </a>
+                                {{ $item->source->web_name }} </a>
                             @endif
                         </p>
                     </div>
