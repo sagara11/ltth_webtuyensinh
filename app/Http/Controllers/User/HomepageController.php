@@ -93,17 +93,6 @@ class HomepageController extends Controller
     {
         $name = $request->name_search;
         $news_name = Post::where('name','like', '%'.$request->name_search.'%')->where('type_post','post')->get();
-
-        // $trend_first = Post::where('trend', 1)->where('publish',1)->where('type_post','post')->first();
-        // $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->where('type_post','post')->paginate(3);
-        
-        // if(empty($trend_first)){
-        //     $trend_first = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->first();
-        //     $trend = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->offset(1)->paginate(3);
-        // }
-        // $news = Post::orderBy('created_at', 'desc')->where('id', "!=", $trend_first->id)->paginate(20);
-
-        // $webtuyensinh_first = Category::where('id', $trend_first->category_id)->first();
         return view('user.page.timkiem', compact('news_name', 'name'));
 
     }

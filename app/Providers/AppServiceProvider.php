@@ -68,37 +68,12 @@ class AppServiceProvider extends ServiceProvider
         });
 
         view()->composer('user.page.home',function($view){
-            $header = Post::orderBy('view', 'desc')->paginate(3);
-            $banner = Banner::orderBy('created_at', 'desc')->where('position', 'top')->paginate(2);
-            $footer_banner = Banner::orderBy('created_at', 'desc')->where('position', 'sidebar')->first();
             $trend_first = Post::where('trend', 1)->where('publish',1)->where('type_post','post')->first();
             if(empty($trend_first)){
                 $trend_first = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->first();
             }
             $webtuyensinh_first = Category::where('id', $trend_first->category_id)->first();
-            $view->with('webtuyensinh_first', $webtuyensinh_first)->with('footer_banner', $footer_banner)->with('banner', $banner)->with('header', $header)->with('banner', $banner);
-        });
-
-        view()->composer('user.page.nguontin',function($view){
-            $header = Post::orderBy('view', 'desc')->where('type_post','post')->paginate(3);
-            $banner = Banner::orderBy('created_at', 'desc')->where('position', 'top')->paginate(2);
-            $footer_banner = Banner::orderBy('created_at', 'desc')->where('position', 'sidebar')->first();
-            $trend_first = Post::where('trend', 1)->where('publish',1)->where('type_post','post')->first();
-            if(empty($trend_first)){
-                Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->first();
-            }
-            $view->with('footer_banner', $footer_banner)->with('banner', $banner)->with('header', $header)->with('banner', $banner);
-        });
-
-        view()->composer('user.page.timkiem',function($view){
-            $header = Post::orderBy('view', 'desc')->where('type_post','post')->paginate(3);
-            $banner = Banner::orderBy('created_at', 'desc')->where('position', 'top')->paginate(2);
-            $footer_banner = Banner::orderBy('created_at', 'desc')->where('position', 'sidebar')->first();
-            $trend_first = Post::where('trend', 1)->where('publish',1)->where('type_post','post')->first();
-            if(empty($trend_first)){
-                Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->first();
-            }
-            $view->with('footer_banner', $footer_banner)->with('banner', $banner)->with('header', $header)->with('banner', $banner);
+            $view->with('webtuyensinh_first', $webtuyensinh_first);
         });
     }
 }
