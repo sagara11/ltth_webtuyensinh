@@ -56,9 +56,13 @@ class AppServiceProvider extends ServiceProvider
         });
 
         view()->composer('user.layout.sidebar',function($view){
+            $tuyensinh_first = Post::where('category_id', 37)->first();
+            $tuyensinh = Post::orderBy('created_at', 'asc')->where('category_id', 37)->where('id', "!=", $tuyensinh_first->id)->where('publish',1)->paginate(4);
+            $giaoduc_first = Post::where('category_id', 34)->where('publish',1)->first();
+            $giaoduc = Post::orderBy('created_at', 'desc')->where('category_id', 34)->where('id', "!=", $giaoduc_first->id)->where('publish',1)->paginate(4);
             $xuhuong_first = Post::orderBy('view', 'desc')->first();
             $xuhuong = Post::orderBy('view', 'desc')->paginate(5);
-            $view->with('xuhuong_first', $xuhuong_first)->with('xuhuong', $xuhuong);
+            $view->with('tuyensinh_first', $tuyensinh_first)->with('tuyensinh', $tuyensinh)->with('giaoduc_first', $giaoduc_first)->with('giaoduc', $giaoduc)->with('xuhuong_first', $xuhuong_first)->with('xuhuong', $xuhuong);
         });
 
         view()->composer('user.page.home',function($view){
@@ -67,11 +71,8 @@ class AppServiceProvider extends ServiceProvider
             $footer_banner = Banner::orderBy('created_at', 'desc')->where('position', 'sidebar')->first();
             $trend_first = Post::latest()->where('trend', 1)->where('publish',1)->first();
             $sidetrend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->where('publish',1)->paginate(6);
-            $tuyensinh_first = Post::where('category_id', 37)->first();
-            $tuyensinh = Post::orderBy('created_at', 'asc')->where('category_id', 37)->where('id', "!=", $tuyensinh_first->id)->where('publish',1)->paginate(4);
-            $giaoduc_first = Post::where('category_id', 34)->where('publish',1)->first();
-            $giaoduc = Post::orderBy('created_at', 'desc')->where('category_id', 34)->where('id', "!=", $giaoduc_first->id)->where('publish',1)->paginate(4);
-            $view->with('footer_banner', $footer_banner)->with('banner', $banner)->with('header', $header)->with('banner', $banner)->with('sidetrend', $sidetrend)->with('tuyensinh_first', $tuyensinh_first)->with('tuyensinh', $tuyensinh)->with('giaoduc', $giaoduc)->with('giaoduc_first', $giaoduc_first);
+            $webtuyensinh_first = Category::where('id', $trend_first->category_id)->first();
+            $view->with('webtuyensinh_first', $webtuyensinh_first)->with('footer_banner', $footer_banner)->with('banner', $banner)->with('header', $header)->with('banner', $banner)->with('sidetrend', $sidetrend);
         });
 
         view()->composer('user.page.nguontin',function($view){
@@ -80,21 +81,13 @@ class AppServiceProvider extends ServiceProvider
             $footer_banner = Banner::orderBy('created_at', 'desc')->where('position', 'sidebar')->first();
             $trend_first = Post::latest()->where('trend', 1)->where('publish',1)->first();
             $sidetrend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->where('publish',1)->paginate(6);
-            $tuyensinh_first = Post::where('category_id', 37)->first();
-            $tuyensinh = Post::orderBy('created_at', 'asc')->where('category_id', 37)->where('id', "!=", $tuyensinh_first->id)->where('publish',1)->paginate(4);
-            $giaoduc_first = Post::where('category_id', 34)->where('publish',1)->first();
-            $giaoduc = Post::orderBy('created_at', 'desc')->where('category_id', 34)->where('id', "!=", $giaoduc_first->id)->where('publish',1)->paginate(4);
-            $view->with('footer_banner', $footer_banner)->with('banner', $banner)->with('header', $header)->with('banner', $banner)->with('sidetrend', $sidetrend)->with('tuyensinh_first', $tuyensinh_first)->with('tuyensinh', $tuyensinh)->with('giaoduc', $giaoduc)->with('giaoduc_first', $giaoduc_first);
+            $view->with('footer_banner', $footer_banner)->with('banner', $banner)->with('header', $header)->with('banner', $banner)->with('sidetrend', $sidetrend);
         });
 
         view()->composer('user.page.chitietin',function($view){
             $trend_first = Post::latest()->where('trend', 1)->where('publish',1)->first();
             $sidetrend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->where('publish',1)->paginate(6);
-            $tuyensinh_first = Post::where('category_id', 37)->first();
-            $tuyensinh = Post::orderBy('created_at', 'asc')->where('category_id', 37)->where('id', "!=", $tuyensinh_first->id)->where('publish',1)->paginate(4);
-            $giaoduc_first = Post::where('category_id', 34)->where('publish',1)->first();
-            $giaoduc = Post::orderBy('created_at', 'desc')->where('category_id', 34)->where('id', "!=", $giaoduc_first->id)->where('publish',1)->paginate(4);
-            $view->with('sidetrend', $sidetrend)->with('tuyensinh_first', $tuyensinh_first)->with('tuyensinh', $tuyensinh)->with('giaoduc', $giaoduc)->with('giaoduc_first', $giaoduc_first);
+            $view->with('sidetrend', $sidetrend);
         });
 
         view()->composer('user.page.timkiem',function($view){
@@ -103,11 +96,7 @@ class AppServiceProvider extends ServiceProvider
             $footer_banner = Banner::orderBy('created_at', 'desc')->where('position', 'sidebar')->first();
             $trend_first = Post::latest()->where('trend', 1)->where('publish',1)->first();
             $sidetrend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->where('publish',1)->paginate(6);
-            $tuyensinh_first = Post::where('category_id', 37)->first();
-            $tuyensinh = Post::orderBy('created_at', 'asc')->where('category_id', 37)->where('id', "!=", $tuyensinh_first->id)->where('publish',1)->paginate(4);
-            $giaoduc_first = Post::where('category_id', 34)->where('publish',1)->first();
-            $giaoduc = Post::orderBy('created_at', 'desc')->where('category_id', 34)->where('id', "!=", $giaoduc_first->id)->where('publish',1)->paginate(4);
-            $view->with('footer_banner', $footer_banner)->with('banner', $banner)->with('header', $header)->with('banner', $banner)->with('sidetrend', $sidetrend)->with('tuyensinh_first', $tuyensinh_first)->with('tuyensinh', $tuyensinh)->with('giaoduc', $giaoduc)->with('giaoduc_first', $giaoduc_first);
+            $view->with('footer_banner', $footer_banner)->with('banner', $banner)->with('header', $header)->with('banner', $banner)->with('sidetrend', $sidetrend);
         });
     }
 }

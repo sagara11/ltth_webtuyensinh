@@ -18,6 +18,7 @@ Web Tuyển Sinh - Trang thông tin chính thức về tuyển sinh
         <div class="col-md-8">
             <!-- Bai viet chinh -->
             <section id="baiviet-chinh">
+                @if (isset($trend_first))
                 <a href="{{ route('chitiettin', $trend_first->slug) }}">
                     <img class="img-fluid" src="{{ $trend_first->image }}" alt="{{ $trend_first->name }}">
                 </a>
@@ -29,13 +30,32 @@ Web Tuyển Sinh - Trang thông tin chính thức về tuyển sinh
                     <span>{{ $trend_first->hour() }} |</span>
                     <!-- <span>{{ $trend_first->comment ? $trend_first->comment : 0 }} bình luận |</span> -->
                     @if (isset($trend_first->source->id))
-                    <a class="webtuyensinh-link" href="{{ route('nguon_tin', $trend_first->source->id) }}">{{ $trend_first->source->web_name }}</a>
+                    <a class="webtuyensinh-link"
+                        href="{{ route('nguon_tin', $trend_first->source->id) }}">{{ $trend_first->source->web_name }}</a>
                     @endif
                 </p>
+                @else
+                <a href="{{ route('chitiettin', $news[0]->slug) }}">
+                    <img class="img-fluid" src="{{ $news[0]->image }}" alt="{{ $news[0]->name }}">
+                </a>
+                <h5>
+                    <a href="{{ route('chitiettin',$news[0]->slug) }}"> {{ $news[0]->name }} </a>
+                </h5>
+                <p>
+                    <span>{{ $news[0]->categories->name }} |</span>
+                    <span>{{ $news[0]->hour() }} |</span>
+                    <!-- <span>{{ $news[0]->comment ? $news[0]->comment : 0 }} bình luận |</span> -->
+                    @if (isset($news[0]->source->id))
+                    <a class="webtuyensinh-link"
+                        href="{{ route('nguon_tin', $news[0]->source->id) }}">{{ $news[0]->source->web_name }}</a>
+                    @endif
+                </p>
+                @endif
             </section>
 
             <!-- Bai viet tieu bieu -->
             <section class="row" id="baiviet-tieubieu">
+                @if (isset($trend))
                 @foreach ($trend as $item)
                 <div class="col-md-4  tieubieu-box">
                     <div class="row">
@@ -50,13 +70,39 @@ Web Tuyển Sinh - Trang thông tin chính thức về tuyển sinh
                                 <span>{{ $item->categories->name }} |</span>
                                 <span>{{ $item->hour() }} |</span>
                                 @if (isset($item->source->id))
-                                <a class="webtuyensinh-link" href="{{ route('nguon_tin', $item->source->id) }}">{{ $item->source->web_name }}</a>
-                                @endif 
+                                <a class="webtuyensinh-link"
+                                    href="{{ route('nguon_tin', $item->source->id) }}">{{ $item->source->web_name }}</a>
+                                @endif
                             </p>
                         </div>
                     </div>
                 </div>
                 @endforeach
+                @else
+                @foreach ($news_sub as $item)
+                <div class="col-md-4  tieubieu-box">
+                    <div class="row">
+                        <div class="col-md-12 col-5">
+                            <a href="{{ route('chitiettin',$item->slug) }}">
+                                <img class="img-fluid" src="{{ $item->image }}" alt="{{$item->slug}}">
+                            </a>
+                        </div>
+                        <div class="col-md-12 col-7">
+                            <h5> <a href="{{ route('chitiettin',$item->slug) }}"> {{ $item->name }} </a> </h5>
+                            <p>
+                                <span>{{ $item->categories->name }} |</span>
+                                <span>{{ $item->hour() }} |</span>
+                                @if (isset($item->source->id))
+                                <a class="webtuyensinh-link"
+                                    href="{{ route('nguon_tin', $item->source->id) }}">{{ $item->source->web_name }}</a>
+                                @endif
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+                @endif
+
             </section>
 
             <!-- Bai viet - tin tuc -->
@@ -78,7 +124,8 @@ Web Tuyển Sinh - Trang thông tin chính thức về tuyển sinh
                                 @endif
                                 <span> {{ $item->hour() }} </span>
                                 @if (isset($item->source->id))
-                                <a class="webtuyensinh-link" href="{{ route('nguon_tin', $item->source->id) }}"> {{ $item->source->web_name }} </a>
+                                <a class="webtuyensinh-link" href="{{ route('nguon_tin', $item->source->id) }}">
+                                    {{ $item->source->web_name }} </a>
                                 @endif
                             </p>
                         </div>

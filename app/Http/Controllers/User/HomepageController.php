@@ -26,10 +26,9 @@ class HomepageController extends Controller
     {
         $trend_first = Post::latest()->where('trend', 1)->where('publish',1)->first();
         $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('publish',1)->where('id', "!=", $trend_first->id)->paginate(3);
-        $news = Post::orderBy('id', 'desc')->where('id', "!=", $trend_first->id)->where('publish',1)->paginate(20);
-
-        $webtuyensinh_first = Category::where('id', $trend_first->category_id)->first();
-        return view('user.page.home', compact('news', 'trend_first', 'trend', 'webtuyensinh_first'));
+        $news_sub = Post::orderBy('id', 'desc')->where('publish',1)->paginate(3);
+        $news = Post::orderBy('id', 'desc')->where('publish',1)->paginate(20);
+        return view('user.page.home', compact('news', 'trend_first', 'trend'));
     }
 
     function danhmuc($slug)
@@ -48,9 +47,7 @@ class HomepageController extends Controller
         }
         $news = Post::orderBy('id', 'desc')->where('category_id', $header_id->id)->where('id', "!=", $trend_first->id)->where('publish',1)->paginate(20);
         $now = Carbon::now();
-
-        $webtuyensinh_first = Category::where('id', $trend_first->category_id)->first();
-        return view('user.page.home', compact('news', 'trend_first', 'trend', 'webtuyensinh_first', 'header_id'));
+        return view('user.page.home', compact('news', 'trend_first', 'trend', 'header_id'));
     }
 
     function chitiettin($slug)
@@ -65,10 +62,6 @@ class HomepageController extends Controller
             return view('user.layout.error404');
         }
         $xuhuong = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id','!=',$new->id)->paginate(4);
-        $tuyensinh_first = Post::where('category_id', 37)->first();
-        $tuyensinh = Post::orderBy('created_at', 'desc')->where('category_id', 37)->where('id', "!=", $tuyensinh_first->id)->where('publish',1)->paginate(4);
-        $giaoduc_first = Post::where('category_id', 34)->first();
-        $giaoduc = Post::orderBy('created_at', 'desc')->where('category_id', 34)->where('id', "!=", $giaoduc_first->id)->paginate(4);
         $tinlienquan = Post::orderBy('created_at', 'desc')->where('category_id', $new->category_id)->where('publish',1)->where('id','!=',$new->id)->paginate(4);
         $tinmoi = Post::orderBy('created_at', 'desc')->where('publish',1)->paginate(4);
         $tinnong = Post::orderBy('view', 'desc')->where('publish',1)->paginate(4);
@@ -95,7 +88,7 @@ class HomepageController extends Controller
 
         $footer_banner = Banner::orderBy('created_at', 'desc')->where('position', 'sidebar')->first();
          
-        return view('user.page.chitiettin', compact('comment','header', 'new', 'xuhuong', 'tinlienquan','tuyensinh_first','tuyensinh','giaoduc_first','giaoduc', 'tinmoi', 'tinnong', 'banner', 'trend', 'trend_first', 'footer_banner', 'sidetrend'));
+        return view('user.page.chitiettin', compact('comment','header', 'new', 'xuhuong', 'tinlienquan','tinmoi', 'tinnong', 'banner', 'trend', 'trend_first', 'footer_banner', 'sidetrend'));
     }
 
     function nguontin($danhmuc_id)
@@ -137,8 +130,7 @@ class HomepageController extends Controller
         $user = Auth::user();
         $user_post = Post::where('user_id', Auth::user()->id)->get();
         $comment = Comment::where('user_id', Auth::user()->id)->get();
-        $active = 'All';
-        return view('user.page.taikhoan', compact('active','user_post','header','user','comment'));
+        return view('user.page.taikhoan', compact('user_post','header','user','comment'));
     }
 
     function doimatkhau(){
@@ -146,8 +138,7 @@ class HomepageController extends Controller
         $user = Auth::user();
         $user_post = Post::where('user_id', Auth::user()->id)->get();
         $comment = Comment::where('user_id', Auth::user()->id)->get();
-        $active = 'All';
-        return view('user.page.doimatkhau', compact('active','user_post','header','user','comment'));
+        return view('user.page.doimatkhau', compact('user_post','header','user','comment'));
     }
 
     function thembaidang(){
@@ -155,8 +146,7 @@ class HomepageController extends Controller
         $user = Auth::user();
         $user_post = Post::where('user_id', Auth::user()->id)->get();
         $comment = Comment::where('user_id', Auth::user()->id)->get();
-        $active = 'All';
-        return view('user.page.thembaidang', compact('active','user_post','header','user','comment'));
+        return view('user.page.thembaidang', compact('user_post','header','user','comment'));
     }
 
     function danhsachbaidang(){
@@ -164,8 +154,7 @@ class HomepageController extends Controller
         $user = Auth::user();
         $user_post = Post::where('user_id', Auth::user()->id)->get();
         $comment = Comment::where('user_id', Auth::user()->id)->get();
-        $active = 'All';
-        return view('user.page.danhsachbaidang', compact('active','user_post','header','user','comment'));
+        return view('user.page.danhsachbaidang', compact('user_post','header','user','comment'));
     }
 
     function quanlybinhluan(){
@@ -173,8 +162,7 @@ class HomepageController extends Controller
         $user = Auth::user();
         $user_post = Post::where('user_id', Auth::user()->id)->get();
         $comment = Comment::where('user_id', Auth::user()->id)->get();
-        $active = 'All';
-        return view('user.page.quanlybinhluan', compact('active','user_post','header','user','comment'));
+        return view('user.page.quanlybinhluan', compact('user_post','header','user','comment'));
     }
 
     function signin(Request $request)
