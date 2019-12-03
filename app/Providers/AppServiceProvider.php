@@ -70,7 +70,7 @@ class AppServiceProvider extends ServiceProvider
             $banner = Banner::orderBy('created_at', 'desc')->where('position', 'top')->paginate(2);
             $footer_banner = Banner::orderBy('created_at', 'desc')->where('position', 'sidebar')->first();
             try{
-                $trend_first = Post::latest()->where('trend', 1)->where('publish',1)->where('type_post','post')->first();
+                $trend_first = Post::where('trend', 1)->where('publish',1)->where('type_post','post')->first();
             }
             catch(\Exception $e){
                 $trend_first = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->first();
@@ -84,7 +84,7 @@ class AppServiceProvider extends ServiceProvider
             $banner = Banner::orderBy('created_at', 'desc')->where('position', 'top')->paginate(2);
             $footer_banner = Banner::orderBy('created_at', 'desc')->where('position', 'sidebar')->first();
             try{
-                $trend_first = Post::latest()->where('trend', 1)->where('publish',1)->where('type_post','post')->first();
+                $trend_first = Post::where('trend', 1)->where('publish',1)->where('type_post','post')->first();
             }
             catch(\Exception $e){
                 $trend_first = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->first();
