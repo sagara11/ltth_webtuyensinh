@@ -69,7 +69,9 @@ Web Tuyển Sinh - Trang thông tin chính thức về tuyển sinh
                         <div class="col-md-9 col-7">
                             <h5> <a href="{{ route('chitiettin',$item->slug) }}"> {{ $item->name }} </a> </h5>
                             <p>
+                                @if (isset($item->categories->name))
                                 <span> {{ $item->categories->name }} </span>
+                                @endif
                                 <span> {{ $item->hour() }} </span>
                                 <a class="webtuyensinh-link" href="{{ route('nguon_tin', $item->source->id) }}"> {{ $item->source->web_name }} </a>
                             </p>

@@ -33,7 +33,9 @@ Kết quả tìm kiếm
                         <div class="col-md-9 col-7">
                             <h5> <a href="{{ route('chitiettin',$item->slug) }}"> {{ $item->name }} </a> </h5>
                             <p>
+                                @if (isset($item->categories->name))
                                 <span> {{ $item->categories->name }} </span>
+                                @endif
                                 <span> {{ $item->hour() }} </span>
                                 <a class="webtuyensinh-link" href=""> {{ $item->source->web_name }} </a>
                             </p>
