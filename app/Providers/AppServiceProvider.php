@@ -56,13 +56,15 @@ class AppServiceProvider extends ServiceProvider
         });
 
         view()->composer('user.layout.sidebar',function($view){
+            $banner = Banner::orderBy('created_at', 'desc')->where('position', 'top')->paginate(2);
+            $footer_banner = Banner::orderBy('created_at', 'desc')->where('position', 'sidebar')->first();
             $tuyensinh_first = Post::where('category_id', 37)->first();
             $tuyensinh = Post::orderBy('created_at', 'asc')->where('category_id', 37)->where('id', "!=", $tuyensinh_first->id)->where('publish',1)->paginate(4);
             $giaoduc_first = Post::where('category_id', 34)->where('publish',1)->first();
             $giaoduc = Post::orderBy('created_at', 'desc')->where('category_id', 34)->where('id', "!=", $giaoduc_first->id)->where('publish',1)->paginate(4);
             $xuhuong_first = Post::orderBy('view', 'desc')->where('type_post','post')->first();
-            $xuhuong = Post::orderBy('view', 'desc')->where('type_post','post')->paginate(5);
-            $view->with('tuyensinh_first', $tuyensinh_first)->with('tuyensinh', $tuyensinh)->with('giaoduc_first', $giaoduc_first)->with('giaoduc', $giaoduc)->with('xuhuong_first', $xuhuong_first)->with('xuhuong', $xuhuong);
+            $xuhuong = Post::orderBy('view', 'desc')->where('type_post','post')->where('id','!=',$xuhuong_first->id)->paginate(5);
+            $view->with('banner', $banner)->with('footer_banner', $footer_banner)->with('tuyensinh_first', $tuyensinh_first)->with('tuyensinh', $tuyensinh)->with('giaoduc_first', $giaoduc_first)->with('giaoduc', $giaoduc)->with('xuhuong_first', $xuhuong_first)->with('xuhuong', $xuhuong);
         });
 
         view()->composer('user.page.home',function($view){

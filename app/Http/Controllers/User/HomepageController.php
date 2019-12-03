@@ -53,9 +53,6 @@ class HomepageController extends Controller
 
     function chitiettin($slug)
     {
-        $banner = Banner::orderBy('created_at', 'desc')->where('position', 'top')->paginate(2);
-        $footer_banner = Banner::orderBy('created_at', 'desc')->where('position', 'sidebar')->first();
-
         $new = Post::orderBy('created_at', 'desc')->where('slug', $slug)->where('publish',1)->first();
         if(isset($new)==false){
             return view('user.layout.error404');
@@ -74,11 +71,8 @@ class HomepageController extends Controller
         catch(\Exception $e){
             $comment = "Chưa có bình luận";
         }
-        // $sidetrend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->where('type_post','post')->paginate(6);
-
-        $footer_banner = Banner::orderBy('created_at', 'desc')->where('position', 'sidebar')->first();
          
-        return view('user.page.chitiettin', compact('comment', 'new', 'xuhuong', 'tinlienquan','tinmoi', 'tinnong', 'banner', 'footer_banner'));
+        return view('user.page.chitiettin', compact('comment', 'new', 'xuhuong', 'tinlienquan','tinmoi', 'tinnong'));
     }
 
     function nguontin($danhmuc_id)
