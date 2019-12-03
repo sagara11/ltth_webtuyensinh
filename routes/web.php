@@ -16,7 +16,6 @@ Route::get('/redirect/{social}', 'SocialAuthController@redirect');
 Route::get('/callback/{social}', 'SocialAuthController@callback');
 Route::get('/loadmore', '\App\Http\Controllers\User\HomepageController@loadmore');
 
-
 Route::get('/crawl/{frequency}', 'CrawlController@crawl_routine')->name('crawl');
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
