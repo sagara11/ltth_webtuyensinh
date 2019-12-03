@@ -201,8 +201,15 @@ public function filter(Request $request)
             foreach ($category_id as $row) {
                 $categories_id[] = $row->id;
             }
-            array_unshift($categories_id,(int)$request->categories);
-            $post = $post->whereIn('category_id',$categories_id);
+            if(!empty($categories_id))
+            {
+                array_unshift($categories_id,(int)$request->categories);
+                $post = $post->whereIn('category_id',$categories_id);
+            }
+            else
+            {
+                $post = $post->where('category_id',$request->categories);
+            }
         }
         else{
             $post = $post->where('category_id',$request->categories);

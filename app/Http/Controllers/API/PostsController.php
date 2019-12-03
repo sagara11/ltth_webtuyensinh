@@ -59,9 +59,16 @@ class PostsController extends BaseController
                 foreach ($category_id_temp as $row) {
                     $categories_id[] = $row->id;
                 }
-                array_push($categories_id,(int)$category_id);
+                if(!empty($categories_id))
+                {
+                    array_push($categories_id,(int)$category_id);
 
-                $posts = $posts->whereIn('category_id',$categories_id);
+                    $posts = $posts->whereIn('category_id',$categories_id);
+                }   
+                else
+                {
+                    $posts = $posts->where('category_id',$category_id);
+                }
             }
             else{
                 $posts = $posts->where('category_id',$category_id);
