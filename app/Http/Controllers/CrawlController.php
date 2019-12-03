@@ -40,9 +40,10 @@ class CrawlController extends Controller
             //tao doi tuong voi web_name
             $domain_name = __NAMESPACE__. '\\'.'CrawlerPages'.'\\'. $object_name.'Controller';
             $crawl = new $domain_name;
-            for($i=1; $i<2; $i++){
+            for($i=5; $i==1; $i--){
                 // truyen link voi link
                 $posts = $crawl->posts($object_link, $i);
+                array_reverse($posts);
                 foreach($posts as $key => $value){
                     try{
                         $post = $crawl->post($value['urls']);
