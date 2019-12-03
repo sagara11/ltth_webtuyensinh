@@ -70,9 +70,8 @@ class AppServiceProvider extends ServiceProvider
             $banner = Banner::orderBy('created_at', 'desc')->where('position', 'top')->paginate(2);
             $footer_banner = Banner::orderBy('created_at', 'desc')->where('position', 'sidebar')->first();
             $trend_first = Post::latest()->where('trend', 1)->where('publish',1)->first();
-            $sidetrend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->where('publish',1)->paginate(6);
             $webtuyensinh_first = Category::where('id', $trend_first->category_id)->first();
-            $view->with('webtuyensinh_first', $webtuyensinh_first)->with('footer_banner', $footer_banner)->with('banner', $banner)->with('header', $header)->with('banner', $banner)->with('sidetrend', $sidetrend);
+            $view->with('webtuyensinh_first', $webtuyensinh_first)->with('footer_banner', $footer_banner)->with('banner', $banner)->with('header', $header)->with('banner', $banner);
         });
 
         view()->composer('user.page.nguontin',function($view){
@@ -80,14 +79,7 @@ class AppServiceProvider extends ServiceProvider
             $banner = Banner::orderBy('created_at', 'desc')->where('position', 'top')->paginate(2);
             $footer_banner = Banner::orderBy('created_at', 'desc')->where('position', 'sidebar')->first();
             $trend_first = Post::latest()->where('trend', 1)->where('publish',1)->first();
-            $sidetrend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->where('publish',1)->paginate(6);
-            $view->with('footer_banner', $footer_banner)->with('banner', $banner)->with('header', $header)->with('banner', $banner)->with('sidetrend', $sidetrend);
-        });
-
-        view()->composer('user.page.chitietin',function($view){
-            $trend_first = Post::latest()->where('trend', 1)->where('publish',1)->first();
-            $sidetrend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->where('publish',1)->paginate(6);
-            $view->with('sidetrend', $sidetrend);
+            $view->with('footer_banner', $footer_banner)->with('banner', $banner)->with('header', $header)->with('banner', $banner);
         });
 
         view()->composer('user.page.timkiem',function($view){

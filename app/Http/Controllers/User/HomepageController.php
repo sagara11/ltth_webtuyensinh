@@ -24,9 +24,14 @@ class HomepageController extends Controller
 {
     function home()
     {
-        $trend_first = Post::latest()->where('trend', 1)->where('publish',1)->first();
-        $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('publish',1)->where('id', "!=", $trend_first->id)->paginate(3);
-        $news_sub = Post::orderBy('id', 'desc')->where('publish',1)->paginate(3);
+        try{
+            $trend_first = Post::latest()->where('trend', 1)->where('publish',1)->first();
+            $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('publish',1)->offset(1)->paginate(3);
+        }
+        catch(\Exception $e){
+            $trend_first = Post::orderBy('id', 'desc')->where('publish',1)->first();
+            $trend = Post::orderBy('id', 'desc')->where('publish',1)->offset(1)->paginate(3);
+        }
         $news = Post::orderBy('id', 'desc')->where('publish',1)->paginate(20);
         return view('user.page.home', compact('news', 'trend_first', 'trend'));
     }
@@ -39,11 +44,11 @@ class HomepageController extends Controller
         }
         try{
             $trend_first = Post::latest()->where('trend', 1)->where('category_id', $header_id->id)->first();
-            $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->where('category_id', $header_id->id)->paginate(3);
+            $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->offset(1)->where('category_id', $header_id->id)->paginate(3);
         }
         catch(\Exception $e){
             $trend_first = Post::where('category_id', $header_id->id)->first();
-            $trend = Post::where('category_id', $header_id->id)->where('id','!=',$trend_first->id)->paginate(3);
+            $trend = Post::where('category_id', $header_id->id)->offset(1)->paginate(3);
         }
         $news = Post::orderBy('id', 'desc')->where('category_id', $header_id->id)->where('id', "!=", $trend_first->id)->where('publish',1)->paginate(20);
         $now = Carbon::now();
