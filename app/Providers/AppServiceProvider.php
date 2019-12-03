@@ -69,7 +69,12 @@ class AppServiceProvider extends ServiceProvider
             $header = Post::orderBy('view', 'desc')->paginate(3);
             $banner = Banner::orderBy('created_at', 'desc')->where('position', 'top')->paginate(2);
             $footer_banner = Banner::orderBy('created_at', 'desc')->where('position', 'sidebar')->first();
-            $trend_first = Post::latest()->where('trend', 1)->where('publish',1)->first();
+            try{
+                $trend_first = Post::latest()->where('trend', 1)->where('publish',1)->first();
+            }
+            catch(\Exception $e){
+                $trend_first = Post::orderBy('id', 'desc')->where('publish',1)->first();
+            }
             $webtuyensinh_first = Category::where('id', $trend_first->category_id)->first();
             $view->with('webtuyensinh_first', $webtuyensinh_first)->with('footer_banner', $footer_banner)->with('banner', $banner)->with('header', $header)->with('banner', $banner);
         });
@@ -78,7 +83,12 @@ class AppServiceProvider extends ServiceProvider
             $header = Post::orderBy('view', 'desc')->paginate(3);
             $banner = Banner::orderBy('created_at', 'desc')->where('position', 'top')->paginate(2);
             $footer_banner = Banner::orderBy('created_at', 'desc')->where('position', 'sidebar')->first();
-            $trend_first = Post::latest()->where('trend', 1)->where('publish',1)->first();
+            try{
+                $trend_first = Post::latest()->where('trend', 1)->where('publish',1)->first();
+            }
+            catch(\Exception $e){
+                $trend_first = Post::orderBy('id', 'desc')->where('publish',1)->first();
+            }
             $view->with('footer_banner', $footer_banner)->with('banner', $banner)->with('header', $header)->with('banner', $banner);
         });
 
@@ -86,7 +96,12 @@ class AppServiceProvider extends ServiceProvider
             $header = Post::orderBy('view', 'desc')->paginate(3);
             $banner = Banner::orderBy('created_at', 'desc')->where('position', 'top')->paginate(2);
             $footer_banner = Banner::orderBy('created_at', 'desc')->where('position', 'sidebar')->first();
-            $trend_first = Post::latest()->where('trend', 1)->where('publish',1)->first();
+            try{
+                $trend_first = Post::latest()->where('trend', 1)->where('publish',1)->first();
+            }
+            catch(\Exception $e){
+                $trend_first = Post::orderBy('id', 'desc')->where('publish',1)->first();
+            }
             $sidetrend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->where('publish',1)->paginate(6);
             $view->with('footer_banner', $footer_banner)->with('banner', $banner)->with('header', $header)->with('banner', $banner)->with('sidetrend', $sidetrend);
         });
