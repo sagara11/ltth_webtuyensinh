@@ -135,6 +135,7 @@ Route::get('/xacnhanmatkhau',"User\HomepageController@xacnhanmatkhau")->name('xa
 Route::post('/comment',"User\HomepageController@comment")->name('comment');
 Route::post('/reply',"User\HomepageController@replycomment")->name('replycomment');
 Route::post('/deletecomment','User\HomepageController@delete_comment')->name('deletecomment');
+Route::get('/deletecomment_chitiet/{comment_id}','User\HomepageController@chitiettin_delete_comment')->name('deletecomment_chitiet');
 Route::post('/updatecomment','User\HomepageController@update_comment')->name('updatecomment');
 
 Route::get('/search', 'User\HomepageController@search')->name('search');

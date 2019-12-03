@@ -38,7 +38,7 @@ Kết quả tìm kiếm
                                 @endif
                                 <span> {{ $item->hour() }} </span>
                                 @if (isset($item->source->web_name))
-                                <a class="webtuyensinh-link" href=""> {{ $item->source->web_name }} </a>
+                                <a class="webtuyensinh-link" href="{{ route('nguon_tin', $item->source->id) }}"> {{ $item->source->web_name }} </a>
                                 @endif
                             </p>
                         </div>

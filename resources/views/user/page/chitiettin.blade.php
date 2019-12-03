@@ -86,7 +86,7 @@
                                     @if ($item->user->id == Auth::user()->id)
                                     <!-- <span> Sửa  </span> -->
                                     <span>
-                                        <a href="{{ route('deletecomment',$item->id) }}">Xóa</a>
+                                        <a href="{{ route('deletecomment_chitiet',$item->id) }}">Xóa</a>
                                     </span>
                                     @endif
                                     @endif

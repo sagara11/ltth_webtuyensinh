@@ -56,39 +56,24 @@ class AppServiceProvider extends ServiceProvider
         });
 
         view()->composer('user.layout.sidebar',function($view){
+            $banner = Banner::orderBy('created_at', 'desc')->where('position', 'top')->paginate(2);
+            $footer_banner = Banner::orderBy('created_at', 'desc')->where('position', 'sidebar')->first();
             $tuyensinh_first = Post::where('category_id', 37)->first();
             $tuyensinh = Post::orderBy('created_at', 'asc')->where('category_id', 37)->where('id', "!=", $tuyensinh_first->id)->where('publish',1)->paginate(4);
             $giaoduc_first = Post::where('category_id', 34)->where('publish',1)->first();
             $giaoduc = Post::orderBy('created_at', 'desc')->where('category_id', 34)->where('id', "!=", $giaoduc_first->id)->where('publish',1)->paginate(4);
-            $xuhuong_first = Post::orderBy('view', 'desc')->first();
-            $xuhuong = Post::orderBy('view', 'desc')->paginate(5);
-            $view->with('tuyensinh_first', $tuyensinh_first)->with('tuyensinh', $tuyensinh)->with('giaoduc_first', $giaoduc_first)->with('giaoduc', $giaoduc)->with('xuhuong_first', $xuhuong_first)->with('xuhuong', $xuhuong);
+            $xuhuong_first = Post::orderBy('view', 'desc')->where('type_post','post')->first();
+            $xuhuong = Post::orderBy('view', 'desc')->where('type_post','post')->where('id','!=',$xuhuong_first->id)->paginate(5);
+            $view->with('banner', $banner)->with('footer_banner', $footer_banner)->with('tuyensinh_first', $tuyensinh_first)->with('tuyensinh', $tuyensinh)->with('giaoduc_first', $giaoduc_first)->with('giaoduc', $giaoduc)->with('xuhuong_first', $xuhuong_first)->with('xuhuong', $xuhuong);
         });
 
         view()->composer('user.page.home',function($view){
-            $header = Post::orderBy('view', 'desc')->paginate(3);
-            $banner = Banner::orderBy('created_at', 'desc')->where('position', 'top')->paginate(2);
-            $footer_banner = Banner::orderBy('created_at', 'desc')->where('position', 'sidebar')->first();
-            $trend_first = Post::latest()->where('trend', 1)->where('publish',1)->first();
+            $trend_first = Post::where('trend', 1)->where('publish',1)->where('type_post','post')->first();
+            if(empty($trend_first)){
+                $trend_first = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->first();
+            }
             $webtuyensinh_first = Category::where('id', $trend_first->category_id)->first();
-            $view->with('webtuyensinh_first', $webtuyensinh_first)->with('footer_banner', $footer_banner)->with('banner', $banner)->with('header', $header)->with('banner', $banner);
-        });
-
-        view()->composer('user.page.nguontin',function($view){
-            $header = Post::orderBy('view', 'desc')->paginate(3);
-            $banner = Banner::orderBy('created_at', 'desc')->where('position', 'top')->paginate(2);
-            $footer_banner = Banner::orderBy('created_at', 'desc')->where('position', 'sidebar')->first();
-            $trend_first = Post::latest()->where('trend', 1)->where('publish',1)->first();
-            $view->with('footer_banner', $footer_banner)->with('banner', $banner)->with('header', $header)->with('banner', $banner);
-        });
-
-        view()->composer('user.page.timkiem',function($view){
-            $header = Post::orderBy('view', 'desc')->paginate(3);
-            $banner = Banner::orderBy('created_at', 'desc')->where('position', 'top')->paginate(2);
-            $footer_banner = Banner::orderBy('created_at', 'desc')->where('position', 'sidebar')->first();
-            $trend_first = Post::latest()->where('trend', 1)->where('publish',1)->first();
-            $sidetrend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->where('publish',1)->paginate(6);
-            $view->with('footer_banner', $footer_banner)->with('banner', $banner)->with('header', $header)->with('banner', $banner)->with('sidetrend', $sidetrend);
+            $view->with('webtuyensinh_first', $webtuyensinh_first);
         });
     }
 }
