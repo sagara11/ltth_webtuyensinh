@@ -48,13 +48,12 @@ class tuoitreController extends Controller
         {
             $slug = $match[1];
         } 
-
         $date = $post->find('.date-time')->innerHTML;
         $string1 = explode(" ", $date)[0];
+        $hour = explode(" ",$date)[1];
 
         $string2 = explode("/", $string1);
-        $created_at = date("d-m-Y",(strtotime($string2[1].'/'.$string2[0].'/'.$string2[2])));
-
+        $created_at = date("Y-m-d H:i:s",(strtotime($string2[2].'/'.$string2[1].'/'.$string2[0]." ".$hour)));
         return array(
             'name' => $name,
             'description' => $description,

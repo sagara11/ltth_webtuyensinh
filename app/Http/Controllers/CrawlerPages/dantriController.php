@@ -19,9 +19,8 @@ class dantriController extends Controller
         // gan cac link va anh trong muc tin moi vao mang
         $datas = [];
         $count = 0;
-        $post = $posts->find('.eplcheck div.mr1 h2 a');
+        $post = $posts->find('a.fon6');
         $src = $posts->find('img.img130');
-
         foreach($post as $key){
             $object = array(
                 'urls' => 'https://dantri.com.vn'.$key->href,
@@ -36,6 +35,7 @@ class dantriController extends Controller
     }
 
     function post($page_url){
+        
         $post = new Dom;
         $post->loadFromUrl($page_url);
 
@@ -49,15 +49,18 @@ class dantriController extends Controller
         $description = trim($description_span, "<span>Dân trí<span/>&nbsp;");
         $description = strip_tags($description);
         $content = $post->find('.detail-content');
-
-        $str = $post->find('.date-time')->innerHTML;
-        $string1 = explode(" ", $str)[2];
+        $str = $post->find('span.tt-capitalize')->innerHTML;
+        // Thứ Sáu 29/11/2019 - 00:17
+        $string1 = explode(" ", $str)[3];
+    
+        $hour = explode(" ",$str)[5];
 
         $string2 = explode("/", $string1);
-        $created_at = date("d-m-Y",strtotime($string2[1]."/".$string2[0]."/".$string2[2]));
-
+        
+        $created_at = date("Y-m-d H:i:s",strtotime($string2[2]."/".$string2[1]."/".$string2[0]." ".$hour));
+        
         $post_link = $page_url;
-
+        
         //gan thuoc tinh cua trang
         return array(
             'name' => $name,

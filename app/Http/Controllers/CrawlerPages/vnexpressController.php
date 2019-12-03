@@ -63,12 +63,13 @@ class vnexpressController extends Controller
         }
 
         $post_link = $page_url;
-
         $str = $post->find('span.time')->innerHTML;
         $string1 = explode(", ", $str)[1];
 
+        $hour = explode(" ",$str)[3];
+
         $string2 = explode("/", $string1);
-        $created_at = date("d-m-Y",strtotime($string2[1]."/".$string2[0]."/".$string2[2]));
+        $created_at = date("Y-m-d H:i:s",strtotime($string2[2]."/".$string2[1]."/".$string2[0]." ".$hour));
 
         //gan thuoc tinh cua trang
         return array(

@@ -46,13 +46,17 @@ class CrawlController extends Controller
                 foreach($posts as $key => $value){
                     try{
                         $post = $crawl->post($value['urls']);
+                        
                         $data = new Post();
                         $data->name = $post['name'];
+                        
                         $data->description = $post['description'];
                         $data->image = $value['img'];
                         $data->slug = $post['slug'];
                         $data->content = ($post['content']);
+                        
                         $data->created_at = $post['created_at'];
+                        
                         $data->content = preg_replace('/<(div|\/div|a|\/a)[^>]{0,}>/', '', $data->content);
                         $data->content = preg_replace('/style=\"(.*?)\"/', '', $data->content);
                         $data->type_post= 'post';

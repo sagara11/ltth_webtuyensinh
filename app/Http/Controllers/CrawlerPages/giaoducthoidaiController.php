@@ -19,18 +19,19 @@ class giaoducthoidaiController extends Controller
         // gan cac link va anh trong muc tin moi vao mang
         $datas = [];
         $count = 0;
-        $post = $posts->find('.zone-list article.story .thumbnail a');
-        $src = $posts->find('.zone-list article.story .thumbnail a img');
-
+        $post = $posts->find('.news-detail ul li a');
+        
+        $src = $posts->find('.news-detail ul li a .nd-img img');
         foreach($post as $key){
             $object = array(
                 'urls' => 'https://giaoducthoidai.vn'.$key->href,
-                'img' => str_replace("168x110","",$src[$count]->src)
+                'img' => str_replace("/220x142","",$src[$count]->src)
             );
             array_push($datas, $object);
             $count++;
         }
 
+        // dd($datas);
         // return mang page va hinh anh
         return $datas;
     }
@@ -46,8 +47,8 @@ class giaoducthoidaiController extends Controller
             {
                 $slug = $match[1];
             }
-            $description = $post->find('div.summary.cms-desc div')->innerHTML;
-            $content = $post->find('.cms-body');
+            $description = strip_tags(html_entity_decode($post->find('label.cms-description div')->innerHTML));
+            $content = $post->find('#abody')->innerHTML;
         }
         catch(\Exception $e){
             $name = strip_tags($post->find('h1.cms-title')->innerHTML);
@@ -55,20 +56,17 @@ class giaoducthoidaiController extends Controller
             {
                 $slug = $match[1];
             }
-            $description = $post->find('div.summary.cms-desc')->innerHTML;
-            $content = $post->find('.cms-body');
+            $description = html_entity_decode($post->find('label.cms-description')->innerHTML);
+            $content = $post->find('#abody')->innerHTML;
         }
+
         $post_link = $page_url;
+        $str = $post->find('span.cms-date')->innerHTML;
+        $string1 = explode(" ", $str)[1];
+        $string2 = explode("/", $string1);
+        $hour = explode(" ", $str)[0];
 
-        $str = $post->find('span.time')->innerHTML;
-        $string1 = explode(", ", $str)[1];
-
-        $string3 = explode(" ", $string1)[0];
-
-        $string2 = explode("/", $string3);
-        $date = $string2[1]."/".$string2[0]."/".$string2[2];
-
-        $created_at = date("d-m-Y",strtotime($date));
+        $created_at = date("Y-m-d H:i:s",strtotime($string2[2]."/".$string2[1]."/".$string2[0]." ".$hour));
 
         //gan thuoc tinh cua trang
         return array(

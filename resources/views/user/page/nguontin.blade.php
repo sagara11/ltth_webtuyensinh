@@ -16,45 +16,7 @@ Web Tuyển Sinh - Trang thông tin chính thức về tuyển sinh
 <main class="container">
     <div class="row">
         <div class="col-md-8">
-            <!-- Bai viet chinh -->
-            <section id="baiviet-chinh">
-                <a href="{{ route('chitiettin', $data_first->slug) }}">
-                    <img class="img-fluid" src="{{ $data_first->image }}" alt="{{ $data_first->name }}">
-                </a>
-                <h5>
-                    <a href="{{ route('chitiettin',$data_first->slug) }}"> {{ $data_first->name }} </a>
-                </h5>
-                <p>
-                    <span>{{ $data_first->categories->name }} |</span>
-                    <span>{{ $data_first->hour() }} |</span>
-                    <!-- <span>{{ $data_first->comment ? $data_first->comment : 0 }} bình luận |</span> -->
-                    <a class="webtuyensinh-link" href="">{{ $data_first->source->web_name }}</a>
-                </p>
-            </section>
-
-            <!-- Bai viet tieu bieu -->
-            <section class="row" id="baiviet-tieubieu">
-                @foreach ($data_second as $item)
-                <div class="col-md-4  tieubieu-box">
-                    <div class="row">
-                        <div class="col-md-12 col-5">
-                            <a href="{{ route('chitiettin',$item->slug) }}">
-                                <img class="img-fluid" src="{{ $item->image }}" alt="{{$item->slug}}">
-                            </a>
-                        </div>
-                        <div class="col-md-12 col-7">
-                            <h5> <a href="{{ route('chitiettin',$item->slug) }}"> {{ $item->name }} </a> </h5>
-                            <p>
-                                <span>{{ $item->categories->name }} |</span>
-                                <span>{{ $item->hour() }} |</span>
-                                <a class="webtuyensinh-link" href="">{{ $item->source->web_name }}</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-            </section>
-
+            <h4 style="color: #f65c2c;">{{ $data_first->source->web_name }}</h4>
             <!-- Bai viet - tin tuc -->
             <section id="baiviet-tintuc">
                 @foreach ($data_third as $item)

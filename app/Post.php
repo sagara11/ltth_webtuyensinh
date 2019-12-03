@@ -4,9 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Category;
+use DateTime;
 use Illuminate\Support\Carbon;
 class Post extends Model
 {
+    // public $timestamps = false;
     protected $table = "posts";
 
     public function categories()
