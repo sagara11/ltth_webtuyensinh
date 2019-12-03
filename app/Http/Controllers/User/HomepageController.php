@@ -244,7 +244,12 @@ class HomepageController extends Controller
 
     function delete_comment(Request $request){
         Comment::where('id', $request->comment_delete_id)->delete();
-        return redirect()->back()->with('active', 'quanlybinhluan');
+        return back();
+    }
+
+    function chitiettin_delete_comment($comment_id){
+        Comment::where('id', $comment_id)->delete();
+        return back();
     }
 
     function update_comment(Request $request){
