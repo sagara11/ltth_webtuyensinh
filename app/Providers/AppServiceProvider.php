@@ -96,8 +96,7 @@ class AppServiceProvider extends ServiceProvider
             if(empty($trend_first)){
                 Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->first();
             }
-            $sidetrend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->where('publish',1)->paginate(6);
-            $view->with('footer_banner', $footer_banner)->with('banner', $banner)->with('header', $header)->with('banner', $banner)->with('sidetrend', $sidetrend);
+            $view->with('footer_banner', $footer_banner)->with('banner', $banner)->with('header', $header)->with('banner', $banner);
         });
     }
 }

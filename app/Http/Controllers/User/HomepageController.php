@@ -24,7 +24,6 @@ class HomepageController extends Controller
 {
     function home()
     {
-        
         $trend_first = Post::where('trend', 1)->where('publish',1)->where('type_post','post')->first();
         $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('publish',1)->where('type_post','post')->offset(1)->paginate(3);
         if(empty($trend_first)){
@@ -54,8 +53,6 @@ class HomepageController extends Controller
 
     function chitiettin($slug)
     {
-        $header = Post::orderBy('view', 'desc')->where('type_post','post')->paginate(3);
-
         $banner = Banner::orderBy('created_at', 'desc')->where('position', 'top')->paginate(2);
         $footer_banner = Banner::orderBy('created_at', 'desc')->where('position', 'sidebar')->first();
 
@@ -70,24 +67,18 @@ class HomepageController extends Controller
 
         $new->view =  $new->view + 1;
         $new->save();
-
-            $trend_first = Post::where('trend', 1)->where('category_id', $new->category_id)->where('type_post','post')->first();
-            $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->where('category_id', $new->category_id)->where('type_post','post')->paginate(3);
-        if(empty($trend_first)){
-            $trend_first = Post::where('category_id', $new->category_id)->where('type_post','post')->first();
-            $trend = Post::where('category_id', $new->category_id)->where('id','!=',$trend_first->id)->where('type_post','post')->paginate(3);
-        }
+        
         try{
             $comment = Comment::where('post_id', $new->id)->where('parent_id', NULL)->paginate(5);
         }
         catch(\Exception $e){
             $comment = "Chưa có bình luận";
         }
-        $sidetrend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->where('type_post','post')->paginate(6);
+        // $sidetrend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->where('type_post','post')->paginate(6);
 
         $footer_banner = Banner::orderBy('created_at', 'desc')->where('position', 'sidebar')->first();
          
-        return view('user.page.chitiettin', compact('comment','header', 'new', 'xuhuong', 'tinlienquan','tinmoi', 'tinnong', 'banner', 'trend', 'trend_first', 'footer_banner', 'sidetrend'));
+        return view('user.page.chitiettin', compact('comment', 'new', 'xuhuong', 'tinlienquan','tinmoi', 'tinnong', 'banner', 'footer_banner'));
     }
 
     function nguontin($danhmuc_id)
@@ -109,17 +100,17 @@ class HomepageController extends Controller
         $name = $request->name_search;
         $news_name = Post::where('name','like', '%'.$request->name_search.'%')->where('type_post','post')->get();
 
-        $trend_first = Post::where('trend', 1)->where('publish',1)->where('type_post','post')->first();
-        $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->where('type_post','post')->paginate(3);
+        // $trend_first = Post::where('trend', 1)->where('publish',1)->where('type_post','post')->first();
+        // $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->where('type_post','post')->paginate(3);
         
-        if(empty($trend_first)){
-            $trend_first = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->first();
-            $trend = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->offset(1)->paginate(3);
-        }
-        $news = Post::orderBy('created_at', 'desc')->where('id', "!=", $trend_first->id)->paginate(20);
+        // if(empty($trend_first)){
+        //     $trend_first = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->first();
+        //     $trend = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->offset(1)->paginate(3);
+        // }
+        // $news = Post::orderBy('created_at', 'desc')->where('id', "!=", $trend_first->id)->paginate(20);
 
-        $webtuyensinh_first = Category::where('id', $trend_first->category_id)->first();
-        return view('user.page.timkiem', compact('news', 'trend_first', 'trend', 'webtuyensinh_first', 'news_name', 'name'));
+        // $webtuyensinh_first = Category::where('id', $trend_first->category_id)->first();
+        return view('user.page.timkiem', compact('news_name', 'name'));
 
     }
 
