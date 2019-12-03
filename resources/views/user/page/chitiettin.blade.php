@@ -189,8 +189,10 @@
                         <p>
                             <span> {{ $item->categories->name }} </span>
                             <span> {{ $item->hour() }} </span>
+                            @if (isset($item->source->id))
                             <a class="webtuyensinh-link" href="{{ route('nguon_tin', $item->source->id) }}">
-                                {{ $item->source->web_name }} </a>
+                                    {{ $item->source->web_name }} </a>
+                            @endif
                         </p>
                     </div>
                 </div>
@@ -221,8 +223,10 @@
                             <span> {{ $item->categories->name }} </span>
                             @endif
                             <span> {{ $item->hour() }} </span>
+                            @if (isset($item->source->id))
                             <a class="webtuyensinh-link" href="{{ route('nguon_tin', $item->source->id) }}">
-                                {{ $item->source->web_name }} </a>
+                                    {{ $item->source->web_name }} </a>
+                            @endif
                         </p>
                     </div>
                 </div>
@@ -251,8 +255,10 @@
                         <p>
                             <span> {{ $item->categories->name }} </span>
                             <span> {{ $item->hour() }} </span>
+                            @if (asset($item->source->id))
                             <a class="webtuyensinh-link" href="{{ route('nguon_tin', $item->source->id) }}">
-                                {{ $item->source->web_name }} </a>
+                                    {{ $item->source->web_name }} </a>
+                            @endif
                         </p>
                     </div>
                 </div>

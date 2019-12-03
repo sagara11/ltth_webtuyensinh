@@ -28,7 +28,9 @@ Web Tuyển Sinh - Trang thông tin chính thức về tuyển sinh
                     <span>{{ $trend_first->categories->name }} |</span>
                     <span>{{ $trend_first->hour() }} |</span>
                     <!-- <span>{{ $trend_first->comment ? $trend_first->comment : 0 }} bình luận |</span> -->
+                    @if (isset($trend_first->source->id))
                     <a class="webtuyensinh-link" href="{{ route('nguon_tin', $trend_first->source->id) }}">{{ $trend_first->source->web_name }}</a>
+                    @endif
                 </p>
             </section>
 
@@ -47,7 +49,9 @@ Web Tuyển Sinh - Trang thông tin chính thức về tuyển sinh
                             <p>
                                 <span>{{ $item->categories->name }} |</span>
                                 <span>{{ $item->hour() }} |</span>
+                                @if (isset($item->source->id))
                                 <a class="webtuyensinh-link" href="{{ route('nguon_tin', $item->source->id) }}">{{ $item->source->web_name }}</a>
+                                @endif 
                             </p>
                         </div>
                     </div>
