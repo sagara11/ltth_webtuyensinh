@@ -22,26 +22,11 @@ use Illuminate\Support\Carbon;
 use Mail;
 class HomepageController extends Controller
 {
-    function seo(){
-        $seo_name = Post::where('seo_title',$this->seo_title);
-        $seo_description = Post::where('seo_description',$this->seo_description);
-        $seo_keyword = Pots::where('seo_keyword',$this->seo_keyword);
-
-        $object = array(
-            'seo_name' => $seo_name,
-            'seo_description' => $seo_description,
-            'seo_keyword' => $seo_keyword
-        );
-
-        // return mang url tung page va hinh anh
-        return $object;
-    }
-
     function home()
     {
         $trend_first = Post::latest()->where('trend', 1)->where('publish',1)->first();
         $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('publish',1)->where('id', "!=", $trend_first->id)->paginate(3);
-        $news = Post::orderBy('created_at', 'desc')->where('id', "!=", $trend_first->id)->where('publish',1)->paginate(20);
+        $news = Post::orderBy('id', 'desc')->where('id', "!=", $trend_first->id)->where('publish',1)->paginate(20);
 
         $webtuyensinh_first = Category::where('id', $trend_first->category_id)->first();
         return view('user.page.home', compact('news', 'trend_first', 'trend', 'webtuyensinh_first'));
@@ -50,6 +35,9 @@ class HomepageController extends Controller
     function danhmuc($slug)
     {
         $header_id = Category::where('slug', $slug)->first();
+        if(isset($header_id)==false){
+            return view('user.layout.error404');
+        }
         try{
             $trend_first = Post::latest()->where('trend', 1)->where('category_id', $header_id->id)->first();
             $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id', "!=", $trend_first->id)->where('category_id', $header_id->id)->paginate(3);
@@ -58,7 +46,7 @@ class HomepageController extends Controller
             $trend_first = Post::where('category_id', $header_id->id)->first();
             $trend = Post::where('category_id', $header_id->id)->where('id','!=',$trend_first->id)->paginate(3);
         }
-        $news = Post::orderBy('created_at', 'desc')->where('category_id', $header_id->id)->where('id', "!=", $trend_first->id)->where('publish',1)->paginate(20);
+        $news = Post::orderBy('id', 'desc')->where('category_id', $header_id->id)->where('id', "!=", $trend_first->id)->where('publish',1)->paginate(20);
         $now = Carbon::now();
 
         $webtuyensinh_first = Category::where('id', $trend_first->category_id)->first();
@@ -73,6 +61,9 @@ class HomepageController extends Controller
         $footer_banner = Banner::orderBy('created_at', 'desc')->where('position', 'sidebar')->first();
 
         $new = Post::orderBy('created_at', 'desc')->where('slug', $slug)->where('publish',1)->first();
+        if(isset($new)==false){
+            return view('user.layout.error404');
+        }
         $xuhuong = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id','!=',$new->id)->paginate(4);
         $tuyensinh_first = Post::where('category_id', 37)->first();
         $tuyensinh = Post::orderBy('created_at', 'desc')->where('category_id', 37)->where('id', "!=", $tuyensinh_first->id)->where('publish',1)->paginate(4);
