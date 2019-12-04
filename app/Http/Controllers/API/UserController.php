@@ -192,6 +192,7 @@ class UserController extends BaseController
                     return response()->json($response);
             }
         }
+        
     /**
      * Remove the specified user from storage
      *

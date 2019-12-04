@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Category;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -242,6 +243,17 @@ class HomepageController extends Controller
         return back();
     }
 
+    function update_post_image(Request $request){
+        $avatar_upload = new UserController;
+        $url = $avatar_upload->Xulyupload($request, $request->post_id);
+        
+        $avatar = Post::where('id', $request->post_id)->first();
+        $avatar->image = $url;
+        $avatar->save();
+
+        return back();
+    }
+
     function delete_comment(Request $request){
         Comment::where('id', $request->comment_delete_id)->delete();
         return back();
@@ -286,13 +298,13 @@ class HomepageController extends Controller
     }
 
     function update_view($post_id){
+        $user = Auth::user();
         $post_update = Post::where('id', $post_id)->first();
-        return view('user.page.update_post',compact('post_update'));
+        return view('user.page.update_post',compact('post_update','user'));
     }
 
     function updatepost(Request $request){
-        $data = new UserController;
-        $image = $data->Xulyupload($request,$request->update_id);
+        $image = $request->image_1;
         Post::where('id', $request->update_id)->update([
             'name'=>$request->update_name,
             'image'=>$image,
@@ -376,4 +388,24 @@ class HomepageController extends Controller
         }
         exit(json_encode(['html' => $html]));
     }
+
+    public function Xulyupload2(Request $rq,$id)
+    {
+        $rules = [ 'image_1' => 'avatar|max:1024' ]; 
+        $posts = [ 'image_1' => $rq->file('image_1') ];
+
+        $valid = Validator::make($posts, $rules);
+            // Ko có lỗi, kiểm tra nếu file đã dc upload
+            if ($rq->file('image_1')->isValid()) {
+                // Filename cực shock để khỏi bị trùng
+                $fileName = $rq->file('image_1')->storeAs('userfiles/images/avatar','avatar'.$id.'.jpg');
+                // Thư mục upload
+                $uploadPath = public_path('userfiles/images/avatar'); // Thư mục upload
+                // Bắt đầu chuyển file vào thư mục
+                $rq->file('image_1')->move($uploadPath,$fileName);
+                // Thành công, show thành công
+                $photoURL = url($fileName);
+                return $photoURL;
+            }
+        }
 }

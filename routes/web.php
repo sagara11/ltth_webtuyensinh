@@ -145,6 +145,7 @@ Route::post('/newscreate',"User\HomepageController@news_create")->name('newscrea
 Route::post('/deletepost',"User\HomepageController@deletepost")->name('deletepost');
 Route::post('/updatepost',"User\HomepageController@updatepost")->name('updatepost');
 Route::get('/update_view/{post_id}',"User\HomepageController@update_view")->name('update_view');
+Route::post('/updatepostavatar',"User\HomepageController@update_post_image")->name('updatepostimage');
 
 
 Route::get("/{slug}",'User\HomepageController@chitiettin')->name('chitiettin');
