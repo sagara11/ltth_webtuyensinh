@@ -21,7 +21,7 @@ Route::get('/crawl/{frequency}', 'CrawlController@crawl_routine')->name('crawl')
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
 Route::group(['prefix' => 'admin'], function() {
-		Route::group(['middleware' => 'auth'], function () {
+		Route::group(['middleware' => 'auth','middleware'=>'checklogin'], function () {
 
 		// Route::resource('banner','\App\Http\Controllers\Admin\BannerController');
 		Route::get('banner/list','\App\Http\Controllers\Admin\BannerController@index')->name('indexBanner');
