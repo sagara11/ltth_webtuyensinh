@@ -33,10 +33,10 @@
                 <div class="social">
                     <h6> Liên kết </h6>
                     <ul> 
-                        <li> <a href=""> <i class="fa fa-facebook"></i> </a> </li>
-                        <li> <a href=""> <i class="fa fa-twitter"></i> </a> </li>
-                        <li> <a href=""> <i class="fa fa-google-plus"></i> </a> </li>
-                        <li> <a href=""> <i class="fa fa-youtube"></i> </a> </li>
+                        <li> <a target="_blank" href="https://www.facebook.com/baotuyensinh/"> <i class="fa fa-facebook"></i> </a> </li>
+                        <li> <a target="_blank" href=""> <i class="fa fa-twitter"></i> </a> </li>
+                        <li> <a target="_blank" href=""> <i class="fa fa-google-plus"></i> </a> </li>
+                        <li> <a target="_blank" href="https://www.youtube.com/channel/UC6RxJoDPb9GilhZucQvLTVQ"> <i class="fa fa-youtube"></i> </a> </li>
                     </ul>
                     <ul class="app">
                         <li> <img src="{{ asset('media/google-play-badge.png') }}" alt="" />  </li>
@@ -56,7 +56,7 @@
                 <div class="col-md-6">
                     <p class="right">
                         <b> Liên hệ tòa soạn </b> <br />
-                        Hotline: 04 668 39 668 - Email: contact@webtuyensinh.edu.vn 
+                        Hotline: 1900 272786 - Email: lienhe@bts.edu.vn 
                     </p>
                 </div>
             </div>
