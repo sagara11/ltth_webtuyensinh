@@ -51,7 +51,7 @@
                 <div class="col-md-6">
                     <p> © Copyright 2019 Web Tuyển Sinh. All rights reserved. <br /> 
 
-                        Giấy phép số XXX do bộ thông tin truyền thông cấp ngày xx/xx/xxxx </p>
+                        Giấy phép số 196/GP-BTTTT do Bộ Thông Tin Truyền Thông cấp ngày 21/05/2019 </p>
                 </div>
                 <div class="col-md-6">
                     <p class="right">
