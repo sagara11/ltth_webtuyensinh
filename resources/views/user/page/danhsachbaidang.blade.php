@@ -60,7 +60,6 @@ Web Tuyển Sinh - Trang thông tin chính thức về tuyển sinh
                             <thead>
                                 <tr>
                                     <th>Ảnh</th>
-                                    <th>Danh mục</th>
                                     <th>Tên bài viết</th>
                                     <th>Thời gian</th>
                                     <th>Sửa</th>
@@ -72,9 +71,6 @@ Web Tuyển Sinh - Trang thông tin chính thức về tuyển sinh
                                 <tr>
                                     <td>
                                         <img height="45px" width="65px" src="{{ $item->image }}" alt="">
-                                    </td>
-                                    <td>
-                                        Forum
                                     </td>
                                     <td>
                                         {{ $item->name }}
