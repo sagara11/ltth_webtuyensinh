@@ -117,7 +117,7 @@
                                 <span style="background-color: {{ $temp->publish ? '#4caf50' : '#c41700' }}; color: white; padding: 5px 5px;">{{ $temp->publish ? 'ON' : 'OFF' }}</span>
                             </td>
                             <td>
-                                <span style="background-color: {{ $temp->role_id == 0 ? '#4caf50' : '#c41700' }}; color: white; padding: 5px 5px;">{{ $temp->role_id == 0 ? 'User' : 'Admin' }}</span>
+                                <span style="background-color: {{ $temp->role_id == 1 ? '#c41700' : '#4caf50' }}; color: white; padding: 5px 5px;">{{ $temp->role_id == 1 ? 'Admin' : 'User' }}</span>
                             </td>
                         </tr>
                         @endforeach

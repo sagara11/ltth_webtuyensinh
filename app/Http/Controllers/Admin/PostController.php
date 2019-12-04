@@ -208,7 +208,7 @@ public function filter(Request $request)
             }
             else
             {
-                $post = $post->where('category_id',$request->categories);
+                $post = $post->where('category_id',$request->categories);   
             }
         }
         else{

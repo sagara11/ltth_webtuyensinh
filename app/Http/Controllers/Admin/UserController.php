@@ -178,7 +178,7 @@ class UserController extends Controller
     }
     public function phancap(Request $request)
     {
-        if(Auth::user()->role_id)
+        if(Auth::user()->role_id == 1)
         {
             if(isset($request->option))
             {

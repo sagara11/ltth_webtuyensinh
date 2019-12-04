@@ -15,6 +15,8 @@ use Facebook\Facebook;
 use App\SocialNetwork;
 use Illuminate\Support\Facades\Log;
 use Mail;
+use Google_Client; 
+use Google_Service_Drive;
 class UserController extends BaseController
 {
     /**
@@ -237,12 +239,28 @@ class UserController extends BaseController
     {
         $provider = $request->type;
         if ($provider == 'google') {
-            return $this->checkGoogle();
+            return $this->checkGoogle($request);
         }
 
         if ($provider == 'facebook') {
             return $this->checkFacebook($request);
         }
+    }
+    public function checkGoogle(Request $request)
+    {
+        $client = new Google_Client();
+        $client->setApplicationName("Api google");
+        $client->setDeveloperKey("astute-rig-261003");
+        $client->setRedirectUri('http://127.0.0.1:8000/api/users/info');
+        $client->addScope(Google_Service_Drive::DRIVE_METADATA_READONLY);
+        $client->setAccessType('offline');
+        $auth_url = $client->createAuthUrl();
+        header('Location: ' . filter_var($auth_url, FILTER_SANITIZE_URL));
+
+        // $client->authenticate($_GET['code']);
+
+        $access_token = $client->getAccessToken();
+        dd($access_token);
     }
     public function check_id($id)
     {
