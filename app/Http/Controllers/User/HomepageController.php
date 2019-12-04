@@ -28,7 +28,7 @@ class HomepageController extends Controller
         $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('publish',1)->where('type_post','post')->offset(2)->paginate(3);
         if(empty($trend_first)){
             $trend_first = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->first();
-            $trend = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->offset(2 )->paginate(3);
+            $trend = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->where('id', "!=", $trend_first->id)->paginate(3);
         }
         $news = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->paginate(20);
         return view('user.page.home', compact('news', 'trend_first', 'trend'));
@@ -40,11 +40,11 @@ class HomepageController extends Controller
         if(isset($header_id)==false){
             return view('user.layout.error404');
         }
-            $trend_first = Post::where('trend', 1)->where('category_id', $header_id->id)->where('type_post','post')->first();
-            $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->offset(1)->where('category_id', $header_id->id)->where('type_post','post')->paginate(3);
+        $trend_first = Post::where('trend', 1)->where('category_id', $header_id->id)->where('type_post','post')->first();
+        $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->offset(2)->where('category_id', $header_id->id)->where('type_post','post')->paginate(3);
         if(empty($trend_first)){
             $trend_first = Post::where('category_id', $header_id->id)->where('type_post','post')->first();
-            $trend = Post::where('category_id', $header_id->id)->where('type_post','post')->offset(1)->paginate(3);
+            $trend = Post::where('category_id', $header_id->id)->where('type_post','post')->where('id', "!=", $trend_first->id)->paginate(3);
         }
         $news = Post::orderBy('id', 'desc')->where('category_id', $header_id->id)->where('id', "!=", $trend_first->id)->where('publish',1)->where('type_post','post')->paginate(20);
         $now = Carbon::now();
@@ -282,7 +282,12 @@ class HomepageController extends Controller
     function deletepost(Request $request){
         $del_post = Post::where('id', $request->post_id)->first();
         $del_post->delete();
-        return back();
+        return $this->danhsachbaidang();
+    }
+
+    function update_view($post_id){
+        $post_update = Post::where('id', $post_id)->first();
+        return view('user.page.update_post',compact('post_update'));
     }
 
     function updatepost(Request $request){
@@ -294,7 +299,7 @@ class HomepageController extends Controller
             'description'=>$request->update_description,
             'content'=>$request->update_content
         ]);
-        return back();
+        return $this->danhsachbaidang();
     }
 
     function verify_password(Request $request){

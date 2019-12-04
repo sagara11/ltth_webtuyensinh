@@ -79,9 +79,11 @@ Web Tuyển Sinh - Trang thông tin chính thức về tuyển sinh
                                         {{ $item->hour() }}
                                     </td>
                                     <td>
-                                        <button data-toggle="modal" data-target="#update_post_modal" id="{{ $item->id }}"
+                                        <button id="{{ $item->id }}"
                                             class="update_post_btn btn btn-success" type="button">
-                                            Sửa
+                                            <a style="color: white;" href="{{ route('update_view',$item->id) }}">
+                                                Sửa
+                                            </a>
                                         </button>
                                     </td>
                                     <td>
@@ -96,34 +98,6 @@ Web Tuyển Sinh - Trang thông tin chính thức về tuyển sinh
                         </table>
                     </form>
                 </section>
-
-                {{-- Modal update post --}}
-                <form method="post" action="{{ route('updatepost') }}" enctype="multipart/form-data">
-                    @csrf
-                    <div id="update_post_modal" class="modal fade">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    Chỉnh sửa bài viết
-                                </div>
-                                <div class="modal-body">
-                                    <input id="update_id" type="hidden" name="update_id">
-                                    <div class="form-group">
-                                        <p>Hình ảnh</p>
-                                        <input type="file" name="avatar">
-                                    </div>
-                                    <input required name="update_name" class="form-control mb-2" type="text"
-                                        placeholder="Tên bài viết">
-                                    <input required name="update_description" class="form-control mb-2" type="text"
-                                        placeholder="Mô tả bài viết">
-                                    <textarea required name="update_content" class="form-control mb-2" name="" id=""
-                                        rows="10" placeholder="Nội dung bài viết"></textarea>
-                                    <button class="btn btn-success" type="submit">Lưu</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
 
                 <form method="post" action="{{ route('updatecomment') }}">
                     @csrf
