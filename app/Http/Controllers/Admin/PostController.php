@@ -5,6 +5,7 @@ use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Database\Seeder;
 use DB;
+use Illuminate\Support\Facades\Auth;
 use App\Crawl;
 use App\Category;
 use Illuminate\Support\Str;
@@ -57,6 +58,7 @@ class PostController extends Controller
             $user->source_id = $webtuyensinh->id ;
             $user->content = $request->content ;
             $user->type_post = 'post';
+            $user->user_id = Auth::user()->id;
             $user->seo_keyword = $request->seo_keyword ;
             $user->seo_title = $request->seo_title ;
             $user->seo_description = $request->seo_description ;
