@@ -43,7 +43,7 @@ class CrawlController extends Controller
             for($i=5; $i>=1; $i--){
                 // truyen link voi link
                 $posts = $crawl->posts($object_link, $i);
-                array_reverse($posts);
+                $posts = array_reverse($posts);
                 foreach($posts as $key => $value){
                     try{
                         $post = $crawl->post($value['urls']);
