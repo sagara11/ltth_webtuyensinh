@@ -16,7 +16,7 @@ class CrawlController extends Controller
 {
     function crawl_routine($frequency){
         // lay het doi tuong bang bien frequency
-        $object = Crawl::where('frequency', $frequency)->get();
+        $object = Crawl::where('frequency', $frequency)->orderBy('id' , 'desc')->get();
         foreach($object as $key){
             // lay web_name va link cua tung web
             $object_name = $key['web_name'];

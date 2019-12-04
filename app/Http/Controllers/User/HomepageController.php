@@ -25,10 +25,10 @@ class HomepageController extends Controller
     function home()
     {
         $trend_first = Post::where('trend', 1)->where('publish',1)->where('type_post','post')->first();
-        $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('publish',1)->where('type_post','post')->offset(1)->paginate(3);
+        $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('publish',1)->where('type_post','post')->offset(2)->paginate(3);
         if(empty($trend_first)){
             $trend_first = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->first();
-            $trend = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->offset(1)->paginate(3);
+            $trend = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->offset(2 )->paginate(3);
         }
         $news = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->paginate(20);
         return view('user.page.home', compact('news', 'trend_first', 'trend'));
