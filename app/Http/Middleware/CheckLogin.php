@@ -21,7 +21,7 @@ class CheckLogin
         {
             if(Auth::user()->role_id == 1)
             {
-                return redirect('/home');
+                return $response;
             }
             else
             {

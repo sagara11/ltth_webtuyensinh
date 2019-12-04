@@ -251,16 +251,27 @@ class UserController extends BaseController
         $client = new Google_Client();
         $client->setApplicationName("Api google");
         $client->setDeveloperKey("astute-rig-261003");
-        $client->setRedirectUri('http://127.0.0.1:8000/api/users/info');
-        $client->addScope(Google_Service_Drive::DRIVE_METADATA_READONLY);
+        $client->setClientId('80761288770-0ld0jp3hegh8nggeo73rqmefs9jtmijj.apps.googleusercontent.com');
+        $client->setClientSecret('9sn4oQBGejnwPxWAH77iXrel');
+        $client->setRedirectUri('http://127.0.0.1:8000/api/users/test');
+        $client->addScope("https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email");
         $client->setAccessType('offline');
-        $auth_url = $client->createAuthUrl();
-        header('Location: ' . filter_var($auth_url, FILTER_SANITIZE_URL));
 
-        // $client->authenticate($_GET['code']);
+        $client -> createAuthUrl();
 
-        $access_token = $client->getAccessToken();
-        dd($access_token);
+        return $this->test_login($client);   
+
+    }
+    public function test_login($client)
+    {
+        if(isset($_GET['code']))
+            $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
+            $_SESSION['access_token']=$token;
+
+            $oAuth = new Google_Service_Oauth2($client);
+            $userData = $oAuth->userinfo_v2_me->get();
+            echo "<pre>";
+            var_dump($userData);
     }
     public function check_id($id)
     {
