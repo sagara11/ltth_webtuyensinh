@@ -37,17 +37,26 @@ class HomepageController extends Controller
 
     function danhmuc($slug)
     {
+        
         $header_id = Category::where('slug', $slug)->first();
+        
         if(isset($header_id)==false){
             return view('user.layout.error404');
         }
         $trend_first = Post::where('trend', 1)->where('category_id', $header_id->id)->where('type_post','post')->first();
         $trend = Post::orderBy('created_at', 'desc')->where('trend', 1)->offset(2)->where('category_id', $header_id->id)->where('type_post','post')->paginate(3);
         if(empty($trend_first)){
+            try{
             $trend_first = Post::where('category_id', $header_id->id)->where('type_post','post')->first();
             $trend = Post::where('category_id', $header_id->id)->where('type_post','post')->where('id', "!=", $trend_first->id)->paginate(3);
+            }
+            catch(\Exception $e){
+                return view("user.layout.error_danhmuc");
+            }
         }
+        
         $news = Post::orderBy('id', 'desc')->where('category_id', $header_id->id)->where('id', "!=", $trend_first->id)->where('publish',1)->where('type_post','post')->paginate(20);
+
         $now = Carbon::now();
         return view('user.page.home', compact('news', 'trend_first', 'trend', 'header_id'));
     }

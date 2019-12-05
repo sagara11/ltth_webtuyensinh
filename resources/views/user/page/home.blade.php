@@ -61,28 +61,9 @@ Web Tuyển Sinh - Trang thông tin chính thức về tuyển sinh
                 </div>
                 @endforeach
                 @else
-                @foreach ($news_sub as $item)
-                <div class="col-md-4  tieubieu-box">
-                    <div class="row">
-                        <div class="col-md-12 col-5">
-                            <a href="{{ route('chitiettin',$item->slug) }}">
-                                <img class="img-fluid" src="{{ $item->image }}" alt="{{$item->slug}}">
-                            </a>
-                        </div>
-                        <div class="col-md-12 col-7">
-                            <h5> <a href="{{ route('chitiettin',$item->slug) }}"> {{ $item->name }} </a> </h5>
-                            <p>
-                                <span>{{ $item->categories->name }} |</span>
-                                <span>{{ $item->hour() }} |</span>
-                                @if (isset($item->source->id))
-                                <a class="webtuyensinh-link"
-                                    href="{{ route('nguon_tin', $item->source->id) }}">{{ $item->source->web_name }}</a>
-                                @endif
-                            </p>
-                        </div>
-                    </div>
+                <div>
+                    Chưa có bài viết
                 </div>
-                @endforeach
                 @endif
 
             </section>
