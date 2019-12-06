@@ -7,6 +7,16 @@
 <link rel="stylesheet" href="{{ asset('css/user_web/layout/baiviet_box.css') }}">
 <link rel="stylesheet" href="{{ asset('css/user_web/layout/comment.css') }}">
 <link rel="stylesheet" href="{{ asset('css/user_web/page/chitiettin.css') }}">
+<meta property="og:image" content="{{ $new->image  }}" />
+<meta name="description" content="{{ $new->description }}">
+
+
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="{{ $new->description }}" />
+<meta property="og:url" content="https://webtuyensinh.edu.vn" />
+<meta property="og:site_name" content="{{ $new->name }}" />
+<meta property="og:description" content="{{ $new->description }}" />
 @endsection
 @section('title')
 {{ $new->name}}
