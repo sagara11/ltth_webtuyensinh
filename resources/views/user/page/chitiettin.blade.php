@@ -14,7 +14,7 @@
 <meta property="og:locale" content="en_US" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="{{ $new->description }}" />
-<meta property="og:url" content="https://webtuyensinh.edu.vn" />
+<meta property="og:url" content="https://webtuyensinh.edu.vn/{{$new->slug}}" />
 <meta property="og:site_name" content="{{ $new->name }}" />
 <meta property="og:description" content="{{ $new->description }}" />
 @endsection
