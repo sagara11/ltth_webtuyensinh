@@ -98,8 +98,8 @@ function rebuild_date( $format, $time = 0 )
             <div class="col-md-6">
                 <ul class="left">
                     <li> {{ rebuild_date('l, d/M/Y, H:i')}} </li>
-                    <li> <i class="fa fa-phone"> </i> 04 668 39 668 </li>
-                    <li> <i class="fa fa-envelope"> </i> contact@webtuyensinh.edu.vn </li>
+                    <li> <i class="fa fa-phone"> </i> 1900 272786 </li>
+                    <li> <i class="fa fa-envelope"> </i> lienhe@bts.edu.vn </li>
                 </ul>
             </div>
             <div class="col-md-6 ">
