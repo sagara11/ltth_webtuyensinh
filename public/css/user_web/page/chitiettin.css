@@ -29,12 +29,14 @@
 #baiviet-description {
   margin: 10px 0px;
   padding: 15px;
-  background-color: #eeeeee; }
+  background-color: #eeeeee;
+  font-size: 16px; }
   #baiviet-description p {
     margin: 0px 0px; }
 
 #baiviet-content {
-  padding: 10px 0px; }
+  padding: 10px 0px;
+  font-size: 16px; }
   #baiviet-content img {
     max-width: 100%;
     height: auto; }
