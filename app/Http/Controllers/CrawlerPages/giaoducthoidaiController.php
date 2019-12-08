@@ -47,7 +47,7 @@ class giaoducthoidaiController extends Controller
             {
                 $slug = $match[1];
             }
-            $description = strip_tags(html_entity_decode($post->find('label.cms-description div')->innerHTML));
+            $description = (html_entity_decode($post->find('label.cms-description div')->innerHTML));
             $content = $post->find('#abody')->innerHTML;
         }
         catch(\Exception $e){
@@ -70,8 +70,8 @@ class giaoducthoidaiController extends Controller
 
         //gan thuoc tinh cua trang
         return array(
-            'name' => $name,
-            'description' => $description,
+            'name' =>  html_entity_decode($name),
+            'description' =>  strip_tags($description),
             'slug' => $slug,
             'content' => $content,
             'post_link' => $post_link,

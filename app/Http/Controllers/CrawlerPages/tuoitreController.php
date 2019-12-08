@@ -55,8 +55,8 @@ class tuoitreController extends Controller
         $string2 = explode("/", $string1);
         $created_at = date("Y-m-d H:i:s",(strtotime($string2[2].'/'.$string2[1].'/'.$string2[0]." ".$hour)));
         return array(
-            'name' => $name,
-            'description' => $description,
+            'name' => html_entity_decode($name),
+            'description' => strip_tags($description),
             'slug' => $slug,
             'content' => $content,
             'post_link' => $post_link,

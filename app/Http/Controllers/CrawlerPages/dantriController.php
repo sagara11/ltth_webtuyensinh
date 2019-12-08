@@ -63,7 +63,7 @@ class dantriController extends Controller
         
         //gan thuoc tinh cua trang
         return array(
-            'name' => $name,
+            'name' => html_entity_decode($name),
             'description' => $description,
             'slug' => $slug,
             'content' => $content,

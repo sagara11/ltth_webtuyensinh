@@ -73,8 +73,8 @@ class vnexpressController extends Controller
 
         //gan thuoc tinh cua trang
         return array(
-            'name' => $name,
-            'description' => $description,
+            'name' => html_entity_decode($name),
+            'description' => strip_tags($description),
             'slug' => $slug[0],
             'content' => $content,
             'post_link' => $post_link,
