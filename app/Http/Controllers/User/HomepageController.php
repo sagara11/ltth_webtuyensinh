@@ -69,7 +69,7 @@ class HomepageController extends Controller
             $trend = Post::where('category_id', $header_id->id)->where('type_post','post')->where('id', "!=", $trend_first->id)->paginate(3);
             }
             catch(\Exception $e){
-                return view("user.layout.error_danhmuc");
+                return view("user.layout.error_danhmuc", compact('setting') );
             }
         }
         
@@ -89,7 +89,7 @@ class HomepageController extends Controller
         $setting = $this->setting;
         $new = Post::orderBy('created_at', 'desc')->where('slug', $slug)->where('publish',1)->first();
         if(isset($new)==false){
-            return view('user.layout.error404');
+            return view('user.layout.error404',  compact('setting'));
         }
         $xuhuong = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id','!=',$new->id)->where('type_post','post')->paginate(4);
         $tinlienquan = Post::orderBy('created_at', 'desc')->where('category_id', $new->category_id)->where('publish',1)->where('id','!=',$new->id)->where('type_post','post')->paginate(4);
