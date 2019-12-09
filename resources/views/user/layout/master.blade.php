@@ -17,6 +17,38 @@
     <link rel="icon" href="" type="image/x-icon"/>
     <meta property="og:image" content="{{ $setting['seo_image']  }}" />
 
+    <script type="application/ld+json">
+    {
+       "@context": "http://schema.org",
+       "@type": "WebSite",
+       "name" : "",
+       "url": "https://webtuyensinh.edu.vn",
+       "potentialAction": [{
+          "@type": "SearchAction",
+          "target": "https://webtuyensinh.edu.vn/search?name_search={search_term}",
+          "query-input": "required name_search=search_term"
+        }]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    { 
+      "@context" : "http://schema.org",
+        "@type" : "Organization",
+        "legalName" : "",
+        "url" : "https://webtuyensinh.edu.vn",
+        "contactPoint" : [{
+          "@type" : "ContactPoint",
+          "telephone" : "+84 0971.722.666",
+          "contactType" : "customer service"
+        }],
+        "logo" : "https://webtuyensinh.edu.vn/media/logo-main.png",
+        "sameAs" : [ 
+          "https://www.facebook.com/baotuyensinh/"
+        ]
+    }
+    </script>
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />

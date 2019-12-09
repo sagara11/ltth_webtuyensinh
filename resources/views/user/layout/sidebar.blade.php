@@ -82,7 +82,7 @@
             <section id="tuyensinh">
                 <div class="side-header">
                     <i class="fa fa-briefcase"></i>
-                    <h4>TUYỂN SINH</h4>
+                    <h2>TUYỂN SINH</h2>
                 </div>
                 <div class="side-content">
                     <a href="{{ route('chitiettin', $tuyensinh_first->slug) }}" class="tuyensinh-main">
@@ -107,7 +107,7 @@
             <section id="giaoduc">
                 <div class="side-header">
                     <i class="fa fa-book"></i>
-                    <h4 class="d-inline">GIÁO DỤC</h4>
+                    <h2 class="d-inline">GIÁO DỤC</h2>
                 </div>
                 <div class="side-content">
                     <a href="{{ route('chitiettin',$giaoduc_first->slug) }}" class="giaoduc-main">

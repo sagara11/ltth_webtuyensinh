@@ -18,9 +18,9 @@
                 <a href="{{ route('chitiettin', $trend_first->slug) }}">
                     <img class="img-fluid" src="{{ $trend_first->image }}" alt="{{ $trend_first->name }}">
                 </a>
-                <h5>
+                <h1>
                     <a href="{{ route('chitiettin',$trend_first->slug) }}"> {{ $trend_first->name }} </a>
-                </h5>
+                </h1>
                 <p>
                     <span>{{ $trend_first->categories->name }} |</span>
                     <span>{{ $trend_first->hour() }} |</span>

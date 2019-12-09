@@ -7,6 +7,79 @@
 <link rel="stylesheet" href="{{ asset('css/user_web/page/chitiettin.css') }}">
 @endsection
 @section('content')
+
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "NewsArticle",
+      "name": "{{ $new->name }}",
+      "image" : "{{ $new->image }}",
+      "description" : "{{ $new->description }}",
+      "author"      : "webtuyensinh",
+      "headline":"Web Tuyển Sinh",
+        "datePublished": "{{ $new->created_at }}",
+        "dateModified": "{{ $new->updated_at }}",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "{{ $new->id }}"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "https://webtuyensinh.edu.vn",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "",
+            "width": 60,
+            "height": 60
+        }
+      },
+      "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id"   : "https://webtuyensinh.edu.vn/{{ $new->slug }}"
+      }
+    }
+</script>
+
+<script type="application/ld+json">
+    {
+     "@context": "http://schema.org",
+     "@type": "BreadcrumbList",
+     "itemListElement":
+     [
+      {
+       "@type": "ListItem",
+       "position": 1,
+       "item":
+       {
+        "@id": "https://webtuyensinh.edu.vn",
+        "name": "Trang chủ"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item":
+                         {
+           "@id": "https://webtuyensinh.edu.vn/danh-muc/{{ $new->categories->slug }}/",
+           "name":"{{ $new->categories->name }}" 
+         }
+       
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item":
+         {
+           "@id": "https://webtuyensinh.edu.vn/{{ $new->slug }}/",
+           "name": ">{{ $new->name }}y"
+         }
+        }
+     ]
+    }
+    </script>
+
+
 <main class="container">
     <div class="row">
         <div class="col-lg-8">
@@ -201,7 +274,7 @@
     {{-- Tin moi --}}
     <section class="tintuc-contain">
         <div class="tin-header">
-            <h3>TIN MỚI</h3>
+            <h3> <span> TIN MỚI </span> </h3>
         </div>
         <div class="tin-content">
             @foreach ($tinmoi as $item)
@@ -235,7 +308,7 @@
     {{-- Tin nong --}}
     <section class="tintuc-contain">
         <div class="tin-header">
-            <h3>TIN NÓNG</h3>
+            <h3> <span> TIN NÓNG </span> </h3>
         </div>
         <div class="tin-content">
             @foreach ($tinnong as $item)
