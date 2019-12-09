@@ -18,11 +18,24 @@ use App\Crawl;
 use App\Users;
 use App\Banner;
 use App\Comment;
+use App\Option;
+
 use Exception;
 use Illuminate\Support\Carbon;
 use Mail;
 class HomepageController extends Controller
 {
+    private $setting;
+
+    public function __construct()
+    {
+        $options = Option::get();
+        $this->setting = [];
+        foreach ($options as $key => $value) {
+            $this->setting[$value['key_option']] = $value['value'];
+        }
+    }
+
     function home()
     {
         $trend_first = Post::where('trend', 1)->where('publish',1)->where('type_post','post')->first();
@@ -32,12 +45,14 @@ class HomepageController extends Controller
             $trend = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->where('id', "!=", $trend_first->id)->paginate(3);
         }
         $news = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->paginate(20);
-        return view('user.page.home', compact('news', 'trend_first', 'trend'));
+
+        $setting=$this->setting;
+        return view('user.page.home', compact('news', 'trend_first', 'trend', 'setting'));
     }
 
     function danhmuc($slug)
     {
-        
+        $setting = $this->setting;
         $header_id = Category::where('slug', $slug)->first();
         
         if(isset($header_id)==false){
@@ -58,11 +73,16 @@ class HomepageController extends Controller
         $news = Post::orderBy('id', 'desc')->where('category_id', $header_id->id)->where('id', "!=", $trend_first->id)->where('publish',1)->where('type_post','post')->paginate(20);
 
         $now = Carbon::now();
-        return view('user.page.home', compact('news', 'trend_first', 'trend', 'header_id'));
+        $setting['seo_title'] = $header_id->seo_title ? $header_id->seo_title : $header_id->name;
+        $setting['seo_description'] = $header_id->seo_description ? $header_id->seo_description : $header_id->name;
+        $setting['canonical'] = url('/danh-muc'.$header_id->slug);
+
+        return view('user.page.home', compact('news', 'trend_first', 'trend', 'header_id', 'setting'));
     }
 
     function chitiettin($slug)
     {
+        $setting = $this->setting;
         $new = Post::orderBy('created_at', 'desc')->where('slug', $slug)->where('publish',1)->first();
         if(isset($new)==false){
             return view('user.layout.error404');
@@ -81,29 +101,37 @@ class HomepageController extends Controller
         catch(\Exception $e){
             $comment = "Chưa có bình luận";
         }
-         
-        return view('user.page.chitiettin', compact('comment', 'new', 'xuhuong', 'tinlienquan','tinmoi', 'tinnong'));
+        $setting['seo_title'] = $new->seo_title ? $new->seo_title : $new->name;
+        $setting['seo_description'] = $new->seo_description ? $new->seo_description :  $new->description;
+        $setting['canonical'] = url('/'.$new->slug);
+        $setting['seo_image'] = $new->image ? $new->image : $setting['seo_image'];
+
+        return view('user.page.chitiettin', compact('comment', 'new', 'xuhuong', 'tinlienquan','tinmoi', 'tinnong', 'setting'));
     }
 
     function nguontin($danhmuc_id)
     {
-        $data = Post::where('source_id',$danhmuc_id);
 
-        $data_first = $data->where('source_id',$danhmuc_id)->orderBy('view','desc')->first();
+        $data_first = Post::where('source_id',$danhmuc_id)->orderBy('view','desc')->first();
 
         $data_third = Post::where('source_id',$danhmuc_id)->orderBy('created_at','desc')->where('type_post','post')->paginate(20);
         $tinlienquan = Post::orderBy('created_at', 'desc')->where('category_id', $data_first->category_id)->where('publish',1)->where('id','!=',$data_first->id)->where('type_post','post')->paginate(4);
         $tinmoi = Post::orderBy('created_at', 'desc')->where('publish',1)->where('type_post','post')->paginate(4);
         $tinnong = Post::orderBy('view', 'desc')->where('publish',1)->where('type_post','post')->paginate(4);
+        $setting = $this->setting;
+
+        $setting['seo_title'] = 'Tin từ '.$data_first->source->web_name;
+        $setting['canonical'] = url('/nguon-tin/'.$danhmuc_id);
      
-        return view('user.page.nguontin', compact('data_first','data_third', 'tinlienquan', 'tinmoi', 'tinnong'));
+        return view('user.page.nguontin', compact('data_first','data_third', 'tinlienquan', 'tinmoi', 'tinnong', 'setting'));
     }
 
     function search(REQUEST $request)
     {
+        $setting = $this->setting;
         $name = $request->name_search;
         $news_name = Post::where('name','like', '%'.$request->name_search.'%')->where('type_post','post')->get();
-        return view('user.page.timkiem', compact('news_name', 'name'));
+        return view('user.page.timkiem', compact('news_name', 'name','setting'));
 
     }
 
@@ -118,7 +146,8 @@ class HomepageController extends Controller
         $user = Auth::user();
         $user_post = Post::where('user_id', Auth::user()->id)->get();
         $comment = Comment::where('user_id', Auth::user()->id)->get();
-        return view('user.page.taikhoan', compact('user_post','header','user','comment'));
+        $setting = $this->setting;
+        return view('user.page.taikhoan', compact('user_post','header','user','comment', 'setting'));
     }
 
     function doimatkhau(){
@@ -126,7 +155,9 @@ class HomepageController extends Controller
         $user = Auth::user();
         $user_post = Post::where('user_id', Auth::user()->id)->get();
         $comment = Comment::where('user_id', Auth::user()->id)->get();
-        return view('user.page.doimatkhau', compact('user_post','header','user','comment'));
+        $setting = $this->setting;
+        $setting['seo_title'] = 'Đổi mật khẩu';
+        return view('user.page.doimatkhau', compact('user_post','header','user','comment', 'setting'));
     }
 
     function thembaidang(){
@@ -134,7 +165,9 @@ class HomepageController extends Controller
         $user = Auth::user();
         $user_post = Post::where('user_id', Auth::user()->id)->get();
         $comment = Comment::where('user_id', Auth::user()->id)->get();
-        return view('user.page.thembaidang', compact('user_post','header','user','comment'));
+        $setting = $this->setting;
+        $setting['seo_title'] = "Thêm bài đăng";
+        return view('user.page.thembaidang', compact('user_post','header','user','comment', 'setting'));
     }
 
     function danhsachbaidang(){
@@ -142,7 +175,9 @@ class HomepageController extends Controller
         $user = Auth::user();
         $user_post = Post::where('user_id', Auth::user()->id)->get();
         $comment = Comment::where('user_id', Auth::user()->id)->get();
-        return view('user.page.danhsachbaidang', compact('user_post','header','user','comment'));
+         $setting = $this->setting;
+        $setting['seo_title'] = "Danh sách bài đăng";
+        return view('user.page.danhsachbaidang', compact('user_post','header','user','comment', 'setting'));
     }
 
     function quanlybinhluan(){
@@ -150,7 +185,9 @@ class HomepageController extends Controller
         $user = Auth::user();
         $user_post = Post::where('user_id', Auth::user()->id)->get();
         $comment = Comment::where('user_id', Auth::user()->id)->get();
-        return view('user.page.quanlybinhluan', compact('user_post','header','user','comment'));
+         $setting = $this->setting;
+        $setting['seo_title'] = "Quản lý bình luận";
+        return view('user.page.quanlybinhluan', compact('user_post','header','user','comment', 'setting'));
     }
 
     function signin(Request $request)

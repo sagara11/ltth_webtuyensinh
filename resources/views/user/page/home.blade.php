@@ -9,9 +9,6 @@
 <link rel="stylesheet" href="{{ asset('css/user_web/layout/paginate.css') }}">
 <link rel="stylesheet" href="{{ asset('css/user_web/page/home.css') }}">
 @endsection
-@section('title')
-Web Tuyển Sinh - Trang thông tin chính thức về tuyển sinh
-@endsection
 @section('content')
 <main class="container">
     <div class="row">

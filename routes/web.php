@@ -16,6 +16,11 @@ Route::get('/redirect/{social}', 'SocialAuthController@redirect');
 Route::get('/callback/{social}', 'SocialAuthController@callback');
 Route::get('/loadmore', '\App\Http\Controllers\User\HomepageController@loadmore');
 
+
+Route::get('/sitemap.xml','SitemapController@index');
+Route::get('/sitemap_post.xml','SitemapController@post');
+Route::get('/sitemap_category.xml','SitemapController@category');
+
 Route::get('/crawl/{frequency}', 'CrawlController@crawl_routine')->name('crawl');
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
@@ -157,4 +162,6 @@ Route::post('/change-password', 'User\HomepageController@change_password')->name
 Route::get('login/facebook', 'SocialAccountController@redirectToProvider');
 
 Route::get('login/facebook/callback', 'SocialAccountController@handleProviderCallback');
+
+
 

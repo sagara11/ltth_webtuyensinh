@@ -1,11 +1,21 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>@yield('title')</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    @yield('meta')
+    <title> {{ $setting['seo_title'] }} - Web Tuyển Sinh </title>
+    <meta name="description" content="{{ $setting['seo_description'] }}" />
+    <meta name="robots" content="index, follow" />
+    <meta http-equiv="content-language" content="vi" />
+    <meta property="og:title" content="{{ $setting['seo_title'] }}">
+    <meta property="og:description" content="{{ $setting['seo_description'] }}">
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="{{ $setting['canonical'] }}">
+    <link rel="canonical" href="{{ $setting['canonical'] }}" />
+    <meta property="og:site_name" content="Web Tuyển Sinh">
+    <link rel="icon" href="" type="image/x-icon"/>
+    <meta property="og:image" content="{{ $setting['seo_image']  }}" />
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
