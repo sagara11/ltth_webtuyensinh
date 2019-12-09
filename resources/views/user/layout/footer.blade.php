@@ -39,8 +39,8 @@
                         <li> <a target="_blank" href="https://www.youtube.com/channel/UC6RxJoDPb9GilhZucQvLTVQ"> <i class="fa fa-youtube"></i> </a> </li>
                     </ul>
                     <ul class="app">
-                        <li> <img src="{{ asset('media/google-play-badge.png') }}" alt="" />  </li>
-                        <li> <img src="{{ asset('media/app store badge.png') }}" alt="" />  </li>
+                        <li> <img src="{{ asset('media/google-play-badge.png') }}" alt="logo" />  </li>
+                        <li> <img src="{{ asset('media/app store badge.png') }}" alt="logo" />  </li>
                     </ul>
                 </div>
                 

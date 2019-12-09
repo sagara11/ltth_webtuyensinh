@@ -24,7 +24,7 @@ Web Tuyển Sinh - Trang thông tin chính thức về tuyển sinh
                     <div class="row">
                         <div class="col-md-3 col-5">
                             <a href="{{ route('chitiettin',$item->slug) }}" class="tintuc-img">
-                                <img class="img-fluid" src="{{ $item->image }}" alt="" />
+                                <img class="img-fluid" src="{{ $item->image }}" alt="{{ $item->name }}" />
                             </a>
                         </div>
 

@@ -69,6 +69,7 @@ header {
       padding: 3px 10px ;
       border-radius: 3px;
       color: white;
+      cursor: pointer;
     }
   }
   .dropdown {
@@ -137,11 +138,12 @@ header {
         text-align: right;
 
         list-style-type: none;
-        .home {
+        .active {
           a {
             padding: 7px 10px;
             background-color: rgb(246, 92, 44);
             display: inline-block;
+            color:white !important;
             i {
               
               color: white;

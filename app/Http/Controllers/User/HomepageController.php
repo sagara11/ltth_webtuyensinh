@@ -34,6 +34,7 @@ class HomepageController extends Controller
         foreach ($options as $key => $value) {
             $this->setting[$value['key_option']] = $value['value'];
         }
+        $this->setting['current'] = 'home';
     }
 
     function home()
@@ -47,6 +48,8 @@ class HomepageController extends Controller
         $news = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->paginate(20);
 
         $setting=$this->setting;
+
+
         return view('user.page.home', compact('news', 'trend_first', 'trend', 'setting'));
     }
 
@@ -76,6 +79,7 @@ class HomepageController extends Controller
         $setting['seo_title'] = $header_id->seo_title ? $header_id->seo_title : $header_id->name;
         $setting['seo_description'] = $header_id->seo_description ? $header_id->seo_description : $header_id->name;
         $setting['canonical'] = url('/danh-muc'.$header_id->slug);
+        $setting['current'] = $header_id->id;
 
         return view('user.page.home', compact('news', 'trend_first', 'trend', 'header_id', 'setting'));
     }
@@ -105,6 +109,7 @@ class HomepageController extends Controller
         $setting['seo_description'] = $new->seo_description ? $new->seo_description :  $new->description;
         $setting['canonical'] = url('/'.$new->slug);
         $setting['seo_image'] = $new->image ? $new->image : $setting['seo_image'];
+        $setting['current'] = $new->category_id;
 
         return view('user.page.chitiettin', compact('comment', 'new', 'xuhuong', 'tinlienquan','tinmoi', 'tinnong', 'setting'));
     }

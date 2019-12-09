@@ -99,7 +99,7 @@
                                         <div class="col-md-9">
                                             <span>
                                                 <img class="rounded rounded-circle" src="{{ Auth::user()->avatar }}"
-                                                    alt="">
+                                                    alt="avatar">
                                             </span>
                                             <span><b>{{ Auth::user()->name }}</b></span>
                                         </div>
@@ -123,7 +123,7 @@
     @foreach ($item->child_comments as $child_item)
     <div class="comment-box children">
         <div class="comment-box-img">
-            <img class="rounded rounded-circle" src="{{ $child_item->user->avatar }}" alt="">
+            <img class="rounded rounded-circle" src="{{ $child_item->user->avatar }}" alt="avatar">
         </div>
         <div class="comment-box-content">
             <span class="user-name"> {{ $child_item->user->name }} </span>
@@ -148,7 +148,7 @@
             <div class="row">
                 <div class="col-md-9">
                     <span>
-                        <img class="rounded rounded-circle" src="{{ Auth::user()->avatar }}" alt="">
+                        <img class="rounded rounded-circle" src="{{ Auth::user()->avatar }}" alt="avatar">
                     </span>
                     <span><b>{{ Auth::user()->name }}</b></span>
                 </div>
@@ -177,7 +177,7 @@
                 <div class="row">
                     <div class="col-md-3 col-5">
                         <a href="{{ route('chitiettin',$item->slug) }}" class="tintuc-img">
-                            <img class="img-fluid" src="{{ $item->image }}" alt="" />
+                            <img class="img-fluid" src="{{ $item->image }}" alt="{{ $item->name }}" />
                         </a>
                     </div>
 
@@ -209,7 +209,7 @@
                 <div class="row">
                     <div class="col-md-3 col-5">
                         <a href="{{ route('chitiettin',$item->slug) }}" class="tintuc-img">
-                            <img class="img-fluid" src="{{ $item->image }}" alt="" />
+                            <img class="img-fluid" src="{{ $item->image }}" alt="{{ $item->name }}" />
                         </a>
                     </div>
 
@@ -243,7 +243,7 @@
                 <div class="row">
                     <div class="col-md-3 col-5">
                         <a href="{{ route('chitiettin',$item->slug) }}" class="tintuc-img">
-                            <img class="img-fluid" src="{{ $item->image }}" alt="" />
+                            <img class="img-fluid" src="{{ $item->image }}" alt="{{ $item->name }}" />
                         </a>
                     </div>
 

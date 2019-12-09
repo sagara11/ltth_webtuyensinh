@@ -58,7 +58,8 @@ header {
       background-color: #055695;
       padding: 3px 10px;
       border-radius: 3px;
-      color: white; }
+      color: white;
+      cursor: pointer; }
   header .dropdown {
     cursor: pointer; }
     header .dropdown .dropdown-toggle {
@@ -107,16 +108,17 @@ nav.nav {
     /*float: right;*/
     text-align: right;
     list-style-type: none; }
-    nav.nav .menu ul .home a {
+    nav.nav .menu ul .active a {
       padding: 7px 10px;
       background-color: #f65c2c;
-      display: inline-block; }
-      nav.nav .menu ul .home a i {
+      display: inline-block;
+      color: white !important; }
+      nav.nav .menu ul .active a i {
         color: white;
         transition: 0.3s; }
-        nav.nav .menu ul .home a i:hover {
+        nav.nav .menu ul .active a i:hover {
           transform: scale(1.2, 1.2); }
-    nav.nav .menu ul .home:hover {
+    nav.nav .menu ul .active:hover {
       background-color: white; }
     nav.nav .menu ul li {
       display: inline-block; }

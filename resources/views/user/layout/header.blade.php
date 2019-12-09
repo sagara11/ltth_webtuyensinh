@@ -110,7 +110,7 @@ function rebuild_date( $format, $time = 0 )
                         <div class="dropdown">
                             <div class="dropdown-toggle" data-toggle="dropdown">
                                 <img class=" rounded rounded-circle" height="25px" width="25px" src="{{ Auth::user()->avatar }}"
-                                    alt="" />
+                                    alt="avatar" />
                                 <p>{{ Auth::user()->name }}</p>
                             </div>
                           
@@ -244,15 +244,24 @@ function rebuild_date( $format, $time = 0 )
         <div class="row">
             <div class="col-lg-2">
                 <a class="logo" href="{{ route('home') }}">
-                    <img class="img-fluid" src="{{ asset('media/logo-main.png') }}" alt="" />
+                    <img class="img-fluid" src="{{ asset('media/logo-main.png') }}" alt="{{ $setting['seo_title'] }}" />
                 </a>
             </div>
             <div class="menu col-lg-10">
                 <ul>
-                    <li class="home"> <a href="/"> <i class="fa fa-home"> </i> </a> </li>
-                    @foreach ($nav_section as $item)
-                    <li> <a href="{{ route('danhmuc',$item->slug) }}"> {{ $item->name }} </a> </li>
-                    @endforeach
+                    <li class="{{ isset($setting['current']) && $setting['current'] == 'home' ? 'active' : '' }}"> <a href="/"> <i class="fa fa-home"> </i> </a> </li>
+
+                    @php 
+                        foreach ($nav_section as $item):
+                            $active = '';
+                            if(isset($setting['current']) && $setting['current'] == $item->id ) {
+                                $active = 'active';
+                            }
+                    @endphp
+                    <li class="{{ $active }}" > <a href="{{ route('danhmuc',$item->slug) }}"> {{ $item->name }} </a> </li>
+                    @php
+                        endforeach;
+                    @endphp
                     <li> <a target="_blank" href="https://hoidaptuyensinh.vn"> Hỏi Đáp </a> </li>
                     <li> <a target="_blank" href="#"> Việc Làm </a> </li>
 
@@ -278,7 +287,7 @@ function rebuild_date( $format, $time = 0 )
     </div>
     <div class="logo">
         <a href="{{ route('home') }}">
-            <img class="img-fluid" src="{{ asset('media/logo-main.png') }}" alt="Logo" />
+            <img class="img-fluid" src="{{ asset('media/logo-main.png') }}" alt="{{ $setting['seo_title'] }}" />
         </a>
     </div>
     <form style="width: 15%;" class="searchbar" method="get" action="{{ route('search') }}">
@@ -303,7 +312,7 @@ function rebuild_date( $format, $time = 0 )
         @if(Auth::check())
         <div>
             <a href="{{ route('taikhoan') }}" class="m-2">
-                <img height="30px" width="30px" class="rounded rounded-circle" src="{{Auth::user()->avatar}}">
+                <img height="30px" width="30px" alt="avatar" class="rounded rounded-circle" src="{{Auth::user()->avatar}}">
                 {{ Auth::user()->name }}
             </a>
         </div>
