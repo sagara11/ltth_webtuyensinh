@@ -19,16 +19,15 @@ class vnexpressController extends Controller
         // gan cac link va anh trong muc tin moi vao mang
         $datas = [];
         $count = 0;
-        $post = $posts->find('.sidebar_1 .list_news .title_news .icon_commend');
-        $src = $posts->find('.thumb_art .thumb.thumb_5x3 img.vne_lazy_image');
+        $list_news = $posts->find('.sidebar_1 .list_news');
 
-        foreach($post as $key){
+        foreach($list_news as $k => $key){
+            if(!$key->find('img')->count()) continue;
             $object = array(
-                'urls' => $key->href,
-                'img' => str_replace("_180x108","",$src[$count]->getAttribute('data-original'))
+                'urls' => $key->find('a')->href,
+                'img' => str_replace("_180x108","", $key->find('img')->src ) 
             );
             array_push($datas, $object);
-            $count++;
         }
 
         // return mang url tung page va hinh anh
