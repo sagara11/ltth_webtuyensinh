@@ -25,7 +25,7 @@ class vnexpressController extends Controller
             if(!$key->find('img')->count()) continue;
             $object = array(
                 'urls' => $key->find('a')->href,
-                'img' => str_replace("_180x108","", $key->find('img')->src ) 
+                'img' => $key->find('img')->getAttribute('data-original') 
             );
             array_push($datas, $object);
         }
