@@ -20,6 +20,7 @@ class CrawlController extends Controller
         foreach($object as $key){
             // lay web_name va link cua tung web
             $object_name = $key['web_name'];
+            echo ' ----------- '.$object_name.' ---------- ';
             switch($object_name){
                 case "Tuổi trẻ": 
                     $object_name = "tuoitre";
@@ -40,6 +41,7 @@ class CrawlController extends Controller
             //tao doi tuong voi web_name
             $domain_name = __NAMESPACE__. '\\'.'CrawlerPages'.'\\'. $object_name.'Controller';
             $crawl = new $domain_name;
+
             for($i=1; $i>=1; $i--){
                 // truyen link voi link
                 $posts = $crawl->posts($object_link, $i);
@@ -80,6 +82,7 @@ class CrawlController extends Controller
                     } 
                     catch(\Exception $e){
                         echo " + Error ";
+                        var_dump($e->getMessage() );
                         continue;
                     }
                 }

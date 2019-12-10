@@ -45,7 +45,7 @@ class HomepageController extends Controller
             $trend_first = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->first();
             $trend = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->where('id', "!=", $trend_first->id)->paginate(3);
         }
-        $news = Post::orderBy('id', 'desc')->where('publish',1)->where('type_post','post')->paginate(20);
+        $news = Post::orderBy('created_at', 'desc')->where('publish',1)->where('type_post','post')->paginate(20);
 
         $setting=$this->setting;
 

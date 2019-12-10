@@ -58,7 +58,6 @@ class vnexpressController extends Controller
             $slug = explode('.html?', $slug_arr);
             $description = $post->find('h2.description')->innerHTML;
             $content = $post->find('.content_detail')->innerHTML;                                                                                                                                                                                       
-            exit();
         }
 
         $post_link = $page_url;
