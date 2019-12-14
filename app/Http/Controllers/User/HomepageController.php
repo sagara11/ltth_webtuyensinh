@@ -118,9 +118,9 @@ class HomepageController extends Controller
     {
         $setting = $this->setting;
         $new = Post::orderBy('created_at', 'desc')->where('slug', $slug1)->first();
-        // if(isset($new)==false){
-        //     return view('user.layout.error404',  compact('setting'));
-        // }
+        if(isset($new)==false){
+            return view('user.layout.error404',  compact('setting'));
+        }
         $xuhuong = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id','!=',$new->id)->where('type_post','post')->paginate(4);
         $tinlienquan = Post::orderBy('created_at', 'desc')->where('publish',1)->where('id','!=',$new->id)->where('type_post','forum')->paginate(4);
         $tinmoi = Post::orderBy('created_at', 'desc')->where('publish',1)->where('type_post','post')->paginate(4);
@@ -142,6 +142,12 @@ class HomepageController extends Controller
         $setting['current'] = $new->category_id;
 
         return view('user.page.forum', compact('comment', 'new', 'xuhuong', 'tinlienquan','tinmoi', 'tinnong', 'setting'));
+    }
+
+    function forum_list(){
+        $setting=$this->setting;
+        $forum_post = Post::where('type_post', "forum")->where("publish", 1)->get();
+        return view("user.page.forum_list",compact('setting', 'forum_post'));
     }
 
     function nguontin($danhmuc_id)

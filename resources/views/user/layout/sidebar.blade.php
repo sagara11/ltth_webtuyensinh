@@ -167,12 +167,25 @@
             @foreach ($nguoidungmoi as $item)
             <div class="nguoidungmoi-box">
                 <div class="nguoidungmoi-avatar">
+                    @if (isset($item->avatar))
                     <img height="35px" width="35px" class="rounded rounded-circle" src="{{ $item->avatar }}" alt="">
+                    @else
+                    <div class="empty-avatar">
+                        <p>
+                            {{ substr($item->name, 0, 1) }}
+                        </p>
+                    </div>
+                    @endif
                 </div>
                 <div class="nguoidungmoi-contents">
+                    @if (isset($item->name))
                     <p>
                         {{ $item->name }}
                     </p>
+                    @else
+                    <p>User</p>
+                    @endif
+
                 </div>
             </div>
             @endforeach

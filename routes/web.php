@@ -118,6 +118,8 @@ Route::group(['prefix'=>'elastic'], function () {
 
 Route::get("/",'User\HomepageController@home')->name('home');
 Route::get('danh-muc/{slug}','User\HomepageController@danhmuc')->name('danhmuc');
+Route::get('forum/','User\HomepageController@forum_list')->name('forum_list');
+
 
 Route::get('/tai-khoan-1', 'User\HomepageController@taikhoan')->name('taikhoan');
 Route::get('/tai-khoan-2', 'User\HomepageController@doimatkhau')->name('doimatkhau');
@@ -151,8 +153,8 @@ Route::post('/deletepost',"User\HomepageController@deletepost")->name('deletepos
 Route::post('/updatepost',"User\HomepageController@updatepost")->name('updatepost');
 Route::get('/update_view/{post_id}',"User\HomepageController@update_view")->name('update_view');
 Route::post('/updatepostavatar',"User\HomepageController@update_post_image")->name('updatepostimage');
-Route::get("forum/{slug1}",'User\HomepageController@forum')->name('forum');
 
+Route::get("forum/{slug1}",'User\HomepageController@forum')->name('forum');
 Route::get("/{slug}",'User\HomepageController@chitiettin')->name('chitiettin');
 
 

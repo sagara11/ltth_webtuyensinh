@@ -262,6 +262,7 @@ function rebuild_date( $format, $time = 0 )
                     @php
                         endforeach;
                     @endphp
+                    <li> <a href="http://127.0.0.1:8000/forum"> Forum </a> </li>
                     <li> <a target="_blank" href="https://hoidaptuyensinh.vn"> Hỏi Đáp </a> </li>
                     <li> <a target="_blank" href="#"> Việc Làm </a> </li>
 

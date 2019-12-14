@@ -330,6 +330,17 @@ footer {
         margin-right: 10px; }
         #nguoidungmoi .side-content .nguoidungmoi-box .nguoidungmoi-avatar img {
           border-radius: 4px; }
+        #nguoidungmoi .side-content .nguoidungmoi-box .nguoidungmoi-avatar .empty-avatar {
+          background-color: brown;
+          border-radius: 17.5px;
+          height: 35px;
+          width: 35px; }
+          #nguoidungmoi .side-content .nguoidungmoi-box .nguoidungmoi-avatar .empty-avatar p {
+            color: white;
+            text-transform: uppercase;
+            line-height: 35px;
+            text-align: center;
+            margin: 0px 0px; }
       #nguoidungmoi .side-content .nguoidungmoi-box .nguoidungmoi-contents {
         width: 85%;
         display: flex;
