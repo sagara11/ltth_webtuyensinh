@@ -250,7 +250,8 @@ class UserController extends BaseController
     }
     public function checkGoogle(Request $request)
     {
-        $token = $request->header('token');
+        $token = $request->token;
+
         $client = new Google_Client();
         $client->setApplicationName(env('NAME'));
         $client->setDeveloperKey(env('KEY'));
@@ -331,17 +332,6 @@ class UserController extends BaseController
             return response()->json($response);
         }
 
-    }
-    public function test_login($client)
-    {
-        if(isset($_GET['code']))
-            $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
-        $_SESSION['access_token']=$token;
-
-        $oAuth = new Google_Service_Oauth2($client);
-        $userData = $oAuth->userinfo_v2_me->get();
-        echo "<pre>";
-        var_dump($userData);
     }
     public function check_id($id)
     {
