@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Log;
 use Mail;
 use Google_Client; 
 use Google_Service_Drive;
+use Google_Service_Oauth2;
 class UserController extends BaseController
 {
     /**
@@ -25,33 +26,33 @@ class UserController extends BaseController
      * @param  \App\User  $model
      * @return \Illuminate\View\View
      */
-     public function index(Request $request)
+    public function index(Request $request)
     { 
         try{
-                $token = $request->header('token');
-                $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
-                if($gettoken == null)
-                {
-                    $response = [
-                        'status' => false,
-                        'message' => '$token is invalid !!! ',
-                    ];
-                    return response()->json($response);
-                }
-                $user = User::where('id',$gettoken[0])->select('id','name','email','avatar')->first();
+            $token = $request->header('token');
+            $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
+            if($gettoken == null)
+            {
                 $response = [
-                        'status' => true,
-                        'message' => 'User Data',
-                        'info' => $user,
-                    ];
+                    'status' => false,
+                    'message' => '$token is invalid !!! ',
+                ];
                 return response()->json($response);
+            }
+            $user = User::where('id',$gettoken[0])->select('id','name','email','avatar')->first();
+            $response = [
+                'status' => true,
+                'message' => 'User Data',
+                'info' => $user,
+            ];
+            return response()->json($response);
         }
         catch(\Exception $e){
-                $response = [
-                        'status' => false,
-                        'message' => 'Get information fail!!!',
-                    ];
-                return response()->json($response);
+            $response = [
+                'status' => false,
+                'message' => 'Get information fail!!!',
+            ];
+            return response()->json($response);
         }
     }
 
@@ -61,9 +62,9 @@ class UserController extends BaseController
         if(empty($data))
         {
             $response = [
-                    'status' => false,
-                    'message' => 'Không tồn tại email này !!!',
-                ];
+                'status' => false,
+                'message' => 'Không tồn tại email này !!!',
+            ];
             return response()->json($response);
         }
         else
@@ -73,9 +74,9 @@ class UserController extends BaseController
                 $message->to($email, 'Verified Password!!!')->subject('Please click the link below to retrieve your password !!!');
             });
             $response = [
-                    'status' => true,
-                    'message' => 'Send message successfully!',
-                ];
+                'status' => true,
+                'message' => 'Send message successfully!',
+            ];
             return response()->json($response);
         }
     }
@@ -97,65 +98,65 @@ class UserController extends BaseController
      * @return \Illuminate\View\View
      */
     
-     public function update(Request $request, User $user)
+    public function update(Request $request, User $user)
     {
         try{ 
-                $token = $request->header('token');
-                $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
-                if($gettoken == null)
-                {
-                    $response = [
-                        'status' => false,
-                        'message' => '$token is invalid !!! ',
-                    ];
-                    return response()->json($response);
-                }
-                $id = $gettoken[0];
-                $user = User::find($gettoken[0]);
+            $token = $request->header('token');
+            $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
+            if($gettoken == null)
+            {
+                $response = [
+                    'status' => false,
+                    'message' => '$token is invalid !!! ',
+                ];
+                return response()->json($response);
+            }
+            $id = $gettoken[0];
+            $user = User::find($gettoken[0]);
                 // xu li phan thay doi mat khau
-                if(isset($request->password) || isset($request->new_password))
+            if(isset($request->password) || isset($request->new_password))
+            {
+                if($request->password != null && $request->new_password != null)
                 {
-                    if($request->password != null && $request->new_password != null)
+                    if(Hash::check($request->password,$user->password))
                     {
-                        if(Hash::check($request->password,$user->password))
-                        {
-                            $user->password = Hash::make($request->new_password);
-                        } 
-                        else
-                        {
-                            $response = [
-                            'status' => false,
-                            'message' => 'Your password does not match any other password !!!',
-                            ];
-                            return response()->json($response);
-                        }
-                    }   
+                        $user->password = Hash::make($request->new_password);
+                    } 
                     else
                     {
-                        // helloshjdsad
                         $response = [
-                        'status' => false,
-                        'message' => 'please fill the password or new password !!!',
+                            'status' => false,
+                            'message' => 'Your password does not match any other password !!!',
                         ];
                         return response()->json($response);
                     }
-                }
-                // xu li phan anh
-                if($request->file('avatar') != null)
+                }   
+                else
                 {
-                    $avatar = $this->Xulyupload($request,$user->id);
-                    $user->avatar = $avatar ;
+                        // helloshjdsad
+                    $response = [
+                        'status' => false,
+                        'message' => 'please fill the password or new password !!!',
+                    ];
+                    return response()->json($response);
                 }
-                $user->name = $request->name ? $request->name : $user->name ;
-                $user->email = $request->email ? $request->email : $user->email ;
-                $user->save();
-                $data = User::where('id',$id)->select('id','name','email','avatar')->first();
-                $response = [
-                    'status' => true,
-                    'message' => 'Update success',
-                    'info' => $data 
-                ];
-                return response()->json($response);
+            }
+                // xu li phan anh
+            if($request->file('avatar') != null)
+            {
+                $avatar = $this->Xulyupload($request,$user->id);
+                $user->avatar = $avatar ;
+            }
+            $user->name = $request->name ? $request->name : $user->name ;
+            $user->email = $request->email ? $request->email : $user->email ;
+            $user->save();
+            $data = User::where('id',$id)->select('id','name','email','avatar')->first();
+            $response = [
+                'status' => true,
+                'message' => 'Update success',
+                'info' => $data 
+            ];
+            return response()->json($response);
         }
         catch(\Exception $e) {
             $response = [
@@ -172,9 +173,9 @@ class UserController extends BaseController
 
         $valid = Validator::make($posts, $rules);
             // Ko có lỗi, kiểm tra nếu file đã dc upload
-            if ($rq->file('avatar')->isValid()) {
+        if ($rq->file('avatar')->isValid()) {
                 // Filename cực shock để khỏi bị trùng
-                $fileName = $rq->file('avatar')->storeAs('userfiles/images/avatar','avatar'.$id.'.jpg');
+            $fileName = $rq->file('avatar')->storeAs('userfiles/images/avatar','avatar'.$id.'.jpg');
                 // Thư mục upload
                 $uploadPath = public_path('userfiles/images/avatar'); // Thư mục upload
                 // Bắt đầu chuyển file vào thư mục
@@ -185,14 +186,14 @@ class UserController extends BaseController
             }
             else {
                 // Lỗi file
-                 $response = [
-                    'status' => false,
-                    'message' => ' Update Avatar fail !!!!',
-                ];
-                    return response()->json($response);
-            }
+               $response = [
+                'status' => false,
+                'message' => ' Update Avatar fail !!!!',
+            ];
+            return response()->json($response);
         }
-        
+    }
+
     /**
      * Remove the specified user from storage
      *
@@ -249,30 +250,98 @@ class UserController extends BaseController
     }
     public function checkGoogle(Request $request)
     {
+        $token = $request->header('token');
         $client = new Google_Client();
-        $client->setApplicationName("Api google");
-        $client->setDeveloperKey("astute-rig-261003");
-        $client->setClientId('80761288770-0ld0jp3hegh8nggeo73rqmefs9jtmijj.apps.googleusercontent.com');
-        $client->setClientSecret('9sn4oQBGejnwPxWAH77iXrel');
-        $client->setRedirectUri('http://127.0.0.1:8000/api/users/test');
-        $client->addScope("https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email");
-        $client->setAccessType('offline');
+        $client->setApplicationName(env('NAME'));
+        $client->setDeveloperKey(env('KEY'));
+        $client->setClientId(env('GOOGLE_CLIENT_ID'));
+        $client->setClientSecret(env('GOOGLE_CLIENT_SECRET'));
+        $client->setRedirectUri(env('GOOGLE_REDIRECT_URL'));
+        $client->addScope("email");
+        $client->addScope("profile");
 
-        $client -> createAuthUrl();
+        $client->setAccessToken($token);
 
-        return $this->test_login($client);   
+        $google_oauth = new Google_Service_Oauth2($client);
+        $google_account_info = $google_oauth->userinfo->get();
+        $email =  $google_account_info->email;
+        $name =  $google_account_info->name;
+
+        try{
+            $check = $this->check_id($google_account_info->id);
+            $user = '';
+            $user_new = '';
+                // check id
+            if(empty($check))
+            {
+                if($email)
+                {
+                        //check email
+                    $check_email = User::where('email',$email)->first();
+                    if(empty($check_email))
+                    {
+                            // them tai khoan khi chua co email
+                        $avatar = $google_account_info->picture;
+                        $user_new_id = $this->add_new($google_account_info->givenName,$email,$avatar);
+                        $user_new = User::where('id',$user_new_id)->select('id','name','email','avatar')->first();  
+                    }
+                        // them tai khoan khi da co email
+                    $avatar = $google_account_info->picture;
+                    $id = ($this->update_new($check_email,$google_account_info->givenName,$avatar));
+                    $user = User::where('id',$id)->select('id','name','email','avatar')->first();  
+                }     
+                else
+                {
+                    $response = [
+                        'status' => -1,
+                        'message' => 'Khong co email !!!',
+                    ];
+                    return response()->json($response);
+                }
+            }
+            else
+            {
+                $user = User::where('id',$check->user_id)->select('id','name','email','avatar')->first();
+            }
+                // luu vao social network
+            if(empty($check)){
+                $data = new SocialNetwork();
+                $data->user_id = isset($user->id) ? $user->id : $user_new_id;
+                $data->social_id = $google_account_info->id;
+                $data->provider = 'Google';
+                $data->save();
+            }
+                // cap token
+            $time = time();
+            $token = JWT::encode([isset($user->id) ? $user->id : $user_new_id, $time] , env('JWT_KEY'));
+            $data = $user_new != '' ? $user_new : $user;
+            $response = [
+                'status' => true,
+                'message' => 'Login success',
+                'token' => $token,
+                'info' => $data,
+            ];
+            return response()->json($response);
+        }catch(\Exception $e)
+        {
+            $response = [
+                'status' => false,
+                'message' => 'Login Fail!!!',
+            ];
+            return response()->json($response);
+        }
 
     }
     public function test_login($client)
     {
         if(isset($_GET['code']))
             $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
-            $_SESSION['access_token']=$token;
+        $_SESSION['access_token']=$token;
 
-            $oAuth = new Google_Service_Oauth2($client);
-            $userData = $oAuth->userinfo_v2_me->get();
-            echo "<pre>";
-            var_dump($userData);
+        $oAuth = new Google_Service_Oauth2($client);
+        $userData = $oAuth->userinfo_v2_me->get();
+        echo "<pre>";
+        var_dump($userData);
     }
     public function check_id($id)
     {
@@ -289,196 +358,196 @@ class UserController extends BaseController
         try {
               // Get the \Facebook\GraphNodes\GraphUser object for the current user.
               // If you provided a 'default_access_token', the '{access-token}' is optional.
-              $response = $fb->get("/me?fields=id,email,first_name");
-            } catch(\Facebook\Exceptions\FacebookResponseException $e) {
+          $response = $fb->get("/me?fields=id,email,first_name");
+      } catch(\Facebook\Exceptions\FacebookResponseException $e) {
               // When Graph returns an error
-              echo 'Graph returned an error: ' . $e->getMessage();
-              exit();
-            } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+          echo 'Graph returned an error: ' . $e->getMessage();
+          exit();
+      } catch(\Facebook\Exceptions\FacebookSDKException $e) {
               // When validation fails or other local issues
-              echo 'Facebook SDK returned an error: ' . $e->getMessage();
-              exit();
-            }
-        try{
-                $me = $response->getGraphUser();
-                $check = $this->check_id($me['id']);
-                $user = '';
-                $user_new = '';
+          echo 'Facebook SDK returned an error: ' . $e->getMessage();
+          exit();
+      }
+      try{
+        $me = $response->getGraphUser();
+        $check = $this->check_id($me['id']);
+        $user = '';
+        $user_new = '';
                 // check id
-                if(empty($check))
-                {
-                    if(isset($me['email']))
-                    {
+        if(empty($check))
+        {
+            if(isset($me['email']))
+            {
                         //check email
-                        $check_email = User::where('email',$me['email'])->first();
-                        if(empty($check_email))
-                        {
+                $check_email = User::where('email',$me['email'])->first();
+                if(empty($check_email))
+                {
                             // them tai khoan khi chua co email
-                            $avatar = 'http://graph.facebook.com/'.$me['id'].'/picture?type=square';
-                            $user_new_id = $this->add_new($me['first_name'],$me['email'],$avatar);
-                            $user_new = User::where('id',$user_new_id)->select('id','name','email','avatar')->first();  
-                        }
+                    $avatar = 'http://graph.facebook.com/'.$me['id'].'/picture?type=square';
+                    $user_new_id = $this->add_new($me['first_name'],$me['email'],$avatar);
+                    $user_new = User::where('id',$user_new_id)->select('id','name','email','avatar')->first();  
+                }
                         // them tai khoan khi da co email
-                        $avatar = 'http://graph.facebook.com/'.$me['id'].'/picture?type=square';
-                        $id = ($this->update_new($check_email,$me['first_name'],$avatar));
-                        $user = User::where('id',$id)->select('id','name','email','avatar')->first();  
-                    }     
-                    else
-                    {
-                        $response = [
-                            'status' => -1,
-                            'message' => 'Khong co email !!!',
-                        ];
-                        return response()->json($response);
-                    }
-                }
-                else
-                {
-                    $user = User::where('id',$check->user_id)->select('id','name','email','avatar')->first();
-                }
-                // luu vao social network
-                if(empty($check)){
-                    $data = new SocialNetwork();
-                    $data->user_id = isset($user->id) ? $user->id : $user_new_id;
-                    $data->social_id = $me['id'];
-                    $data->provider = 'Facebook';
-                    $data->save();
-                }
-                // cap token
-                $time = time();
-                $token = JWT::encode([isset($user->id) ? $user->id : $user_new_id, $time] , env('JWT_KEY'));
-                $data = $user_new != '' ? $user_new : $user;
-                $response = [
-                            'status' => true,
-                            'message' => 'Login success',
-                            'token' => $token,
-                            'info' => $data,
-                        ];
-                        return response()->json($response);
-        }catch(\Exception $e)
-        {
-            $response = [
-                            'status' => false,
-                            'message' => 'Login Fail!!!',
-                        ];
-                        return response()->json($response);
-        }
-    }
-    public function update_new($user,$name,$avatar)
-    {
-        try{
-            $user->name  = $name;
-            $user->avatar = $avatar;
-            $user->password = Hash::make('admin123');
-            $user->publish = 1 ;
-            $user->save();
-            return $user->id ;
-        }catch(\Exception $e)
-        {
-            $response = [
-                            'status' => false,
-                            'message' => 'Add Fail!!!',
-                        ];
-                        return response()->json($response);
-        }
-    }
-    public function add_new($name,$email,$avatar)
-    {
-        try{
-            $user = new User();
-            $user->name  = $name;
-            $user->avatar = $avatar;
-            $user->email = $email;
-            $user->password = Hash::make('admin123');
-            $user->publish = 1 ;
-            $user->save();
-            return $user->id ;
-        }catch(\Exception $e)
-        {
-            $response = [
-                            'status' => false,
-                            'message' => 'Add Fail!!!',
-                        ];
-                        return response()->json($response);
-        }
-    }
-    public function comments(Request $request)
-    {
-        try{
-            $token = $request->header('token');
-            $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
-            if($gettoken == null)
-                {
-                    $response = [
-                        'status' => false,
-                        'message' => '$token is invalid !!! ',
-                    ];
-                    return response()->json($response);
-                }
-            $comments = Comment::select('id','comment','created_at','post_id')->with(array(
-                    'post' => function($comments)
-                    {
-                        $comments->select('id','name');
-                    }))->where('user_id', $gettoken[0]);
-                $limit = isset($request->limit) ? $request->limit : 10 ;
-                $comments = $comments->paginate($limit);
-                $response = [
-                            'status'  => true,
-                            'comment' => $comments,
-                        ];
-                return response()->json($response);
-        }
-        catch(\Exception $e)
-        {
-            $response = [
-                        'status'  => false,
-                        'message' => 'Fail!!',
-                    ];
-            return response()->json($response);
-        }
-    }
-    public function responseErrors($returnCode, $message, $statusCode = 200)
-    {
-        return response()->json([
-            'code' => (int) $returnCode,
-            'message' => $message,
-        ], $statusCode);
-    }
-    public function responseSuccess($data, $statusCode = 200)
-    {
-        return response()->json(array_merge(['code' => 200], $data), $statusCode);
-    }
-    public function register(Request $request)
-    {
-        if($request->email != '' && $request->password != '')
-        {
-            try{
-                $user = new User();
-                $user->email = $request->email;
-                $user->password = Hash::make($request->password);
-                $user->publish = 1 ;
-                $user->save();
-                $response = [
-                        'status'  => true,
-                        'message' => 'Register success!!!',
-                    ];
-                return response()->json($response);
-            }catch(\Exception $e)
+                $avatar = 'http://graph.facebook.com/'.$me['id'].'/picture?type=square';
+                $id = ($this->update_new($check_email,$me['first_name'],$avatar));
+                $user = User::where('id',$id)->select('id','name','email','avatar')->first();  
+            }     
+            else
             {
                 $response = [
-                        'status'  => false,
-                        'message' => 'This email has existed!!!',
-                    ];
-            return response()->json($response);
+                    'status' => -1,
+                    'message' => 'Khong co email !!!',
+                ];
+                return response()->json($response);
             }
         }
         else
         {
+            $user = User::where('id',$check->user_id)->select('id','name','email','avatar')->first();
+        }
+                // luu vao social network
+        if(empty($check)){
+            $data = new SocialNetwork();
+            $data->user_id = isset($user->id) ? $user->id : $user_new_id;
+            $data->social_id = $me['id'];
+            $data->provider = 'Facebook';
+            $data->save();
+        }
+                // cap token
+        $time = time();
+        $token = JWT::encode([isset($user->id) ? $user->id : $user_new_id, $time] , env('JWT_KEY'));
+        $data = $user_new != '' ? $user_new : $user;
+        $response = [
+            'status' => true,
+            'message' => 'Login success',
+            'token' => $token,
+            'info' => $data,
+        ];
+        return response()->json($response);
+    }catch(\Exception $e)
+    {
+        $response = [
+            'status' => false,
+            'message' => 'Login Fail!!!',
+        ];
+        return response()->json($response);
+    }
+}
+public function update_new($user,$name,$avatar)
+{
+    try{
+        $user->name  = $name;
+        $user->avatar = $avatar;
+        $user->password = Hash::make('admin123');
+        $user->publish = 1 ;
+        $user->save();
+        return $user->id ;
+    }catch(\Exception $e)
+    {
+        $response = [
+            'status' => false,
+            'message' => 'Add Fail!!!',
+        ];
+        return response()->json($response);
+    }
+}
+public function add_new($name,$email,$avatar)
+{
+    try{
+        $user = new User();
+        $user->name  = $name;
+        $user->avatar = $avatar;
+        $user->email = $email;
+        $user->password = Hash::make('admin123');
+        $user->publish = 1 ;
+        $user->save();
+        return $user->id ;
+    }catch(\Exception $e)
+    {
+        $response = [
+            'status' => false,
+            'message' => 'Add Fail!!!',
+        ];
+        return response()->json($response);
+    }
+}
+public function comments(Request $request)
+{
+    try{
+        $token = $request->header('token');
+        $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
+        if($gettoken == null)
+        {
             $response = [
-                        'status'  => false,
-                        'message' => 'Please fill the email or password !!!',
-                    ];
+                'status' => false,
+                'message' => '$token is invalid !!! ',
+            ];
+            return response()->json($response);
+        }
+        $comments = Comment::select('id','comment','created_at','post_id')->with(array(
+            'post' => function($comments)
+            {
+                $comments->select('id','name');
+            }))->where('user_id', $gettoken[0]);
+        $limit = isset($request->limit) ? $request->limit : 10 ;
+        $comments = $comments->paginate($limit);
+        $response = [
+            'status'  => true,
+            'comment' => $comments,
+        ];
+        return response()->json($response);
+    }
+    catch(\Exception $e)
+    {
+        $response = [
+            'status'  => false,
+            'message' => 'Fail!!',
+        ];
+        return response()->json($response);
+    }
+}
+public function responseErrors($returnCode, $message, $statusCode = 200)
+{
+    return response()->json([
+        'code' => (int) $returnCode,
+        'message' => $message,
+    ], $statusCode);
+}
+public function responseSuccess($data, $statusCode = 200)
+{
+    return response()->json(array_merge(['code' => 200], $data), $statusCode);
+}
+public function register(Request $request)
+{
+    if($request->email != '' && $request->password != '')
+    {
+        try{
+            $user = new User();
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->publish = 1 ;
+            $user->save();
+            $response = [
+                'status'  => true,
+                'message' => 'Register success!!!',
+            ];
+            return response()->json($response);
+        }catch(\Exception $e)
+        {
+            $response = [
+                'status'  => false,
+                'message' => 'This email has existed!!!',
+            ];
             return response()->json($response);
         }
     }
+    else
+    {
+        $response = [
+            'status'  => false,
+            'message' => 'Please fill the email or password !!!',
+        ];
+        return response()->json($response);
+    }
+}
 }
