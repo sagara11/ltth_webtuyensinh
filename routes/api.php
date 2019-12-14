@@ -32,6 +32,7 @@ Route::post('users/login','\App\Http\Controllers\API\UserController@login');
 Route::post('users/login_social','\App\Http\Controllers\API\UserController@login_social');
 Route::post('users/update_profile','\App\Http\Controllers\API\UserController@update');
 Route::get('users/comments','\App\Http\Controllers\API\UserController@comments');
+Route::get('users/test','\App\Http\Controllers\API\UserController@test_login');
 Route::post('users/forgot_password','\App\Http\Controllers\API\UserController@change_password');
 Route::post('users/regis','\App\Http\Controllers\API\UserController@register');
 //comment
