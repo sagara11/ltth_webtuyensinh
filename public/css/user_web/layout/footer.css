@@ -258,6 +258,85 @@ footer {
             margin-right: 0.5rem;
             background-color: #0f90a4; }
 
+#congdong {
+  margin: 10px 0px; }
+  #congdong .side-header {
+    padding: 10px 0px; }
+    #congdong .side-header i {
+      margin-right: 10px;
+      color: #055695; }
+    #congdong .side-header h2 {
+      font-weight: bold;
+      font-size: 20px;
+      display: inline;
+      color: #055695; }
+  #congdong .side-content {
+    max-height: 400px;
+    overflow-y: scroll;
+    padding: 10px 10px;
+    background-color: #f7f7f7;
+    border: 1px solid #055695;
+    border-top: 2px solid #055695; }
+    #congdong .side-content .congdong-box {
+      padding: 10px 5px;
+      border-top: 1px dotted #055695;
+      display: flex; }
+      #congdong .side-content .congdong-box .congdong-avatar {
+        width: 15%;
+        margin-right: 10px; }
+        #congdong .side-content .congdong-box .congdong-avatar img {
+          border-radius: 4px; }
+      #congdong .side-content .congdong-box .congdong-contents {
+        width: 85%; }
+        #congdong .side-content .congdong-box .congdong-contents .user-name {
+          color: #e3411f;
+          text-transform: uppercase;
+          font-size: 13px;
+          margin: 0px 0px; }
+        #congdong .side-content .congdong-box .congdong-contents a {
+          text-decoration: none; }
+          #congdong .side-content .congdong-box .congdong-contents a .forum-name {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: left;
+            margin: 0px 0px;
+            color: #333333; }
+
+#nguoidungmoi {
+  margin: 10px 0px; }
+  #nguoidungmoi .side-header {
+    padding: 10px 0px; }
+    #nguoidungmoi .side-header i {
+      margin-right: 10px;
+      color: #055695; }
+    #nguoidungmoi .side-header h2 {
+      font-weight: bold;
+      font-size: 20px;
+      display: inline;
+      color: #055695; }
+  #nguoidungmoi .side-content {
+    max-height: 300px;
+    overflow-y: scroll;
+    padding: 10px 10px;
+    background-color: #f7f7f7;
+    border: 1px solid #055695;
+    border-top: 2px solid #055695; }
+    #nguoidungmoi .side-content .nguoidungmoi-box {
+      padding: 10px 5px;
+      border-top: 1px dotted #055695;
+      display: flex; }
+      #nguoidungmoi .side-content .nguoidungmoi-box .nguoidungmoi-avatar {
+        width: 15%;
+        margin-right: 10px; }
+        #nguoidungmoi .side-content .nguoidungmoi-box .nguoidungmoi-avatar img {
+          border-radius: 4px; }
+      #nguoidungmoi .side-content .nguoidungmoi-box .nguoidungmoi-contents {
+        width: 85%;
+        display: flex;
+        align-items: center; }
+        #nguoidungmoi .side-content .nguoidungmoi-box .nguoidungmoi-contents p {
+          margin: 0px 0px; }
+
 #big-ad img {
   width: 100%; }
 

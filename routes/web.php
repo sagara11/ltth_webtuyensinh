@@ -151,9 +151,10 @@ Route::post('/deletepost',"User\HomepageController@deletepost")->name('deletepos
 Route::post('/updatepost',"User\HomepageController@updatepost")->name('updatepost');
 Route::get('/update_view/{post_id}',"User\HomepageController@update_view")->name('update_view');
 Route::post('/updatepostavatar',"User\HomepageController@update_post_image")->name('updatepostimage');
-
+Route::get("forum/{slug1}",'User\HomepageController@forum')->name('forum');
 
 Route::get("/{slug}",'User\HomepageController@chitiettin')->name('chitiettin');
+
 
 Route::get('/video', 'User\HomepageController@video');
 

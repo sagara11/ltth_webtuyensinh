@@ -87,7 +87,7 @@ class HomepageController extends Controller
     function chitiettin($slug)
     {
         $setting = $this->setting;
-        $new = Post::orderBy('created_at', 'desc')->where('slug', $slug)->where('publish',1)->first();
+        $new = Post::orderBy('created_at', 'desc')->where('slug', $slug)->first();
         if(isset($new)==false){
             return view('user.layout.error404',  compact('setting'));
         }
@@ -112,6 +112,36 @@ class HomepageController extends Controller
         $setting['current'] = $new->category_id;
 
         return view('user.page.chitiettin', compact('comment', 'new', 'xuhuong', 'tinlienquan','tinmoi', 'tinnong', 'setting'));
+    }
+
+    function forum($slug1)
+    {
+        $setting = $this->setting;
+        $new = Post::orderBy('created_at', 'desc')->where('slug', $slug1)->first();
+        // if(isset($new)==false){
+        //     return view('user.layout.error404',  compact('setting'));
+        // }
+        $xuhuong = Post::orderBy('created_at', 'desc')->where('trend', 1)->where('id','!=',$new->id)->where('type_post','post')->paginate(4);
+        $tinlienquan = Post::orderBy('created_at', 'desc')->where('publish',1)->where('id','!=',$new->id)->where('type_post','forum')->paginate(4);
+        $tinmoi = Post::orderBy('created_at', 'desc')->where('publish',1)->where('type_post','post')->paginate(4);
+        $tinnong = Post::orderBy('view', 'desc')->where('publish',1)->where('type_post','post')->paginate(4);
+
+        $new->view =  $new->view + 1;
+        $new->save();
+        
+        try{
+            $comment = Comment::where('post_id', $new->id)->where('parent_id', NULL)->paginate(5);
+        }
+        catch(\Exception $e){
+            $comment = "Chưa có bình luận";
+        }
+        $setting['seo_title'] = $new->seo_title ? $new->seo_title : $new->name;
+        $setting['seo_description'] = $new->seo_description ? $new->seo_description :  $new->description;
+        $setting['canonical'] = url('/'.$new->slug);
+        $setting['seo_image'] = $new->image ? $new->image : $setting['seo_image'];
+        $setting['current'] = $new->category_id;
+
+        return view('user.page.forum', compact('comment', 'new', 'xuhuong', 'tinlienquan','tinmoi', 'tinnong', 'setting'));
     }
 
     function nguontin($danhmuc_id)

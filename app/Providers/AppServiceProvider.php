@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use App\Category;
 use App\Banner;  
 use App\Post;
+use App\Users;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -64,7 +65,9 @@ class AppServiceProvider extends ServiceProvider
             $giaoduc = Post::orderBy('created_at', 'desc')->where('category_id', 34)->where('id', "!=", $giaoduc_first->id)->where('publish',1)->paginate(4);
             $xuhuong_first = Post::orderBy('view', 'desc')->where('type_post','post')->first();
             $xuhuong = Post::orderBy('view', 'desc')->where('type_post','post')->where('id','!=',$xuhuong_first->id)->paginate(5);
-            $view->with('banner', $banner)->with('footer_banner', $footer_banner)->with('tuyensinh_first', $tuyensinh_first)->with('tuyensinh', $tuyensinh)->with('giaoduc_first', $giaoduc_first)->with('giaoduc', $giaoduc)->with('xuhuong_first', $xuhuong_first)->with('xuhuong', $xuhuong);
+            $congdong = Post::where('type_post', 'forum')->paginate(4);
+            $nguoidungmoi = Users::orderBy('created_at', 'desc')->paginate(10);
+            $view->with('nguoidungmoi', $nguoidungmoi)->with('congdong', $congdong)->with('banner', $banner)->with('footer_banner', $footer_banner)->with('tuyensinh_first', $tuyensinh_first)->with('tuyensinh', $tuyensinh)->with('giaoduc_first', $giaoduc_first)->with('giaoduc', $giaoduc)->with('xuhuong_first', $xuhuong_first)->with('xuhuong', $xuhuong);
         });
 
         view()->composer('user.page.home',function($view){
