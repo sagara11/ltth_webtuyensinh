@@ -33,7 +33,9 @@ Forum - Web Tuyển Sinh
                         <div class="arrow"></div>
                         <div class="post-content">
                             <div>
-                                {{ $item->name }}
+                                <a href="{{ route('forum', $item->slug) }}">
+                                    {{ $item->name }}
+                                </a>
                             </div>
                         </div>
                         <div>

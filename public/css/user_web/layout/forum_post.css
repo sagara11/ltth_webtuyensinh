@@ -31,6 +31,11 @@
   .forum-contain .forum-box .post-content {
     padding: 10px 12px;
     border: 1px solid #dedede; }
+    .forum-contain .forum-box .post-content a {
+      color: #333333;
+      text-decoration: none; }
+      .forum-contain .forum-box .post-content a:hover {
+        color: #e3411f; }
   .forum-contain .forum-box span {
     color: #e3411f; }
 
