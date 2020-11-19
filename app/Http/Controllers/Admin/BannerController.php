@@ -10,12 +10,6 @@ use App\Http\Controllers\Controller;
 use DB;
 class BannerController extends Controller
 {
-    /**
-     * Display a listing of the users
-     *
-     * @param  \App\User  $model
-     * @return \Illuminate\View\View
-     */
     public function index()
     {
         $banners = Banner::orderBy('created_at','desc');
