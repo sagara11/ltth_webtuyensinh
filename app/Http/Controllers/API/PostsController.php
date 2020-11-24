@@ -18,7 +18,7 @@ class PostsController extends BaseController
      * @param  \App\User  $model
      * @return \Illuminate\View\View
      */
-    public function posts(Request $request)
+    public function index(Request $request)
     {
         $type = 'post';
         $posts = Post::select('id','name','image','description','created_at','view','comment','category_id','source_id');
@@ -114,7 +114,7 @@ class PostsController extends BaseController
         }
     }
 
-    public function post(Request $request)
+    public function show(Request $request)
     {
         if(isset($request->id) && $request->id != null)
         {

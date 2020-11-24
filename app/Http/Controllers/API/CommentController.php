@@ -63,7 +63,7 @@ class CommentController extends BaseController
         }
     }
 
-    public function store(Request $request)
+    public function create(Request $request)
     {
         if(isset($request->post_id) && isset($request->comment) && $request->post_id != '' && $request->comment != '')
         {
@@ -104,29 +104,13 @@ class CommentController extends BaseController
         {
             $response = [
                         'status' => false,
-                        'message' => 'Add fail',
+                        'message' => 'Post_id or comment is empty',
                     ];
             return response()->json($response);
         }
     }
-    /**
-     * Show the form for creating a new user
-     *
-     * @return \Illuminate\View\View
-    /**
-     * Store a newly created user in storage
-     *
-     * @param  \App\Http\Requests\UserRequest  $request
-     * @param  \App\User  $model
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    /**
-     * Show the form for editing the specified user
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\View\View
-     */
-     public function update(Request $request, User $user)
+
+    public function update(Request $request, User $user)
     {
         if(isset($request->comment_id) && isset($request->comment) && $request->comment_id != '' && $request->comment != '')
         {
@@ -202,7 +186,7 @@ class CommentController extends BaseController
             try{
                 $token = $request->header('token');
                 $gettoken = JWT::decode($token, env('JWT_KEY'), array('HS256'));
-
+                // $gettoken[0] = 123;
                 if($data->user_id == $gettoken[0])
                 {
                     $data->delete();
@@ -216,7 +200,7 @@ class CommentController extends BaseController
                 {
                     $response = [
                                 'status' => false,
-                                'message' => 'Delete fail!!!',
+                                'message' => 'You are not allowed to fix this comment !!!',
                             ];
                         return response()->json($response);
                 }

@@ -69,7 +69,8 @@ class UserController extends BaseController
         }
         else
         {
-            $email = $data->email;
+            // $email = $data->email;
+            $email = "minhtung2k5@gmail.com";
             Mail::send('admin/mailfb', array('name'=>$data->name,'content'=>'Please click the link below to retrieve your password !!!', 'link'=>'Link: https:/#'), function($message) use($email) {
                 $message->to($email, 'Verified Password!!!')->subject('Please click the link below to retrieve your password !!!');
             });
@@ -133,7 +134,6 @@ class UserController extends BaseController
                 }   
                 else
                 {
-                        // helloshjdsad
                     $response = [
                         'status' => false,
                         'message' => 'please fill the password or new password !!!',
@@ -507,7 +507,7 @@ public function responseSuccess($data, $statusCode = 200)
 {
     return response()->json(array_merge(['code' => 200], $data), $statusCode);
 }
-public function register(Request $request)
+public function create(Request $request)
 {
     if($request->email != '' && $request->password != '')
     {
